@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+
+require 'play'
+require 'optparse'
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: play [options] COMMAND"
+
+  opts.separator ""
+  opts.separator "Options:"
+
+  opts.on("--migrate", "Setup the database") do
+    ActiveRecord::Base.establish_connection(Play.config['db'])
+    ActiveRecord::Migrator.migrate("#{File.dirname(__FILE__)}/db/migrate")
+  end
+
+  opts.on("-d", "--detach", "Start the music server") do
+    pid = fork { Play::Client.loop }
+    Process.detach(pid)
+  end
+
+  opts.on("-s", "--stop", "Stop the music server") do
+    Play::Client.stop
+  end
+
+  opts.on("-w", "--web", "Run the web instance") do
+    system("rackup -p 5050")
+  end
+
+  opts.on("-p", "--path", "Pause the music server") do |path|
+    Play::Client.pause
+  end
+
+  opts.on("-i", "--import", "Import new songs") do |import|
+    Play::Library.import_songs
+    exit
+  end
+
+  opts.on("-h", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+
+end
+
+parser.parse!

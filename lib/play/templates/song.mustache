@@ -1,0 +1,21 @@
+<div class="song">
+  <span class="controls">
+    {{#queued?}} 
+      <a href="/remove/{{id}}" title="remove from queue">-</a>
+    {{/queued?}}
+    {{^queued?}}
+      <a href="/add/{{id}}" title="add to queue">+</a>
+    {{/queued?}}
+  </span>
+
+  <span class="artist">
+    <a href="/artist/{{artist_name}}">{{artist_name}}</a>
+  </span>
+
+  <span class="title">
+    <a href="/song/{{id}}">{{title}}</a>
+  </span>
+  <span class="album">
+    <a href="/artist/{{artist_name}}/album/{{album_name}}">{{album_name}}</a>
+  </span>
+</div>

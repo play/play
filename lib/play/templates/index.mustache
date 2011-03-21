@@ -1,0 +1,18 @@
+{{#songs}}
+  {{>song}}
+  <div class="votes">
+    {{#current_votes}}
+      {{#user}}
+        <a href="/{{login}}">
+          <img src="http://www.gravatar.com/avatar.php?gravatar_id={{gravatar_id}}&size=50" class="gravatar" height="25" width="25" />
+        </a>
+      {{/user}}
+    {{/current_votes}}
+  </div>
+{{/songs}}
+
+{{^songs}}
+<div class="content">
+  The queue is empty. Quick, play some <a href="/artist/Ace+of+Base">Ace of Base</a>; no one's looking.
+</div>
+{{/songs}}

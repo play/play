@@ -1,0 +1,24 @@
+<div class="content" style="height: 75px">
+  {{#user}}
+    <div class="profile_box">
+      <img src="http://www.gravatar.com/avatar.php?gravatar_id={{gravatar_id}}&size=140" class="gravatar" height="75" width="75" />
+    </div>
+
+    <div class="profile_box bio">
+      <strong>@{{login}}</strong><br />
+      Queued up {{votes_count}} songs.<br />
+    </div>
+
+  {{/user}}
+</div>
+
+<div class="favorite_artists">
+  <h2>Favorite Artists</h2>
+    <ul>
+      {{#user}}
+        {{#favorite_artists}}
+          <li><a href="/artist/{{name}}">{{name}}</a></li>
+        {{/favorite_artists}}
+      {{/user}}
+    </ul>
+</div>

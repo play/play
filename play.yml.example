@@ -1,0 +1,22 @@
+# This file should get moved to:
+#   ~/.play.yml
+#
+# Also you should fill it out.
+
+path: /path/to/your/music/yo
+gh_key: github_oauth_key
+gh_secret: github_oauth_secret
+office_url: http://example.com/office.macs
+
+# Database stuffs that we'll pass on to ActiveRecord. Change if you want to. If
+# you don't want to, you are probably a handsome-looking gentlemen or a
+# gorgeous lady who knows what they want out of life.
+db:
+  database: play
+  adapter: mysql2
+  user: user
+  password: password
+  reconnect: true
+# db:
+  # database: db/play.sqlite3
+  # adapter: sqlite3
