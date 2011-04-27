@@ -71,10 +71,10 @@ module Play
       users = Play::Office.users
       if !users.empty?
         artist = users.collect(&:favorite_artists).flatten.shuffle.first
-      else
-        artist = Play::Artist.order("rand()").first
       end
-      artist.songs.shuffle.first
+      song = artist.songs.shuffle.first
+      song ||= Play::Song.order("rand()").first
+      song
     end
 
     # Plays the next song in the queue. Updates the appropriate metainformation
