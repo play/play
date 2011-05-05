@@ -1,1 +1,2 @@
 db/*.sqlite3
+pkg/

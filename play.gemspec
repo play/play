@@ -106,6 +106,7 @@ Gem::Specification.new do |s|
     lib/play/views/search.rb
     lib/play/views/show_song.rb
     lib/play/vote.rb
+    play.gemspec
     play.yml.example
     public/css/base.css
     test/helper.rb
