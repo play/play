@@ -120,7 +120,16 @@ To actually use it locally, we'll automatically create a user called `user` for
 you when you first access the app. That way you can actually mess around
 without having to hit GitHub or create a user manually.
 
-None of this happens if you launch Play with `bin/play -d`. 
+None of this happens if you launch Play with `bin/play -d`.
+
+## Current Status
+
+This is pretty rough. For the most part it should run pretty reliably for you,
+but there's a bit of setup and configuration that I'd like to refine and do
+away with until it's "ready" for prime time.
+
+Once it's ready, pretty sure I'm going to make the most awesome screencast, and
+then it's balls-out from there.
 
 ## ♬ ★★★
 
