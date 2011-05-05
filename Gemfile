@@ -1,11 +1,2 @@
 source 'http://rubygems.org'
-gem 'rack', '~>1.2.2'
-gem 'sinatra'
-gem 'activerecord', :require => 'active_record'
-gem 'sqlite3'
-gem 'mustache'
-gem 'SystemTimer'
-gem 'ruby-audioinfo'
-gem 'oa-oauth'
-gem 'yajl-ruby'
-gem 'mysql2'
+gemspec
