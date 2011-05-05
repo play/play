@@ -6,6 +6,11 @@ def app
 end
 
 context "App" do
+  fixtures do
+    @artist = Artist.create(:name => 'Justice')
+    @song = Song.create(:title => 'Stress', :artist => @artist)
+  end
+
   setup do
     @user = Play::User.new(:login => 'holman',
                         :email => 'holman@example.com',
@@ -32,7 +37,6 @@ context "App" do
   end
 
   test "/now_playing" do
-    @song = Play::Song.new(:title => 'Stress')
     Play.expects(:now_playing).returns(@song)
     get "/now_playing"
     assert last_response.body.include?("Stress")

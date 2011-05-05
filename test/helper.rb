@@ -13,6 +13,8 @@ require 'spec/mini'
 require 'running_man'
 require 'running_man/active_record_block'
 
+ENV['RACK_ENV'] = 'test'
+
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
