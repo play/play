@@ -17,6 +17,7 @@ parser = OptionParser.new do |opts|
   end
 
   opts.on("-d", "--detach", "Start the music server") do
+    ENV['RACK_ENV'] = 'production'
     pid = fork { Play::Client.loop }
     Process.detach(pid)
   end

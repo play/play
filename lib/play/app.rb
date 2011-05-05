@@ -34,9 +34,15 @@ module Play
       if current_user
         @login = current_user.login
       else
-        redirect '/login' unless request.path_info =~ /\/login/ ||
-                                 request.path_info =~ /\/auth/  ||
-                                 request.path_info =~ /\/api/
+        if ENV['RACK_ENV'] == 'production'
+          redirect '/login' unless request.path_info =~ /\/login/ ||
+                                   request.path_info =~ /\/auth/  ||
+                                   request.path_info =~ /\/api/
+        else
+          # This will create a test user for you locally in development.
+          session['user_id'] = User.create(:login => 'user',
+                                           :email => 'play@example.com').id
+        end
       end
     end
 

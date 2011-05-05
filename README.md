@@ -109,6 +109,19 @@ unique identifier to associate back to Play's user accounts. In this example,
 I'd log into my account and change my `office_string` to be "holman" so I could
 match up. It could be anything, though; we actually use MAC addresses here.
 
+## Local development
+
+If you're going to hack on this locally, you can use the normal process for
+writing a Sintara app (`rackup`, `shotgun`, et cetera). The only thing we kind
+of do differently in Play is we disable the GitHub OAuth callback (since your
+development URL is different than it would be in production).
+
+To actually use it locally, we'll automatically create a user called `user` for
+you when you first access the app. That way you can actually mess around
+without having to hit GitHub or create a user manually.
+
+None of this happens if you launch Play with `bin/play -d`. 
+
 ## ♬ ★★★
 
 This was created by [Zach Holman](http://zachholman.com). You can follow me on
