@@ -72,9 +72,12 @@ module Play
       if !users.empty?
         artist = users.collect(&:favorite_artists).flatten.shuffle.first
       end
-      song = artist.songs.shuffle.first
-      song ||= Play::Song.order("rand()").first
-      song
+
+      if artist
+        artist.songs.shuffle.first
+      else
+        Play::Song.order("rand()").first
+      end
     end
 
     # Plays the next song in the queue. Updates the appropriate metainformation
