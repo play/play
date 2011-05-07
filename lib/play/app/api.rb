@@ -52,20 +52,13 @@ module Play
 
     post "/api/add_album" do
       api_authenticate
-      artist = Play::Artist.find_by_name(params[:artist_name])
-      if artist
-        album = artist.albums.find_by_name(params[:album_name])
-        if album
-          album.enqueue!(api_user)
-          {
-            'artist_name' => artist.name,
-            'album_name'  => album.name
-          }.to_json
-        else
-          error("Sorry, but we couldn't find that album.")
-        end
+      album = Play::Album.find_by_name(params[:name])
+      if album
+        album.enqueue!(api_user)
+        {:artist_name => album.artist.name,
+         :album_name => album.name}.to_json
       else
-        error("Sorry, but we couldn't find that artist.")
+        error("Sorry, but we couldn't find that album.")
       end
     end
 

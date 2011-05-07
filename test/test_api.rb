@@ -68,6 +68,14 @@ context "Api" do
     assert_equal [@song.title], song[:song_titles]
   end
 
+  test "/api/add_album" do
+    post "/api/add_album", { :name => @album.name,
+                             :user_login => @user.login }
+    response = parse_json(last_response.body.strip)
+    assert_equal @artist.name, response[:artist_name]
+    assert_equal @album.name, response[:album_name]
+  end
+
   test "/api/remove" do
     post "/api/remove"
     resp = parse_json(last_response.body.strip)

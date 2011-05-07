@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    play (0.0.1)
+    play (0.0.2)
       SystemTimer
       activerecord
       mustache
