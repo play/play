@@ -26,7 +26,7 @@ require 'play/vote'
 
 module Play
   
-  VERSION = '0.0.2'
+  VERSION = '0.0.3'
 
   # The path to your music library. All of the music underneath this directory
   # will be added to the internal library.
