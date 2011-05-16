@@ -109,6 +109,13 @@ unique identifier to associate back to Play's user accounts. In this example,
 I'd log into my account and change my `office_string` to be "holman" so I could
 match up. It could be anything, though; we actually use MAC addresses here.
 
+## API
+
+Play has a full API that you can use to do tons of fun stuff. In fact, the API
+is more feature-packed than the web UI. Because we're programmers. And baller.
+
+Check out the [API docs on the wiki](https://github.com/holman/play/wiki/API).
+
 ## Local development
 
 If you're going to hack on this locally, you can use the normal process for
