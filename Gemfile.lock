@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    play (0.0.3)
+    play (0.0.4)
       SystemTimer
       activerecord
       mustache
@@ -42,16 +42,16 @@ GEM
     mocha (0.9.12)
     mp4info (1.7.3)
     multi_json (1.0.1)
+    multi_xml (0.2.2)
     multipart-post (1.1.0)
     mustache (0.99.3)
     mysql2 (0.2.7)
-    nokogiri (1.4.4)
-    oa-core (0.2.4)
-    oa-oauth (0.2.4)
+    oa-core (0.2.5)
+    oa-oauth (0.2.5)
       faraday (~> 0.6.1)
-      multi_json (>= 0.0.5)
-      nokogiri (~> 1.4.2)
-      oa-core (= 0.2.4)
+      multi_json (~> 1.0.0)
+      multi_xml (~> 0.2.2)
+      oa-core (= 0.2.5)
       oauth (~> 0.4.0)
       oauth2 (~> 0.4.1)
     oauth (0.4.4)
