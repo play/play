@@ -54,6 +54,13 @@ module Play
       `kill \`ps ax | grep "play -d" | cut -d ' ' -f 1\``
     end
 
+    # Say things over the speakers, lol.
+    #
+    # Returns nothing.
+    def self.say(msg)
+      system "say #{msg}"
+    end
+
     # Set the volume level of the client.
     #
     #   number - The Integer volume level. This should be a number between 0

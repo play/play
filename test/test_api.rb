@@ -24,6 +24,13 @@ context "Api" do
     assert_equal @album.name,  now_playing[:album_name]
   end
 
+  test "/api/say" do
+    Play::Client.expects(:say).with("Holman is sexy").returns(true)
+    get "/api/say", { :message => "Holman is sexy" }
+    resp = parse_json(last_response.body.strip)
+    assert_equal "Okay.", resp[:success]
+  end
+
   test "/api requires user_login" do
     post "/api/add_song", {}
     user = parse_json(last_response.body.strip)

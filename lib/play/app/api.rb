@@ -5,6 +5,11 @@ module Play
       music_response(song)
     end
 
+    get "/api/say" do
+      Play::Client.say(params[:message])
+      { :success => "Okay." }.to_json
+    end
+
     post "/api/user/add_alias" do
       user = User.find_by_login(params[:login])
       if user
