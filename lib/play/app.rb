@@ -38,10 +38,6 @@ module Play
           redirect '/login' unless request.path_info =~ /\/login/ ||
                                    request.path_info =~ /\/auth/  ||
                                    request.path_info =~ /\/api/
-        else
-          # This will create a test user for you locally in development.
-          session['user_id'] = User.create(:login => 'user',
-                                           :email => 'play@example.com').id
         end
       end
     end
@@ -49,6 +45,12 @@ module Play
     get "/" do
       @songs = Song.queue.all
       mustache :index
+    end
+
+    get "/devlogin" do
+      session['user_id'] = User.create(:login => 'user',
+                                       :email => 'play@example.com').id
+      redirect '/'
     end
 
     get "/login" do

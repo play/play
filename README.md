@@ -129,8 +129,8 @@ of do differently in Play is we disable the GitHub OAuth callback (since your
 development URL is different than it would be in production).
 
 To actually use it locally, we'll automatically create a user called `user` for
-you when you first access the app. That way you can actually mess around
-without having to hit GitHub or create a user manually.
+you when you first access the app. You can sign into this user by hitting
+`/devlogin` on your running instance.
 
 None of this happens if you launch Play with `bin/play -d`.
 
