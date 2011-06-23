@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'play'
-  s.version           = '0.0.5'
-  s.date              = '2011-05-27'
+  s.version           = '0.0.6'
+  s.date              = '2011-06-23'
   s.rubyforge_project = 'play'
 
   ## Make sure your summary is short. The description may be as long
