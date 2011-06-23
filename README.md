@@ -63,6 +63,11 @@ recursively when you run:
 
     play -i
 
+Alternatively, you can just start up the web server (`play -w`) and it will
+listen for any changes you make to your music directory. In other words, once
+the web component has started, if you drop in a new directory of music, it'll
+realize that and go ahead and index it.
+
 ## Play
 
 Once you're all set up, you can spin up the web app with:
