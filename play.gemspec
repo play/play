@@ -56,6 +56,8 @@ Gem::Specification.new do |s|
   s.add_dependency('oa-oauth')
   s.add_dependency('yajl-ruby')
   s.add_dependency('mysql2')
+  s.add_dependency('rb-fsevent')
+  s.add_dependency('fssm')
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development

@@ -1,17 +1,33 @@
 module Play
   class Library
+
+    # Monitors the music directory for any new music added to it. Once
+    # changed, Play will run through and reindex those directories.
+    #
+    # Returns nothing.
+    def self.monitor
+      FSSM.monitor(Play.path, '**/**/**', :directories => true) do
+        update {|base, relative| Library.import_songs("#{base}/#{relative}") }
+        delete {|base, relative| nil }
+        create {|base, relative| Library.import_songs("#{base}/#{relative}") }
+      end
+    end
+
     # Search a directory and return all of the files in it, recursively.
     #
     # Returns an Array of String file paths.
-    def self.fs_songs
-      `find "#{Play.path}" -type f ! -name '.*'`.split("\n")
+    def self.fs_songs(path)
+      `find "#{path}" -type f ! -name '.*'`.split("\n")
     end
 
     # Imports an array of songs into the database.
     #
+    # path = the String path of the directory to search in. Will default to the
+    #        default Play path if not specified.
+    #
     # Returns nothing.
-    def self.import_songs
-      fs_songs.each do |path|
+    def self.import_songs(path=Play.path)
+      fs_songs(path).each do |path|
         import_song(path)
       end
     end

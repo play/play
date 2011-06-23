@@ -9,6 +9,8 @@ require 'sinatra/base'
 require 'mustache/sinatra'
 require 'digest'
 require 'yajl'
+require 'rb-fsevent'
+require 'fssm'
 
 require 'play/core_ext/hash'
 

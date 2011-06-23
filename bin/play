@@ -27,6 +27,8 @@ parser = OptionParser.new do |opts|
   end
 
   opts.on("-w", "--web", "Run the web instance") do
+    pid = fork { Play::Library.monitor }
+    Process.detach(pid)
     system("rackup -p 5050 #{File.dirname(__FILE__)}/../config.ru")
   end
 
