@@ -51,7 +51,7 @@ Gem::Specification.new do |s|
   s.add_dependency('sinatra')
   s.add_dependency('activerecord')
   s.add_dependency('sqlite3')
-  s.add_dependency('mustache')
+  s.add_dependency('mustache', "0.99.3")
   s.add_dependency('SystemTimer')
   s.add_dependency('ruby-audioinfo')
   s.add_dependency('oa-oauth')

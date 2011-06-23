@@ -1,11 +1,12 @@
 PATH
   remote: .
   specs:
-    play (0.0.5)
+    play (0.0.7)
       SystemTimer
       activerecord
+      bundler
       fssm
-      mustache
+      mustache (= 0.99.3)
       mysql2
       oa-oauth
       rack (~> 1.2.2)
@@ -47,7 +48,7 @@ GEM
     multi_json (1.0.1)
     multi_xml (0.2.2)
     multipart-post (1.1.0)
-    mustache (0.99.4)
+    mustache (0.99.3)
     mysql2 (0.2.7)
     oa-core (0.2.6)
     oa-oauth (0.2.6)
