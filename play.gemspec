@@ -46,17 +46,17 @@ Gem::Specification.new do |s|
 
   ## List your runtime dependencies here. Runtime dependencies are those
   ## that are needed for an end user to actually USE your code.
-  s.add_dependency('rack', ["~>1.2.2"])
+  s.add_dependency('rack',         "~>1.3.0")
   s.add_dependency('bundler')
   s.add_dependency('sinatra')
   s.add_dependency('activerecord')
   s.add_dependency('sqlite3')
-  s.add_dependency('mustache', "0.99.3")
+  s.add_dependency('mustache',     "=0.99.3")
   s.add_dependency('SystemTimer')
   s.add_dependency('ruby-audioinfo')
   s.add_dependency('oa-oauth')
   s.add_dependency('yajl-ruby')
-  s.add_dependency('mysql2')
+  s.add_dependency('mysql2',       "~>0.3.7")
   s.add_dependency('rb-fsevent')
   s.add_dependency('fssm')
 
