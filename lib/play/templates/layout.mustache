@@ -6,16 +6,17 @@
 </head>
 
 <body>
-  <h1>{{title}}</h1>
-
   <div class="navigation">
-    <form method="get" action="/search">
-      <input type="search" name="q" />
-    </form>
+    <h1>{{title}}</h1>
 
     <a href="/">Queue</a>
     <a href="/history">History</a>
     <a href="/{{login}}">@{{login}}</a>
+
+    <form method="get" action="/search">
+      <input type="search" name="q" />
+    </form>
+
   </div>
 
   {{{yield}}}

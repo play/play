@@ -1,21 +1,32 @@
 <div class="song">
-  <span class="controls">
-    {{#queued?}} 
-      <a href="/remove/{{id}}" title="remove from queue">-</a>
-    {{/queued?}}
-    {{^queued?}}
-      <a href="/add/{{id}}" title="add to queue">+</a>
-    {{/queued?}}
-  </span>
-
-  <span class="artist">
+  <div class="artist">
     <a href="/artist/{{artist_name}}">{{artist_name}}</a>
-  </span>
+  </div>
 
-  <span class="title">
+  <div class="title">
     <a href="/song/{{id}}">{{title}}</a>
-  </span>
-  <span class="album">
-    <a href="/artist/{{artist_name}}/album/{{album_name}}">{{album_name}}</a>
-  </span>
+  </div>
+
+  <div class="controls">
+    <div class="stats">{{to_playcount}}.</div>
+
+    <span class="wrap">
+      <a href="/artist/{{artist_name}}/album/{{album_name}}">Show Album</a>
+
+      {{#queued?}} 
+        <a href="/remove/{{id}}" title="remove from queue">Don't Play</a>
+      {{/queued?}}
+      {{^queued?}}
+        <a href="/add/{{id}}" title="add to queue">Play</a>
+      {{/queued?}}
+    </span>
+
+    {{#current_votes}}
+      {{#user}}
+        <a href="/{{login}}">
+          <img src="http://www.gravatar.com/avatar.php?gravatar_id={{gravatar_id}}&size=50" class="gravatar" height="25" width="25" />
+        </a>
+      {{/user}}
+    {{/current_votes}}
+  </div>
 </div>

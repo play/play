@@ -1,14 +1,5 @@
 {{#songs}}
   {{>song}}
-  <div class="votes">
-    {{#current_votes}}
-      {{#user}}
-        <a href="/{{login}}">
-          <img src="http://www.gravatar.com/avatar.php?gravatar_id={{gravatar_id}}&size=50" class="gravatar" height="25" width="25" />
-        </a>
-      {{/user}}
-    {{/current_votes}}
-  </div>
 {{/songs}}
 
 {{^songs}}
