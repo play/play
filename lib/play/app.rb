@@ -34,7 +34,7 @@ module Play
       if current_user
         @login = current_user.login
       else
-        if ['production','test'].include?(ENV['RACK_ENV'])
+        if ENV['RACK_ENV'] != 'test'
           redirect '/login' unless request.path_info =~ /\/login/ ||
                                    request.path_info =~ /\/auth/  ||
                                    request.path_info =~ /\/api/
