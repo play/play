@@ -16,6 +16,17 @@ context "Song" do
     assert_equal "A Cross the Universe", @song.album_name
   end
 
+  test "to_playcount" do
+    @song.playcount = 20
+    assert_equal "Played 20 times", @song.to_playcount
+
+    @song.playcount = 1
+    assert_equal "Played 1 time", @song.to_playcount
+
+    @song.playcount = nil
+    assert_equal "Played 0 times", @song.to_playcount
+  end
+
   test "enqueue queues it up" do
     @song.enqueue! @user
     assert @song.queued

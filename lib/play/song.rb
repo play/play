@@ -23,6 +23,14 @@ module Play
       album.name
     end
 
+    # A nice, human-readable way of describing the playcount.
+    #
+    # Returns a String.
+    def to_playcount
+      count = playcount || 0
+      "Played #{count} time#{'s' if count != 1}"
+    end
+
     # The current votes for a song. A song may have many historical votes,
     # which is well and good, but here we're only concerned for the current
     # round of whether it's voted for.
