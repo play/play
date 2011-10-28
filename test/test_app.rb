@@ -6,6 +6,8 @@ def app
 end
 
 context "App" do
+  include Play
+
   fixtures do
     @artist = Artist.create(:name => 'Justice')
     @song = Song.create(:title => 'Stress', :artist => @artist)
@@ -40,6 +42,13 @@ context "App" do
     Play.expects(:now_playing).returns(@song)
     get "/now_playing"
     assert last_response.body.include?("Stress")
+  end
+
+  test "/play/album" do
+    @album = Album.new
+    Album.stubs(:find).returns(@album)
+    @album.expects(:enqueue!)
+    get "/play/album/1"
   end
 
 #  test "/add existing song" do

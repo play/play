@@ -1,5 +1,13 @@
 <div class="songs">
-{{#songs}}
-  {{>song}}
-{{/songs}}
+  <div class="song">
+    <div class="controls">
+      <div class="wrap">
+        <a href="/play/album/{{album_id}}">Play this Album</a>
+      </div>
+    </div>
+  </div>
+
+  {{#songs}}
+    {{>song}}
+  {{/songs}}
 </div>

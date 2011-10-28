@@ -93,6 +93,7 @@ a:hover{
   color: #BCBCBC;
 }
 .song .title{
+  margin-bottom: 5px;
   padding-left: 10px;
   font-size: 36px;
   letter-spacing: -2px;
@@ -109,7 +110,6 @@ a:hover{
   color: #3299BB;
 }
 .song .controls{
-  margin-top: 5px;
   text-align: right;
   font-size: 11px;
 }

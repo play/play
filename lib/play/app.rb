@@ -75,6 +75,12 @@ module Play
       redirect '/'
     end
 
+    get "/play/album/:id" do
+      album = Play::Album.find(params[:id])
+      album.enqueue!(current_user)
+      redirect '/'
+    end
+
     get "/remove/:id" do
       @song = Song.find(params[:id])
       @song.dequeue!(current_user)
