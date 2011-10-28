@@ -17,7 +17,7 @@ body{
   background-repeat: repeat;
   margin: 0;
   padding: 0 0 75px 0;
-  color: #5E7894;
+  color: #424242;
 }
 h1{
   text-align: left;
@@ -53,13 +53,17 @@ a:hover{
   display: inline;
 }
 .navigation input{
-  vertical-align: top;
   float: right;
   width: 200px;
   color: #FF9900;
 }
 .gravatar{
   -webkit-border-radius: 5px;
+}
+.content{
+  width: 600px;
+  margin: 0 auto;
+  padding: 10px;
 }
 
 /*
@@ -156,11 +160,5 @@ a:hover{
   font-size: 1.1em;
 }
 .bio{
-  padding: 15px 0;
-}
-.favorite_artists{
-  margin: 0 15px;
-}
-.favorite_artists h2{
-  color: #485460;
+  line-height: 1.5em;
 }
