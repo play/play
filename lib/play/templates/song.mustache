@@ -10,6 +10,14 @@
   <div class="controls">
     <div class="stats">{{to_playcount}}.</div>
 
+    {{#current_votes}}
+      {{#user}}
+        <a href="/{{login}}">
+          <img src="http://www.gravatar.com/avatar.php?gravatar_id={{gravatar_id}}&size=50" class="gravatar" height="25" width="25" />
+        </a>
+      {{/user}}
+    {{/current_votes}}
+
     <span class="wrap">
       <a href="/artist/{{artist_name}}/album/{{album_name}}">Show Album</a>
 
@@ -21,12 +29,6 @@
       {{/queued?}}
     </span>
 
-    {{#current_votes}}
-      {{#user}}
-        <a href="/{{login}}">
-          <img src="http://www.gravatar.com/avatar.php?gravatar_id={{gravatar_id}}&size=50" class="gravatar" height="25" width="25" />
-        </a>
-      {{/user}}
-    {{/current_votes}}
+    &nbsp;
   </div>
 </div>

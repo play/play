@@ -138,7 +138,8 @@ a:hover{
 }
 .song .controls img{
   vertical-align: middle;
-  margin: 0 10px 3px 3px;
+  margin-right: 5px;
+  margin-bottom: 3px;
   border-radius: 3px;
   opacity: .75;
 }
