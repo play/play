@@ -113,6 +113,7 @@ a:hover{
   color: #3299BB;
 }
 .song .controls{
+  height: 25px;
   text-align: right;
   font-size: 11px;
 }
