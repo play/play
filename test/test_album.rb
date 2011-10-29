@@ -20,6 +20,14 @@ context "Album" do
     assert_equal "/tmp/music", @album.path
   end
 
+  test "zipped!" do
+    assert @album.respond_to?(:zipped!)
+  end
+
+  test "zip_name" do
+    assert @album.zip_name =~ /Justice/
+  end
+
   test "zip_path" do
     assert @album.zip_path =~ /\.zip$/
   end
