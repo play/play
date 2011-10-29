@@ -1,2 +1,3 @@
+config/play.yml
+config/play.backup.yml
 db/*.sqlite3
-pkg/

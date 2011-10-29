@@ -34,10 +34,9 @@ Play is installed by cloning down the repository:
 
     git clone https://github.com/holman/play
 
-Once that's done, make sure you have Bundler installed (`gem install bundler`)
-and then run:
+Then run the `setup` script. It's cool.
 
-    bundle install
+    bin/setup
 
 ### Fill out ~/.play.yml
 
