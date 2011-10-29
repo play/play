@@ -22,10 +22,10 @@
       <a href="/artist/{{artist_name}}/album/{{album_name}}">Show Album</a>
 
       {{#queued?}} 
-        <a href="/remove/{{id}}" title="remove from queue">Don't Play</a>
+        <span><a href="/remove/{{id}}" title="remove from queue" class="remove">Don't Play</a></span>
       {{/queued?}}
       {{^queued?}}
-        <a href="/add/{{id}}" title="add to queue">Play</a>
+        <span><a href="/add/{{id}}" title="add to queue" class="add">Play</a></span>
       {{/queued?}}
     </span>
 

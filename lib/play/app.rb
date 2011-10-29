@@ -72,7 +72,7 @@ module Play
     get "/add/:id" do
       @song = Song.find(params[:id])
       @song.enqueue!(current_user)
-      redirect '/'
+      "Queued"
     end
 
     get "/play/album/:id" do
@@ -84,7 +84,7 @@ module Play
     get "/remove/:id" do
       @song = Song.find(params[:id])
       @song.dequeue!(current_user)
-      redirect '/'
+      "Removed"
     end
 
     get "/artist/*/album/*" do
