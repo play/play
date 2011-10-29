@@ -23,7 +23,7 @@ fi
 
 # Install gems
 echo "  + Bootstrapping your Rubies."
-bundle install > /dev/null 2>&1
+bundle install --quiet
 
 echo ""
 
