@@ -44,7 +44,7 @@ module Play
     end
 
     get "/" do
-      @songs = Song.queue.all
+      @songs = Song.queue.includes(:album, :artist, :votes).all
       mustache :index
     end
 
@@ -96,7 +96,10 @@ module Play
     end
 
     get "/artist/*" do
-      @artist = Artist.where(:name => params[:splat].first).first
+      @artist = Artist.
+                  where(:name => params[:splat].first).
+                  includes(:songs => [:album, :artist]).
+                  first
       @songs = @artist.songs
       mustache :artist_songs
     end
