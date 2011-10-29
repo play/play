@@ -1,4 +1,4 @@
-![play](http://f.cl.ly/items/0M3D1T3o282g1x1C0q09/splash.png)
+[![play](http://f.cl.ly/items/0M3D1T3o282g1x1C0q09/splash.png)](http://cl.ly/BOJT)
 
 ## Background
 
