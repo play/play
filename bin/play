@@ -13,7 +13,7 @@ parser = OptionParser.new do |opts|
 
   opts.on("--migrate", "Setup the database") do
     ActiveRecord::Base.establish_connection(Play.config['db'])
-    ActiveRecord::Migrator.migrate("#{File.dirname(__FILE__)}/db/migrate")
+    ActiveRecord::Migrator.migrate("#{File.dirname(__FILE__)}/../db/migrate/", ActiveRecord::Migrator.current_version)
   end
 
   opts.on("-d", "--detach", "Start the music server") do
