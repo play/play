@@ -36,8 +36,9 @@ module Play
         @login = current_user.login
       else
         if ENV['RACK_ENV'] != 'test'
-          redirect '/login' unless request.path_info =~ /\/login/ ||
-                                   request.path_info =~ /\/auth/  ||
+          redirect '/login' unless request.path_info =~ /\/login/    ||
+                                   request.path_info =~ /\/devlogin/ ||
+                                   request.path_info =~ /\/auth/     ||
                                    request.path_info =~ /\/api/
         end
       end
