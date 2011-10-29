@@ -38,38 +38,6 @@ Then run the `setup` script. It's cool.
 
     bin/setup
 
-### Fill out ~/.play.yml
-
-You'll need to set up your configuration values, which we store in
-`~/.play.yml`. You can view the [example file on
-GitHub](https://github.com/holman/play/blob/master/play.yml.example).
-
-### Set up your database
-
-This is a bit of a pain that we'll correct eventually. For now, create your
-MySQL database by hand. We expect the database to be called `play`, but it's
-really pulled from whatever you have in `~/.play.yml`.
-
-### Set up your GitHub application
-
-Next, go to GitHub and [register a new OAuth
-application](https://github.com/account/applications/new). Users sign in with
-their GitHub account. Copy the Client ID and Client Secret into Play's
-`~/.play.yml` file.
-
-### Set up your music folder
-
-Next, tell Play where to look for music. It's the `path` attribute in
-`~/.play.yml`. We'll then look at your path and import everything
-recursively when you run:
-
-    play -i
-
-Alternatively, you can just start up the web server (`play -w`) and it will
-listen for any changes you make to your music directory. In other words, once
-the web component has started, if you drop in a new directory of music, it'll
-realize that and go ahead and index it.
-
 ## Play
 
 Once you're all set up, you can spin up the web app with:
