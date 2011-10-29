@@ -18,7 +18,7 @@ module Play
       session['user_id'].blank? ? nil : User.find_by_id(session['user_id'])
     end
 
-    configure :development,:production do
+    configure :development do
       # This should use Play.config eventually, but there's some weird loading
       # problems right now with this file. So it goes. Dupe it for now.
       config = YAML::load(File.open("#{ENV['HOME']}/.play.yml"))

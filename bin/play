@@ -18,8 +18,6 @@ parser = OptionParser.new do |opts|
   opts.separator "Options:"
 
   opts.on("-d", "--detach", "Start the music server") do
-    ENV['RACK_ENV'] = 'production'
-
     migrate
 
     # Run a "quick" import to check for anything new.
