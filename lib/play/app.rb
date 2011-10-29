@@ -49,9 +49,9 @@ module Play
       mustache :index
     end
 
-    get "/devlogin" do
+    get "/devlogin/:email" do
       session['user_id'] = User.create(:login => 'user',
-                                       :email => 'play@example.com').id
+                                       :email => params[:email]).id
       redirect '/'
     end
 
