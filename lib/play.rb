@@ -56,7 +56,7 @@ module Play
   #
   # Returns the String path to the configuration file.
   def self.config_path
-    "#{ENV['HOME']}/.play.yml"
+    "config/play.yml"
   end
 
   # The configuration object for Play.

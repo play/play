@@ -21,8 +21,7 @@ module Play
     configure :development do
       # This should use Play.config eventually, but there's some weird loading
       # problems right now with this file. So it goes. Dupe it for now.
-      config = YAML::load(File.open("#{ENV['HOME']}/.play.yml"))
-      ActiveRecord::Base.establish_connection(config['db'])
+      ActiveRecord::Base.establish_connection(Play.config['db'])
       # ActiveRecord::Base.logger = Logger.new(STDOUT)
     end
 
