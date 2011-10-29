@@ -40,27 +40,12 @@ Then run the `setup` script. It's cool.
 
 ## Play
 
-Once you're all set up, you can spin up the web app with:
+Things are managed with the `bin/play` executable.
 
-    play -w
-
-You can hit the server at [localhost:5050](http://localhost:5050). Queue some
-hawt, hawt music up. We'll wait.
-
-Ready? Cool. The only thing left to do is actually start the music server.
-That's done with:
-
-    play -d
-
-You'll detach it and put it in the background, where it will sit waiting for
-salacious music to play for you. When you want to kill it for reals, run:
-
-    play -s
-
-For all the fun commands and stuff you can do, just run:
-
-    play -h
-
+    play -w          Start the web server
+    play -d          Start the music server
+    play -s          Stop the music server
+    play -h          Help! I need somebody. Help! Not just anybody.
 
 ## Set up your office (optional)
 
@@ -90,28 +75,6 @@ Play has a full API that you can use to do tons of fun stuff. In fact, the API
 is more feature-packed than the web UI. Because we're programmers. And baller.
 
 Check out the [API docs on the wiki](https://github.com/holman/play/wiki/API).
-
-## Local development
-
-If you're going to hack on this locally, you can use the normal process for
-writing a Sintara app (`rackup`, `shotgun`, et cetera). The only thing we kind
-of do differently in Play is we disable the GitHub OAuth callback (since your
-development URL is different than it would be in production).
-
-To actually use it locally, we'll automatically create a user called `user` for
-you when you first access the app. You can sign into this user by hitting
-`/devlogin` on your running instance.
-
-None of this happens if you launch Play with `bin/play -d`.
-
-## Current Status
-
-This is pretty rough. For the most part it should run pretty reliably for you,
-but there's a bit of setup and configuration that I'd like to refine and do
-away with until it's "ready" for prime time.
-
-Once it's ready, pretty sure I'm going to make the most awesome screencast, and
-then it's balls-out from there.
 
 ## ♬ ★★★
 
