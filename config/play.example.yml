@@ -3,9 +3,9 @@
 #
 # Also you should fill it out.
 
-path: /path/to/your/music/yo
-gh_key: github_oauth_key
-gh_secret: github_oauth_secret
+path: __PATH__
+gh_key: __OAUTH_KEY__
+gh_secret: __OAUTH_SECRET__
 office_url: http://example.com/office.macs
 
 # Database stuffs that we'll pass on to ActiveRecord. Change if you want to. If
@@ -14,6 +14,6 @@ office_url: http://example.com/office.macs
 db:
   database: play
   adapter: mysql2
-  user: user
-  password: password
+  user: __USER__
+  password: __PASSWORD__
   reconnect: true
