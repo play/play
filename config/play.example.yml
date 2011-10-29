@@ -17,6 +17,3 @@ db:
   user: user
   password: password
   reconnect: true
-# db:
-  # database: db/play.sqlite3
-  # adapter: sqlite3
