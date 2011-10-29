@@ -115,6 +115,12 @@ module Play
       send_file @song.path
     end
 
+    get "/album/:id/download" do
+      @album = Album.find(params[:id])
+      @album.zipped!
+      send_file @album.zip_path.gsub('\ ',' ')
+    end
+
     get "/search" do
       @search = params[:q]
       artist = Artist.where("LOWER(name) = ?", @search.downcase).first

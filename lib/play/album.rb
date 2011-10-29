@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module Play
   class Album < ActiveRecord::Base
     has_many :songs
@@ -18,7 +20,21 @@ module Play
     #
     # Returns a String path on the filesystem.
     def path
-      File.expand_path File.join(songs.first.path, '..')
+      File.expand_path File.join(songs.first.path, '..').gsub(' ','\ ')
+    end
+
+    def zipped!
+      return if File.exist?(zip_path)
+      FileUtils.mkdir_p "/tmp/play"
+      system "zip #{zip_path} #{path}/*"
+    end
+
+    def zip_name
+      "#{artist.name} - #{name}.zip".gsub(' ','\ ')
+    end
+
+    def zip_path
+      "/tmp/play/#{zip_name}"
     end
   end
 end
