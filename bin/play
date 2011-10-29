@@ -34,7 +34,7 @@ parser = OptionParser.new do |opts|
   opts.on("-w", "--web", "Run the web instance") do
     pid = fork { Play::Library.monitor }
     Process.detach(pid)
-    system("rackup -p 5050 #{File.dirname(__FILE__)}/../config.ru")
+    system("unicorn -c #{File.dirname(__FILE__)}/../config/unicorn.rb")
   end
 
   opts.on("-p", "--path", "Pause the music server") do |path|

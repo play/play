@@ -10,6 +10,7 @@ gem 'yajl-ruby'
 gem 'mysql2',        '~>0.3.7'
 gem 'rb-fsevent'
 gem 'fssm'
+gem 'unicorn',       '~>4.1.0'
 
 group :test do
   gem 'running_man'
