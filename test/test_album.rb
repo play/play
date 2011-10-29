@@ -20,4 +20,8 @@ context "Album" do
     assert_equal "/tmp/music", @album.path
   end
 
+  test "zip_path" do
+    assert @album.zip_path =~ /\.zip$/
+  end
+
 end

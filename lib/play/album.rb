@@ -23,18 +23,27 @@ module Play
       File.expand_path File.join(songs.first.path, '..').gsub(' ','\ ')
     end
 
+    # Zips up an album and stashes in it a temporary directory.
+    #
+    # Returns nothing.
     def zipped!
       return if File.exist?(zip_path)
-      FileUtils.mkdir_p "/tmp/play"
+      FileUtils.mkdir_p "/tmp/play-zips"
       system "zip #{zip_path} #{path}/*"
     end
 
+    # The name of the zipfile.
+    #
+    # Returns a String.
     def zip_name
       "#{artist.name} - #{name}.zip".gsub(' ','\ ')
     end
 
+    # The path to the zipfile.
+    #
+    # Returns a String.
     def zip_path
-      "/tmp/play/#{zip_name}"
+      "/tmp/play-zips/#{zip_name}"
     end
   end
 end
