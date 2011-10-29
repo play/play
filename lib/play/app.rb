@@ -105,6 +105,11 @@ module Play
       mustache :show_song
     end
 
+    get "/song/:id/download" do
+      @song = Song.find(params[:id])
+      send_file @song.path
+    end
+
     get "/search" do
       @search = params[:q]
       artist = Artist.where("LOWER(name) = ?", @search.downcase).first
