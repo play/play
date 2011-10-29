@@ -28,11 +28,16 @@ play anything iTunes can play.
 
 Play also expects MySQL to be installed.
 
-### Install the gem
+### Install
 
-Play itself is installed with a gem.
+Play is installed by cloning down the repository:
 
-    gem install play
+    git clone https://github.com/holman/play
+
+Once that's done, make sure you have Bundler installed (`gem install bundler`)
+and then run:
+
+    bundle install
 
 ### Fill out ~/.play.yml
 

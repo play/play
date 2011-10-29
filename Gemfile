@@ -13,6 +13,7 @@ gem 'fssm'
 gem 'unicorn',       '~>4.1.0'
 
 group :test do
+  gem 'sqlite3'
   gem 'running_man'
   gem 'mocha'
 end
