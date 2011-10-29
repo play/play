@@ -22,6 +22,7 @@ context "Api" do
     assert_equal @artist.name, now_playing[:artist_name]
     assert_equal @song.title,  now_playing[:song_title]
     assert_equal @album.name,  now_playing[:album_name]
+    assert_equal "/song/#{@song.id}/download", now_playing[:download]
   end
 
   test "/api/say" do
