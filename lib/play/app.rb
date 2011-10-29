@@ -23,6 +23,7 @@ module Play
       # problems right now with this file. So it goes. Dupe it for now.
       config = YAML::load(File.open("#{ENV['HOME']}/.play.yml"))
       ActiveRecord::Base.establish_connection(config['db'])
+      ActiveRecord::Base.logger = Logger.new(STDOUT)
     end
 
     configure :test do

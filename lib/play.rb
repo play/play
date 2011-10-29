@@ -2,6 +2,7 @@ $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
 
 require "rubygems"
 require "bundler/setup"
+require 'logger'
 
 require 'active_record'
 require 'audioinfo'
