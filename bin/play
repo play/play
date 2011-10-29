@@ -18,6 +18,11 @@ parser = OptionParser.new do |opts|
 
   opts.on("-d", "--detach", "Start the music server") do
     ENV['RACK_ENV'] = 'production'
+
+    # Run a "quick" import to check for anything new.
+    pid = fork { Play::Library.import_songs }
+    Process.detach(pid)
+
     pid = fork { Play::Client.loop }
     Process.detach(pid)
   end
