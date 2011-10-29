@@ -2,7 +2,7 @@ module Play
   module Views
     class Index < Layout
       def title
-        "Queue"
+        "Play"
       end
     end
   end

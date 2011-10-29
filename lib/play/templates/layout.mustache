@@ -9,9 +9,9 @@
   <div class="navigation">
     <h1>{{title}}</h1>
 
-    <a href="/">Queue</a>
-    <a href="/history">History</a>
-    <a href="/{{login}}">@{{login}}</a>
+    <a class="{{queue_page}}" href="/">Queue</a>
+    <a class="{{history_page}}" href="/history">History</a>
+    <a class="{{profile_page}}" href="/{{login}}">@{{login}}</a>
 
     <form method="get" action="/search">
       <input type="search" name="q" />
