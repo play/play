@@ -49,9 +49,7 @@ GitHub](https://github.com/holman/play/blob/master/play.yml.example).
 
 This is a bit of a pain that we'll correct eventually. For now, create your
 MySQL database by hand. We expect the database to be called `play`, but it's
-really pulled from whatever you have in `~/.play.yml`. When that's set up, run:
-
-    bin/play --migrate
+really pulled from whatever you have in `~/.play.yml`.
 
 ### Set up your GitHub application
 

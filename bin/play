@@ -5,19 +5,22 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 require 'play'
 require 'optparse'
 
+# Auto-migrate before launching the servers.
+def migrate
+  ActiveRecord::Base.establish_connection(Play.config['db'])
+  ActiveRecord::Migrator.migrate("#{File.dirname(__FILE__)}/../db/migrate/", ActiveRecord::Migrator.current_version)
+end
+
 parser = OptionParser.new do |opts|
   opts.banner = "Usage: play [options] COMMAND"
 
   opts.separator ""
   opts.separator "Options:"
 
-  opts.on("--migrate", "Setup the database") do
-    ActiveRecord::Base.establish_connection(Play.config['db'])
-    ActiveRecord::Migrator.migrate("#{File.dirname(__FILE__)}/../db/migrate/", ActiveRecord::Migrator.current_version)
-  end
-
   opts.on("-d", "--detach", "Start the music server") do
     ENV['RACK_ENV'] = 'production'
+
+    migrate
 
     # Run a "quick" import to check for anything new.
     pid = fork { Play::Library.import_songs }
@@ -32,6 +35,8 @@ parser = OptionParser.new do |opts|
   end
 
   opts.on("-w", "--web", "Run the web instance") do
+    migrate
+
     pid = fork { Play::Library.monitor }
     Process.detach(pid)
     system("unicorn -c #{File.dirname(__FILE__)}/../config/unicorn.rb")
