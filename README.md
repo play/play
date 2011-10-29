@@ -2,9 +2,9 @@
 
 ## Background
 
-We want to play music at our office. Everyone has their own library on their
-own machines, and everyone except for me plays shitty music. Play is designed
-to make office music more palatable.
+We like playing music at the GitHub office. Everyone has their own library on
+their own machines, and everyone except for me plays shitty music. Play is
+designed to make office music more palatable.
 
 Play is **api-driven** and **web-driven**. All music is dropped on a central
 Mac system. Once it's available to Play, users can control what's being played.
