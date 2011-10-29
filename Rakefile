@@ -41,25 +41,3 @@ desc "Open an irb session preloaded with this library"
 task :console do
   sh "irb -rubygems -r ./lib/play"
 end
-
-namespace :db do
-  task :create do
-    config = YAML::load(File.open("#{ENV['HOME']}/.play.yml"))
-    `mysql -u#{config['db']['user']} \
-      --password='#{config['db']['password']}' \
-      --execute=\'CREATE DATABASE #{config['db']['database']} CHARACTER SET utf8 COLLATE utf8_unicode_ci;'`
-  end
-
-  task :drop do
-    config = YAML::load(File.open("#{ENV['HOME']}/.play.yml"))
-    `mysql --user=#{config['db']['user']} \
-           --password='#{config['db']['password']}' \
-           --execute='DROP DATABASE #{config['db']['database']};'`
-  end
-
-  desc "Migrate the database through scripts in db/migrate."
-  task :migrate => :environment do
-    ActiveRecord::Base.establish_connection(Play.config['db'])
-    ActiveRecord::Migrator.migrate("db/migrate")
-  end
-end
