@@ -1,5 +1,4 @@
-# Play
-Play is your company's dj.
+![play](http://f.cl.ly/items/0M3D1T3o282g1x1C0q09/splash.png)
 
 ## Background
 
