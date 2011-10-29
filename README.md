@@ -57,7 +57,7 @@ That particular step is left to the reader's imagination — here at GitHub we
 poll our router's ARP tables and update an internal application with MAC
 addresses — but all Play cares about is a URL that returns comma-separated
 string identifiers. We get that string by hitting the `office_url` in
-`~/.play.yml`. The string that's returned from that URL should look
+`config/play.yml`. The string that's returned from that URL should look
 something like this:
 
     holman,kneath,defunkt
