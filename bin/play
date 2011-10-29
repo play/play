@@ -39,6 +39,7 @@ parser = OptionParser.new do |opts|
 
     pid = fork { Play::Library.monitor }
     Process.detach(pid)
+    puts "play is running on http://localhost:5050"
     system("unicorn -c #{File.dirname(__FILE__)}/../config/unicorn.rb")
   end
 
