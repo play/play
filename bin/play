@@ -43,7 +43,7 @@ parser = OptionParser.new do |opts|
     system("unicorn -c #{File.dirname(__FILE__)}/../config/unicorn.rb")
   end
 
-  opts.on("-p", "--path", "Pause the music server") do |path|
+  opts.on("-p", "--pause", "Pause the music server") do |path|
     Play::Client.pause
   end
 
