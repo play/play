@@ -60,6 +60,7 @@ module Play
     #
     # Returns nothing.
     def self.say(msg)
+      return unless msg
       system "say #{msg}"
     end
 
