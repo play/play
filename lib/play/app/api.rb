@@ -6,7 +6,7 @@ module Play
     end
 
     get "/api/say" do
-      Play::Client.say(params[:message])
+      Client.say(params[:message])
       { :success => "Okay." }.to_json
     end
 
@@ -21,7 +21,7 @@ module Play
     end
 
     post "/api/import" do
-      if Play::Library.import_songs
+      if Library.import_songs
         { :success => 'true' }.to_json
       else
         error "Had some problems importing into Play. Uh-oh."
@@ -30,7 +30,7 @@ module Play
 
     post "/api/add_song" do
       api_authenticate
-      artist = Play::Artist.find_by_name(params[:artist_name])
+      artist = Artist.find_by_name(params[:artist_name])
       if artist
         song = artist.songs.find_by_title(params[:song_title])
         if song
@@ -46,7 +46,7 @@ module Play
 
     post "/api/add_artist" do
       api_authenticate
-      artist = Play::Artist.find_by_name(params[:artist_name])
+      artist = Artist.find_by_name(params[:artist_name])
       if artist
         {:song_titles => artist.enqueue!(api_user).collect(&:title),
          :artist_name => artist.name}.to_json
@@ -57,7 +57,7 @@ module Play
 
     post "/api/add_album" do
       api_authenticate
-      album = Play::Album.find_by_name(params[:name])
+      album = Album.find_by_name(params[:name])
       if album
         album.enqueue!(api_user)
         {:artist_name => album.artist.name,
@@ -84,7 +84,7 @@ module Play
     end
 
     post "/api/volume" do
-      if Play::Client.volume(params[:level])
+      if Client.volume(params[:level])
         { :success => 'true' }.to_json
       else
         error "There's a problem adjusting the volume."
@@ -92,7 +92,7 @@ module Play
     end
 
     post "/api/pause" do
-      if Play::Client.pause
+      if Client.pause
         { :success => 'true' }.to_json
       else
         error "There's a problem pausing."
@@ -100,8 +100,8 @@ module Play
     end
 
     def api_user
-      Play::User.find_by_login(params[:user_login]) ||
-      Play::User.find_by_alias(params[:user_login])
+      User.find_by_login(params[:user_login]) ||
+      User.find_by_alias(params[:user_login])
     end
 
     def api_authenticate
