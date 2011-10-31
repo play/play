@@ -138,4 +138,11 @@ context "Api" do
     resp = parse_json(last_response.body.strip)
     assert_equal 'true', resp[:success]
   end
+
+  test "/api/next" do
+    Play::Client.expects(:pause).times(2).returns(true)
+    post "/api/next"
+    resp = parse_json(last_response.body.strip)
+    assert_equal 'true', resp[:success]
+  end
 end

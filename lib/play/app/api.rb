@@ -99,6 +99,14 @@ module Play
       end
     end
 
+    post "/api/next" do
+      if Client.pause && Client.pause
+        { :success => 'true' }.to_json
+      else
+        error "There's a problem pausing."
+      end
+    end
+
     def api_user
       User.find_by_login(params[:user_login]) ||
       User.find_by_alias(params[:user_login])
