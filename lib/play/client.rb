@@ -6,6 +6,8 @@ module Play
     # Returns nothing.
     def self.loop
       while true
+        ActiveRecord::Base.connection.reconnect!
+
         Signal.trap("INT") { exit! }  
 
         if paused?
