@@ -53,7 +53,9 @@ module Play
     # Returns nothing.
     def self.stop
       `killall afplay > /dev/null 2>&1`
-      `kill \`ps ax | grep "play -d" | cut -d ' ' -f 1\``
+      `ps ax | grep "play -d" | grep -v grep`.split("\n").size.times do
+        `kill $(ps ax | grep "play -d" | grep -v grep | cut -d ' ' -f 1)`
+      end
     end
 
     # Say things over the speakers, lol.
