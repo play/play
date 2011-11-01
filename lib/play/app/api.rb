@@ -107,6 +107,16 @@ module Play
       end
     end
 
+    get "/api/stats" do
+      playcounts = History.count
+      obj = Song.limit(1).group("artist_id").select("artist_id, count(artist_id) as count").first
+      artist = Artist.find(obj.artist_id)
+      {
+        :message => "Total plays: #{playcounts}"+
+                    "\nFavorite artist: #{artist.name} (#{obj.count} plays)"
+      }.to_json
+    end
+
     def api_user
       User.find_by_login(params[:user_login]) ||
       User.find_by_alias(params[:user_login])
