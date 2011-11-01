@@ -129,7 +129,8 @@ module Play
         'artist_name' => song.artist_name,
         'song_title'  => song.title,
         'album_name'  => song.album_name,
-        'download'    => "/song/#{song.id}/download"
+        'song_download_path' => "/song/#{song.id}/download",
+        'album_download_path' => "/album/#{song.album_id}/download"
       }.to_json
     end
   end
