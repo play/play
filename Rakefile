@@ -32,7 +32,6 @@ $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/lib')
 require 'yaml'
 
 task :environment do
-  ENV['RACK_ENV'] ||= 'development'
   require 'lib/play'
   require "bundler/setup"
 end
