@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 gem 'rack',          '~>1.3.0'
+gem 'rake'
 gem 'sinatra'
 gem 'activerecord'
 gem 'mustache',      '=0.99.3'
