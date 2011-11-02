@@ -80,4 +80,4 @@ Check out the [API docs on the wiki](https://github.com/holman/play/wiki/API).
 This was created by [Zach Holman](http://zachholman.com). You can follow me on
 Twitter as [@holman](http://twitter.com).
 
-I usually find myself playing Justice, Kanye West, and Muse at the office.
+I usually find myself playing Justice, Deadmau5, and Muse at the office.
