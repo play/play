@@ -58,12 +58,8 @@ read path
 path=${path//\//\\/}
 
 # GitHub setup
-open "https://github.com/account/applications/new"
 echo ""
 echo "  + You need to register your play instance on GitHub. "
-echo ""
-echo "    We just opened up the OAuth management screen in your browser -"
-echo "    the URL is: https://github.com/account/applications/new"
 echo ""
 echo "    Unless you're putting play on a different hostname, you likely will"
 echo "    want to use the following values:"
@@ -74,6 +70,11 @@ echo ""
 echo "    Once you've registered a new application, you'll need to grab the"
 echo "    *client ID* and the *client secret*."
 echo ""
+
+echo "    Press \"return\" to open a browser window and enter your OAuth details."
+read
+open "https://github.com/account/applications/new"
+
 echo "  + What's your GitHub client ID?     › \c"
 read client_id
 echo "  + What's your GitHub client secret? › \c"
