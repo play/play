@@ -108,7 +108,7 @@ context "Api" do
   test "/api/user/add_alias" do
     post "/api/user/add_alias", { :login => @user.login, :alias => 'zach' }
     resp = parse_json(last_response.body.strip)
-    assert 'true', resp[:success]
+    assert 'true', resp[:success].to_s
     assert_equal 'zach', User.first.alias
   end
 

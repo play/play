@@ -12,6 +12,6 @@ context "Play" do
   test "now playing" do
     @song = Play::Song.create
     @song.play!
-    assert @song, Play.now_playing
+    assert_equal @song, Play.now_playing
   end
 end
