@@ -12,7 +12,7 @@ context "Office" do
   test "user string returns a string o' user data" do
     object = "lol"
     object.stubs(:read).returns("holman,kneath")
-    Play::Office.stubs(:open).returns(object)
+    Play::Office.stubs(:connection).returns(object)
     assert_equal "holman,kneath", Play::Office.user_string
   end
 

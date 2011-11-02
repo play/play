@@ -15,11 +15,18 @@ module Play
       users.compact
     end
 
+    # Opens up the office URL.
+    #
+    # Returns a String.
+    def connection
+      open(url)
+    end
+
     # Hits the URL that we'll use to identify users.
     #
     # Returns a String of users (hopefully in comma-separated format).
     def self.user_string
-      open(url).read
+      connection.read
     rescue Exception
       nil
     end
