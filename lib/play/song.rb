@@ -108,6 +108,7 @@ module Play
       song ||= office_song
       Play::History.create(:song => song)
       song.play!
+      song.increment!(:playcount)
       song.dequeue!
       song
     end
