@@ -8,6 +8,7 @@ require 'play'
 #
 # Returns nothing.
 def migrate
+  puts "Migrating your database"
   version = ActiveRecord::Migrator.current_version
   version = 1 if version == 0
   ActiveRecord::Base.establish_connection(Play.config['db'])
