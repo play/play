@@ -41,10 +41,8 @@ Then run the `setup` script. It's cool.
 
 Things are managed with the `bin/play` executable.
 
-    play -w          Start the web server
-    play -d          Start the music server
-    play -s          Stop the music server
-    play -h          Help! I need somebody. Help! Not just anybody.
+    play start       Starts up the web and music servers.
+    play help        All of the other commands available in play.
 
 ## Set up your office (optional)
 

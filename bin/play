@@ -3,9 +3,10 @@
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 require 'play'
-require 'optparse'
 
 # Auto-migrate before launching the servers.
+#
+# Returns nothing.
 def migrate
   version = ActiveRecord::Migrator.current_version
   version = 1 if version == 0
@@ -13,50 +14,60 @@ def migrate
   ActiveRecord::Migrator.migrate("#{File.dirname(__FILE__)}/../db/migrate/", version)
 end
 
-parser = OptionParser.new do |opts|
-  opts.banner = "Usage: play [options] COMMAND"
+# Starts up the web interface.
+#
+# Returns nothing.
+def start_web
+  pid = fork { Play::Library.monitor }
+  Process.detach(pid)
 
-  opts.separator ""
-  opts.separator "Options:"
-
-  opts.on("-d", "--detach", "Start the music server") do
-    migrate
-
-    pid = fork { Play::Client.loop }
-    Process.detach(pid)
-
-    # Run a "quick" import to check for anything new.
-    pid = fork { Play::Library.import_songs }
-    Process.detach(pid)
-  end
-
-  opts.on("-s", "--stop", "Stop the music server") do
-    Play::Client.stop
-  end
-
-  opts.on("-w", "--web", "Run the web instance") do
-    migrate
-
-    pid = fork { Play::Library.monitor }
-    Process.detach(pid)
-    puts "play is running on http://localhost:5050"
-    system("unicorn -c #{File.dirname(__FILE__)}/../config/unicorn.rb")
-  end
-
-  opts.on("-p", "--pause", "Pause the music server") do |path|
-    Play::Client.pause
-  end
-
-  opts.on("-i", "--import", "Import new songs") do |import|
-    Play::Library.import_songs
-    exit
-  end
-
-  opts.on("-h", "--help", "Show this message") do
-    puts opts
-    exit
-  end
-
+  puts "play is running on http://localhost:5050"
+  system("unicorn -c #{File.dirname(__FILE__)}/../config/unicorn.rb")
 end
 
-parser.parse!
+# Starts up the music server.
+#
+# Returns nothing.
+def start_music
+  pid = fork { Play::Client.loop }
+  Process.detach(pid)
+end
+
+# Forks and kicks off music indexing.
+#
+# Returns nothing.
+def index_music
+  pid = fork { Play::Library.import_songs }
+  Process.detach(pid)
+end
+
+case ARGV[0]
+when 'start'
+  start_music
+  start_web
+  index_music
+when 'stop'
+  Play::Client.stop
+when 'music'
+  migrate
+  start_music
+  index_music
+when 'web'
+  migrate
+  start_web
+when 'pause'
+  Play::Client.pause
+when 'index'
+  index_music
+else
+  puts "play ►"
+  puts ""
+  puts "USAGE:    play [command]"
+  puts "COMMANDS: "
+  puts "          start  - Starts the web and music servers."
+  puts "          stop   - Stops the music server."
+  puts "          music  - Starts the music server."
+  puts "          web    - Starts the web server."
+  puts "          pause  - Pauses the music server."
+  puts "          import - Forces a reindex of the music library."
+end
