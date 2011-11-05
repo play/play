@@ -45,6 +45,20 @@ context "Api" do
     assert !user[:error].include?("must supply a valid `user_login`")
   end
 
+  test "/api/star_now_playing" do
+    Play.stubs(:now_playing).returns(@song)
+    post "/api/star_now_playing", { :user_login => @user.login }
+    song = parse_json(last_response.body.strip)
+    assert_equal @song.title, song[:song_title]
+  end
+
+  test "/api/play_stars" do
+    @song.star!(@user)
+    post "/api/play_stars", { :user_login => @user.login }
+    song = parse_json(last_response.body.strip)
+    assert_equal @song.title, song[:song_title]
+  end
+
   test "/api/add_song" do
     post "/api/add_song", { :song_title => @song.title,
                             :artist_name => @artist.name,

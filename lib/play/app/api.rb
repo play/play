@@ -28,6 +28,24 @@ module Play
       end
     end
 
+    post "/api/star_now_playing" do
+      api_authenticate
+      song = Play.now_playing
+      song.star!(api_user)
+      music_response(song)
+    end
+
+    post "/api/play_stars" do
+      api_authenticate
+      star = api_user.stars.sort_by{ rand }.first
+      if song = star.song
+        song.enqueue!(api_user)
+        music_response(song)
+      else
+        error "You don't have any starred songs, you lazy bastard."
+      end
+    end
+
     post "/api/add_song" do
       api_authenticate
       artist = Artist.find_by_name(params[:artist_name])

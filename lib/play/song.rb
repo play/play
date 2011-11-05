@@ -4,6 +4,7 @@ module Play
     belongs_to :album
     has_many :votes
     has_many :histories
+    has_many :stars
 
     scope :queue, select("songs.*,(select count(song_id) from votes where song_id=songs.id and active=1) as song_count").
                   where(:queued => true).
@@ -38,6 +39,15 @@ module Play
     # Returns and Array of Vote objects.
     def current_votes
       votes.where(:active => true).all
+    end
+
+    # Stars a song.
+    #
+    # user - The User object to associate with the new Star.
+    #
+    # Returns the new Star object.
+    def star!(user)
+      stars.create(:user => user)
     end
 
     # Queue up a song.

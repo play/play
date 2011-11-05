@@ -1,6 +1,7 @@
 module Play
   class User < ActiveRecord::Base
     has_many :votes
+    has_many :stars
 
     # Let the user vote for a particular song.
     #

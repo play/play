@@ -27,6 +27,11 @@ context "Song" do
     assert_equal "Played 0 times", @song.to_playcount
   end
 
+  test "stars a song" do
+    @song.star! @user
+    assert @user.stars.size == 1
+  end
+
   test "enqueue queues it up" do
     @song.enqueue! @user
     assert @song.queued
