@@ -21,6 +21,8 @@
 
       <a href="/artist/{{artist_name}}/album/{{album_name}}">Show Album</a>
 
+      <span><a href="/star/{{id}}" title="star song" class="star">Star</a></span>
+
       {{#queued?}} 
         <span><a href="/remove/{{id}}" title="remove from queue" class="remove">Don't Play</a></span>
       {{/queued?}}

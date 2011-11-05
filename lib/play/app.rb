@@ -71,7 +71,13 @@ module Play
       mustache :now_playing
     end
 
-    get "/add/:id" do
+    post "/star/:id" do
+      @song = Song.find(params[:id])
+      @song.star!(current_user)
+      "Starred"
+    end
+
+    post "/add/:id" do
       @song = Song.find(params[:id])
       @song.enqueue!(current_user)
       "Queued"
@@ -83,7 +89,7 @@ module Play
       redirect '/'
     end
 
-    get "/remove/:id" do
+    post "/remove/:id" do
       @song = Song.find(params[:id])
       @song.dequeue!(current_user)
       "Removed"
