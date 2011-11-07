@@ -18,6 +18,11 @@ like.
 
 No shit.
 
+## Screencast
+
+[There's a video](http://zachholman.com/screencast/play). It includes some
+explicit close-ups of a command line prompt.
+
 ## Install
 
 The underlying tech of Play uses `afplay` to control music (for now), so you'll
