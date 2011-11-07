@@ -72,5 +72,5 @@ else
   puts "          web     - Starts the web server."
   puts "          pause   - Pauses the music server."
   puts "          migrate - Forces a migration of the database."
-  puts "          import  - Forces a reindex of the music library."
+  puts "          index   - Forces a reindex of the music library."
 end
