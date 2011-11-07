@@ -44,6 +44,12 @@ Things are managed with the `bin/play` executable.
     play start       Starts up the web and music servers.
     play help        All of the other commands available in play.
 
+## Hubot
+
+Play also has [Hubot](https://hubot.github.com) integration. Just add
+[play.coffee](https://github.com/github/hubot-scripts/blob/master/src/scripts/play.coffee)
+to your Hubot.
+
 ## Set up your office (optional)
 
 This isn't a required step. If nothing's in the queue and Play has still been
