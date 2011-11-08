@@ -87,7 +87,7 @@ module Play
     # currently located in the office.
     def self.office_song
       users = Play::Office.users
-      if !users.empty?
+      if users && !users.empty?
         artist = users.collect(&:favorite_artists).flatten.shuffle.first
       end
 
