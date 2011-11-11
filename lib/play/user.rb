@@ -37,7 +37,7 @@ module Play
     #
     # Returns the String MD5 hash.
     def gravatar_id
-      Digest::MD5.hexdigest(email)
+      Digest::MD5.hexdigest(email) if email
     end
 
     # Authenticates a user. This will either select the existing user account,
