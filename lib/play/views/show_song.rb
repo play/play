@@ -12,7 +12,7 @@ module Play
       end
 
       def plays
-        @song.votes.count
+        @song.votes.count || 0
       end
     end
   end
