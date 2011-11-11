@@ -30,7 +30,7 @@ need a Mac. `afplay` is just a simple command-line wrapper to OS X's underlying
 music libraries, so it should come preinstalled with your Mac, and it should
 play anything iTunes can play.
 
-Play also expects MySQL to be installed.
+Play also expects MySQL to be installed. Play runs in Ruby 1.8.7.
 
 ### Install
 
