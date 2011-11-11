@@ -17,6 +17,7 @@ module Play
     #
     # Returns an Array of String file paths.
     def self.fs_songs(path)
+      Encoding.default_external = 'utf-8'
       `find "#{path}" -type f ! -name '.*'`.split("\n")
     end
 
