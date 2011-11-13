@@ -1,4 +1,8 @@
 <div class="song">
+  {{^queued?}}
+    <span class="play"><a href="/add/{{id}}" title="add to queue" class="add">&nbsp;►&nbsp;</a></span>
+  {{/queued?}}
+
   <div class="artist">
     <a href="/artist/{{artist_name}}">{{artist_name}}</a>
   </div>
@@ -25,9 +29,6 @@
 
       {{#queued?}} 
         <span><a href="/remove/{{id}}" title="remove from queue" class="remove">Don't Play</a></span>
-      {{/queued?}}
-      {{^queued?}}
-        <span><a href="/add/{{id}}" title="add to queue" class="add">►</a></span>
       {{/queued?}}
     </span>
 

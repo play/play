@@ -112,6 +112,26 @@ a:hover{
 .song .album a{
   color: #3299BB;
 }
+.song .play{
+  float: left;
+  background-color: #3299BB;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.37, rgb(50,153,187)),
+    color-stop(0.69, rgb(113,200,227))
+  );
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.song .play a{
+  color: #fff;
+  text-shadow: 0 1px 1px #424242;
+  font-size: 36pt;
+}
 .song .controls{
   height: 25px;
   text-align: right;
