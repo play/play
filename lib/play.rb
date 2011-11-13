@@ -15,6 +15,7 @@ require 'fssm'
 
 require 'play/core_ext/hash'
 
+require 'play/platform'
 require 'play/app'
 require 'play/artist'
 require 'play/album'
