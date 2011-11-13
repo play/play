@@ -71,6 +71,8 @@ a:hover{
 
 /*
  * SONGS
+ *
+ * Also see .song.now-playing
  */
 .song{
   width: 600px;
@@ -81,7 +83,7 @@ a:hover{
 	linear,
 	left bottom,
 	left top,
-	color-stop(0, rgb(233,233,233)),
+	color-stop(0, #E9E9E9),
 	color-stop(0.5, #fff)
   );
   font-weight: bold;
@@ -154,6 +156,40 @@ a:hover{
   font-size: 13px;
   font-weight: 300;
   color: #BCBCBC;
+}
+
+/*
+ * NOW PLAYING
+ */
+.song.now-playing{
+  background-color: #D1E7CA;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, #D1E7CA),
+    color-stop(0.5, #FFF)
+  );
+}
+
+/*
+ * HISTORY
+ */
+#history .song{
+  color: #BCBCBC;
+  font-size: 0.8em;
+  background-color: #E9E9E9;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, #E9E9E9),
+    color-stop(0.5, #FFF)
+  );
+  padding: 5px;
+}
+#history .song a{
+  color: #3299BB;
 }
 
 /*

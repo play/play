@@ -1,9 +1,28 @@
-{{#songs}}
-  {{>song}}
-{{/songs}}
-
-{{^songs}}
-<div class="content">
-  The queue is empty. Quick, play some <a href="/artist/Ace+of+Base">Ace of Base</a>; no one's looking.
+<div id="history">
+  {{#recent}}
+    <div class="song">
+      <a href="/song/{{id}}">{{title}}</a>
+      by
+      <a href="/artist/{{artist_name}}">{{artist_name}}</a>
+    </div>
+  {{/recent}}
 </div>
-{{/songs}}
+
+<div id="now-playing">
+  {{#current}}
+    {{>song}}
+  {{/current}}
+</div>
+
+<div id="queue">
+  {{#songs}}
+    {{>song}}
+  {{/songs}}
+
+  {{^songs}}
+  <div class="content">
+    The queue is empty. Quick, play some <a href="/artist/Ace+of+Base">Ace of Base</a>; no one's looking.
+  </div>
+  {{/songs}}
+</div>
+
