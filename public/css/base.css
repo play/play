@@ -105,12 +105,13 @@ a:hover{
   color: #424242;
 }
 .song .album{
-  float: left;
+  margin-bottom: 5px;
+  padding-left: 10px;
   font-size: 16px;
   letter-spacing: -2px;
 }
 .song .album a{
-  color: #3299BB;
+  color: #BCBCBC;
 }
 .song .controls{
   height: 25px;

@@ -7,6 +7,10 @@
     <a href="/song/{{id}}">{{title}}</a>
   </div>
 
+  <div class="album">
+    <a href="/artist/{{artist_name}}/album/{{album_name}}">{{album_name}}</a>
+  </div>
+
   <div class="controls">
     {{#current_votes}}
       {{#user}}
@@ -18,8 +22,6 @@
 
     <span class="wrap">
       <a href="/song/{{id}}/download">Download</a>
-
-      <a href="/artist/{{artist_name}}/album/{{album_name}}">Show Album</a>
 
       <span><a href="/star/{{id}}" title="star song" class="star">Star</a></span>
 
