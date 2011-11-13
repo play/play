@@ -64,7 +64,7 @@ module Play
       @user = User.authenticate(auth['user_info'])
       session['user_id'] = @user.id
       redirect '/'
-    end    
+    end
 
     get "/now_playing" do
       @song = Play.now_playing
