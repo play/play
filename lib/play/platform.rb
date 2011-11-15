@@ -14,13 +14,6 @@ module Play
       !!(RUBY_PLATFORM =~ /linux/)
     end
 
-    # Tests if currently running on Windows.
-    #
-    # Returns true if platform is Windows, else false.
-    def self.windows?
-      !!(RUBY_PLATFORM =~ /mswin|mingw/)
-    end
-
     # Gets the command used to play a music file for the current platform.
     #
     # Returns a String of the command.
@@ -29,9 +22,6 @@ module Play
         'afplay'
       elsif linux?
         'mpg123'
-      elsif windows?
-        warn('You are using an unsupported operating system')
-        exit(1)
       end
     end
 
@@ -45,9 +35,6 @@ module Play
         'say'
       elsif linux?
         ''
-      elsif windows?
-        warn('You are using an unsupported operating system')
-        exit(1)
       end
     end
 
@@ -63,9 +50,6 @@ module Play
       elsif linux?
         volume = number.to_i * 10
         "amixer set Master #{volume}%"
-      elsif windows?
-        warn('You are using an unsupported operating system')
-        exit(1)
       end
     end
   end
