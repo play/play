@@ -12,7 +12,7 @@ echo "  a nifty server for your musics."
 echo ""
 
 # Check for Bundler
-if test ! $(which bundle)
+if test ! $(which bundle 2> /dev/null)
 then
   echo "  x You need to install Bundler:"
   echo "    gem install bundler"
@@ -28,7 +28,7 @@ bundle install --quiet
 echo ""
 
 # Check for MySQL
-if test ! $(which mysql)
+if test ! $(which mysql 2> /dev/null)
 then
   echo "  x You need to install MySQL."
   exit
@@ -37,9 +37,9 @@ else
 fi
 
 # MySQL setup
-echo "  + What's the username for the MySQL database user? › \c"
+echo -ne "  + What's the username for the MySQL database user? › "
 read user
-echo "  + What's the password for the MySQL database user? › \c"
+echo -ne "  + What's the password for the MySQL database user? › "
 stty -echo
 read password
 stty echo
@@ -57,7 +57,7 @@ bin/play migrate 2>&1 > /dev/null
 
 # Music setup
 echo ""
-echo "  + What is the absolute path to your music? › \c"
+echo -ne "  + What is the absolute path to your music? › "
 read path
 path=${path//\//\\/}
 
@@ -77,11 +77,18 @@ echo ""
 
 echo "    Press \"return\" to open a browser window and enter your OAuth details."
 read
-open "https://github.com/account/applications/new"
+if [[ "Darwin" == "$(uname)" ]]
+then
+  open "https://github.com/account/applications/new"
+else
+  echo "    Uh oh! You're on Linux."
+  echo "    Open https://github.com/account/applications/new in your browser."
+  echo ""
+fi
 
-echo "  + What's your GitHub client ID?     › \c"
+echo -ne "  + What's your GitHub client ID?     › "
 read client_id
-echo "  + What's your GitHub client secret? › \c"
+echo -ne "  + What's your GitHub client secret? › "
 read client_secret
 
 # Set up play.yml
@@ -92,11 +99,11 @@ then
   mv config/play.yml config/play.backup.yml
 fi
 cp config/play.example.yml config/play.yml
-sed -i '' "s/__PATH__/$path/" config/play.yml
-sed -i '' "s/__OAUTH_KEY__/$client_id/" config/play.yml
-sed -i '' "s/__OAUTH_SECRET__/$client_secret/" config/play.yml
-sed -i '' "s/__USER__/$user/" config/play.yml
-sed -i '' "s/__PASSWORD__/$password/" config/play.yml
+sed -i'' "s/__PATH__/$path/" config/play.yml
+sed -i'' "s/__OAUTH_KEY__/$client_id/" config/play.yml
+sed -i'' "s/__OAUTH_SECRET__/$client_secret/" config/play.yml
+sed -i'' "s/__USER__/$user/" config/play.yml
+sed -i'' "s/__PASSWORD__/$password/" config/play.yml
 
 echo "  + Configuration settings saved to config/play.yml."
 echo "    Feel free to manually update the file anytime you'd like."
