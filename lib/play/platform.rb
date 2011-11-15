@@ -28,7 +28,7 @@ module Play
       if darwin?
         'afplay'
       elsif linux?
-        'play'
+        'mpg123'
       elsif windows?
         warn('You are using an unsupported operating system')
         exit(1)

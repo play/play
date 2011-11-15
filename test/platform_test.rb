@@ -20,7 +20,7 @@ context "Platform" do
   test "play_command" do
     Play::Platform.stubs(:warn).returns(true)
     assert_equal "afplay", Play::Platform.play_command if RUBY_PLATFORM.include?('darwin')
-    assert_equal "play", Play::Platform.play_command if RUBY_PLATFORM.include?('linux')
+    assert_equal "mpg123", Play::Platform.play_command if RUBY_PLATFORM.include?('linux')
 
     assert_equal 1, Play::Platform.play_command if RUBY_PLATFORM.include?('mswin') ||
                                                    RUBY_PLATFORM.include?('mingw')
