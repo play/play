@@ -51,6 +51,10 @@ mysql --user="$user" \
 
 echo "  + You now have a database named \"play\"."
 
+echo ""
+echo "  + Migrating your database."
+bin/play migrate 2>&1 > /dev/null
+
 # Music setup
 echo ""
 echo "  + What is the absolute path to your music? › \c"

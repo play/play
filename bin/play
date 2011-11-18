@@ -59,6 +59,7 @@ when 'web'
 when 'pause'
   Play::Client.pause
 when 'index'
+  migrate
   index_music
 when 'migrate'
   migrate
