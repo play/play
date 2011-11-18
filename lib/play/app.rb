@@ -107,6 +107,7 @@ module Play
                   where(:name => params[:splat].first).
                   includes(:songs => [:album, :artist]).
                   first
+      return mustache :four_oh_four if !@artist
       @songs = @artist.songs
       mustache :artist_songs
     end
