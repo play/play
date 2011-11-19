@@ -6,6 +6,7 @@ gem 'activerecord'
 gem 'mustache',      '=0.99.3'
 gem "SystemTimer",   "~>1.2.3", :platforms => [:mri_18]
 gem 'ruby-audioinfo'
+gem 'iconv'
 gem 'oa-oauth'
 gem 'yajl-ruby'
 gem 'mysql2',        '~>0.3.7'
