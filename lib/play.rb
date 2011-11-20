@@ -18,10 +18,6 @@ require 'play/core_ext/hash'
 require 'play/app'
 require 'play/artist'
 require 'play/album'
-
-require 'play/client'
-require 'play/afplayclient'
-
 require 'play/history'
 require 'play/library'
 require 'play/office'
@@ -79,6 +75,7 @@ module Play
   # in the config subclass.
   def self.client
     client_class = config['client'].capitalize + 'Client'
+    require 'play/' + client_class.downcase
     Play.const_get(client_class)
   rescue NameError
     raise NotImplementedError,
