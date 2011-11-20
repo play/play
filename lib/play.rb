@@ -15,9 +15,6 @@ require 'fssm'
 
 require 'play/core_ext/hash'
 
-require 'play/rdio/om'
-require 'play/rdio/rdio'
-
 require 'play/app'
 require 'play/artist'
 require 'play/album'
@@ -33,6 +30,7 @@ require 'play/vote'
 
 require 'play/jukeboxes/base'
 require 'play/jukeboxes/local'
+require 'play/jukeboxes/rdio'
 
 module Play
   # The path to your music library. All of the music underneath this directory

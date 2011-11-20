@@ -48,7 +48,6 @@ module Play
 
       # list them
       playlists.each { |playlist| puts "%s\t%s" % [playlist['shortUrl'], playlist['name']] }
-      
     end
     
     
