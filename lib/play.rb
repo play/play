@@ -18,7 +18,10 @@ require 'play/core_ext/hash'
 require 'play/app'
 require 'play/artist'
 require 'play/album'
+
 require 'play/client'
+require 'play/afplayclient'
+
 require 'play/history'
 require 'play/library'
 require 'play/office'
@@ -70,5 +73,15 @@ module Play
   #   office_url - the URL to an endpoint where we can see who's in your office
   def self.config
     YAML::load(File.open(config_path))
+  end
+
+  # Returns the Client subclass that matches the client requested
+  # in the config subclass.
+  def self.client
+    client_class = config['client'].capitalize + 'Client'
+    Play.const_get(client_class)
+  rescue NameError
+    raise NotImplementedError,
+    "\"#{config['client']}\" is not a supported music client type."
   end
 end
