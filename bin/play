@@ -44,7 +44,7 @@ end
 
 def rdio_auth
   puts "Generating URL for rdio token"
-  Play::Rdio.auth_instructions
+  Play::Rdio::Auth.instructions
 end
 
 case ARGV[0]
