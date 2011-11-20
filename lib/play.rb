@@ -31,6 +31,9 @@ require 'play/views/layout'
 require 'play/user'
 require 'play/vote'
 
+require 'play/jukeboxes/base'
+require 'play/jukeboxes/local'
+
 module Play
   # The path to your music library. All of the music underneath this directory
   # will be added to the internal library.

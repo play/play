@@ -13,7 +13,11 @@ module Play
         if paused?
           sleep(1)
         else
-          system("afplay", Song.play_next_in_queue.path)
+          song = Song.play_next_in_queue
+          if song
+            jukebox = Local::Jukebox.new
+            jukebox.play!(song) if jukebox.enabled?
+          end
         end
       end
     end
