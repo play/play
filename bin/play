@@ -42,6 +42,11 @@ def index_music
   Process.detach(pid)
 end
 
+def rdio_auth
+  puts "Generating URL for rdio token"
+  Play::Rdio.auth_instructions
+end
+
 case ARGV[0]
 when 'start'
   start_music
@@ -63,6 +68,8 @@ when 'index'
   index_music
 when 'migrate'
   migrate
+when 'rdio'
+  rdio_auth
 else
   puts "play ►"
   puts ""

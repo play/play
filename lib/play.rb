@@ -15,6 +15,9 @@ require 'fssm'
 
 require 'play/core_ext/hash'
 
+require 'play/rdio/om'
+require 'play/rdio/rdio'
+
 require 'play/app'
 require 'play/artist'
 require 'play/album'

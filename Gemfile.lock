@@ -27,6 +27,7 @@ GEM
     fssm (0.2.7)
     i18n (0.6.0)
     iconv (0.1)
+    json (1.6.1)
     kgio (2.6.0)
     metaclass (0.0.1)
     mocha (0.10.0)
@@ -89,6 +90,7 @@ DEPENDENCIES
   activerecord
   fssm
   iconv
+  json
   mocha
   mustache (= 0.99.3)
   mysql2 (~> 0.3.7)
