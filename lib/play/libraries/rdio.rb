@@ -1,5 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/rdio/om')
 require File.expand_path(File.dirname(__FILE__) + '/rdio/client')
+require File.expand_path(File.dirname(__FILE__) + '/rdio/server')
 require File.expand_path(File.dirname(__FILE__) + '/rdio/auth')
 
 module Play
@@ -15,7 +16,15 @@ module Play
       end
       
       def play!(song)
-        
+        @client.queue_track(song.path)
+      end
+      
+      def stop!
+        @client.stop_server
+      end
+      
+      def playing?
+        @client.playing?
       end
       
       def monitor

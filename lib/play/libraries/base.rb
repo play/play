@@ -24,6 +24,12 @@ module Play
       end
     end
     
+    def self.each(&block)
+      instances.values.each do |instance|
+        yield instance
+      end
+    end
+    
     class Base
       def self.sync_song(path, artist_name, album_name, title)
         artist = Artist.find_or_create_by_name(artist_name)
@@ -47,6 +53,14 @@ module Play
     
       def play!(song)
         raise("Library should implement play!")
+      end
+      
+      def stop!
+        raise("Library should implement stop!")
+      end
+      
+      def playing?
+        raise("Library should implement playing?")
       end
       
       def monitor

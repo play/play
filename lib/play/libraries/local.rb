@@ -15,6 +15,15 @@ module Play
         system(@command, song.path)
       end
       
+      def stop!
+        return unless @command
+        `killall #{@command} > /dev/null 2>&1`
+      end
+      
+      def playing?
+        `ps aux | grep #{@command} | grep -v grep | wc -l | tr -d ' '`.chomp != '0'
+      end
+      
       def import
         self.class.import_songs
       end

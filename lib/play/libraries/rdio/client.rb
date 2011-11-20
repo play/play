@@ -38,19 +38,64 @@ module Play
         else
           return nil unless config["consumer_token"]
           return nil unless config["consumer_secret"]
-          return nil unless config["playback_token"]
-          Client.new([config["client_key"], config["client_secret"]], [config["consumer_token"], config["consumer_secret"]])
+          Client.new( [config["client_key"], config["client_secret"]], 
+                      [config["consumer_token"], config["consumer_secret"]], 
+                      config["playback_token"])
         end
       end
       
       # the consumer and token can be accessed
       attr_accessor :consumer, :token
 
-      def initialize(consumer, token=nil)
+      def initialize(consumer, token=nil, playback=nil)
         @consumer = consumer
         @token = token
+        @playback = playback
       end
 
+      def playing?
+        return false unless @server
+        Server.playing
+      end
+      
+      def start_server
+        return if @server
+        
+        play = YAML::load(File.open("config/play.yml"))
+        host = play["domain"] || "localhost"
+        port = play["rdio"] && play["rdio"]["port"] ? play["rdio"]["port"].to_i : 4567
+        
+        @server = Thread.new { Server.run! :host => host, :port => port }
+        Server.token = @playback || "GAlNi78J_____zlyYWs5ZG02N2pkaHlhcWsyOWJtYjkyN2xvY2FsaG9zdEbwl7EHvbylWSWFWYMZwfc="
+        Server.domain = host
+        puts "server started: #{@server}"
+      end
+      
+      def stop_server
+        stop_track
+        return unless @server
+        Thread.kill(@server)
+        @server = nil
+      end
+      
+      def queue_track(key)
+        start_server
+        Server.playing = true
+        Server.queue << key
+        while true
+          puts "playing"
+          break unless Server.playing
+          sleep(0.5)
+        end
+      end
+      
+      def stop_track
+        return unless @server
+        Server.command = ["clear"]
+      end
+      
+      
+      
       def begin_authentication(callback_url)
         # request a request token from the server
         response = signed_post('http://api.rdio.com/oauth/request_token',
