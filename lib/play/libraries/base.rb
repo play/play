@@ -1,6 +1,7 @@
 module Play
   module Library
     def self.klazzes
+      # probably need to do this dynamically via registration or subclasses
       [Play::Local::Library, Play::Rdio::Library]
     end
     
@@ -14,9 +15,7 @@ module Play
     end
     
     def self.instance(name)
-      inst = instances[name]
-      # TODO: constantize and add to @instances if not there (with big fat rescue)
-      inst
+      instances[name]
     end
     
     def self.enabled(&block)
