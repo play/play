@@ -6,7 +6,7 @@ context "Library" do
     count = Play::Library.instances.size
     assert count > 0
     
-    Play::Library.instances.each do |instance|
+    Play::Library.instances.values.each do |instance|
       instance.stubs(:enabled?).returns(true)
     end
     
@@ -19,13 +19,17 @@ context "Library" do
   
   test "instances returns all" do
     instances = Play::Library.instances
-    names = instances.collect{ |i| i.class.name }
-    assert_equal names, ["Play::Local::Library", "Play::Rdio::Library"]
+    assert_equal instances.keys.sort, ["Play::Local::Library", "Play::Rdio::Library"]
   end
   
   test "instances are the same ones" do
-    first = Play::Library.instances.first
-    assert_equal first, Play::Library.instances.first
+    first = Play::Library.instances.values.first
+    assert_equal first, Play::Library.instances.values.first
+  end
+  
+  test "instance finds the instances" do
+    instance = Play::Library.instance("Play::Local::Library")
+    assert instance.class.name == "Play::Local::Library"
   end
   
 end

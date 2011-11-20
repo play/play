@@ -12,3 +12,11 @@ db:
   user: __USER__
   password: __PASSWORD__
   reconnect: true
+
+# optional rdio support example: get your client keys and run 'bin/play rdio' to set the others up
+rdio:
+  client_key: 4e4sxgwenpj56z5as792ykff
+  client_secret: JX498sVPmc
+  consumer_token: wedrp9bnxbmnqcvxpq2r896qr9qaja6mjevtrxbm49sdyyaw4vc6mk93qk52dm2v
+  consumer_secret: SrzU9TwPk3Gj
+  playback_token: GAlOyKnnAA3FgTRlNHN4Z2hnbnBqNTZP7WSzNzkyeWtmZmxvY2FsaG9zdE_9lJpHS1qX6CGmXW2dxlI=

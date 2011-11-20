@@ -25,6 +25,24 @@ require 'json'
 module Play
   module Rdio    
     class Client
+      def self.connection(with_consumer=true)
+        play = YAML::load(File.open("config/play.yml"))
+        return nil unless play["rdio"]
+
+        config = play["rdio"]
+        return nil unless config["client_key"]
+        return nil unless config["client_secret"]
+
+        if !with_consumer
+          Client.new([config["client_key"], config["client_secret"]])
+        else
+          return nil unless config["consumer_token"]
+          return nil unless config["consumer_secret"]
+          return nil unless config["playback_token"]
+          Client.new([config["client_key"], config["client_secret"]], [config["consumer_token"], config["consumer_secret"]])
+        end
+      end
+      
       # the consumer and token can be accessed
       attr_accessor :consumer, :token
 
@@ -51,6 +69,7 @@ module Play
                                {'oauth_verifier' => verifier})
         # parse the response
         parsed = CGI.parse(response)
+        puts parsed.inspect
         # save the token
         @token = [parsed['oauth_token'][0], parsed['oauth_token_secret'][0]]
       end

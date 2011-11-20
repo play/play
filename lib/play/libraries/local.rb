@@ -3,7 +3,7 @@ module Play
     class Library < Play::Library::Base
       def initialize
         super
-        @command = "afplay" if system("which afplay")
+        @command = "afplay" if system("which afplay > /dev/null")
         # TODO: could support other systems in this way
       end
       
@@ -67,17 +67,7 @@ module Play
       # Returns the imported (or found) Song.
       def self.import_song(path)
         artist_name,title,album_name = fs_get_artist_and_title_and_album(path)
-        artist = Artist.find_or_create_by_name(artist_name)
-        song = Song.where(:path => path).first
-
-        if !song
-          album = Album.where(:artist_id => artist.id, :name => album_name).first ||
-                  Album.create(:artist_id => artist.id, :name => album_name)
-          Song.create(:path => path,
-                      :artist => artist,
-                      :album => album,
-                      :title => title)
-        end
+        sync_song(path, artist_name, album_name, title)
       end
 
       # Splits a music file up into three constituent parts: artist, title,

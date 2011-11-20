@@ -15,8 +15,8 @@ module Play
         else
           song = Song.play_next_in_queue
           if song
-            library = Local::Library.new
-            library.play!(song) if library.enabled?
+            library = Play::Library.instance(song.library_type)
+            library.play!(song) if library && library.enabled?
           end
         end
       end

@@ -96,7 +96,7 @@ module Play
       end
 
       def percent_encode(s)
-        chars = s.chars.map do |c|
+        chars = s.to_s.chars.map do |c|
           if ((c >= '0' and c <= '9') or
               (c >= 'A' and c <= 'Z') or
               (c >= 'a' and c <= 'z') or
