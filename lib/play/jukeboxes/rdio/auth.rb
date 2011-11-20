@@ -17,7 +17,8 @@ module Play
         verifier = STDIN.gets.strip
         rdio.complete_authentication(verifier)
       
-        puts "consumer_token from your yml file: #{rdio.token}"
+        puts "consumer_token for your yml file: #{rdio.token}"
+        puts "playback_token for your yml file: #{rdio.call('getPlaybackToken')['result']}"
       
         puts "Let's see if it worked:"
         # find out what playlists you created
