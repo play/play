@@ -20,7 +20,6 @@ require 'play/artist'
 require 'play/album'
 require 'play/client'
 require 'play/history'
-require 'play/library'
 require 'play/office'
 require 'play/star'
 require 'play/song'
@@ -28,9 +27,9 @@ require 'play/views/layout'
 require 'play/user'
 require 'play/vote'
 
-require 'play/jukeboxes/base'
-require 'play/jukeboxes/local'
-require 'play/jukeboxes/rdio'
+require 'play/libraries/base'
+require 'play/libraries/local'
+require 'play/libraries/rdio'
 
 module Play
   # The path to your music library. All of the music underneath this directory

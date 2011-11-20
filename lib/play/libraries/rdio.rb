@@ -4,7 +4,7 @@ require File.expand_path(File.dirname(__FILE__) + '/rdio/auth')
 
 module Play
   module Rdio
-    class Jukebox < Play::Jukebox::Base
+    class Library < Play::Library::Base
       def initialize
         super
       end
@@ -15,7 +15,15 @@ module Play
       
       def play!(song)
         
-      end   
+      end
+      
+      def monitor
+        
+      end
+      
+      def import
+        
+      end
     end
   end
 end

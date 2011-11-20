@@ -15,8 +15,8 @@ module Play
         else
           song = Song.play_next_in_queue
           if song
-            jukebox = Local::Jukebox.new
-            jukebox.play!(song) if jukebox.enabled?
+            library = Local::Library.new
+            library.play!(song) if library.enabled?
           end
         end
       end

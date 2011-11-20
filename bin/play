@@ -19,8 +19,10 @@ end
 #
 # Returns nothing.
 def start_web
-  pid = fork { Play::Library.monitor }
-  Process.detach(pid)
+  Play::Library.enabled do |library|
+    pid = fork { library.monitor }
+    Process.detach(pid)
+  end
 
   puts "play is running on http://localhost:5050"
   system("unicorn -c #{File.dirname(__FILE__)}/../config/unicorn.rb")
@@ -38,8 +40,10 @@ end
 #
 # Returns nothing.
 def index_music
-  pid = fork { Play::Library.import_songs }
-  Process.detach(pid)
+  Play::Library.enabled do |library|
+    pid = fork { library.import }
+    Process.detach(pid)
+  end
 end
 
 def rdio_auth

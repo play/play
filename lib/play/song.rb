@@ -106,10 +106,12 @@ module Play
     def self.play_next_in_queue
       song = queue.first
       song ||= office_song
-      Play::History.create(:song => song)
-      song.play!
-      song.increment!(:playcount)
-      song.dequeue!
+      if song
+        Play::History.create(:song => song)
+        song.play!
+        song.increment!(:playcount)
+        song.dequeue!
+      end
       song
     end
   end
