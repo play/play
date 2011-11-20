@@ -17,15 +17,21 @@ module Play
         verifier = STDIN.gets.strip
         rdio.complete_authentication(verifier)
       
-        puts "consumer_token for your yml file: #{rdio.token}"
-        puts "playback_token for your yml file: #{rdio.call('getPlaybackToken')['result']}"
+        if rdio.token
+          params = {}
+          params["domain"] = config["domain"] if config["domain"]
+          playback = rdio.call('getPlaybackToken', params)['result']
+          
+          puts "consumer_token for your yml file: #{rdio.token}"
+          puts "playback_token for your yml file: #{playback}"
       
-        puts "Let's see if it worked:"
-        # find out what playlists you created
-        playlists = rdio.call('getPlaylists')['result']['owned']
+          puts "Let's see if it worked:"
+          # find out what playlists you created
+          playlists = rdio.call('getPlaylists')['result']['owned']
 
-        # list them
-        playlists.each { |playlist| puts "%s\t%s" % [playlist['shortUrl'], playlist['name']] }
+          # list them
+          playlists.each { |playlist| puts "%s\t%s" % [playlist['shortUrl'], playlist['name']] }
+        end
       end
     end
   end
