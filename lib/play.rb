@@ -12,6 +12,7 @@ require 'digest'
 require 'yajl'
 require 'rb-fsevent'
 require 'fssm'
+require 'randumb'
 
 require 'play/core_ext/hash'
 
@@ -77,7 +78,7 @@ module Play
   def self.client
     client_class = config['client'].capitalize + 'Client'
     require 'play/' + client_class.downcase
-    Play.const_get(client_class)
+    return Play.const_get(client_class)
   rescue NameError
     raise NotImplementedError,
     "\"#{config['client']}\" is not a supported music client type."
