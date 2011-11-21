@@ -13,6 +13,7 @@ context "Api" do
                                 :artist => @artist,
                                 :album  => @album)
     @user = Play::User.create(:login => 'holman', :alias => 'zach')
+    @client = Play.client
   end
 
   test "/api/now_playing" do
@@ -27,7 +28,7 @@ context "Api" do
   end
 
   test "/api/say" do
-    Play::Client.expects(:say).with("Holman is sexy").returns(true)
+    @client.expects(:say).with("Holman is sexy").returns(true)
     get "/api/say", { :message => "Holman is sexy" }
     resp = parse_json(last_response.body.strip)
     assert_equal "Okay.", resp[:success]
@@ -134,28 +135,28 @@ context "Api" do
   end
 
   test "/api/volume" do
-    Play::Client.expects(:volume).with('3').returns(true)
+    @client.expects(:volume).with('3').returns(true)
     post "/api/volume", {:level => 3}
     resp = parse_json(last_response.body.strip)
     assert_equal 'true', resp[:success]
   end
 
   test "/api/volume with a float" do
-    Play::Client.expects(:volume).with("2.5").returns(true)
+    @client.expects(:volume).with("2.5").returns(true)
     post "/api/volume", {:level => '2.5'}
     resp = parse_json(last_response.body.strip)
     assert_equal 'true', resp[:success]
   end
 
   test "/api/pause" do
-    Play::Client.expects(:pause).returns(true)
+    @client.expects(:pause).returns(true)
     post "/api/pause"
     resp = parse_json(last_response.body.strip)
     assert_equal 'true', resp[:success]
   end
 
   test "/api/next" do
-    Play::Client.expects(:pause).times(2).returns(true)
+    @client.expects(:pause).times(2).returns(true)
     post "/api/next"
     resp = parse_json(last_response.body.strip)
     assert_equal 'true', resp[:success]
