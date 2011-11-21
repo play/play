@@ -17,5 +17,13 @@ context "Local" do
     rdio = Play::Rdio::Library.new
     rdio.sync_tracks
   end
+
+  test "launches web page" do
+    rdio = Play::Rdio::Library.new
+    
+    puts rdio.launch_browser("t7349138")
+    puts rdio.launch_browser("t7116197")
+  end
 =end
+
 end

@@ -1,6 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/rdio/om')
 require File.expand_path(File.dirname(__FILE__) + '/rdio/client')
-require File.expand_path(File.dirname(__FILE__) + '/rdio/server')
 require File.expand_path(File.dirname(__FILE__) + '/rdio/auth')
 
 module Play
@@ -9,22 +8,42 @@ module Play
       def initialize
         super
         @client = Client.connection
+        browser = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+        @command = browser.gsub(' ', '\ ') if File.exists?(browser)
+      end
+      
+      def launch_url
+        "http://localhost:5050/rdio/"
+      end
+      
+      def quit_browser(track_id)
+        Play::Client.kill_each("#{launch_url}#{track_id}")
+      end
+      
+      def launch_browser(track_id)
+        return nil unless @command
+        data_dir = "/tmp/play/chrome/#{rand(999999999)}"
+        cmd = "#{@command} \"#{launch_url}#{track_id}\" --no-process-singleton-dialog --incognito --user-data-data-dir=#{data_dir}"
+        `#{cmd} > /dev/null 2>&1`
       end
       
       def enabled?
-        !!@client
+        return false unless @client
+        return false unless @command
+        # check for the web server running
+        Play::Client.ps_count?("unicorn worker") && Play::Client.ps_count?("unicorn master")
       end
       
       def play!(song)
-        @client.queue_track(song.path)
+        launch_browser(song.path)
       end
       
       def stop!
-        @client.stop_server
+        Play::Client.kill_each(launch_url)
       end
       
       def playing?
-        @client.playing?
+        Play::Client.ps_count?(launch_url)
       end
       
       def monitor

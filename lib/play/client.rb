@@ -56,18 +56,26 @@ module Play
       end
       false
     end
+    
+    def self.kill_each(val)
+      `ps ax | grep "#{val}" | grep -v grep`.split("\n").size.times do
+        `kill $(ps ax | grep "#{val}" | grep -v grep | sed -e 's/^[ \t]*//' | cut -d ' ' -f 1)`
+      end
+    end
+    
+    def self.ps_count?(val)
+      `ps aux | grep "#{val}" | grep -v grep | wc -l | tr -d ' '`.chomp != '0'
+    end
 
     # Stop the music, and stop the music server.
     #
     # Returns nothing.
     def self.stop
+      # shut down the service itself
+      kill_each("play -d")
+      
       Play::Library.each do |library|
         library.stop!
-      end
-      
-      # show down the service itself
-      `ps ax | grep "play -d" | grep -v grep`.split("\n").size.times do
-        `kill $(ps ax | grep "play -d" | grep -v grep | cut -d ' ' -f 1)`
       end
     end
 

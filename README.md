@@ -55,6 +55,15 @@ Play also has [Hubot](https://hubot.github.com) integration. Just add
 [play.coffee](https://github.com/github/hubot-scripts/blob/master/src/scripts/play.coffee)
 to your Hubot.
 
+## Rdio
+
+There is a setup script to help fill out the right play.yml settings for Rdio. 
+You'll need to set it up with your client keys from Rdio.
+
+    play rdio       Helps set the yml variables
+
+Playing Rdio tracks also requires Google Chrome.
+
 ## Set up your office (optional)
 
 This isn't a required step. If nothing's in the queue and Play has still been

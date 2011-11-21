@@ -19,13 +19,13 @@ end
 #
 # Returns nothing.
 def start_web
+  puts "play is running on http://localhost:5050"
+  system("unicorn -c #{File.dirname(__FILE__)}/../config/unicorn.rb")
+  
   Play::Library.enabled do |library|
     pid = fork { library.monitor }
     Process.detach(pid)
   end
-
-  puts "play is running on http://localhost:5050"
-  system("unicorn -c #{File.dirname(__FILE__)}/../config/unicorn.rb")
 end
 
 # Starts up the music server.
@@ -86,4 +86,5 @@ else
   puts "          pause   - Pauses the music server."
   puts "          migrate - Forces a migration of the database."
   puts "          index   - Forces a reindex of the music library."
+  puts "          rdio    - Connects with a client to get consumer fields."
 end

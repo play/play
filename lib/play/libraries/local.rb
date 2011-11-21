@@ -21,7 +21,7 @@ module Play
       end
       
       def playing?
-        `ps aux | grep #{@command} | grep -v grep | wc -l | tr -d ' '`.chomp != '0'
+        Play::Client.ps_count?(@command)
       end
       
       def import
@@ -32,9 +32,6 @@ module Play
         self.class.monitor_directory
       end
       
-      
-
-
       # Monitors the music directory for any new music added to it. Once
       # changed, Play will run through and reindex those directories.
       #

@@ -39,7 +39,8 @@ module Play
           redirect '/login' unless request.path_info =~ /\/login/    ||
                                    request.path_info =~ /\/devlogin/ ||
                                    request.path_info =~ /\/auth/     ||
-                                   request.path_info =~ /\/api/
+                                   request.path_info =~ /\/api/      ||
+                                   request.path_info =~ /\/rdio/
         end
       end
     end
@@ -140,10 +141,26 @@ module Play
       @songs = History.limit(100).order('created_at desc').collect(&:song)
       mustache :play_history
     end
+    
+    get "/rdio/:track_id/done" do
+      Play::Library.instance("Play::Rdio::Library").quit_browser(params[:track_id])
+      "thanks!"
+    end
+    
+    get "/rdio/:track_id" do
+      @track_id = params[:track_id]
+      play = YAML::load(File.open("config/play.yml"))
+      @domain = play["domain"] || "localhost"
+      @playback_token = play["rdio"]["playback_token"] if play["rdio"] && play["rdio"]["playback_token"]
+      @playback_token ||= "GAlNi78J_____zlyYWs5ZG02N2pkaHlhcWsyOWJtYjkyN2xvY2FsaG9zdEbwl7EHvbylWSWFWYMZwfc="
+      mustache :rdio
+    end
 
     get "/:login" do
       @user = User.where(:login => params[:login]).first
       mustache :profile
     end
+    
+
   end
 end
