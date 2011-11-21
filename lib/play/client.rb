@@ -24,14 +24,7 @@ module Play
     def self.play(song_path)
     end
 
-    # The temp file we use to signify whether Play should be paused.
-    #
-    # Returns the String path of the pause file.
-    def self.pause_path
-    end
-
-    # "Pauses" a client by stopping currently playing songs and setting up the
-    # pause temp file.
+    # "Pauses" a client by stopping currently playing songs
     # 
     # Returns nothing.
     def self.pause
@@ -41,12 +34,14 @@ module Play
     #
     # Returns the Boolean value of whether we're paused.
     def self.paused?
+      return true
     end
 
     # Are we currently playing? Look at the process list and check it out.
     #
     # Returns true if we're playing, false if we aren't.
     def self.playing?
+      return false
     end
 
     # Stop the music, and stop the music server.
