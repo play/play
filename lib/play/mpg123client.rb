@@ -63,7 +63,7 @@ module Play
     # Returns nothing.
     def self.volume(number)
       volume = number.to_i * 10
-      system "amixer set Master #{volume}% 2> /dev/null"
+      system "amixer set Master #{volume}% > /dev/null 2>&1"
     end
   end
 end
