@@ -1,5 +1,3 @@
-require 'play/client'
-
 module Play
   class Mpg123Client < Client
     # Cause the client to play a song
