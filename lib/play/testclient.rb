@@ -1,5 +1,5 @@
 module Play
-  class TestClient
+  class TestClient < Client
     # Cause the client to play a song
     #
     # Returns nothing
