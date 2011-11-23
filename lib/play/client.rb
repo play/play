@@ -18,10 +18,17 @@ module Play
       end
     end
 
-    # Cause the client to play a song
+    # Have the client play a song
     #
     # Returns nothing
     def self.play(song_path)
+    end
+
+    # Cause the client to play the next song.
+    #
+    # Returns true if successful, else false.
+    def self.next
+      pause && pause
     end
 
     # "Pauses" a client by stopping currently playing songs

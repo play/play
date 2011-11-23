@@ -162,7 +162,7 @@ context "Api" do
   end
 
   test "/api/next" do
-    Play::TestClient.expects(:pause).times(2).returns(true)
+    Play::TestClient.expects(:next).times(1).returns(true)
     post "/api/next"
     resp = parse_json(last_response.body.strip)
     assert_equal 'true', resp[:success]

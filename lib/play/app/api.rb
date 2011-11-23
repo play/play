@@ -118,10 +118,10 @@ module Play
     end
 
     post "/api/next" do
-      if Play.client.pause && Play.client.pause
+      if Play.client.next
         { :success => 'true' }.to_json
       else
-        error "There's a problem pausing."
+        error "There's a problem playing the next song."
       end
     end
 
