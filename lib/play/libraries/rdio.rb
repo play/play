@@ -22,16 +22,14 @@ module Play
       
       def launch_browser(track_id)
         return nil unless @command
+        return nil unless Play::Client.ps_count?("unicorn worker") && Play::Client.ps_count?("unicorn master")
         data_dir = "/tmp/play/chrome/#{rand(999999999)}"
         cmd = "#{@command} \"#{launch_url}#{track_id}\" --no-process-singleton-dialog --incognito --user-data-data-dir=#{data_dir}"
         `#{cmd} > /dev/null 2>&1`
       end
       
       def enabled?
-        return false unless @client
-        return false unless @command
-        # check for the web server running
-        Play::Client.ps_count?("unicorn worker") && Play::Client.ps_count?("unicorn master")
+        @client && @command       
       end
       
       def play!(song)
@@ -87,9 +85,49 @@ module Play
           tracks.each do |track|
             import_track(track)
           end
-
           page += 1
         end
+        
+        fetch_playlists_keys.each do |key|
+          tracks = fetch_playlist_tracks(key)
+          break if tracks.empty?
+          
+          tracks.each do |track|
+            import_track(track)
+          end
+        end
+
+      end
+      
+      def fetch_playlists_keys
+        params = {}
+        playlists = @client.call("getPlaylists", params)["result"] || []
+        out = []
+        ["collab", "subscribed", "owned"].each do |type|
+          next unless playlists[type]
+          playlists[type].each do |list|
+            out << list["key"] if list["key"]
+          end
+        end
+        out
+      end
+
+      def fetch_playlist_tracks(playlist_key)
+        params = {}
+        params["keys"] = playlist_key
+        params["extras"] = "trackKeys"
+        list = @client.call("get", params)["result"] || {}
+        
+        
+        return [] unless list[playlist_key]
+        return [] unless list[playlist_key]["trackKeys"]
+        
+        out = []
+        params = {}
+        
+        params["keys"] = list[playlist_key]["trackKeys"].join(",")
+        tracks = @client.call("get", params)["result"] || {}
+        tracks.values   
       end
 
       def fetch_tracks(page)
