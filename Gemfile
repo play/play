@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 gem 'rack',          '~>1.3.0'
 gem 'rake',          '~>0.9.2.1'
+gem 'randumb'
 gem 'sinatra'
 gem 'activerecord'
 gem 'mustache',      '=0.99.3'
