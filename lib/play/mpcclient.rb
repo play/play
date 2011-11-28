@@ -5,7 +5,9 @@ module Play
     # Returns nothing
     def self.play(song_path)
       if `mpc playlist | wc -l`.to_i < 1
-        system('mpc', 'add', song_path.gsub(/^#{Play.config['path']}\//,""))
+        if not system('mpc', 'add',
+          song_path.gsub(/^#{Play.config['path']}\//,""))
+          return # mpc didn't add the song, so just return, don't block
       end
       `mpc play`
       `mpc idle` # self.play is expected to block, so wait for an event
