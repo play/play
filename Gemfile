@@ -9,7 +9,11 @@ gem 'ruby-audioinfo'
 gem 'oa-oauth'
 gem 'yajl-ruby'
 gem 'mysql2',        '~>0.3.7'
-gem 'rb-fsevent'
+
+# ideally bundler should offer :platform => :mac, :linux to make this nicer.
+gem 'rb-fsevent' # mac
+gem 'rb-inotify' # linux
+
 gem 'fssm'
 gem 'unicorn',       '~>4.1.0'
 

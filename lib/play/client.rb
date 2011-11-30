@@ -13,7 +13,7 @@ module Play
         if paused?
           sleep(1)
         else
-          system("afplay", Song.play_next_in_queue.path)
+          system("#{Platform.play_command}", Song.play_next_in_queue.path)
         end
       end
     end
@@ -31,7 +31,7 @@ module Play
     # Returns nothing.
     def self.pause
       paused? ? `rm -f #{pause_path}` : `touch #{pause_path}`    
-      `killall afplay > /dev/null 2>&1`
+      `killall #{Platform.play_command} > /dev/null 2>&1`
     end
 
     # Are we currently paused?
@@ -45,14 +45,14 @@ module Play
     #
     # Returns true if we're playing, false if we aren't.
     def self.playing?
-      `ps aux | grep afplay | grep -v grep | wc -l | tr -d ' '`.chomp != '0'
+      `ps aux | grep #{Platform.play_command} | grep -v grep | wc -l | tr -d ' '`.chomp != '0'
     end
 
     # Stop the music, and stop the music server.
     #
     # Returns nothing.
     def self.stop
-      `killall afplay > /dev/null 2>&1`
+      `killall #{Platform.play_command} > /dev/null 2>&1`
       `ps ax | grep "play -d" | grep -v grep`.split("\n").size.times do
         `kill $(ps ax | grep "play -d" | grep -v grep | cut -d ' ' -f 1)`
       end
@@ -62,8 +62,7 @@ module Play
     #
     # Returns nothing.
     def self.say(msg)
-      return unless msg
-      system "say #{msg}"
+      system "#{Platform.say_command} #{msg}" if msg
     end
 
     # Set the volume level of the client.
@@ -73,7 +72,7 @@ module Play
     #
     # Returns nothing.
     def self.volume(number)
-      system "osascript -e 'set volume #{number}' 2>/dev/null"
+      system "#{Platform.volume_command number}"
     end
   end
 end
