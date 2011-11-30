@@ -87,6 +87,6 @@ Check out the [API docs on the wiki](https://github.com/holman/play/wiki/API).
 ## ♬ ★★★
 
 This was created by [Zach Holman](http://zachholman.com). You can follow me on
-Twitter as [@holman](http://twitter.com).
+Twitter as [@holman](https://twitter.com/holman).
 
 I usually find myself playing Justice, Deadmau5, and Muse at the office.
