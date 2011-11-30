@@ -1,6 +1,10 @@
 <div class="song">
   <div class="artist">
     <a href="/artist/{{artist_name}}">{{artist_name}}</a>
+    <span class="fucking-slash">/</span>
+    <span class="album">
+      <a href="/artist/{{artist_name}}/album/{{album_name}}">{{album_name}}</a>
+    </span>
   </div>
 
   <div class="title">
@@ -18,8 +22,6 @@
 
     <span class="wrap">
       <a href="/song/{{id}}/download">Download</a>
-
-      <a href="/artist/{{artist_name}}/album/{{album_name}}">Show Album</a>
 
       <span><a href="/star/{{id}}" title="star song" class="star">Star</a></span>
 

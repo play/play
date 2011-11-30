@@ -104,13 +104,17 @@ a:hover{
 .song .title a{
   color: #424242;
 }
+.song .fucking-slash{
+  color: #E9E9E9;
+  font-weight: bold;
+}
 .song .album{
-  float: left;
+  margin-bottom: 5px;
   font-size: 16px;
   letter-spacing: -2px;
 }
 .song .album a{
-  color: #3299BB;
+  color: #BCBCBC;
 }
 .song .controls{
   height: 25px;
