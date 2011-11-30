@@ -1,4 +1,4 @@
-<div class="song">
+<div class="song {{#now_playing?}}now-playing{{/now_playing?}}">
   <div class="artist">
     <a href="/artist/{{artist_name}}">{{artist_name}}</a>
   </div>
@@ -23,12 +23,14 @@
 
       <span><a href="/star/{{id}}" title="star song" class="star">Star</a></span>
 
-      {{#queued?}} 
-        <span><a href="/remove/{{id}}" title="remove from queue" class="remove">Don't Play</a></span>
-      {{/queued?}}
-      {{^queued?}}
-        <span><a href="/add/{{id}}" title="add to queue" class="add">Play</a></span>
-      {{/queued?}}
+      {{^now_playing?}}
+        {{#queued?}}
+          <span><a href="/remove/{{id}}" title="remove from queue" class="remove">Don't Play</a></span>
+        {{/queued?}}
+        {{^queued?}}
+          <span><a href="/add/{{id}}" title="add to queue" class="add">Play</a></span>
+        {{/queued?}}
+      {{/now_playing?}}
     </span>
 
     &nbsp;
