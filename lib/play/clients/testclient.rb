@@ -1,40 +1,16 @@
 module Play
-  class Client
-    # The main event loop for an audio client. It will loop through each song
-    # in the queue, unless it's paused.
-    #
-    # Returns nothing.
-    def self.loop
-      while true
-        ActiveRecord::Base.connection.reconnect!
-
-        Signal.trap("INT") { exit! }  
-
-        if paused?
-          sleep(1)
-        else
-          play(Song.play_next_in_queue.path)
-        end
-      end
-    end
-
-    # Have the client play a song
+  class TestClient < Client
+    # Cause the client to play a song
     #
     # Returns nothing
     def self.play(song_path)
     end
 
-    # Cause the client to play the next song.
-    #
-    # Returns true if successful, else false.
-    def self.next
-      pause && pause
-    end
-
     # "Pauses" a client by stopping currently playing songs
-    # 
-    # Returns nothing.
+    #
+    # Returns true if client is paused successfully.
     def self.pause
+      return true
     end
 
     # Are we currently paused?
@@ -68,8 +44,9 @@ module Play
     #   number - The Integer volume level. This should be a number between 0
     #            and 10, with "0" being "muted" and "10" being "real real loud"
     #
-    # Returns nothing.
+    # Returns true if volume was set successfully.
     def self.volume(number)
+      return true
     end
   end
 end

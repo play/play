@@ -1,4 +1,5 @@
 require 'helper'
+require 'play/clients/testclient'
 include Rack::Test::Methods
 
 def app
@@ -13,6 +14,12 @@ context "Api" do
                                 :artist => @artist,
                                 :album  => @album)
     @user = Play::User.create(:login => 'holman', :alias => 'zach')
+
+    Play.class_eval do
+      def self.client
+        return Play::TestClient
+      end
+    end
   end
 
   test "/api/now_playing" do
@@ -27,7 +34,7 @@ context "Api" do
   end
 
   test "/api/say" do
-    Play::Client.expects(:say).with("Holman is sexy").returns(true)
+    Play::TestClient.expects(:say).with("Holman is sexy").returns(true)
     get "/api/say", { :message => "Holman is sexy" }
     resp = parse_json(last_response.body.strip)
     assert_equal "Okay.", resp[:success]
@@ -134,28 +141,28 @@ context "Api" do
   end
 
   test "/api/volume" do
-    Play::Client.expects(:volume).with('3').returns(true)
+    Play::TestClient.expects(:volume).with('3').returns(true)
     post "/api/volume", {:level => 3}
     resp = parse_json(last_response.body.strip)
     assert_equal 'true', resp[:success]
   end
 
   test "/api/volume with a float" do
-    Play::Client.expects(:volume).with("2.5").returns(true)
+    Play::TestClient.expects(:volume).with("2.5").returns(true)
     post "/api/volume", {:level => '2.5'}
     resp = parse_json(last_response.body.strip)
     assert_equal 'true', resp[:success]
   end
 
   test "/api/pause" do
-    Play::Client.expects(:pause).returns(true)
+    Play::TestClient.expects(:pause).returns(true)
     post "/api/pause"
     resp = parse_json(last_response.body.strip)
     assert_equal 'true', resp[:success]
   end
 
   test "/api/next" do
-    Play::Client.expects(:pause).times(2).returns(true)
+    Play::TestClient.expects(:next).times(1).returns(true)
     post "/api/next"
     resp = parse_json(last_response.body.strip)
     assert_equal 'true', resp[:success]

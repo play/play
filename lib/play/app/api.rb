@@ -6,7 +6,7 @@ module Play
     end
 
     get "/api/say" do
-      Client.say(params[:message])
+      Play.client.say(params[:message])
       { :success => "Okay." }.to_json
     end
 
@@ -102,7 +102,7 @@ module Play
     end
 
     post "/api/volume" do
-      if Client.volume(params[:level])
+      if Play.client.volume(params[:level])
         { :success => 'true' }.to_json
       else
         error "There's a problem adjusting the volume."
@@ -110,7 +110,7 @@ module Play
     end
 
     post "/api/pause" do
-      if Client.pause
+      if Play.client.pause
         { :success => 'true' }.to_json
       else
         error "There's a problem pausing."
@@ -118,10 +118,10 @@ module Play
     end
 
     post "/api/next" do
-      if Client.pause && Client.pause
+      if Play.client.next
         { :success => 'true' }.to_json
       else
-        error "There's a problem pausing."
+        error "There's a problem playing the next song."
       end
     end
 

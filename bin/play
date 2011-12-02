@@ -30,7 +30,7 @@ end
 #
 # Returns nothing.
 def start_music
-  pid = fork { Play::Client.loop }
+  pid = fork { Play.client.loop }
   Process.detach(pid)
 end
 
@@ -55,7 +55,7 @@ when 'start'
   start_web
   index_music
 when 'stop'
-  Play::Client.stop
+  Play.client.stop
 when 'music'
   migrate
   start_music
@@ -64,7 +64,7 @@ when 'web'
   migrate
   start_web
 when 'pause'
-  Play::Client.pause
+  Play.client.pause
 when 'index'
   migrate
   index_music
