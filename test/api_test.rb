@@ -1,5 +1,5 @@
 require 'helper'
-require 'play/clients/testclient'
+require 'play/clients/test_client'
 include Rack::Test::Methods
 
 def app

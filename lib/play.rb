@@ -76,7 +76,7 @@ module Play
   # in the config subclass.
   def self.client
     client_class = config['client'].capitalize + 'Client'
-    require 'play/clients/' + client_class.downcase
+    require 'play/clients/' + client_class.gsub!(/(.)([A-Z])/,'\1_\2').downcase
     return Play.const_get(client_class)
   rescue NameError
     raise NotImplementedError,
