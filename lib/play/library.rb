@@ -39,7 +39,7 @@ module Play
     def self.prune_songs
       Song.all.each do |song|
         begin
-          fs_get_artist_and_title_and_album(song.path)
+          fs_get_song_info(song.path)
         rescue AudioInfoError
           print "'#{song.path}' is bad, removing from database.\n"
           song.destroy
@@ -56,7 +56,7 @@ module Play
     #
     # Returns the imported (or found) Song.
     def self.import_song(path)
-      artist_name,title,album_name = fs_get_artist_and_title_and_album(path)
+      artist_name,title,album_name,tracknum = fs_get_song_info(path)
       song = Song.where(:path => path).first
 
       artist = Artist.find_or_create_by_name(artist_name)
@@ -65,11 +65,13 @@ module Play
         Song.create(:path => path,
                     :artist => artist,
                     :album => album,
-                    :title => title)
+                    :title => title,
+                    :track => tracknum)
       else
         song.attributes = {:artist => artist,
                            :album => album,
-                           :title => title}
+                           :title => title,
+                           :track => tracknum}
       end
     rescue AudioInfoError => error
       print "'#{path}' failed to import due to #{error.inspect}\n"
@@ -82,11 +84,12 @@ module Play
     #
     # Returns an Array with three String elements: the artist, the song title,
     # and the album.
-    def self.fs_get_artist_and_title_and_album(path)
+    def self.fs_get_song_info(path)
       AudioInfo.open(path) do |info|
         return info.artist.try(:strip),
                info.title.try(:strip),
-               info.album.try(:strip)
+               info.album.try(:strip),
+               info.tracknum.try(:to_i)
       end
     end
   end
