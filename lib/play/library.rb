@@ -57,16 +57,19 @@ module Play
     # Returns the imported (or found) Song.
     def self.import_song(path)
       artist_name,title,album_name = fs_get_artist_and_title_and_album(path)
-      artist = Artist.find_or_create_by_name(artist_name)
       song = Song.where(:path => path).first
 
+      artist = Artist.find_or_create_by_name(artist_name)
+      album = Album.find_or_create_by_name(album_name)
       if !song
-        album = Album.where(:artist_id => artist.id, :name => album_name).first ||
-                Album.create(:artist_id => artist.id, :name => album_name)
         Song.create(:path => path,
                     :artist => artist,
                     :album => album,
                     :title => title)
+      else
+        song.attributes = {:artist => artist,
+                           :album => album,
+                           :title => title}
       end
     rescue AudioInfoError => error
       print "'#{path}' failed to import due to #{error.inspect}\n"

@@ -105,7 +105,6 @@ module Play
 
     get "/album/:id" do
       @album  = Album.find(params[:id])
-      @artist = @album.artist
       @songs  = @album.songs
       mustache :album_songs
     end

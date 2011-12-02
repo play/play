@@ -1,7 +1,7 @@
 module Play
   class Artist < ActiveRecord::Base
     has_many :songs
-    has_many :albums
+    has_many :albums, :through => :songs
     has_many :votes
 
     # Queue up an artist. This will grab ten random tracks for this artist and

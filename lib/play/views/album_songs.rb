@@ -6,7 +6,7 @@ module Play
       end
 
       def title
-        "#{@artist.name}: #{@album.name}"
+        "#{@album.name}"
       end
     end
   end

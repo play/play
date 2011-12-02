@@ -3,6 +3,7 @@ require 'fileutils'
 module Play
   class Album < ActiveRecord::Base
     has_many :songs
+    has_many :artists, :through => :songs
     belongs_to :artist
 
     before_save :fetch_art
@@ -61,7 +62,11 @@ module Play
     #
     # Returns a String.
     def zip_name
-      "#{artist.name} - #{name}.zip".gsub(' ','\ ')
+      artist_name = ''
+      if artists.count == 1
+        artist_name = ' - ' + artists.first.name
+      end
+      "#{name}#{artist_name}.zip".gsub(' ','\ ')
     end
 
     # The path to the zipfile.
