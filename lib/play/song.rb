@@ -101,7 +101,7 @@ module Play
       if artist
         artist.songs.shuffle.first
       else
-        Play::Song.order("rand()").first
+        Play::Song.random
       end
     end
 
