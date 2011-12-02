@@ -13,7 +13,11 @@ module Play
         if paused?
           sleep(1)
         else
-          system("afplay", Song.play_next_in_queue.path)
+          song = Song.play_next_in_queue
+          if song
+            library = Play::Library.instance(song.library_type)
+            library.play!(song) if library && library.enabled?
+          end
         end
       end
     end
@@ -31,7 +35,9 @@ module Play
     # Returns nothing.
     def self.pause
       paused? ? `rm -f #{pause_path}` : `touch #{pause_path}`    
-      `killall afplay > /dev/null 2>&1`
+      Play::Library.each do |library|
+        library.stop!
+      end
     end
 
     # Are we currently paused?
@@ -45,16 +51,31 @@ module Play
     #
     # Returns true if we're playing, false if we aren't.
     def self.playing?
-      `ps aux | grep afplay | grep -v grep | wc -l | tr -d ' '`.chomp != '0'
+      Play::Library.each do |library|
+        return true if library.playing?
+      end
+      false
+    end
+    
+    def self.kill_each(val)
+      `ps ax | grep "#{val}" | grep -v grep`.split("\n").size.times do
+        `kill $(ps ax | grep "#{val}" | grep -v grep | sed -e 's/^[ \t]*//' | cut -d ' ' -f 1)`
+      end
+    end
+    
+    def self.ps_count?(val)
+      `ps aux | grep "#{val}" | grep -v grep | wc -l | tr -d ' '`.chomp != '0'
     end
 
     # Stop the music, and stop the music server.
     #
     # Returns nothing.
     def self.stop
-      `killall afplay > /dev/null 2>&1`
-      `ps ax | grep "play -d" | grep -v grep`.split("\n").size.times do
-        `kill $(ps ax | grep "play -d" | grep -v grep | cut -d ' ' -f 1)`
+      # shut down the service itself
+      kill_each("play -d")
+      
+      Play::Library.each do |library|
+        library.stop!
       end
     end
 
