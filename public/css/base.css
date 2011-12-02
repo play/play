@@ -70,6 +70,20 @@ a:hover{
   padding: 10px;
 }
 
+#history .song{
+  padding: 10px 15px;
+  width: 570px;
+  font-size: 12px;
+  color: #999;
+}
+#history .song a{
+  color: #ccc;
+  font-weight: bold;
+}
+#history .song a:hover{
+  color: #999;
+}
+
 /*
  * SONGS
  */
