@@ -12,7 +12,6 @@ require 'digest'
 require 'yajl'
 require 'rb-fsevent'
 require 'fssm'
-require 'randumb'
 
 require 'play/core_ext/hash'
 
@@ -77,7 +76,7 @@ module Play
   # in the config subclass.
   def self.client
     client_class = config['client'].capitalize + 'Client'
-    require 'play/' + client_class.downcase
+    require 'play/clients/' + client_class.downcase
     return Play.const_get(client_class)
   rescue NameError
     raise NotImplementedError,
