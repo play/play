@@ -105,14 +105,14 @@ module Play
 
     get "/album/:id" do
       @album  = Album.find(params[:id])
-      @songs  = @album.songs
+      @songs  = @album.songs.order('track asc')
       mustache :album_songs
     end
 
     get "/artist/*/album/*" do
       @artist = Artist.where(:name => params[:splat].first).first
       @album = @artist.albums.where(:name => params[:splat].last).first
-      @songs = @album.songs
+      @songs = @album.songs.order('track asc')
       mustache :album_songs
     end
 
@@ -122,7 +122,7 @@ module Play
                   includes(:songs => [:album, :artist]).
                   first
       return mustache :four_oh_four if !@artist
-      @songs = @artist.songs
+      @songs = @artist.songs.order('album_id')
       mustache :artist_songs
     end
 
