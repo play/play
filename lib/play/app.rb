@@ -95,6 +95,13 @@ module Play
       "Removed"
     end
 
+    get "/album/:id" do
+      @album  = Album.find(params[:id])
+      @artist = @album.artist
+      @songs  = @album.songs
+      mustache :album_songs
+    end
+
     get "/artist/*/album/*" do
       @artist = Artist.where(:name => params[:splat].first).first
       @album = @artist.albums.where(:name => params[:splat].last).first

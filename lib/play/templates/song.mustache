@@ -1,6 +1,6 @@
 <div class="song">
   <div class="album">
-    <a href="/album/{{album_name}}"><img src="{{album_art_url}}" width="75" height="75" title="{{album_name}}" /></a>
+    <a href="/album/{{album_id}}"><img src="{{album_art_url}}" width="75" height="75" title="{{album_name}}" /></a>
   </div>
 
   <div class="star">
@@ -23,7 +23,7 @@
       <span><a href="/add/{{id}}" title="add to queue" class="add">Play</a></span>
     {{/queued?}}
 
-    <a href="/song/{{id}}/download">Download</a>
+    <a href="/song/{{id}}/download" class="secondary">Download</a>
   </div>
 
   <div class="stats">

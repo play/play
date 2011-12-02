@@ -132,10 +132,12 @@ a:hover{
   padding: 5px 10px;
   margin-right: 5px;
 }
-.song .controls a:hover{
-  color: #fff;
-  background-image: none;
-  background-color: #3299BB;
+.song .controls .secondary{
+  background-color: #eee;
+  box-shadow: inset 0px 1px 0px 0px #fff;
+  text-shadow: 0 -1px -1px #fff;
+  color: #111;
+  border-color: #bcbcbc;
 }
 .song .stats{
   display: none;
