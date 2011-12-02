@@ -51,7 +51,9 @@ module Play
     get "/" do
       @recent   = History.limit(3).order('created_at').collect(&:song)
       @current  = current_song
-      @songs    = Song.queue.includes(:album, :artist, :votes).all
+      @songs    = [@current]
+      @songs   << Song.queue.includes(:album, :artist, :votes).all
+      @songs.flatten!
       mustache :index
     end
 

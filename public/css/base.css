@@ -83,6 +83,9 @@ a:hover{
 #history .song a:hover{
   color: #999;
 }
+.now-playing{
+  background-color: #eee !important;
+}
 
 /*
  * SONGS

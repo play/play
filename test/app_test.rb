@@ -20,12 +20,6 @@ context "App" do
     Play::App.any_instance.stubs(:current_user).returns(@user)
   end
 
-  test "/" do
-    get '/'
-    assert last_response.body.include?("@holman")
-    assert last_response.body.include?("queue is empty")
-  end
-
   test "/login" do
     get '/login'
     assert last_response.redirect?
