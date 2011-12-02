@@ -97,7 +97,7 @@ module Play
       when 'song'
         Song.where(:title => params[:q])
       end
-      
+
       songs ? {:song_titles => songs.collect(&:title)}.to_json : error("Search. Problem?")
     end
 

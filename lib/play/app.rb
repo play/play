@@ -18,6 +18,10 @@ module Play
       session['user_id'].blank? ? nil : User.find_by_id(session['user_id'])
     end
 
+    def current_song
+      Play.now_playing
+    end
+
     configure :development do
       # This should use Play.config eventually, but there's some weird loading
       # problems right now with this file. So it goes. Dupe it for now.
@@ -45,7 +49,9 @@ module Play
     end
 
     get "/" do
-      @songs = Song.queue.includes(:album, :artist, :votes).all
+      @recent   = History.limit(5).order('created_at').collect(&:song)
+      @current  = current_song
+      @songs    = Song.queue.includes(:album, :artist, :votes).all
       mustache :index
     end
 
@@ -64,10 +70,10 @@ module Play
       @user = User.authenticate(auth['user_info'])
       session['user_id'] = @user.id
       redirect '/'
-    end    
+    end
 
     get "/now_playing" do
-      @song = Play.now_playing
+      @song = current_song
       mustache :now_playing
     end
 
