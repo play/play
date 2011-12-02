@@ -8,6 +8,7 @@ module Play
         if not system('mpc', 'add',
           song_path.gsub(/^#{Play.config['path']}\//,""))
           return # mpc didn't add the song, so just return, don't block
+        end
       end
       `mpc play`
       `mpc idle` # self.play is expected to block, so wait for an event
