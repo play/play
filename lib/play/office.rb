@@ -18,7 +18,7 @@ module Play
     # Opens up the office URL.
     #
     # Returns a String.
-    def connection
+    def self.connection
       open(url)
     end
 
