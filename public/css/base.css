@@ -9,7 +9,8 @@
 */
 
 html{
-  font-family: Helvetica, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 body{
   background-color: #fff;
@@ -76,83 +77,70 @@ a:hover{
   width: 600px;
   margin: 0 auto;
   padding: 10px 0;
-  background-color: #E9E9E9;
-  background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0, rgb(233,233,233)),
-	color-stop(0.5, #fff)
-  );
-  font-weight: bold;
-  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+.song .star{
+  float: left;
+  margin-left: 15px;
+}
+.song .star a{
+  color: #ccc;
 }
 .song .artist{
-  padding-left: 10px;
-  font-size: 24px;
-  letter-spacing: -1px;
+  padding-top: 3px;
+  padding-left: 40px;
+  font-size: 14px;
+  font-weight: 500;
 }
 .song .artist a{
-  color: #BCBCBC;
+  color: #bcbcbc;
 }
 .song .title{
   margin-bottom: 5px;
-  padding-left: 10px;
-  font-size: 36px;
-  letter-spacing: -2px;
+  margin-top: 5px;
+  padding-left: 40px;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -px;
 }
 .song .title a{
   color: #424242;
 }
 .song .album{
-  float: left;
-  font-size: 16px;
-  letter-spacing: -2px;
+  padding-left: 40px;
+  font-weight: bold;
+  font-size: 14px;
 }
 .song .album a{
-  color: #3299BB;
+  color: #bcbcbc;
 }
 .song .controls{
+  margin: 15px 0 0 40px;
   height: 25px;
-  text-align: right;
   font-size: 11px;
 }
-.song .controls .wrap a{
+.song .controls a{
+  font-weight: bold;
   color: #fff;
-  text-shadow: 0 1px 1px #424242;
-  background-color: #3299BB;
-  background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.37, rgb(50,153,187)),
-	color-stop(0.69, rgb(113,200,227))
-  );
-  border-radius: 5px;
+  text-shadow: 0 -1px -1px rgb(50,153,187);
+  border: 1px solid #3299BB;
+  background-color: rgb(75,169,199);
+  box-shadow: inset 0px 1px 0px 0px rgb(128,193,216);
+  border-radius: 4px;
   padding: 5px 10px;
   margin-right: 5px;
 }
-.song .controls .wrap a:hover{
+.song .controls a:hover{
   color: #fff;
   background-image: none;
   background-color: #3299BB;
 }
-.song .controls img{
-  vertical-align: middle;
-  margin-right: 5px;
-  margin-bottom: 3px;
-  border-radius: 3px;
-  opacity: .75;
-}
-.song .controls a img{
-  background-color: #000;
-}
 .song .stats{
-  float: left;
-  margin-left: 2px;
+  display: none;
+  background-color: #111;
   padding: 5px 10px;
   font-size: 13px;
-  font-weight: 300;
   color: #BCBCBC;
 }
 

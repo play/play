@@ -1,4 +1,8 @@
 <div class="song">
+  <div class="star">
+    <a href="/star/{{id}}" title="star song">☆</a>
+  </div>
+
   <div class="artist">
     <a href="/artist/{{artist_name}}">{{artist_name}}</a>
   </div>
@@ -8,6 +12,19 @@
   </div>
 
   <div class="controls">
+    {{#queued?}}
+      <span><a href="/remove/{{id}}" title="remove from queue" class="remove">Don't Play</a></span>
+    {{/queued?}}
+    {{^queued?}}
+      <span><a href="/add/{{id}}" title="add to queue" class="add">Play</a></span>
+    {{/queued?}}
+
+    <a href="/song/{{id}}/download">Download</a>
+  </div>
+
+  <div class="stats">
+    {{to_playcount}}.
+
     {{#current_votes}}
       {{#user}}
         <a href="/{{login}}">
@@ -15,24 +32,5 @@
         </a>
       {{/user}}
     {{/current_votes}}
-
-    <span class="wrap">
-      <a href="/song/{{id}}/download">Download</a>
-
-      <a href="/artist/{{artist_name}}/album/{{album_name}}">Show Album</a>
-
-      <span><a href="/star/{{id}}" title="star song" class="star">Star</a></span>
-
-      {{#queued?}} 
-        <span><a href="/remove/{{id}}" title="remove from queue" class="remove">Don't Play</a></span>
-      {{/queued?}}
-      {{^queued?}}
-        <span><a href="/add/{{id}}" title="add to queue" class="add">Play</a></span>
-      {{/queued?}}
-    </span>
-
-    &nbsp;
-
-    <div class="stats">{{to_playcount}}.</div>
   </div>
 </div>
