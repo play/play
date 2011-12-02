@@ -5,6 +5,31 @@ module Play
     has_many :songs
     belongs_to :artist
 
+    before_save :fetch_art
+
+    # Runs through all of your albums and grabs album art for them.
+    #
+    # Returns nothing.
+    def self.fetch_art!
+      puts "Grabbing art for all your albums."
+      Album.find_each(:batch_size => 250) do |album|
+        album.save
+      end
+    end
+
+    # Fetches art for this album and sets the attribute (but doesn't save). lol
+    # check it out ma, XML parsing without a library and without heavy
+    # dependencies.
+    #
+    # Returns the found art_url String.
+    def fetch_art
+      key = Play.config['lastfm_key']
+      return if key.blank?
+      url = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo"
+      xml = `curl --silent "#{url}&api_key=#{key}&artist=#{URI.escape artist.name}&album=#{URI.escape name}" | grep '<image size="extralarge">'`
+      self.art_url = xml.strip.sub('<image size="extralarge">','').sub('</image>','')
+    end
+
     # Queue up an entire ALBUM!
     #
     #   user - the User who is requesting the album to be queued

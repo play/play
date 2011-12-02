@@ -28,6 +28,12 @@ ActiveRecord::Migrator.migrate("db/migrate")
 
 RunningMan.setup_on ActiveSupport::TestCase, :ActiveRecordBlock
 
+class Play::Album
+  def fetch_art
+    # no-op
+  end
+end
+
 def parse_json(json)
   Yajl.load(json, :symbolize_keys => true)
 end

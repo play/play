@@ -42,6 +42,13 @@ def index_music
   Process.detach(pid)
 end
 
+# Fetches all the album art in the world.
+#
+# Returns nothing.
+def fetch_art
+  Play::Album.fetch_art!
+end
+
 case ARGV[0]
 when 'start'
   start_music
@@ -61,6 +68,8 @@ when 'pause'
 when 'index'
   migrate
   index_music
+when 'fetch-art'
+  fetch_art
 when 'migrate'
   migrate
 else

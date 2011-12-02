@@ -24,6 +24,13 @@ module Play
       album.name
     end
 
+    # The gorgeous album art we fetched for you.
+    #
+    # Returns the String URL.
+    def album_art_url
+      album.art_url
+    end
+
     # A nice, human-readable way of describing the playcount.
     #
     # Returns a String.
