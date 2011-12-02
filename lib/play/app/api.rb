@@ -78,7 +78,7 @@ module Play
       album = Album.find_by_name(params[:name])
       if album
         album.enqueue!(api_user)
-        {:artist_name => album.artist.name,
+        {:artist_name => album.artists.first.name,
          :album_name => album.name}.to_json
       else
         error("Sorry, but we couldn't find that album.")
