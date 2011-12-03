@@ -27,17 +27,18 @@ module Play
     # dependencies.
     #
     # Returns the found art_url String.
-    def fetch_art
+    def fetch_art(force=false)
       key = Play.config['lastfm_key']
       return if key.blank?
+
+      return unless force or art_url.nil?
       return if name.blank?
       return unless artist and artist.name
 
       url = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo"
-      xml = `curl --silent "#{url}&api_key=#{key}&artist=#{URI.escape artist.name}&album=#{URI.escape name}" | grep '<image size="extralarge">'`
-      if xml
-        self.art_url = xml.strip.sub('<image size="extralarge">','').sub('</image>','')
-      end
+      album_name = name.sub(/(EP|\[Explicit\]| )*$/i, '')
+      xml = `curl --silent "#{url}&api_key=#{key}&artist=#{URI.escape artist.name}&album=#{URI.escape album_name}" | grep '<image size="extralarge">'`
+      self.art_url = xml.strip.sub('<image size="extralarge">','').sub('</image>','')
     end
 
     # Queue up an entire ALBUM!
