@@ -68,7 +68,7 @@ module Play
     #
     # Returns Float (Scale 0-10)
     def self.volume(number = nil)
-      if (volume == nil)
+      if (number == nil)
          volume = `osascript -e 'get output volume of (get volume settings)'`
          ((volume.to_f)/10)
       else
