@@ -124,3 +124,8 @@ echo "  + You now have a database named \"play\"."
 echo ""
 echo "  + Migrating your database."
 bin/play migrate 2>&1 > /dev/null
+
+echo ""
+
+echo "  Good work. We're ready to rock."
+echo "  Run 'bin/play start' to start playing."
