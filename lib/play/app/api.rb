@@ -102,7 +102,8 @@ module Play
     end
     
     get "/api/volume" do
-      Play.client.volume().to_json
+      vol = Play.client.volume(nil)
+      {:volume => vol, :success => 'true'}.to_json
     end
     
     post "/api/volume" do
