@@ -33,6 +33,7 @@ context "App" do
   end
 
   test "/now_playing" do
+    Play.expects(:config).returns({})
     Play.expects(:now_playing).returns(@song)
     get "/now_playing"
     assert last_response.body.include?("Stress")
