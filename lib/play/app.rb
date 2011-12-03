@@ -152,7 +152,7 @@ module Play
     end
 
     get "/history" do
-      @songs = History.limit(100).order('created_at desc').collect(&:song)
+      @songs = History.limit(30).order('created_at desc').collect(&:song)
       mustache :play_history
     end
 
