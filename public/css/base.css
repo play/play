@@ -163,6 +163,10 @@ a:hover{
   font-size: 13px;
   color: #BCBCBC;
 }
+.song .spinner{
+  vertical-align: middle;
+  margin: 0 20px 5px 20px;
+}
 
 /*
  * PROFILE

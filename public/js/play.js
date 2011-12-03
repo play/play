@@ -3,7 +3,7 @@ $(document).ready(function() {
     element = $(this)
     element
       .parent()
-      .html('<img src="/images/spinner.gif" />')
+      .html('<img src="/images/spinner.gif" class="spinner" />')
       .load(element.attr("href"), {q: ''})
     return false
   })
