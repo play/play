@@ -100,7 +100,11 @@ module Play
 
       songs ? {:song_titles => songs.collect(&:title)}.to_json : error_response("Search. Problem?")
     end
-
+    
+    get "/api/volume" do
+      Play.client.volume().to_json
+    end
+    
     post "/api/volume" do
       if Play.client.volume(params[:level])
         { :success => 'true' }.to_json
