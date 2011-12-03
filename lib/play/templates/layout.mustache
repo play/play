@@ -21,6 +21,22 @@
 
   </div>
 
+  <div class="controller">
+    {{#stream?}}
+      <a href="{{stream_url}}">stream</a>
+    {{/stream?}}
+
+    {{#playing?}}
+      <a href="/api/pause">❙❙</a>
+    {{/playing?}}
+
+    {{^playing?}}
+      <a href="/api/pause">❯</a>
+    {{/playing?}}
+
+    <a href="/api/next">❯❯</a>
+  </div>
+
   {{{yield}}}
 </body>
 </html>

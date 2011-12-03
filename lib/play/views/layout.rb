@@ -13,6 +13,18 @@ module Play
         request.env["REQUEST_URI"] =~ /\/#{@login}$/ ? 'active' : ''
       end
 
+      def stream?
+        !stream_url.blank?
+      end
+
+      def stream_url
+        Play.config['stream_url']
+      end
+
+      def playing?
+        !Play.client.paused?
+      end
+
       def login
         @login
       end

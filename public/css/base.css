@@ -69,6 +69,18 @@ a:hover{
   margin: 0 auto;
   padding: 10px;
 }
+.controller{
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+  text-align: right;
+  width: 570px;
+  margin: 0 auto;
+  padding: 10px 15px;
+  color: #111;
+}
+.controller a{
+  margin-left: 15px;
+}
 
 #history .song{
   padding: 10px 15px;
