@@ -49,25 +49,6 @@ else
   echo "  + MySQL found."
 fi
 
-# MySQL setup
-echo "  + What's the username for the MySQL database user? › \c"
-read user
-echo "  + What's the password for the MySQL database user? › \c"
-stty -echo
-read password
-stty echo
-echo ""
-
-mysql --user="$user" \
-      --password="$password" \
-      --execute='CREATE DATABASE IF NOT EXISTS play CHARACTER SET utf8 COLLATE utf8_unicode_ci;'
-
-echo "  + You now have a database named \"play\"."
-
-echo ""
-echo "  + Migrating your database."
-bin/play migrate 2>&1 > /dev/null
-
 # Music setup
 echo ""
 echo "  + What is the absolute path to your music? › \c"
@@ -122,3 +103,29 @@ sed -i '' "s/__LASTFM_KEY__/$lastfm_key/" config/play.yml
 
 echo "  + Configuration settings saved to config/play.yml."
 echo "    Feel free to manually update the file anytime you'd like."
+
+echo ""
+
+# MySQL setup
+echo "  + What's the username for the MySQL database user? › \c"
+read user
+echo "  + What's the password for the MySQL database user? › \c"
+stty -echo
+read password
+stty echo
+echo ""
+
+mysql --user="$user" \
+      --password="$password" \
+      --execute='CREATE DATABASE IF NOT EXISTS play CHARACTER SET utf8 COLLATE utf8_unicode_ci;'
+
+echo "  + You now have a database named \"play\"."
+
+echo ""
+echo "  + Migrating your database."
+bin/play migrate 2>&1 > /dev/null
+
+echo ""
+
+echo "  Good work. We're ready to rock."
+echo "  Run 'bin/play start' to start playing."
