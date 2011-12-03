@@ -11,8 +11,13 @@ module Play
     #
     # Returns nothing.
     def self.fetch_art!
-      puts "Grabbing art for all your albums."
+      puts "Grabbing art for all #{count} of your albums."
       Album.find_each(:batch_size => 250) do |album|
+        next unless album.art_url.nil?
+        next if album.name.blank?
+        next if album.artist.name.blank?
+
+        puts "  => [#{album.id}] #{album.artist.name} - #{album.name}"
         album.save
       end
     end
@@ -25,9 +30,14 @@ module Play
     def fetch_art
       key = Play.config['lastfm_key']
       return if key.blank?
+      return if name.blank?
+      return unless artist and artist.name
+
       url = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo"
       xml = `curl --silent "#{url}&api_key=#{key}&artist=#{URI.escape artist.name}&album=#{URI.escape name}" | grep '<image size="extralarge">'`
-      self.art_url = xml.strip.sub('<image size="extralarge">','').sub('</image>','')
+      if xml
+        self.art_url = xml.strip.sub('<image size="extralarge">','').sub('</image>','')
+      end
     end
 
     # Queue up an entire ALBUM!
