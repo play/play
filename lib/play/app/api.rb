@@ -16,7 +16,7 @@ module Play
         user.alias = params[:alias]
         { :success => user.save }.to_json
       else
-        error "Couldn't find that user. Crap."
+        error_response "Couldn't find that user. Crap."
       end
     end
 
@@ -24,7 +24,7 @@ module Play
       if Library.import_songs
         { :success => 'true' }.to_json
       else
-        error "Had some problems importing into Play. Uh-oh."
+        error_response "Had some problems importing into Play. Uh-oh."
       end
     end
 
@@ -42,7 +42,7 @@ module Play
         song.enqueue!(api_user)
         music_response(song)
       else
-        error "You don't have any starred songs, you lazy bastard."
+        error_response "You don't have any starred songs, you lazy bastard."
       end
     end
 
@@ -55,10 +55,10 @@ module Play
           song.enqueue!(api_user)
           music_response(song)
         else
-          error("Sorry, but we couldn't find that song.")
+          error_response("Sorry, but we couldn't find that song.")
         end
       else
-        error("Sorry, but we couldn't find that artist.")
+        error_response("Sorry, but we couldn't find that artist.")
       end
     end
 
@@ -69,7 +69,7 @@ module Play
         {:song_titles => artist.enqueue!(api_user).collect(&:title),
          :artist_name => artist.name}.to_json
       else
-        error("Sorry, but we couldn't find that artist.")
+        error_response("Sorry, but we couldn't find that artist.")
       end
     end
 
@@ -81,12 +81,12 @@ module Play
         {:artist_name => album.artist.name,
          :album_name => album.name}.to_json
       else
-        error("Sorry, but we couldn't find that album.")
+        error_response("Sorry, but we couldn't find that album.")
       end
     end
 
     post "/api/remove" do
-      error "This hasn't been implemented yet. Whoops."
+      error_response "This hasn't been implemented yet. Whoops."
     end
 
     get "/api/search" do
@@ -98,14 +98,14 @@ module Play
         Song.where(:title => params[:q])
       end
 
-      songs ? {:song_titles => songs.collect(&:title)}.to_json : error("Search. Problem?")
+      songs ? {:song_titles => songs.collect(&:title)}.to_json : error_response("Search. Problem?")
     end
 
     post "/api/volume" do
       if Play.client.volume(params[:level])
         { :success => 'true' }.to_json
       else
-        error "There's a problem adjusting the volume."
+        error_response "There's a problem adjusting the volume."
       end
     end
 
@@ -113,7 +113,7 @@ module Play
       if Play.client.pause
         { :success => 'true' }.to_json
       else
-        error "There's a problem pausing."
+        error_response "There's a problem pausing."
       end
     end
 
@@ -121,7 +121,7 @@ module Play
       if Play.client.next
         { :success => 'true' }.to_json
       else
-        error "There's a problem playing the next song."
+        error_response "There's a problem playing the next song."
       end
     end
 
@@ -144,11 +144,11 @@ module Play
       if api_user
         true
       else
-        halt error("You must supply a valid `user_login` in your requests.")
+        halt error_response("You must supply a valid `user_login` in your requests.")
       end
     end
 
-    def error(msg)
+    def error_response(msg)
       { :error => msg }.to_json
     end
 
