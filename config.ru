@@ -1,6 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/lib/play')
 
-require 'play'
 require 'omniauth/oauth'
 oauth = Play.config
 
