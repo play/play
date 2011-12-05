@@ -32,6 +32,21 @@ module Play
       end
     end
 
+    # Removes an songs in the database that do not exist or are not readable
+    # by AudioInfo
+    #
+    # Returns nothing.
+    def self.prune_songs
+      Song.all.each do |song|
+        begin
+          fs_get_artist_and_title_and_album(song.path)
+        rescue AudioInfoError
+          print "'#{song.path}' is bad, removing from database.\n"
+          song.destroy
+        end
+      end
+    end
+
     # Imports a song into the database. This will identify a file's artist and
     # albums, run through the associations, and so on. It should be idempotent,
     # so you should be able to run it repeatedly on the same set of files and
@@ -53,6 +68,7 @@ module Play
                     :album => album,
                     :title => title)
       end
+    rescue AudioInfoError
     end
 
     # Splits a music file up into three constituent parts: artist, title,
@@ -68,7 +84,6 @@ module Play
                info.title.try(:strip),
                info.album.try(:strip)
       end
-    rescue AudioInfoError
     end
   end
 end
