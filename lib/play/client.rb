@@ -8,7 +8,7 @@ module Play
       while true
         ActiveRecord::Base.connection.reconnect!
 
-        Signal.trap("INT") { exit! }  
+        Signal.trap("INT") { exit! }
 
         if paused?
           sleep(1)
@@ -32,7 +32,7 @@ module Play
     end
 
     # "Pauses" a client by stopping currently playing songs
-    # 
+    #
     # Returns nothing.
     def self.pause
     end

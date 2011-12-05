@@ -16,10 +16,10 @@ module Play
 
     # "Pauses" a client by stopping currently playing songs and setting up the
     # pause temp file.
-    # 
+    #
     # Returns nothing.
     def self.pause
-      paused? ? `rm -f #{pause_path}` : `touch #{pause_path}`    
+      paused? ? `rm -f #{pause_path}` : `touch #{pause_path}`
       `killall mpg123 > /dev/null 2>&1`
     end
 
