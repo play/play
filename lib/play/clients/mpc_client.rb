@@ -47,9 +47,7 @@ module Play
     # Returns nothing.
     def self.stop
       `mpc stop`
-      `ps ax | grep "play -d" | grep -v grep`.split("\n").size.times do
-        `kill $(ps ax | grep "play -d" | grep -v grep | cut -d ' ' -f 1)`
-      end
+      super
     end
   end
 end
