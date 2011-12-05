@@ -129,15 +129,15 @@ context "Api" do
   test "/api/user/add_alias" do
     post "/api/user/add_alias", { :login => @user.login, :alias => 'zach' }
     resp = parse_json(last_response.body.strip)
-    assert 'true', resp[:success].to_s
+    assert true, resp[:success].to_s
     assert_equal 'zach', User.first.alias
   end
 
   test "/api/import" do
-    Library.stubs(:import_songs).returns('true')
+    Library.stubs(:import_songs).returns(true)
     post "/api/import"
     resp = parse_json(last_response.body.strip)
-    assert_equal 'true', resp[:success]
+    assert_equal true, resp[:success]
   end
 
   test "/api/volume" do
@@ -151,27 +151,27 @@ context "Api" do
   test "/api/volume getter" do 
     get "/api/volume"
     resp = parse_json(last_response.body.strip)
-    assert_equal 'true', resp[:success]
+    assert_equal true, resp[:success]
   end
 
   test "/api/volume with a float" do
     Play::TestClient.expects(:volume).with("2.5").returns(true)
     post "/api/volume", {:level => '2.5'}
     resp = parse_json(last_response.body.strip)
-    assert_equal 'true', resp[:success]
+    assert_equal true, resp[:success]
   end
 
   test "/api/pause" do
     Play::TestClient.expects(:pause).returns(true)
     post "/api/pause"
     resp = parse_json(last_response.body.strip)
-    assert_equal 'true', resp[:success]
+    assert_equal true, resp[:success]
   end
 
   test "/api/next" do
     Play::TestClient.expects(:next).times(1).returns(true)
     post "/api/next"
     resp = parse_json(last_response.body.strip)
-    assert_equal 'true', resp[:success]
+    assert_equal true, resp[:success]
   end
 end

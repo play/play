@@ -22,7 +22,7 @@ module Play
 
     post "/api/import" do
       if Library.import_songs
-        { :success => 'true' }.to_json
+        { :success => true }.to_json
       else
         error_response "Had some problems importing into Play. Uh-oh."
       end
@@ -103,12 +103,12 @@ module Play
 
     get "/api/volume" do
       vol = Play.client.volume(nil)
-      {:volume => vol, :success => 'true'}.to_json
+      { :volume => vol, :success => true }.to_json
     end
 
     post "/api/volume" do
       if Play.client.volume(params[:level])
-        { :success => 'true' }.to_json
+        { :success => true, :volume => Play.client.volume }.to_json
       else
         error_response "There's a problem adjusting the volume."
       end
@@ -116,7 +116,7 @@ module Play
 
     post "/api/pause" do
       if Play.client.pause
-        { :success => 'true' }.to_json
+        { :success => true }.to_json
       else
         error_response "There's a problem pausing."
       end
@@ -124,7 +124,7 @@ module Play
 
     post "/api/next" do
       if Play.client.next
-        { :success => 'true' }.to_json
+        { :success => true }.to_json
       else
         error_response "There's a problem playing the next song."
       end
