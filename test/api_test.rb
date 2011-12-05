@@ -145,6 +145,13 @@ context "Api" do
     post "/api/volume", {:level => 3}
     resp = parse_json(last_response.body.strip)
     assert_equal 'true', resp[:success]
+    
+  end
+
+  test "/api/volume getter" do 
+    get "/api/volume"
+    resp = parse_json(last_response.body.strip)
+    assert_equal 'true', resp[:success]
   end
 
   test "/api/volume with a float" do
