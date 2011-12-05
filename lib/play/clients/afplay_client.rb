@@ -53,26 +53,22 @@ module Play
       system "say #{msg}"
     end
 
-    # Set the volume level of the client.
+    # Set the volume level.
     #
-    #   number - The Float volume level. This should be a number between 0
-    #            and 10, with "0" being "muted" and "10" being "real real loud"
-    #            System scale: 0-7
+    #   number - The Integer volume level. This should be a number between 0
+    #            and 100, with "0" being "muted" and "100" being "real real loud"
     #
     # Returns nothing.
+    def self.volume=(num)
+      system "osascript -e 'set volume output volume #{num}' 2>/dev/null"
+    end
+
+    # Get the current volume level.
     #
-    # Get the volume level of the client (System returns in scale 0-100)
-    #   no argument
-    #
-    # Returns Float (Scale 0-10)
-    def self.volume(number = nil)
-      if (number == nil)
-         volume = `osascript -e 'get output volume of (get volume settings)'`
-         ((volume.to_f)/10)
-      else
-         vol = ((number.to_f)/7).round(1)
-         system "osascript -e 'set volume #{vol}' 2>/dev/null"
-      end
+    # Returns the current volume from 0 to 100
+    def self.volume
+      vol = `osascript -e 'get output volume of (get volume settings)'`
+      vol.to_i
     end
   end
 end

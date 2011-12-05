@@ -44,9 +44,16 @@ module Play
     #   number - The Integer volume level. This should be a number between 0
     #            and 10, with "0" being "muted" and "10" being "real real loud"
     #
-    # Returns true if volume was set successfully.
-    def self.volume(number)
-      return true
+    # Returns nothing.
+    def self.volume=(number)
+      @volume = number
+    end
+
+    # Get the current volume.
+    #
+    # Returns an Integer from 0 to 100.
+    def self.volume
+      @volume || 0
     end
   end
 end

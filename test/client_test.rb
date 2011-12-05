@@ -6,7 +6,7 @@ context "Client" do
 
   test "volume" do
     Client.stubs(:system).returns(true)
-    Client.volume(1)
+    Client.volume = 1
   end
 
   test "say" do

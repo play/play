@@ -56,11 +56,10 @@ module Play
     # Set the volume level of the client.
     #
     #   number - The Integer volume level. This should be a number between 0
-    #            and 10, with "0" being "muted" and "10" being "real real loud"
+    #            and 100, with "0" being "muted" and "100" being "real real loud"
     #
     # Returns nothing.
-    def self.volume(number)
-      volume = number.to_i * 10
+    def self.volume=(volume)
       system "amixer set Master #{volume}% > /dev/null 2>&1"
     end
   end

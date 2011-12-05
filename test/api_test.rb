@@ -140,25 +140,17 @@ context "Api" do
     assert_equal true, resp[:success]
   end
 
-  test "/api/volume" do
-    Play::TestClient.expects(:volume).with('3').returns(true)
-    post "/api/volume", {:level => 3}
-    resp = parse_json(last_response.body.strip)
-    assert_equal 'true', resp[:success]
-    
-  end
-
-  test "/api/volume getter" do 
+  test "get /api/volume" do
     get "/api/volume"
     resp = parse_json(last_response.body.strip)
     assert_equal true, resp[:success]
   end
 
-  test "/api/volume with a float" do
-    Play::TestClient.expects(:volume).with("2.5").returns(true)
-    post "/api/volume", {:level => '2.5'}
+  test "set /api/volume" do
+    post "/api/volume", {:level => '3'}
     resp = parse_json(last_response.body.strip)
     assert_equal true, resp[:success]
+    assert_equal    3, resp[:volume]
   end
 
   test "/api/pause" do
