@@ -156,7 +156,7 @@ a:hover{
   text-shadow: 0 -1px 0px rgb(50,153,187);
   border: 1px solid #3299BB;
   background-color: rgb(75,169,199);
-  box-shadow: inset 0px 1px 0px 0px rgb(128,193,216);
+  box-shadow: inset 0px 1px 0px rgba(255,255,255,0.3);
   border-radius: 4px;
   padding: 5px 10px;
   margin-right: 5px;
@@ -168,7 +168,8 @@ a:hover{
 
 .song .controls a:active {
   background-color: rgb(61,146,178);
-  box-shadow: inset 0 1px 6px rgba(0,0,0,0.3);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.3);
+  border: 1px solid #1b617b;
 }
 
 .song .controls .secondary{
@@ -185,6 +186,7 @@ a:hover{
 
 .song .controls .secondary:active {
   background-color: #ddd;
+  border: 1px solid #999;
 }
 
 .song .stats{
