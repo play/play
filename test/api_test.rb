@@ -10,7 +10,7 @@ context "Api" do
   fixtures do
     @artist = Play::Artist.create(:name => "Justice")
     @album  = Play::Album.create(:name  => "Cross", :artist => @artist)
-    @song   = Play::Song.create(:title  => "Stress", 
+    @song   = Play::Song.create(:title  => "Stress",
                                 :artist => @artist,
                                 :album  => @album)
     @user = Play::User.create(:login => 'holman', :alias => 'zach')
