@@ -16,11 +16,13 @@ context "Office" do
     assert_equal "holman,kneath", Play::Office.user_string
   end
 
-  test "users are returned based on office string" do
+  test "users are returned based on office string or login" do
     holman = Play::User.create(:office_string => 'holman')
     kneath = Play::User.create(:office_string => 'kneath')
+    trobrock = Play::User.create(:login => 'trobrock')
+    neevor = Play::User.create(:login => 'neevor', :office_string => "neevor2")
     
-    Play::Office.stubs(:user_string).returns("holman,defunkt")
-    assert_equal [holman], Play::Office.users
+    Play::Office.stubs(:user_string).returns("holman,defunkt,trobrock,neevor")
+    assert_equal [holman,trobrock], Play::Office.users
   end
 end
