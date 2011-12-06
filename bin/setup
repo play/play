@@ -92,11 +92,11 @@ then
   mv config/play.yml config/play.backup.yml
 fi
 cp config/play.example.yml config/play.yml
-sed -i '' "s/__PATH__/$path/" config/play.yml
-sed -i '' "s/__OAUTH_KEY__/$client_id/" config/play.yml
-sed -i '' "s/__OAUTH_SECRET__/$client_secret/" config/play.yml
-sed -i '' "s/__USER__/$user/" config/play.yml
-sed -i '' "s/__PASSWORD__/$password/" config/play.yml
+sed -i'' "s/__PATH__/$path/" config/play.yml
+sed -i'' "s/__OAUTH_KEY__/$client_id/" config/play.yml
+sed -i'' "s/__OAUTH_SECRET__/$client_secret/" config/play.yml
+sed -i'' "s/__USER__/$user/" config/play.yml
+sed -i'' "s/__PASSWORD__/$password/" config/play.yml
 
 echo "  + Configuration settings saved to config/play.yml."
 echo "    Feel free to manually update the file anytime you'd like."
