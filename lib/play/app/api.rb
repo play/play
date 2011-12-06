@@ -107,7 +107,15 @@ module Play
     end
 
     post "/api/volume" do
-      if Play.client.volume = params[:level].to_i
+      vol = params[:level]
+      if vol == "up"
+        vol = Play.client.volume + 5
+      if vol == "down"
+        vol = Play.client.volume - 5
+      if vol == "party"
+        vol = 100
+      
+      if Play.client.volume = vol.to_i
         { :success => true, :volume => Play.client.volume }.to_json
       else
         error_response "There's a problem adjusting the volume."
