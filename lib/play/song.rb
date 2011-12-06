@@ -31,6 +31,10 @@ module Play
       album.art_url
     end
 
+    def valid_album_art_url?
+      not (album_art_url.nil? or album_art_url.empty?)
+    end
+
     # A nice, human-readable way of describing the playcount.
     #
     # Returns a String.
