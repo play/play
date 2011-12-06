@@ -66,6 +66,7 @@ GEM
     ruby-mp3info (0.6.15)
     ruby-ogginfo (0.6.5)
     running_man (0.3.0)
+    sass (3.1.11)
     sinatra (1.3.1)
       rack (~> 1.3, >= 1.3.4)
       rack-protection (~> 1.1, >= 1.1.2)
@@ -97,6 +98,7 @@ DEPENDENCIES
   rb-fsevent
   ruby-audioinfo
   running_man
+  sass (~> 3.1)
   sinatra
   sqlite3
   unicorn (~> 4.1.0)
