@@ -10,7 +10,9 @@ module Play
       return unless string_cache
       users = []
       string_cache.split(',').each do |string|
-        users << User.find_by_office_string(string.downcase)
+        user = User.find_by_office_string(string.downcase)
+        user ||= User.where(:office_string => nil, :login => string.downcase).first
+        users << user
       end
       users.compact
     end
