@@ -1,7 +1,22 @@
 <div class="song {{#now_playing?}}now-playing{{/now_playing?}}">
-  <div class="album">
-    <a href="/album/{{album_id}}"><img src="{{album_art_url}}" width="75" height="75" title="{{album_name}}" /></a>
-  </div>
+  {{#valid_album_art_url?}}
+    <div class="album_art">
+      <a href="/album/{{album_id}}"><img src="{{album_art_url}}" width="75" height="75" title="{{album_name}}" /></a>
+    </div>
+  {{/valid_album_art_url?}}
+  {{^valid_album_art_url?}}
+    <div class="album_name">
+      <span class="fucking-slash">/</span>
+      <a href="/album/{{album_id}}">
+        {{^album_name.nil?}}
+          {{album_name}}
+        {{/album_name.nil?}}
+        {{#album_name.nil?}}
+          Untitled Album
+        {{/album_name.nil?}}
+      </a>
+    </div>
+  {{/valid_album_art_url?}}
 
   <div class="star">
     <a href="/star/{{id}}" title="star song">☆</a>
