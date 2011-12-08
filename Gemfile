@@ -8,7 +8,7 @@ gem "SystemTimer",   "~>1.2.3", :platforms => [:mri_18]
 gem 'ruby-audioinfo'
 gem 'oa-oauth'
 gem 'yajl-ruby'
-gem 'mysql2',        '~>0.3.7'
+gem 'mysql2',        '~>0.3.11'
 gem 'rb-fsevent'
 gem 'fssm'
 gem 'unicorn',       '~>4.1.0'
