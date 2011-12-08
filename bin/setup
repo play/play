@@ -52,7 +52,7 @@ fi
 
 # Music setup
 echo ""
-echo -ne "  + What is the absolute path to your music? › "
+echo "  + What is the absolute path to your music? › "
 read path
 path=${path//\//\\/}
 
@@ -81,22 +81,22 @@ else
   echo ""
 fi
 
-echo -ne "  + What's your GitHub client ID?     › "
+echo "  + What's your GitHub client ID?     › "
 read client_id
-echo -ne "  + What's your GitHub client secret? › "
+echo "  + What's your GitHub client secret? › "
 read client_secret
 
 echo ""
 echo "  + We hit the Last.fm API for beautiful gorgeous album art. If you have"
-echo -ne "    an API key, well, what is it?     › "
+echo "    an API key, well, what is it?     › "
 read lastfm_key
 
 echo ""
 
 # MySQL setup
-echo -ne "  + What's the username for the MySQL database user? › "
+echo "  + What's the username for the MySQL database user? › "
 read user
-echo -ne "  + What's the password for the MySQL database user? › "
+echo "  + What's the password for the MySQL database user? › "
 stty -echo
 read password
 stty echo
