@@ -38,6 +38,7 @@ end
 #
 # Returns nothing.
 def index_music
+  puts "play is indexing your music in the background"
   pid = fork { Play::Library.import_songs }
   Process.detach(pid)
 end
@@ -77,11 +78,12 @@ else
   puts ""
   puts "USAGE:    play [command]"
   puts "COMMANDS: "
-  puts "          start   - Starts the web and music servers."
-  puts "          stop    - Stops the music server."
-  puts "          music   - Starts the music server."
-  puts "          web     - Starts the web server."
-  puts "          pause   - Pauses the music server."
-  puts "          migrate - Forces a migration of the database."
-  puts "          index   - Forces a reindex of the music library."
+  puts "          start     - Starts the web and music servers."
+  puts "          stop      - Stops the music server."
+  puts "          music     - Starts the music server."
+  puts "          web       - Starts the web server."
+  puts "          pause     - Pauses the music server."
+  puts "          fetch-art - Fetch album art."
+  puts "          migrate   - Forces a migration of the database."
+  puts "          index     - Forces a reindex of the music library."
 end
