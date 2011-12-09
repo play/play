@@ -2,5 +2,5 @@ backups
 config/play.yml
 config/play.backup.yml
 db/*.sqlite3
-sass-cache
+.sass-cache
 *.css
