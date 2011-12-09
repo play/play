@@ -38,6 +38,7 @@ end
 #
 # Returns nothing.
 def index_music
+  puts "play is indexing your music in the background"
   pid = fork { Play::Library.import_songs }
   Process.detach(pid)
 end
