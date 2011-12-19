@@ -8,20 +8,19 @@
 </head>
 
 <body>
-  <div class="navigation">
-    <h1>{{title}}</h1>
-
-    <a class="{{queue_page}}" href="/">Queue</a>
-    <a class="{{history_page}}" href="/history">History</a>
-    <a class="{{profile_page}}" href="/{{login}}">@{{login}}</a>
-
+  
+  <div id="universal">
+    <a id="logo">[Play]</a>
+    
     <form method="get" action="/search">
       <input type="search" name="q" />
     </form>
-
+    
+    <a class="{{profile_page}}" href="/{{login}}">@{{login}}</a>
   </div>
-
-  <div class="controller">
+  
+     
+  <div id="controller">
     {{#stream?}}
       <a href="{{stream_url}}">stream</a>
     {{/stream?}}
@@ -36,6 +35,24 @@
 
     <a href="/api/next">❯❯</a>
   </div>
+  
+  
+  
+  
+  
+  <h1>{{title}}</h1>
+  
+  
+  <div class="navigation">
+    
+  <ul>
+    <li><a class="{{queue_page}}" href="/">Queue</a></li>
+    <li><a class="{{history_page}}" href="/history">History</a></li>
+  </ul>
+
+  </div>
+
+
 
   {{{yield}}}
 </body>
