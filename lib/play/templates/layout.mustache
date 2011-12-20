@@ -60,16 +60,38 @@
 	    
   <div class="row twelve">
     <div id="controller" class="four columns">
-	     <p>controller div</p>
+	     <h1>{{title}}</h1>
+	     {{#stream?}}
+           <a href="{{stream_url}}">stream</a>
+         {{/stream?}}
+
+         {{#playing?}}
+           <a href="/api/pause">❙❙</a>
+         {{/playing?}}
+
+         {{^playing?}}
+           <a href="/api/pause">❯</a>
+         {{/playing?}}
+
+         
+         <a href="/api/prev">prev</a>
+         <a href="/api/next">❯❯</a>
 	    
 	</div>
 
 	    
 	<div id="queue" class="seven columns">			
-		<p>queue div</p>		
+		<nav role="queue-list">
+          <ul>
+            <li><a class="{{queue_page}}" href="/">Queue</a></li>
+             <li><a class="{{history_page}}" href="/history">History</a></li>
+          </ul>
+        </nav>	
+        
+        {{{yield}}}
+        	
     </div>
   </div>
-  <!-- container -->
 
 
 
