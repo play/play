@@ -49,8 +49,6 @@ module Play
     end
 
     get "/" do
-      @recent   = History.limit(3+1).order('created_at desc').collect(&:song)
-      @recent   = @recent.reverse[0..-2]
       @current  = current_song
       @songs    = [@current]
       @songs   << Song.queue.includes(:album, :artist, :votes).all
