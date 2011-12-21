@@ -1,67 +1,9 @@
 /*
-Syntax error: Invalid CSS after "displ": expected "{", was "}"
-        on line 34 of public/scss/base.scss
 
-29: }
-30: 
-31: 
-32: a#logo {
-33: displ
-34: }
-35: 
-36: form.seach {
-37: 
-38: }
-39: 
+ orange FF9900
+   dark 424242
+  light E9E9E9
+   grey BCBCBC
+ bright 3299BB
 
-Backtrace:
-public/scss/base.scss:34
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:926:in `expected'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:872:in `expected'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:867:in `tok!'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:376:in `block'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:371:in `ruleset'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:433:in `declaration_or_ruleset'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:910:in `call'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:910:in `rethrow'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:434:in `declaration_or_ruleset'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:396:in `block_child'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:385:in `block_contents'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:377:in `block'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:371:in `ruleset'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:395:in `block_child'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:388:in `block_contents'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:59:in `stylesheet'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/scss/parser.rb:28:in `parse'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/engine.rb:327:in `_to_tree'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/engine.rb:300:in `_render'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/engine.rb:247:in `render'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/plugin/compiler.rb:339:in `update_stylesheet'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/plugin/compiler.rb:202:in `update_stylesheets'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/plugin/compiler.rb:200:in `each'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/../sass/plugin/compiler.rb:200:in `update_stylesheets'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/plugin.rb:81:in `update_stylesheets'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/plugin.rb:54:in `check_for_updates'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/sass-3.1.11/lib/sass/plugin/rack.rb:51:in `call'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/oa-core-0.3.2/lib/omniauth/strategy.rb:44:in `call!'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/oa-core-0.3.2/lib/omniauth/strategy.rb:30:in `call'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.3.5/lib/rack/session/abstract/id.rb:195:in `context'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.3.5/lib/rack/session/abstract/id.rb:190:in `call'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.3.5/lib/rack/lint.rb:48:in `_call'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.3.5/lib/rack/lint.rb:36:in `call'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.3.5/lib/rack/showexceptions.rb:24:in `call'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.3.5/lib/rack/commonlogger.rb:20:in `call'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.3.5/lib/rack/chunked.rb:41:in `call'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.3.5/lib/rack/content_length.rb:14:in `call'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:528:in `process_client'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:600:in `worker_loop'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:485:in `spawn_missing_workers'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/unicorn-4.1.1/lib/unicorn/http_server.rb:135:in `start'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/gems/unicorn-4.1.1/bin/unicorn:121
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/bin/unicorn:19:in `load'
-/Users/jcostello/Developer/.rvm/gems/ruby-1.8.7-p334/bin/unicorn:19
 */
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Syntax error: Invalid CSS after \"displ\": expected \"{\", was \"}\"\A         on line 34 of public/scss/base.scss\A \A 29: }\A 30: \A 31: \A 32: a#logo {\A 33: displ\A 34: }\A 35: \A 36: form.seach {\A 37: \A 38: }\A 39: "; }
