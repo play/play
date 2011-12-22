@@ -25,53 +25,75 @@
     
 </head>
 <body>
-<div id="top-bar" class="container">
-    <header id="admin" class="row">
-      
-      <a id="logo">[Play]</a>
-    
-      <form class="search" method="get" action="/search">
-        <input type="search" name="q" value="find music" />
-      </form>
-    
-      <a class="user" class="two" href="/{{login}}">@{{login}}</a>
-
-	</header>
-  </div>
-	    
-  <div class="container">
-  <div class="row">
-    <div id="controller" class="three columns">
-	     <!--<h1>{{title}}</h1>-->
-	     {{#stream?}}
-           <a href="{{stream_url}}">stream</a>
-         {{/stream?}}
-
-         {{#playing?}}
-           <a href="/api/pause">❙❙</a>
-         {{/playing?}}
-
-         {{^playing?}}
-           <a href="/api/pause">❯</a>
-         {{/playing?}}
-
+    <div id="top-bar" class="container">
          
-         <a href="/api/prev">prev</a>
-         <a href="/api/next">❯❯</a>
-	    
-	</div>
+         <header id="admin" class="row">
+              
+              <a id="logo">[Play]</a>
+              
+              <form class="search" method="get" action="/search">
+                  <input type="search" name="q" value="find music" />
+              </form>
+    
+              <a class="user" class="two" href="/{{login}}">@{{login}}</a>
 
+	     </header>
+    
+    </div><!-- #top-bar .container -->
 	    
-	<div id="queue" class="eight columns offset-by-one">			
-		<nav role="queue-history">
-          <a class="{{queue_page}}" href="/">Queue</a>
-          <a class="{{history_page}}" href="/history">History</a>
-        </nav>	
+    <div id="main" class="container">
         
-        {{{yield}}}
+        <div class="row">
+            
+            <div id="left" class="three columns">
+            
+            <section id="controller">
+	   
+	            {{#stream?}}
+                <a href="{{stream_url}}">Stream</a>
+                {{/stream?}}
+
+                <a href="/api/prev">Previous</a>
+         
+                {{#playing?}}
+                <a href="/api/pause">Pause</a>
+                {{/playing?}}
+
+                {{^playing?}}
+                <a href="/api/pause">Play</a>
+                {{/playing?}}
+
+                <a href="/api/next">Next</a>
+	    
+	        </section>
+	        
+	        <section id="now-playing">
+	            
+	                <ul>
+	                    <li class="title">I am Ahab</li>
+	                    <li class="artist"><em>by</em> <a href="#">Mastodon</a></li>
+	                    <li class="album"><em>from</em> <a href="#">Leviathan</a></li>
+	                </ul>
+	            
+	                <a class="album-art" href="#"><img src="images/album-placeholder.png" /></a>
+	        </section>
+	        
+	        <section id="song-stats">
+	            <p>Here's where rad stats, likes, and shit like that go</p>
+	        </section>
+            
+            </div>
+	    
+	        <section id="queue" class="nine columns">			
+		        <dl class="tabs">
+                   <dd><a class="{{queue_page}}" href="/">Queue</a></dd>
+                   <dd><a class="{{history_page}}" href="/history">History</a></dd>
+                </dl>
+        
+                {{{yield}}}
         	
+            </section>
+        </div>
     </div>
-  </div>
-  </div>
 </body>
 </html>
