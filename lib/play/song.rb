@@ -84,6 +84,7 @@ module Play
     def play!
       Song.update_all(:now_playing => false)
       self.now_playing = true
+      self.last_played = Time.now
       votes.update_all(:active => false)
       save
     end
