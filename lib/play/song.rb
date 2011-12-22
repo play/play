@@ -83,8 +83,8 @@ module Play
     # Returns a Boolean of whether we've saved the song.
     def play!
       Song.update_all(:now_playing => false)
-      self.now_playing = true
-      self.last_played = Time.now
+      self.now_playing    = true
+      self.last_played_at = Time.now
       votes.update_all(:active => false)
       save
     end
