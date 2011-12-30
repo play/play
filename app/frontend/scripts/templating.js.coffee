@@ -4,4 +4,4 @@ data = {
 
 template = Hogan.compile('hello {{world}}')
 
-alert template.render(data)
+#alert template.render(data)

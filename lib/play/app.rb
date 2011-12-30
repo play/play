@@ -48,6 +48,11 @@ module Play
       end
     end
 
+    # This is a stub for play-next until the proper API is created.
+    get "/next.json" do
+      {:song => {:title => 'Stress', :artist => 'Justice'}}.to_json
+    end
+
     get "/" do
       @current  = current_song
       @songs    = [@current]
