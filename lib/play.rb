@@ -13,7 +13,7 @@ require 'digest'
 require 'yajl'
 require 'rb-fsevent'
 require 'fssm'
-require 'appscript'
+require 'appscript' if RUBY_PLATFORM.downcase.include?("darwin")
 
 require 'app/models/player'
 
