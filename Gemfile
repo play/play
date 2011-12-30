@@ -17,7 +17,10 @@ gem 'unicorn',       '~>4.1.0'
 gem 'sprockets'
 gem 'sass',          '~>3.1'
 gem 'coffee-script'
-gem 'rb-appscript'
+
+if RUBY_PLATFORM.downcase.include?("darwin")
+  gem 'rb-appscript'
+end
 
 group :test do
   gem 'rack-test'
