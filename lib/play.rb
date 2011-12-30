@@ -15,7 +15,7 @@ require 'rb-fsevent'
 require 'fssm'
 require 'appscript' if RUBY_PLATFORM.downcase.include?("darwin")
 
-require 'app/models/player'
+require './app/models/player'
 
 require 'play/core_ext/hash'
 
