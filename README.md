@@ -77,6 +77,11 @@ unique identifier to associate back to Play's user accounts. In this example,
 I'd log into my account and change my `office_string` to be "holman" so I could
 match up. It could be anything, though; we actually use MAC addresses here.
 
+## Development
+
+    bundle install
+    rake start
+
 ## API
 
 Play has a full API that you can use to do tons of fun stuff. In fact, the API
