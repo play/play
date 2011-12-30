@@ -13,6 +13,9 @@ require 'digest'
 require 'yajl'
 require 'rb-fsevent'
 require 'fssm'
+require 'appscript'
+
+require 'app/models/player'
 
 require 'play/core_ext/hash'
 

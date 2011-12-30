@@ -12,9 +12,12 @@ gem 'mysql2',        '~>0.3.11'
 gem 'rb-fsevent'
 gem 'fssm'
 gem 'unicorn',       '~>4.1.0'
+
+# play-next
 gem 'sprockets'
 gem 'sass',          '~>3.1'
 gem 'coffee-script'
+gem 'rb-appscript'
 
 group :test do
   gem 'rack-test'

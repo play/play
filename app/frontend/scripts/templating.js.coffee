@@ -5,4 +5,4 @@ view = {
   title:  'Civilization'
 }
 
-alert Mustache.to_html("{{title}} by {{artist}}", view);
+#alert Mustache.to_html("{{title}} by {{artist}}", view);
