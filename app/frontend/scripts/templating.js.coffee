@@ -1,7 +1,8 @@
-data = {
-  world: "World!"
+//= require mustache
+
+view = {
+  artist: 'Justice',
+  title:  'Civilization'
 }
 
-template = Hogan.compile('hello {{world}}')
-
-#alert template.render(data)
+alert Mustache.to_html("{{title}} by {{artist}}", view);
