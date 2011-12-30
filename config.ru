@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/lib/play')
+require 'sprockets'
 
 require 'omniauth/oauth'
 oauth = Play.config
@@ -6,9 +7,13 @@ oauth = Play.config
 use Rack::Session::Cookie
 use OmniAuth::Strategies::GitHub, oauth['gh_key'], oauth['gh_secret']
 
-require 'sass/plugin/rack'
-Sass::Plugin.options[:template_location] = 'public/scss'
-Sass::Plugin.options[:stylesheet_location] = 'public/stylesheets'
-use Sass::Plugin::Rack
+stylesheets = Sprockets::Environment.new
+stylesheets.append_path 'app/frontend/styles'
 
-run Play::App
+javascripts = Sprockets::Environment.new
+javascripts.append_path 'app/frontend/scripts'
+
+map("/css") { run stylesheets }
+map("/js")  { run javascripts }
+
+map('/')    { run Play::App }

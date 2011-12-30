@@ -48,11 +48,6 @@ module Play
       end
     end
 
-    get '/javascripts/*.js' do
-      file = params[:splat].first
-      coffee file.to_sym, :views => "#{App.public_directory}/coffee"
-    end
-
     get "/" do
       @current  = current_song
       @songs    = [@current]
