@@ -6,8 +6,8 @@ module Play
 
     dir = File.dirname(File.expand_path(__FILE__))
 
-    set :public_folder,    "#{dir}/../../public"
-    set :static,    true
+    set :public_directory, "#{dir}/../../public"
+    set :static, true
     set :mustache, {
       :namespace => Play,
       :templates => "#{dir}/templates",
@@ -46,6 +46,11 @@ module Play
                                    request.path_info =~ /\/api/
         end
       end
+    end
+
+    get '/javascripts/*.js' do
+      file = params[:splat].first
+      coffee file.to_sym, :views => "#{App.public_directory}/coffee"
     end
 
     get "/" do

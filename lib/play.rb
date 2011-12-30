@@ -5,6 +5,7 @@ require "bundler/setup"
 require 'logger'
 
 require 'active_record'
+require 'coffee-script'
 require 'audioinfo'
 require 'sinatra/base'
 require 'mustache/sinatra'
