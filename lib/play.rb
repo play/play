@@ -15,14 +15,14 @@ require 'rb-fsevent'
 require 'fssm'
 require 'appscript' if RUBY_PLATFORM.downcase.include?("darwin")
 
-require './app/models/player'
 require './app/models/artist'
+require './app/models/album'
+require './app/models/player'
 require './app/models/song'
 
 require 'play/core_ext/hash'
 
 require 'play/app'
-require 'play/album'
 require 'play/client'
 require 'play/history'
 require 'play/library'
