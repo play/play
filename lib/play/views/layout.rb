@@ -22,7 +22,7 @@ module Play
       end
 
       def playing?
-        !Play.client.paused?
+        #!Play.client.paused?
       end
 
       def login

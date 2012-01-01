@@ -58,14 +58,4 @@ module Play
     YAML::load(File.open(config_path))
   end
 
-  # Returns the Client subclass that matches the client requested
-  # in the config subclass.
-  def self.client
-    client_class = config['client'].capitalize + 'Client'
-    require 'play/clients/' + client_class.gsub(/(.)([A-Z])/,'\1_\2').downcase
-    return Play.const_get(client_class)
-  rescue NameError
-    raise NotImplementedError,
-    "\"#{config['client']}\" is not a supported music client type."
-  end
 end
