@@ -47,16 +47,5 @@ module Play
       OpenStruct.new(:title => title, :artist => artist)
     end
 
-    # Give me all of the songs by a particular artist.
-    #
-    # artist - The (case-insensitive) String name of an Artist.
-    #
-    # (Eventually) returns an Array of Songs.
-    def self.songs_by_artist(artist)
-      library.tracks[Appscript.its.artist.contains(artist)].get.map do |song|
-        OpenStruct.new(:title => song.name.get, :artist => song.artist.get)
-      end
-    end
-
   end
 end
