@@ -25,6 +25,10 @@ module Play
         Player.paused?
       end
 
+      def now_playing
+        Player.now_playing
+      end
+
       def login
         @login
       end

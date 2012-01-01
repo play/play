@@ -70,9 +70,11 @@
 	        <section id="now-playing">
 	            
 	                <ul>
-	                    <li class="title">I am Ahab</li>
-	                    <li class="artist"><em>by</em> <a href="#">Mastodon</a></li>
-	                    <li class="album"><em>from</em> <a href="#">Leviathan</a></li>
+                    {{#now_playing}}
+	                    <li class="title">{{name}}</li>
+	                    <li class="artist"><em>by</em> <a href="#">{{artist}}</a></li>
+	                    <li class="album"><em>from</em> <a href="#">{{album}}</a></li>
+                    {{/now_playing}}
 	                </ul>
 	            
 	                <a class="album-art" href="#"><img src="images/album-placeholder.png" /></a>

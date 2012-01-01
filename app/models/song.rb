@@ -11,6 +11,9 @@ module Play
     # The song's String artist value.
     attr_accessor :artist
 
+    # The song's String album value.
+    attr_accessor :album
+
     # Initializes a new Song.
     #
     # options - One of two possible arguments:
@@ -24,10 +27,12 @@ module Play
         @id     = song.id
         @name   = song.name
         @artist = song.artist
+        @album  = song.album
       else
         @id     = options[:id]
         @name   = options[:name]
         @artist = options[:artist]
+        @album  = options[:album]
       end
     end
 
@@ -40,7 +45,8 @@ module Play
       record = Player.library.tracks[Appscript.its.persistent_ID.eq(id)].get[0]
       new :id     => record.persistent_ID.get,
           :name   => record.name.get,
-          :artist => record.artist.get
+          :artist => record.artist.get,
+          :album  => record.album.get
     end
 
     # The JSON representation of a Song, suitable for API responses.
