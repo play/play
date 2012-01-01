@@ -23,6 +23,12 @@ module Play
       app.pause
     end
 
+    # Is there music currently playing?
+    def self.paused?
+      state = app.player_state.get
+      state == :paused
+    end
+
     # Maybe today is the day the music stopped.
     def self.stop
       app.stop
