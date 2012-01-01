@@ -4,15 +4,11 @@ require "rubygems"
 require "bundler/setup"
 require 'logger'
 
-require 'active_record'
 require 'coffee-script'
-require 'audioinfo'
 require 'sinatra/base'
 require 'mustache/sinatra'
 require 'digest'
 require 'yajl'
-require 'rb-fsevent'
-require 'fssm'
 require 'appscript' if RUBY_PLATFORM.downcase.include?("darwin")
 
 require './app/models/artist'
@@ -23,14 +19,7 @@ require './app/models/song'
 require 'play/core_ext/hash'
 
 require 'play/app'
-require 'play/client'
-require 'play/history'
-require 'play/library'
-require 'play/office'
-require 'play/star'
 require 'play/views/layout'
-require 'play/user'
-require 'play/vote'
 
 module Play
   # The path to your music library. All of the music underneath this directory
