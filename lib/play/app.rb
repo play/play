@@ -1,4 +1,4 @@
-require 'play/app/api'
+require 'app/api/main'
 
 module Play
   class App < Sinatra::Base
@@ -15,11 +15,7 @@ module Play
     }
 
     def current_user
-      session['user_id'].blank? ? nil : User.find_by_id(session['user_id'])
-    end
-
-    def current_song
-      Play.now_playing
+      #session['user_id'].blank? ? nil : User.find_by_id(session['user_id'])
     end
 
     configure :development do
@@ -32,6 +28,7 @@ module Play
     end
 
     before do
+      return
       if current_user
         @login = current_user.login
       else
@@ -72,11 +69,6 @@ module Play
       @user = User.authenticate(auth['user_info'])
       session['user_id'] = @user.id
       redirect '/'
-    end
-
-    get "/now_playing" do
-      @song = current_song
-      mustache :now_playing
     end
 
     post "/star/:id" do

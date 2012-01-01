@@ -39,13 +39,6 @@ module Play
     config['path']
   end
 
-  # The song that's currently playing.
-  #
-  # Returns the Song object from the database that's currently playing.
-  def self.now_playing
-    Song.where(:now_playing => true).first
-  end
-
   # The path to play.yml.
   #
   # Returns the String path to the configuration file.
