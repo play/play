@@ -54,10 +54,10 @@ module Play
     end
 
     get "/" do
-      @current  = current_song
-      @songs    = [@current]
-      @songs   << Song.queue.includes(:album, :artist, :votes).all
-      @songs.flatten!
+      #@current  = current_song
+      #@songs    = [@current]
+      #@songs   << Song.queue.includes(:album, :artist, :votes).all
+      #@songs.flatten!
       mustache :index
     end
 

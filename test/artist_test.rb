@@ -1,15 +1,16 @@
-require 'helper'
+require File.expand_path("../helper", __FILE__)
 
 context "Artist" do
-  fixtures do
-    @artist = Play::Artist.create(:name => "Justice")
-    @song   = Play::Song.create(:title => "Stress", :artist => @artist)
-    @user   = User.create
+  setup do
+    @artist = Artist.new('Justice')
   end
 
-  test "enqueueing ten songs" do
-    Song.any_instance.expects(:enqueue!).with(@user).times(1)
-    @artist.enqueue!(@user)
+  test "knows its name" do
+    assert_equal 'Justice', @artist.name
+  end
+
+  test "has many songs" do
+    assert @artist.respond_to?(:songs)
   end
 
 end

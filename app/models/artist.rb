@@ -14,9 +14,6 @@ module Play
       self
     end
 
-    # Alias #find as the #new call since this isn't persisted.
-    alias :find, :initialize
-
     # Give me all of the songs by a particular artist.
     #
     # (Eventually) returns an Array of Songs.

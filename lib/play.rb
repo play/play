@@ -16,11 +16,11 @@ require 'fssm'
 require 'appscript' if RUBY_PLATFORM.downcase.include?("darwin")
 
 require './app/models/player'
+require './app/models/artist'
 
 require 'play/core_ext/hash'
 
 require 'play/app'
-require 'play/artist'
 require 'play/album'
 require 'play/client'
 require 'play/history'

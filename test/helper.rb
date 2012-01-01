@@ -9,7 +9,7 @@ end
 
 require 'rack/test'
 require 'mocha'
-require 'spec/mini'
+require 'test/spec/mini'
 require 'running_man'
 require 'running_man/active_record_block'
 
