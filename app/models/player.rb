@@ -47,5 +47,16 @@ module Play
       OpenStruct.new(:title => title, :artist => artist)
     end
 
+    # Search all songs for a given song title.
+    #
+    # keyword - The String keyword to search for.
+    #
+    # Returns an Array of matching Songs.
+    def self.search(keyword)
+      library.search(:for => keyword).map do |record|
+        Song.new(:artist => record.artist.get, :title => record.get)
+      end
+    end
+
   end
 end

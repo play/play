@@ -18,7 +18,7 @@ module Play
     #
     # (Eventually) returns an Array of Songs.
     def songs
-      Player.app.tracks[Appscript.its.artist.contains(artist)].get.map do |song|
+      Player.app.tracks[Appscript.its.artist.contains(name)].get.map do |song|
         OpenStruct.new(:title => song.name.get, :artist => song.artist.get)
       end
     end
