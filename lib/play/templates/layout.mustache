@@ -3,14 +3,13 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
-	
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   
-  <!-- Styles -->
   <link rel="stylesheet" href="/css/base.css">
 
-  <!-- Templating -->
-  <script src="http://twitter.github.com/hogan.js/builds/1.0.3/hogan.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/underscore.js"></script>
+  <script type="text/javascript" src="/js/backbone.js"></script>
+  <script type="text/javascript" src="/js/application.js"></script>
   <script type="text/javascript" src="/js/templating.js"></script>
 
   <!-- Combine and Compress These CSS Files
@@ -26,76 +25,67 @@
   <!-- End Combine and Compress These CSS Files -->
 
   <title>Play: {{title}}</title>
-    
+
 </head>
 <body>
-    <div id="top-bar" class="container">
+  <div id="top-bar" class="container">
          
-         <header id="admin" class="row">
-              
-              <a id="logo">[Play]</a>
-              
-              <form class="search" method="get" action="/search">
-                  <input type="search" name="q" value="find music" />
-              </form>
+    <header id="admin" class="row">
+      <a id="logo">[Play]</a>
+
+      <form class="search" method="get" action="/search">
+        <input type="search" name="q" value="find music" />
+      </form>
+
+      <a class="user" class="two" href="/{{login}}">@{{login}}</a>
+	  </header>
     
-              <a class="user" class="two" href="/{{login}}">@{{login}}</a>
-
-	     </header>
-    
-    </div><!-- #top-bar .container -->
+  </div><!-- #top-bar .container -->
 	    
-    <div id="main" class="container">
-        
-        <div class="row">
-            
-            <div id="left" class="three columns">
-            
-            <section id="controller">
+  <div id="main" class="container">
+    <div class="row">
+      <div id="left" class="three columns">
+        <section id="controller">
+          <a href="/api/prev">Previous</a>
 
-                <a href="/api/prev">Previous</a>
-         
-                {{#playing?}}
-                <a href="/api/pause">Pause</a>
-                {{/playing?}}
+          {{#playing?}}
+          <a href="/api/pause">Pause</a>
+          {{/playing?}}
 
-                {{^playing?}}
-                <a href="/api/pause">Play</a>
-                {{/playing?}}
+          {{^playing?}}
+          <a href="/api/pause">Play</a>
+          {{/playing?}}
 
-                <a href="/api/next">Next</a>
-	    
-	        </section>
+          <a href="/api/next">Next</a>
+        </section>
 	        
-	        <section id="now-playing">
-	            
-	                <ul>
-                    {{#now_playing}}
-	                    <li class="title">{{name}}</li>
-	                    <li class="artist"><em>by</em> <a href="#">{{artist}}</a></li>
-	                    <li class="album"><em>from</em> <a href="#">{{album}}</a></li>
-                    {{/now_playing}}
-	                </ul>
-	            
-	                <a class="album-art" href="#"><img src="images/album-placeholder.png" /></a>
-	        </section>
-	        
-	        <section id="song-stats">
-	            <p>Here's where rad stats, likes, and shit like that go</p>
-	        </section>
-            
-            </div>
-	    
-	        <section id="queue" class="nine columns">			
-		        <dl class="tabs">
-                   <dd><a class="{{queue_page}}" href="/">Queue</a></dd>
-                   <dd><a class="{{history_page}}" href="/history">History</a></dd>
-                </dl>
+        <section id="now-playing">
+          <ul>
+            {{#now_playing}}
+              <li class="name">UNLOADED</li>
+              <li class="artist"><em>by</em> <a href="#">UNLOADED</a></li>
+              <li class="album"><em>from</em> <a href="#">UNLOADED</a></li>
+            {{/now_playing}}
+          </ul>
+
+          <a class="album-art" href="#"><img src="images/album-placeholder.png" /></a>
+        </section>
         
-                {{{yield}}}
-        	
-            </section>
-        </div>
+        <section id="song-stats">
+          <p>Here's where rad stats, likes, and shit like that go</p>
+        </section>
+      </div>
+
+      <section id="queue" class="nine columns">
+        <dl class="tabs">
+           <dd><a class="{{queue_page}}" href="/">Queue</a></dd>
+           <dd><a class="{{history_page}}" href="/history">History</a></dd>
+        </dl>
+
+        {{{yield}}}
+      </section>
     </div>
+  </div>
 </body>
+
 </html>

@@ -56,7 +56,8 @@ module Play
       hash = {
         :id     => id,
         :name   => name,
-        :artist => artist
+        :artist => artist,
+        :album  => album
       }
       Yajl.dump hash
     end
