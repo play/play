@@ -11,15 +11,14 @@ module Play
     # Returns the new Artist.
     def initialize(name)
       @name = name
-      self
     end
 
     # Give me all of the songs by a particular artist.
     #
-    # (Eventually) returns an Array of Songs.
+    # Returns an Array of Songs.
     def songs
       Player.app.tracks[Appscript.its.artist.contains(name)].get.map do |song|
-        OpenStruct.new(:title => song.name.get, :artist => song.artist.get)
+        Song.new(song.persistent_ID.get)
       end
     end
 

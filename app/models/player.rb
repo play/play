@@ -40,11 +40,9 @@ module Play
 
     # Currently-playing song.
     #
-    # (Eventually) returns a Song.
+    # Returns a Song.
     def self.now_playing
-      title  = app.current_track.get.name.get
-      artist = app.current_track.get.artist.get
-      OpenStruct.new(:title => title, :artist => artist)
+      Song.new(app.current_track.persistent_ID.get)
     end
 
     # Search all songs for a given song title.
@@ -54,7 +52,7 @@ module Play
     # Returns an Array of matching Songs.
     def self.search(keyword)
       library.search(:for => keyword).map do |record|
-        Song.new(:artist => record.artist.get, :title => record.get)
+        Song.new(record.persistent_ID.get)
       end
     end
 
