@@ -36,6 +36,15 @@ module Play
       Player.app.playlists[name].get
     end
 
+    # Adds a song to the Queue.
+    #
+    # song - A Song instance.
+    #
+    # Returns a Boolean of whether the song was added.
+    def self.add_song(song)
+      Player.app.add(song.record.location.get, :to => playlist.get)
+    end
+
     # Returns the context of this Queue as JSON. This contains all of the songs
     # in the Queue.
     #

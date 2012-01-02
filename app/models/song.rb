@@ -49,6 +49,13 @@ module Play
           :album  => record.album.get
     end
 
+    # The Appscript record.
+    #
+    # Returns an Appscript::Reference to this song.
+    def record
+      Player.library.tracks[Appscript.its.persistent_ID.eq(id)].get[0]
+    end
+
     # The JSON representation of a Song, suitable for API responses.
     #
     # Returns a String-encoded JSON fragment.
