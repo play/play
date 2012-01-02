@@ -1,5 +1,5 @@
 class SongView extends Backbone.View
-  tagName: 'li'
+  #tagName: 'li'
   initialize: ->
     @template = $('#color-box-template').template()
     @model.bind 'change', @render
