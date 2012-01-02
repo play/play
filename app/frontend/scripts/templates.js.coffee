@@ -13,7 +13,9 @@ templates.list = """
 """
 
 templates.song = """
-  <h1>a song!</h1>
+  {{name}}
+  by {{artist}}
+  from {{album}}
 """
 
 templates.now_playing = """
