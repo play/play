@@ -1,6 +1,6 @@
 # A single, solidatary Song.
 class window.Song
-  constructor: (@name, @artist) ->
+  constructor: (@name, @artist, @album) ->
 
 
 
