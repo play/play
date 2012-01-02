@@ -57,15 +57,6 @@
         </section>
 	        
         <section id="now-playing">
-          <ul>
-            {{#now_playing}}
-              <li class="name">UNLOADED</li>
-              <li class="artist"><em>by</em> <a href="#">UNLOADED</a></li>
-              <li class="album"><em>from</em> <a href="#">UNLOADED</a></li>
-            {{/now_playing}}
-          </ul>
-
-          <a class="album-art" href="#"><img src="images/album-placeholder.png" /></a>
         </section>
         
         <section id="song-stats">
@@ -78,8 +69,6 @@
            <dd><a class="{{queue_page}}" href="/">Queue</a></dd>
            <dd><a class="{{history_page}}" href="/history">History</a></dd>
         </dl>
-
-        {{{song_list}}}
 
         <section id="songs">
           {{{yield}}}
