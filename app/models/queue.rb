@@ -45,12 +45,24 @@ module Play
       Player.app.add(song.record.location.get, :to => playlist.get)
     end
 
+    # The songs currently in the Queue.
+    #
+    # Returns an Array of Songs.
+    def self.songs
+      playlist.tracks.get.map do |record|
+        Song.find(record.persistent_ID.get)
+      end
+    end
+
     # Returns the context of this Queue as JSON. This contains all of the songs
     # in the Queue.
     #
     # Returns an Array of Songs.
     def self.to_json
-
+      hash = {
+        :songs => songs.map { |song| song.to_json }
+      }
+      Yajl.dump hash
     end
 
   end

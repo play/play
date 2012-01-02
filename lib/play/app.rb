@@ -1,4 +1,5 @@
 require 'app/api/main'
+require 'app/api/queue'
 
 module Play
   class App < Sinatra::Base
