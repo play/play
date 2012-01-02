@@ -18,3 +18,13 @@ $.ajax
 # Returns a Song.
 songFromJson = (json) ->
   new Song(json.name, json.artist, json.album)
+
+# Create a List from a JSON-backed Array of Songs.
+#
+# json - The common JSON endpoint we return for multiple songs responses.
+#
+# Returns a List of Songs.
+listFromJson = (json) ->
+  songs = json.songs.map(song)
+    songFromJson song
+  new List(songs)

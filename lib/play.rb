@@ -14,6 +14,7 @@ require 'appscript' if RUBY_PLATFORM.downcase.include?("darwin")
 require './app/models/artist'
 require './app/models/album'
 require './app/models/player'
+require './app/models/queue'
 require './app/models/song'
 
 require 'play/core_ext/hash'
