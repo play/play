@@ -14,9 +14,9 @@ require 'test/spec/mini'
 ENV['RACK_ENV'] = 'test'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'app'))
 
-require 'play'
+require 'boot'
 include Play
 
 def parse_json(json)
