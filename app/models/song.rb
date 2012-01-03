@@ -52,8 +52,16 @@ module Play
     # The Appscript record.
     #
     # Returns an Appscript::Reference to this song.
+    #
+    # If we have an ID for this song, let's use that to find it (preferred,
+    # since that'll be quick). If not, search through a combination Artist +
+    # Song name match and return that record.
     def record
-      Player.library.tracks[Appscript.its.persistent_ID.eq(id)].get[0]
+      if id
+        Player.library.tracks[Appscript.its.persistent_ID.eq(id)].get[0]
+      else
+        Artist.new(artist).songs.select{|song| song.name =~ /^#{name}$/i}.first.record
+      end
     end
 
     # The raw data of the album art provided for this song.
