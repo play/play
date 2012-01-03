@@ -26,7 +26,7 @@ GEM
     multi_json (1.0.3)
     multi_xml (0.4.1)
     multipart-post (1.1.3)
-    mustache (0.99.3)
+    mustache (0.99.4)
     oa-core (0.3.2)
     oa-oauth (0.3.2)
       faraday (~> 0.7.3)
@@ -79,7 +79,7 @@ DEPENDENCIES
   coffee-script
   eventmachine (~> 1.0.0.beta.4)
   mocha
-  mustache (= 0.99.3)
+  mustache (~> 0.99.4)
   oa-oauth
   rack (~> 1.3.0)
   rack-test

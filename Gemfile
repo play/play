@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 gem 'rack',          '~>1.3.0'
 gem 'rake',          '~>0.9.2.1'
 gem 'sinatra'
-gem 'mustache',      '=0.99.3'
+gem 'mustache',      '~>0.99.4'
 gem "SystemTimer",   "~>1.2.3", :platforms => [:mri_18]
 gem 'oa-oauth'
 gem 'yajl-ruby'
