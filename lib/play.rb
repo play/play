@@ -17,8 +17,6 @@ require './app/models/player'
 require './app/models/queue'
 require './app/models/song'
 
-require 'play/core_ext/hash'
-
 require 'play/app'
 require 'play/views/layout'
 

@@ -19,12 +19,6 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'play'
 include Play
 
-class Play::Album
-  def fetch_art
-    # no-op
-  end
-end
-
 def parse_json(json)
   Yajl.load(json, :symbolize_keys => true)
 end
