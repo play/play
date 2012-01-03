@@ -44,6 +44,53 @@ module Play
       app.previous_track
     end
 
+    # Get the current numeric volume.
+    #
+    # Returns an Integer from 0-100.
+    def self.system_volume
+      `osascript -e 'get output volume of (get volume settings)'`.chomp.to_i
+    end
+
+    # Set the system volume.
+    #
+    # setting - An Integer value between 0-100, where 100% is loud and, well, 0
+    #           is for losers in offices that are boring.
+    #
+    # Returns the current volume setting.
+    def self.system_volume=(setting)
+      `osascript -e 'set volume output volume #{setting}' 2>/dev/null"`
+      setting
+    end
+
+    # Get the current numeric volume.
+    #
+    # Returns an Integer from 0-100.
+    def self.app_volume
+      app.sound_volume.get
+    end
+
+    # Set the app volume.
+    #
+    # setting - An Integer value between 0-100, where 100% is loud and, well, 0
+    #           is for losers in offices that are boring.
+    #
+    # Returns the current volume setting.
+    def self.app_volume=(setting)
+      app.sound_volume.set(setting)
+      setting
+    end
+
+    # Say something. Robots can speak too, you know.
+    #
+    # Thirds the volume, does its thing, brings the volume up again, and
+    # returns the current volume.
+    def self.say(message)
+      previous = self.app_volume
+      self.app_volume = self.app_volume/3
+      `say #{message}`
+      self.app_volume = previous
+    end
+
     # Currently-playing song.
     #
     # Returns a Song.
