@@ -1,10 +1,6 @@
 require 'helper'
 
 context "User" do
-  fixtures do
-    @user = Play::User.create(:email => "holman@example.com")
-  end
-
   test "vote for" do
     @user.vote_for(Play::Song.create)
     assert_equal 1, @user.votes.count

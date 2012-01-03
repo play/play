@@ -8,11 +8,6 @@ end
 context "App" do
   include Play
 
-  fixtures do
-    @artist = Artist.create(:name => 'Justice')
-    @song = Song.create(:title => 'Stress', :artist => @artist)
-  end
-
   setup do
     @user = Play::User.new(:login => 'holman',
                         :email => 'holman@example.com',
