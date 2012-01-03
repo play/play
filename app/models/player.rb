@@ -8,7 +8,7 @@ module Play
       Appscript.app('iTunes')
     end
 
-    # All longs in the library.
+    # All songs in the library.
     def self.library
       app.playlists['Library'].get
     end
