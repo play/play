@@ -8,6 +8,10 @@ module Play
     put "/pause" do
       Player.pause
     end
+
+    post "/say" do
+      Player.say params[:message]
+    end
     
   end
 end
