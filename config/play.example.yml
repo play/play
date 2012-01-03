@@ -1,16 +1,3 @@
-path: __PATH__
 gh_key: __OAUTH_KEY__
 gh_secret: __OAUTH_SECRET__
 office_url: http://example.com/office.macs
-client: __CLIENT__
-lastfm_key: __LASTFM_KEY__
-
-# Database stuffs that we'll pass on to ActiveRecord. Change if you want to. If
-# you don't want to, you are probably a handsome-looking gentlemen or a
-# gorgeous lady who knows what they want out of life.
-db:
-  database: play
-  adapter: mysql2
-  user: __USER__
-  password: __PASSWORD__
-  reconnect: true
