@@ -19,6 +19,23 @@ $.ajax
     stache = Mustache.to_html(templates.list,song,templates)
     $('#songs').html(stache)
 
+$(document).ready () ->
+  $('#play').click () ->
+    $.ajax
+      type: 'PUT',
+      url: '/play',
+      success: (response) ->
+        $('#songs').html('done')
+    false
+  
+  $('#pause').click () ->
+    $.ajax
+      type: 'PUT',
+      url: '/pause',
+      success: (response) ->
+        $('#songs').html('done')
+    false
+
 # Takes a JSON response and parses it for our common Song attributes.
 #
 # json - The common JSON endpoint we return.

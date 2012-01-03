@@ -47,11 +47,11 @@
           <a href="/api/prev">Previous</a>
 
           {{#playing?}}
-          <a href="/api/pause">Pause</a>
+          <a href="/pause" id="pause">Pause</a>
           {{/playing?}}
 
           {{^playing?}}
-          <a href="/api/pause">Play</a>
+          <a href="/play" id="play">Play</a>
           {{/playing?}}
 
           <a href="/api/next">Next</a>
