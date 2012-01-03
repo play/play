@@ -25,7 +25,7 @@ $.ajax
 #
 # Returns a Song.
 songFromJson = (json) ->
-  new Song(json.name, json.artist, json.album)
+  new Song(json.id, json.name, json.artist, json.album)
 
 # Create a List from a JSON-backed Array of Songs.
 #

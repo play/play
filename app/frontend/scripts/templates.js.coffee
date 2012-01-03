@@ -25,5 +25,5 @@ templates.now_playing = """
     <li class="album"><em>from</em> <a href="#">{{album}}</a></li>
   </ul>
 
-  <a class="album-art" href="#"><img src="images/album-placeholder.png" /></a>
+  <a class="album-art" href="#"><img src="/images/art/{{id}}.png" /></a>
 """

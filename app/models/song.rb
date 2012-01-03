@@ -56,6 +56,14 @@ module Play
       Player.library.tracks[Appscript.its.persistent_ID.eq(id)].get[0]
     end
 
+    # The raw data of the album art provided for this song.
+    #
+    # Returns a String of the binary image or some shit. If there's no art
+    # available, returns nil.
+    def album_art_data
+      record.artworks.get.empty? ? nil : record.artworks[1].raw_data.get.data
+    end
+
     # The JSON representation of a Song, suitable for API responses.
     #
     # Returns a String-encoded JSON fragment.
