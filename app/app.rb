@@ -7,7 +7,7 @@ module Play
 
     dir = File.dirname(File.expand_path(__FILE__))
 
-    set :public_directory, "#{dir}/frontend/public"
+    set :public_folder, "#{dir}/frontend/public"
     set :static, true
     set :mustache, {
       :namespace => Play,
