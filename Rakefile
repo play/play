@@ -33,7 +33,7 @@ end
 
 desc "Open an irb session preloaded with this library"
 task :console do
-  sh "irb -rubygems -r ./lib/play"
+  sh "irb -rubygems -r ./app/boot"
 end
 
 desc "Start the server"
