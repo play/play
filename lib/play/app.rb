@@ -150,8 +150,8 @@ module Play
     end
 
     get "/:login" do
-      @user = User.where(:login => params[:login]).first
-      mustache :profile
+      #@user = User.where(:login => params[:login]).first
+      #mustache :profile
     end
   end
 end

@@ -12,6 +12,8 @@ gem 'unicorn',       '~>4.1.0'
 gem 'sprockets'
 gem 'sass',          '~>3.1'
 gem 'coffee-script'
+gem 'eventmachine',  '~>1.0.0.beta.4'
+gem 'websocket-rack'
 
 if RUBY_PLATFORM.downcase.include?("darwin")
   gem 'rb-appscript'
