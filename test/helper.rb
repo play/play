@@ -18,6 +18,11 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'app'))
 
 require 'boot'
 include Play
+include Rack::Test::Methods
+
+def app
+  Play::App
+end
 
 def parse_json(json)
   Yajl.load(json, :symbolize_keys => true)
