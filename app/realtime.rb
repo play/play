@@ -17,6 +17,26 @@ class Realtime < Rack::WebSocket::Application
   end
 
   def on_open(env)
-    send_data Play::Player.now_playing.to_json
+    last = nil
+
+    while true
+      if last != last=current
+        puts "Sending packet"
+        send_data last
+      end
+      sleep 0.5
+    end
+  end
+
+private
+
+  # The current JSON representation of Play that we send back.
+  #
+  # Returns a String, JSON-encoded.
+  def current
+    hash = {
+      :now_playing => Play::Player.now_playing.to_json
+    }
+    Yajl.dump hash
   end
 end

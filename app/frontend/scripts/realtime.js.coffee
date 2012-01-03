@@ -1,7 +1,9 @@
 socket = new WebSocket('ws://localhost:3000/realtime')
 
 socket.onopen = () ->
+  alert 'open'
   console.log 'open'
 
 socket.onmessage = (message) ->
-  console.log message.data
+  alert message
+  console.log message
