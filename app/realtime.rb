@@ -6,15 +6,12 @@ class Realtime < Rack::WebSocket::Application
 
   def on_close(env)
     @timer.cancel
-    puts "Client disconnected"
   end
 
   def on_message(env, msg)
-    puts "Received message: " + msg
   end
 
   def on_error(env, error)
-    puts "Error occured: " + error.message
   end
 
   def on_open(env)
