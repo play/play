@@ -38,5 +38,5 @@ end
 
 desc "Start the server"
 task :start do
-  sh "shotgun -sthin"
+  sh "thin start -p5050"
 end

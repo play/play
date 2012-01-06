@@ -1,6 +1,6 @@
 play = exports ? this
 
-socket = new WebSocket('ws://localhost:3000/realtime')
+socket = new WebSocket('ws://localhost:5050/realtime')
 
 socket.onopen = () ->
 
