@@ -1,9 +1,9 @@
+play = exports ? this
+
 socket = new WebSocket('ws://localhost:3000/realtime')
 
 socket.onopen = () ->
-  alert 'open'
-  console.log 'open'
 
 socket.onmessage = (message) ->
-  alert message
-  console.log message
+  song = JSON.parse(message.data).now_playing
+  play.renderNowPlaying(JSON.parse(song))

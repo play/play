@@ -3,13 +3,15 @@
 //= require views
 //= require templates
 
+//= require realtime
+
+play = exports ? this
+
 $.ajax
   url: '/now_playing',
   dataType: 'json',
   success: (response) ->
-    song   = songFromJson(response)
-    stache = Mustache.to_html(templates.now_playing,song,templates)
-    $('#now-playing').html(stache)
+    renderNowPlaying(response)
 
 $.ajax
   url: '/queue',
@@ -35,6 +37,12 @@ $(document).ready () ->
       success: (response) ->
         $('#songs').html('done')
     false
+
+# Renders the "Now Playing" block off of JSON.
+play.renderNowPlaying = (json) ->
+  song = songFromJson(json)
+  rendered = Mustache.to_html(templates.now_playing,song,templates)
+  $('#now-playing').html(rendered)
 
 # Takes a JSON response and parses it for our common Song attributes.
 #

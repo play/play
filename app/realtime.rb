@@ -19,9 +19,8 @@ class Realtime < Rack::WebSocket::Application
   def on_open(env)
     last = nil
 
-    while true
+    EM.add_periodic_timer(1) do
       if last != last=current
-        puts "Sending packet"
         send_data last
       end
       sleep 0.5
