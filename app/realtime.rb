@@ -5,6 +5,7 @@ class Realtime < Rack::WebSocket::Application
   end
 
   def on_close(env)
+    @timer.cancel
     puts "Client disconnected"
   end
 
@@ -19,7 +20,7 @@ class Realtime < Rack::WebSocket::Application
   def on_open(env)
     last = nil
 
-    EM.add_periodic_timer(1) do
+    @timer = EM::PeriodicTimer.new(1) do
       if last != last=current
         send_data last
       end
