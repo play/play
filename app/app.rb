@@ -1,4 +1,5 @@
 require 'app/api/control'
+require 'app/api/library'
 require 'app/api/main'
 require 'app/api/queue'
 
