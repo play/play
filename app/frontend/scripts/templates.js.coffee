@@ -13,9 +13,12 @@ templates.list = """
 """
 
 templates.song = """
-  {{name}}
-  by {{artist}}
-  from {{album}}
+  <div class="song">
+    {{name}}
+    by {{artist}}
+    from {{album}}
+    and here's some art and shit: {{{art_tag}}}
+  </div>
 """
 
 templates.now_playing = """
@@ -25,5 +28,5 @@ templates.now_playing = """
     <li class="album"><em>from</em> <a href="#">{{album}}</a></li>
   </ul>
 
-  <a class="album-art" href="#"><img src="/images/art/{{id}}.png" /></a>
+    <a class="album-art" href="#">{{{art_tag}}}</a>
 """
