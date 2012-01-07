@@ -38,7 +38,26 @@ $(document).ready () ->
         $('#songs').html('done')
     false
 
+  $('#search').submit () ->
+    keyword = $('#search').find('input')[0].value
+    updateSongs("/search?q=#{keyword}", "GET")
+    return false
+
+# Update the Songs listing with, you know, songs.
+#
+# Does that.
+play.updateSongs = (path, method) ->
+  $.ajax
+    type: method,
+    url: path,
+    success: (response) ->
+      list = listFromJson(JSON.parse(response))
+      songs = Mustache.to_html(templates.list,list,templates)
+      $('#songs').html(songs)
+
 # Renders the "Now Playing" block off of JSON.
+#
+# Updates the #now-playing block with a Song.
 play.renderNowPlaying = (json) ->
   song = songFromJson(json)
   rendered = Mustache.to_html(templates.now_playing,song,templates)
