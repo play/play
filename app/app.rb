@@ -5,9 +5,16 @@ require 'app/api/queue'
 
 module Play
   class App < Sinatra::Base
+    enable  :sessions
     register Mustache::Sinatra
+    register Sinatra::Auth::Github
 
     dir = File.dirname(File.expand_path(__FILE__))
+
+    set :github_options, {
+                            :secret    => Play.config.secret,
+                            :client_id => Play.config.client_id,
+                         }
 
     set :public_folder, "#{dir}/frontend/public"
     set :static, true
@@ -16,6 +23,10 @@ module Play
       :templates => "#{dir}/templates",
       :views => "#{dir}/views"
     }
+
+    before do
+    #  authenticate!
+    end
 
     get "/" do
       mustache :index

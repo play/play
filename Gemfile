@@ -4,11 +4,11 @@ gem 'rake',          '~>0.9.2.1'
 gem 'sinatra'
 gem 'mustache',      '~>0.99.4'
 gem "SystemTimer",   "~>1.2.3", :platforms => [:mri_18]
-gem 'oa-oauth'
 gem 'yajl-ruby'
 gem 'unicorn',       '~>4.1.0'
 
 # play-next
+gem 'sinatra_auth_github', '~>0.2.0'
 gem 'sprockets'
 gem 'sass',          '~>3.1'
 gem 'coffee-script'
