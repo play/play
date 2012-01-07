@@ -17,6 +17,12 @@ class window.Song
   art_tag: () ->
     "<img src=\"/images/art/#{@id}.png\" />"
 
+  # Link to the Artist page.
+  #
+  # Uses hawt data-artist fields to populate the artist.
+  artist_tag: () ->
+    "<a href=\"#\" data-artist=\"#{@artist}\" class=\"artist\" />#{@artist}</a>"
+
 
 # A listing of Songs.
 #

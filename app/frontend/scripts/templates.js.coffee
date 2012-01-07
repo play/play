@@ -15,7 +15,7 @@ templates.list = """
 templates.song = """
   <div class="song">
     {{name}}
-    by {{artist}}
+    by {{{artist_tag}}}
     from {{album}}
     and here's some art and shit: {{{art_tag}}}
   </div>
@@ -24,9 +24,9 @@ templates.song = """
 templates.now_playing = """
   <ul>
     <li class="name">{{name}}</li>
-    <li class="artist"><em>by</em> <a href="#">{{artist}}</a></li>
+    <li class="artist"><em>by</em> {{{artist_tag}}}</li>
     <li class="album"><em>from</em> <a href="#">{{album}}</a></li>
   </ul>
 
-    <a class="album-art" href="#">{{{art_tag}}}</a>
+  <a class="album-art" href="#">{{{art_tag}}}</a>
 """
