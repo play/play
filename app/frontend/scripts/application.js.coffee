@@ -23,33 +23,25 @@ $.ajax
 
 $(document).ready () ->
   $('#play').click () ->
-    $.ajax
-      type: 'PUT',
-      url: '/play',
-      success: (response) ->
-        $('#songs').html('done')
+    updateSongs("/play", "PUT")
     false
   
   $('#pause').click () ->
-    $.ajax
-      type: 'PUT',
-      url: '/pause',
-      success: (response) ->
-        $('#songs').html('done')
+    updateSongs("/pause", "PUT")
     false
 
   $('#previous').click () ->
     updateSongs("/previous", "PUT")
-    return false
+    false
 
   $('#next').click () ->
     updateSongs("/next", "PUT")
-    return false
+    false
 
   $('#search').submit () ->
     keyword = $('#search').find('input')[0].value
     updateSongs("/search?q=#{keyword}", "GET")
-    return false
+    false
 
 # Update the Songs listing with, you know, songs.
 #
