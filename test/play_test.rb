@@ -1,17 +1,16 @@
-require 'helper'
+require File.expand_path("../helper", __FILE__)
 
 context "Play" do
-  setup do
+
+  test "config" do
+    yaml = {
+      'gh_secret' => "sekrets",
+      'gh_key'    => "clientz"
+    }
+    Play.stubs(:yaml).returns(yaml)
+
+    assert_equal "sekrets", Play.config.secret
+    assert_equal "clientz", Play.config.client_id
   end
 
-  test "path" do
-    Play.expects(:config).returns({'path' => '/tmp/play'})
-    assert_equal '/tmp/play', Play.path
-  end
-
-  test "now playing" do
-    @song = Play::Song.create
-    @song.play!
-    assert_equal @song, Play.now_playing
-  end
 end
