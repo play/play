@@ -12,6 +12,16 @@ context "Api" do
     put "/pause"
   end
 
+  test "/next" do
+    Player.expects(:play_next).returns(true)
+    put "/next"
+  end
+
+  test "/previous" do
+    Player.expects(:play_previous).returns(true)
+    put "/previous"
+  end
+
   test "/say" do
     msg = "Always with the rocks"
     Player.expects(:say).with(msg).returns(nil)

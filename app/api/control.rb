@@ -9,6 +9,14 @@ module Play
       Player.pause
     end
 
+    put "/next" do
+      Player.play_next
+    end
+
+    put "/previous" do
+      Player.play_previous
+    end
+
     post "/say" do
       Player.say params[:message]
     end

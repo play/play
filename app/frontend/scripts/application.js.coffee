@@ -38,6 +38,14 @@ $(document).ready () ->
         $('#songs').html('done')
     false
 
+  $('#previous').click () ->
+    updateSongs("/previous", "PUT")
+    return false
+
+  $('#next').click () ->
+    updateSongs("/next", "PUT")
+    return false
+
   $('#search').submit () ->
     keyword = $('#search').find('input')[0].value
     updateSongs("/search?q=#{keyword}", "GET")
