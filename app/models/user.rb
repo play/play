@@ -90,6 +90,16 @@ module Play
       true
     end
 
+    # Public: Removes a star.
+    #
+    # song - The Song to unstar.
+    #
+    # Returns true when saved.
+    def unstar(song)
+      $redis.srem("#{KEY}:#{login}:stars",song.id)
+      true
+    end
+
   end
 
 end
