@@ -12,7 +12,7 @@ module Play
       user = User.find(params[:splat])
 
       hash = {
-        :songs => user.stars
+        :songs => user.stars.map { |song| song.to_json }
       }
       Yajl.dump hash
     end
