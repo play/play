@@ -5,7 +5,13 @@ require 'app/api/queue'
 
 module Play
   class App < Sinatra::Base
-    enable  :sessions
+
+    # Set up sessions and ensure we have a constant session_secret so that in
+    # development mode `shotgun` won't regenerate a session secret and
+    # invalidate all of our sessions.
+    enable :sessions
+    set    :session_secret, Play.config.client_id
+
     register Mustache::Sinatra
     register Sinatra::Auth::Github
 
@@ -25,11 +31,19 @@ module Play
     }
 
     before do
-    #  authenticate!
+      session_not_required = request.path_info =~ /\/login/ ||
+                             request.path_info =~ /\/auth/
+
+      if session_not_required || session[:user]
+        true
+      else
+        session[:user] = authenticate!
+      end
     end
 
     get "/" do
       mustache :index
     end
+
   end
 end
