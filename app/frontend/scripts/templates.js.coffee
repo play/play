@@ -18,6 +18,8 @@ templates.song = """
     by {{{artist_tag}}}
     from {{album}}
     and here's some art and shit: {{{art_tag}}}
+    <a href="/star"   class="star"   data-song-id="{{id}}">star it</a>
+    <a href="/unstar" class="unstar" data-song-id="{{id}}">unstar it</a>
   </div>
 """
 

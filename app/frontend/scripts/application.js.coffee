@@ -48,6 +48,28 @@ $(document).ready () ->
     updateSongs("/user/#{user}","GET")
     false
 
+  $('.star').live 'click', () ->
+    id = $(@).data('song-id')
+    $.ajax
+      url: '/star',
+      type: 'POST',
+      data:
+        id: id
+      success: (response) ->
+        alert response
+    false
+
+  $('.unstar').live 'click', () ->
+    id = $(@).data('song-id')
+    $.ajax
+      url: '/star',
+      type: 'DELETE',
+      data:
+        id: id
+      success: (response) ->
+        alert response
+    false
+
 # Update the Songs listing with, you know, songs.
 #
 # Does that.
