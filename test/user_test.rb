@@ -1,17 +1,32 @@
-require 'helper'
+require File.expand_path("../helper", __FILE__)
 
 context "User" do
-  test "vote for" do
-    @user.vote_for(Play::Song.create)
-    assert_equal 1, @user.votes.count
+
+  setup do
+    $redis.flushdb
+    @user = User.create('holman','zach@example.com')
+  end
+
+  test "new" do
+    user = User.new('jason','jason@example.com')
+
+    assert_equal 'jason', user.login
+    assert_equal 'jason@example.com', user.email
+  end
+
+  test "can't find a user" do
+    assert User.find('a sane republican').nil?
+  end
+
+  test "totes can find a user" do
+    user = User.find(@user.login)
+
+    assert_equal @user.login, user.login
+    assert_equal @user.email, user.email
   end
 
   test "gravatar_id" do
-    assert_equal "54e4ab9ced3fd1f3f5b20ab2f8201b73", @user.gravatar_id
+    assert_equal "fb8d9bbe8a1150bc9fed0b0f99bbfc47", @user.gravatar_id
   end
 
-  test "votes count" do
-    @user.vote_for(Play::Song.create)
-    assert_equal 1, @user.votes_count
-  end
 end

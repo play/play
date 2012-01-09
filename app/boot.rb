@@ -20,6 +20,7 @@ require 'models/history'
 require 'models/player'
 require 'models/queue'
 require 'models/song'
+require 'models/user'
 
 require 'app'
 require 'views/layout'
