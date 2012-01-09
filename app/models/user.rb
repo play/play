@@ -2,18 +2,25 @@ module Play
 
   # The User does things with Play. These are usually employees who try to
   # request songs to be played, but usually request crap like Garth Brooks.
+  #
+  # redis:
+  #
+  #   play:users                - A Set of all user IDs.
+  #   play:users:#{login}:email - The String email for the given `login`.
+  #   play:users:#{login}:stars - A Set of all Song `permanent_id`s that have
+  #                               been starred by `login`.
   class User
 
-    # The redis key to stash User data.
+    # Public: The redis key to stash User data.
     KEY = 'play:users'
 
-    # The username of the user's GitHub account.
+    # Public: The username of the user's GitHub account.
     attr_accessor :login
 
-    # The public email address listed on GitHub.
+    # Public: The public email address listed on GitHub.
     attr_accessor :email
 
-    # Initializes a User.
+    # Public: Initializes a User.
     #
     # login - The String login of their GitHub account.
     # email - The String email address of their GitHub account.
@@ -24,7 +31,7 @@ module Play
       @email = email
     end
 
-    # Create a User.
+    # Public: Create a User.
     #
     # login - The String login of their GitHub account.
     # email - The String email address of their GitHub account.
@@ -34,7 +41,7 @@ module Play
       User.new(login,email).save
     end
 
-    # Finds a User.
+    # Public: Finds a User.
     #
     # login - The String login.
     #
@@ -46,7 +53,7 @@ module Play
       User.new(login,email)
     end
 
-    # Saves the User.
+    # Public: Saves the User.
     #
     # Returns itself.
     def save
@@ -55,7 +62,7 @@ module Play
       self
     end
 
-    # The MD5 hash of the user's email account. Used for showing their
+    # Public: The MD5 hash of the user's email account. Used for showing their
     # Gravatar.
     #
     # Returns the String MD5 hash.
@@ -63,8 +70,24 @@ module Play
       Digest::MD5.hexdigest(email) if email
     end
 
+    # Public: A User's saved songs.
+    #
+    # Returns an Array of Songs.
     def stars
-      []
+      stars = $redis.smembers("#{KEY}:#{login}:stars")
+      stars.map do |id|
+        Song.find(id)
+      end
+    end
+
+    # Public: Stars a song. Likes a song. Saves a song.
+    #
+    # song - The Song to star.
+    #
+    # Returns true when saved.
+    def star(song)
+      $redis.sadd("#{KEY}:#{login}:stars",song.id)
+      true
     end
 
   end

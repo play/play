@@ -29,4 +29,16 @@ context "User" do
     assert_equal "fb8d9bbe8a1150bc9fed0b0f99bbfc47", @user.gravatar_id
   end
 
+  test "has stars" do
+    song = Song.new(:id => 'xyz')
+
+    assert @user.stars.empty?
+
+    Song.stubs(:find).with('xyz').returns(song)
+    @user.star(song)
+
+    assert_equal 1,     @user.stars.size
+    assert_equal 'xyz', @user.stars.first.id
+  end
+
 end
