@@ -36,7 +36,7 @@ module Play
       session_not_required = request.path_info =~ /\/login/ ||
                              request.path_info =~ /\/auth/
 
-      if session_not_required || session[:user]
+      if session_not_required || @current_user
         true
       else
         login

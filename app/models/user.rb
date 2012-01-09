@@ -63,6 +63,10 @@ module Play
       Digest::MD5.hexdigest(email) if email
     end
 
+    def stars
+      []
+    end
+
   end
 
 end

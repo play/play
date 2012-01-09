@@ -43,6 +43,11 @@ $(document).ready () ->
     updateSongs("/search?q=#{keyword}", "GET")
     false
 
+  $('.user').click () ->
+    user = @text.substr(1)
+    updateSongs("/user/#{user}","GET")
+    false
+
 # Update the Songs listing with, you know, songs.
 #
 # Does that.
