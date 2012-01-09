@@ -31,6 +31,8 @@ module Play
     }
 
     before do
+      return if ENV['RACK_ENV'] == 'test'
+      
       session_not_required = request.path_info =~ /\/login/ ||
                              request.path_info =~ /\/auth/
 
