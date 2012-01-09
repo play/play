@@ -8,6 +8,7 @@ gem 'yajl-ruby'
 gem 'unicorn',       '~>4.1.0'
 
 # play-next
+gem 'redis'
 gem 'sinatra_auth_github', '~>0.2.0'
 gem 'sprockets'
 gem 'sass',          '~>3.1'

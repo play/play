@@ -39,6 +39,7 @@ GEM
     raindrops (0.8.0)
     rake (0.9.2.2)
     rb-appscript (0.6.1)
+    redis (2.2.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     sass (3.1.12)
@@ -88,6 +89,7 @@ DEPENDENCIES
   rack-test
   rake (~> 0.9.2.1)
   rb-appscript
+  redis
   sass (~> 3.1)
   sinatra
   sinatra_auth_github (~> 0.2.0)

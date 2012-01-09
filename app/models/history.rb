@@ -4,6 +4,8 @@ module Play
   # playcounts, oh my.
   class History
     
+    @@index_key = 'play:histories'
+
     # Public: Add a play history for a song.
     #
     # song - A Song.
@@ -25,6 +27,12 @@ module Play
     #
     # Returns an Array of Songs.
     def self.last(number=1)
+    end
+
+  private
+
+    def self.increment(song)
+      #$redis.incr("deez nuts")
     end
 
   end
