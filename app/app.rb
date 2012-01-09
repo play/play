@@ -32,19 +32,31 @@ module Play
 
     before do
       return if ENV['RACK_ENV'] == 'test'
-      
+
       session_not_required = request.path_info =~ /\/login/ ||
                              request.path_info =~ /\/auth/
 
       if session_not_required || session[:user]
         true
       else
-        session[:user] = authenticate!
+        login
       end
+    end
+
+    def login
+      authenticate!
+      user   = User.find(github_user.login)
+      user ||= User.create(github_user.login,github_user.email)
+      @current_user = session[:user] = user
     end
 
     get "/" do
       mustache :index
+    end
+
+    get "/logout" do
+      logout!
+      redirect 'https://github.com'
     end
 
   end
