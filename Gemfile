@@ -9,7 +9,7 @@ gem 'unicorn',       '~>4.1.0'
 
 # play-next
 gem 'redis'
-gem 'sinatra_auth_github', '~>0.2.0'
+gem 'sinatra_auth_github', '~>0.3.0'
 gem 'sprockets'
 gem 'sass',          '~>3.1'
 gem 'coffee-script'
