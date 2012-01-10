@@ -54,6 +54,10 @@ module Play
       @current_user = session[:user] = user
     end
 
+    def current_user
+      @current_user
+    end
+
     get "/" do
       mustache :index
     end

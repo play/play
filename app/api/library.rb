@@ -12,13 +12,13 @@ module Play
 
     post "/star" do
       song = Song.find(params[:id])
-      @current_user.star(song)
+      current_user.star(song)
     end
 
     delete "/star" do
       song = Song.find(params[:id])
-      @current_user.star(song)
+      current_user.star(song)
     end
-    
+
   end
 end
