@@ -10,7 +10,7 @@ module Play
       return unless string_cache
       users = []
       string_cache.split(',').each do |string|
-        users << User.find_by_office_string(string.downcase)
+        users << User.find(string.downcase)
       end
       users.compact
     end
