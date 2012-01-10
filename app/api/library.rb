@@ -2,19 +2,12 @@ module Play
   class App < Sinatra::Base
 
     get "/search" do
-      hash = {
-        :songs => Player.search(params[:q]).map { |song| song.to_json }
-      }
-      Yajl.dump hash
+      songs_as_json(Player.search(params[:q]))
     end
 
     get "/user/:splat" do
       user = User.find(params[:splat])
-
-      hash = {
-        :songs => user.stars.map { |song| song.to_json }
-      }
-      Yajl.dump hash
+      songs_as_json(user.stars)
     end
 
     post "/star" do

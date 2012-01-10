@@ -1,10 +1,14 @@
 require 'app/api/control'
+require 'app/api/helpers'
 require 'app/api/library'
 require 'app/api/main'
 require 'app/api/queue'
 
 module Play
   class App < Sinatra::Base
+
+    # Include our Sinatra Helpers.
+    include Play::Helpers
 
     # Set up sessions and ensure we have a constant session_secret so that in
     # development mode `shotgun` won't regenerate a session secret and
