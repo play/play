@@ -6,8 +6,10 @@ context "Album" do
   end
 
   test "initializes" do
-    album = Album.new('xyz')
-    assert_equal 'xyz', album.id
+    album = Album.new('Cross','Justice')
+
+    assert_equal 'Cross',   album.name
+    assert_equal 'Justice', album.artist
   end
 
 end
