@@ -6,7 +6,7 @@ module Play
     end
 
     get "/user/:splat" do
-      user = User.find(params[:splat])
+      user = User.find(params[:splat].first)
       songs_as_json(user.stars)
     end
 

@@ -1,8 +1,8 @@
-require 'app/api/control'
-require 'app/api/helpers'
-require 'app/api/library'
-require 'app/api/main'
-require 'app/api/queue'
+require 'api/control'
+require 'api/helpers'
+require 'api/library'
+require 'api/main'
+require 'api/queue'
 
 module Play
   class App < Sinatra::Base

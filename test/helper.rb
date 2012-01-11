@@ -9,7 +9,7 @@ end
 
 require 'rack/test'
 require 'mocha'
-require 'test/spec/mini'
+require 'spec/mini'
 
 ENV['RACK_ENV'] = 'test'
 
