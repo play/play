@@ -16,7 +16,11 @@ private
   #
   # Returns a memoized Hash.
   def self.yaml
-    @yaml ||= YAML.load_file('config/play.yml')
+    if File.exist?('config/play.yml')
+      @yaml ||= YAML.load_file('config/play.yml')
+    else
+      {}
+    end
   end
 
 end
