@@ -57,6 +57,9 @@ module Play
     # Returns the imported (or found) Song.
     def self.import_song(path)
       artist_name,title,album_name = fs_get_artist_and_title_and_album(path)
+      if artist_name.blank? || title.blank? || album_name.blank?
+        return
+      end
       artist = Artist.find_or_create_by_name(artist_name)
       song = Song.where(:path => path).first
 
@@ -68,7 +71,7 @@ module Play
                     :album => album,
                     :title => title)
       end
-    rescue AudioInfoError
+    rescue Exception, AudioInfoError
     end
 
     # Splits a music file up into three constituent parts: artist, title,
