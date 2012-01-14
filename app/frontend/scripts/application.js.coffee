@@ -107,6 +107,14 @@ play.renderNowPlaying = (json) ->
   rendered = Mustache.to_html(templates.now_playing,song,templates)
   $('#now-playing').html(rendered)
 
+# Renders the star partial. It handles rendering whether something display "star
+# this song" or "unstar this song".
+#
+# id      - The ID of the song.
+# starred - The Boolean value of whether this should render as "star" or
+#           "unstar".
+play.renderStar = (id, starred) ->
+
 # Takes a JSON response and parses it for our common Song attributes.
 #
 # json - The common JSON endpoint we return.
