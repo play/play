@@ -122,5 +122,5 @@ songFromJson = (json) ->
 # Returns a List of Songs.
 listFromJson = (json) ->
   songs = json.songs.map (song) ->
-    songFromJson(JSON.parse(song))
+    songFromJson(song)
   new List(songs)

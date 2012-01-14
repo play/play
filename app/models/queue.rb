@@ -60,7 +60,7 @@ module Play
     # Returns an Array of Songs.
     def self.to_json
       hash = {
-        :songs => songs.map { |song| song.to_json }
+        :songs => songs
       }
       Yajl.dump hash
     end
