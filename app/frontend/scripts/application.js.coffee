@@ -51,7 +51,7 @@ $(document).ready () ->
 
   # Clicking on a link with a class of `user` takes you to the user page.
   #
-  # data-user - The Data attribute set on the link whose value is the username.
+  # Assumes the anchor text is `@login`, which then gets its `@` stripped.
   $('.user').click () ->
     user = @text.substr(1)
     updateSongs("/user/#{user}","GET")
