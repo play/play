@@ -43,6 +43,9 @@ module Play
     # Returns an instance of a Song.
     def self.find(id)
       record = Player.library.tracks[Appscript.its.persistent_ID.eq(id)].get[0]
+
+      return nil if record.nil?
+
       new :id     => record.persistent_ID.get,
           :name   => record.name.get,
           :artist => record.artist.get,
