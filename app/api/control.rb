@@ -1,4 +1,6 @@
 module Play
+  # API endpoints surrounding *control* over your Player. Think that top part of
+  # the iTunes interface.
   class App < Sinatra::Base
 
     get "/now_playing" do

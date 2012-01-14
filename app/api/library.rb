@@ -1,4 +1,5 @@
 module Play
+  # API endpoints to query and modify your library.
   class App < Sinatra::Base
 
     get "/search" do

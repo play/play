@@ -1,4 +1,5 @@
 module Play
+  # API endpoints dealing with managing your Queue.
   class App < Sinatra::Base
 
     get "/queue" do

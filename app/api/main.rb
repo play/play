@@ -1,4 +1,5 @@
 module Play
+  # API endpoints to support broader, systems-level functions.
   class App < Sinatra::Base
 
     get "/images/art/:id.png" do
