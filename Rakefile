@@ -1,11 +1,10 @@
 require 'rubygems'
 require 'rake'
+require 'yaml'
 
-#############################################################################
-#
-# Standard tasks
-#
-#############################################################################
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/app')
+
+require 'boot'
 
 task :default => :test
 
@@ -15,16 +14,6 @@ Rake::TestTask.new(:test) do |test|
   test.pattern = 'test/**/*_test.rb'
   test.verbose = true
 end
-
-#############################################################################
-#
-# Custom tasks (add your own tasks here)
-#
-#############################################################################
-
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/lib')
-
-require 'yaml'
 
 task :environment do
   require 'lib/play'
@@ -39,4 +28,13 @@ end
 desc "Start the server"
 task :start do
   sh "thin start -p5050"
+end
+
+namespace :redis do
+
+  desc "Wipe all data in redis"
+  task :reset do
+    $redis.flushdb
+  end
+
 end
