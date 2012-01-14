@@ -22,32 +22,45 @@ $.ajax
     $('#songs').html(stache)
 
 $(document).ready () ->
+
+  # Plays music.
   $('#play').click () ->
     updateSongs("/play", "PUT")
     false
   
+  # Pauses music.
   $('#pause').click () ->
     updateSongs("/pause", "PUT")
     false
 
+  # Goes back to the previous track.
   $('#previous').click () ->
     updateSongs("/previous", "PUT")
     false
 
+  # Goes to the next track.
   $('#next').click () ->
     updateSongs("/next", "PUT")
     false
 
+  # Searches things.
   $('#search').submit () ->
     keyword = $('#search').find('input')[0].value
     updateSongs("/search?q=#{keyword}", "GET")
     false
 
+  # Clicking on a link with a class of `user` takes you to the user page.
+  #
+  # data-user - The Data attribute set on the link whose value is the username.
   $('.user').click () ->
     user = @text.substr(1)
     updateSongs("/user/#{user}","GET")
     false
 
+  # Stars this song.
+  #
+  # data-song-id - The Data attribute set on the link whose value is the 
+  #                persistent ID of the song.
   $('.star').live 'click', () ->
     id = $(@).data('song-id')
     $.ajax
@@ -59,6 +72,10 @@ $(document).ready () ->
         alert response
     false
 
+  # Unstars this song.
+  #
+  # data-song-id - The Data attribute set on the link whose value is the 
+  #                persistent ID of the song.
   $('.unstar').live 'click', () ->
     id = $(@).data('song-id')
     $.ajax
