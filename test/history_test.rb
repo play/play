@@ -9,12 +9,29 @@ context "History" do
               :name   => 'Stress',
               :artist => 'Justice',
               :album  => 'Cross'
+    @user = User.create('holman', 'zach@github.com')
   end
 
-  test "adds" do
-    #assert_equal 0, History.count
-    #History.add(@song, 1)
-    #assert_equal 1, History.count
+  test "adds affect counts" do
+    assert_equal 0, History.count
+    assert_equal 0, History.count_by_song(@song)
+
+    History.add(@song, @user)
+
+    assert_equal 1, History.count
+    assert_equal 1, History.count_by_song(@song)
+  end
+
+  test "returns a given amount" do
+    History.add(@song, @user)
+    History.add(@song, @user)
+    History.add(@song, @user)
+
+    last = History.last(3)
+    assert 3, last.size
+
+    last = History.last
+    assert 1, last.size
   end
 
 end

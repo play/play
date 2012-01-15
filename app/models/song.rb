@@ -81,6 +81,13 @@ module Play
       record.artworks.get.empty? ? nil : record.artworks[1].raw_data.get.data
     end
 
+    # The playcount for this song.
+    #
+    # Returns an Integer.
+    def playcount
+      History.count_by_song(self)
+    end
+
     # The JSON representation of a Song, suitable for API responses.
     #
     # Returns a String-encoded JSON fragment.
