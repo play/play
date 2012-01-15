@@ -6,8 +6,8 @@ module Play
       songs_as_json(Player.search(params[:q]),current_user)
     end
 
-    get "/user/:splat" do
-      user = User.find(params[:splat].first)
+    get "/user/:login" do
+      user = User.find(params[:login])
       songs_as_json(user.stars,current_user)
     end
 
