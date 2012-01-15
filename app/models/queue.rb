@@ -36,13 +36,24 @@ module Play
       Player.app.playlists[name].get
     end
 
-    # Adds a song to the Queue.
+    # Public: Adds a song to the Queue.
     #
     # song - A Song instance.
     #
     # Returns a Boolean of whether the song was added.
     def self.add_song(song)
       Player.app.add(song.record.location.get, :to => playlist.get)
+    end
+
+    # Public: Removes a song from the Queue.
+    #
+    # song - A Song instance.
+    #
+    # Returns a Boolean of whether the song was removed maybe.
+    def self.remove_song(song)
+      Play::Queue.playlist.tracks[
+        Appscript.its.persistent_ID.eq(song.id)
+      ].first.delete
     end
 
     # The songs currently in the Queue.

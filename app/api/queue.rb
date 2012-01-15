@@ -6,13 +6,22 @@ module Play
       songs_as_json(Queue.songs,current_user)
     end
 
-    post "/queue/add" do
+    post "/queue" do
       if params[:id]
         song = Song.find(params[:id])
       else
         song = Song.new(:name => params[:name], :artist => params[:artist])
       end
       Queue.add_song(song)
+    end
+
+    delete "/queue" do
+      if params[:id]
+        song = Song.find(params[:id])
+      else
+        song = Song.new(:name => params[:name], :artist => params[:artist])
+      end
+      Queue.remove_song(song)
     end
     
   end

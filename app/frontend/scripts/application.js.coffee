@@ -96,6 +96,38 @@ $(document).ready () ->
         element.replaceWith(renderStar(id, false))
     false
 
+  # Queues up this song.
+  #
+  # data-song-id - The Data attribute set on the link whose value is the 
+  #                persistent ID of the song.
+  $('.add-to-queue').live 'click', () ->
+    element = $(@)
+    id = element.data('song-id')
+    $.ajax
+      url: '/queue',
+      type: 'POST',
+      data:
+        id: id
+      success: (response) ->
+        alert 'added!'
+    false
+
+  # Removes this song from the queue.
+  #
+  # data-song-id - The Data attribute set on the link whose value is the 
+  #                persistent ID of the song.
+  $('.remove-from-queue').live 'click', () ->
+    element = $(@)
+    id = element.data('song-id')
+    $.ajax
+      url: '/queue',
+      type: 'DELETE',
+      data:
+        id: id
+      success: (response) ->
+        alert 'removed!'
+    false
+
 # Update the Songs listing with, you know, songs.
 #
 # Does that.

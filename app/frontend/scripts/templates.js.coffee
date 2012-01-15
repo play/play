@@ -18,7 +18,6 @@ templates.song = """
     by {{{artist_tag}}}
     from {{album}}
     {{{art_tag}}}
-
     {{>star}}
     {{>queuing}}
     {{>downloading}}
@@ -48,11 +47,11 @@ templates.star = """
 
 templates.queuing = """
   {{#queued}}
-    -
+    <a href="/queue/remove" class="remove-from-queue" data-song-id="{{id}}">-</a>
   {{/queued}}
 
   {{^queued}}
-    +
+    <a href="/queue/add" class="add-to-queue" data-song-id="{{id}}">+</a>
   {{/queued}}
 """
 
