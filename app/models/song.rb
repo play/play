@@ -42,6 +42,18 @@ module Play
       end
     end
 
+    # Optimization. This loads a new Song instance from an iTunes record. This
+    # means we can bypass the expensive lookup and initialization inherant in
+    # the #find method.
+    #
+    # Returns a new Song instance.
+    def self.initialize_from_record(record)
+      new :id     => record.persistent_ID.get,
+          :name   => record.name.get,
+          :artist => record.artist.get,
+          :album  => record.album.get
+    end
+
     # Finds a song in the database.
     #
     # id - The persistent String ID in the player's database.
@@ -52,10 +64,7 @@ module Play
 
       return nil if record.nil?
 
-      new :id     => record.persistent_ID.get,
-          :name   => record.name.get,
-          :artist => record.artist.get,
-          :album  => record.album.get
+      initialize_from_record(record)
     end
 
     # The Appscript record.
