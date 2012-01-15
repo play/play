@@ -22,6 +22,11 @@ context "History" do
     assert_equal 1, History.count_by_song(@song)
   end
 
+  test "user count returns zero, not nil" do
+    song = Song.new({:id => 'nope'})
+    assert_equal 0, History.count_by_song(song)
+  end
+
   test "returns a given amount" do
     History.add(@song, @user)
     History.add(@song, @user)
