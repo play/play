@@ -11,6 +11,7 @@ context "api/library" do
     @user = User.create 'holman', 'zach@example.com'
 
     app.any_instance.stubs(:current_user).returns(@user)
+    Play::Queue.stubs(:queued?).returns(false)
   end
 
   test "/search" do

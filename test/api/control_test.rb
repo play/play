@@ -8,6 +8,7 @@ context "api/control" do
               :name    => 'Stress',
               :album   => 'Cross',
               :song_id => 'xyz'
+    Play::Queue.stubs(:queued?).returns(false)
   end
 
   test "/now_playing" do
