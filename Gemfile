@@ -21,3 +21,7 @@ group :test do
   gem 'rack-test'
   gem 'mocha'
 end
+
+group :development do
+  gem 'shotgun'
+end
