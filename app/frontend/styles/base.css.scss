@@ -1,7 +1,7 @@
 @import url(reset.css);
 
 body {
-  background: #ccc url('/images/tactile_noise.png') repeat;
+  background: url('/images/tactile_noise.png') repeat;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
@@ -64,16 +64,36 @@ form.search {
   letter-spacing: 1px;
 }
 
+#now-playing-wrapper {
+  width: 960px;
+  height: 220px;
+}
+
 
 #now-playing {
+  float: left;
+  height: 220px;
+  margin-top: 40px;
+  background: #fff;
+  ul {
+    float: left;
+    width: 400px;
+    height: 220px;
+
+  }
+
   img {
-    width: 280px;
+    float: left;
+    width: 200px;
   }
 }
 
 #now-playing-stats {
-  margin-top: 20px;
-  clear: both;
+   float: left;
+   width: 320px;
+   height: 220px;
+   margin-left: 20px;
+   background: #fff;
 }
 
 
@@ -81,11 +101,11 @@ form.search {
 
 #controls {
   float: left;
+  width: 200px;
   height: 40px;
-  margin-bottom: 40px;
-  background: #fff;
-    #play {
-      background: url('/public/images/')
+    a {
+      display: inline-block;
+
     }
 }
 
@@ -94,7 +114,8 @@ form.search {
 
 
 #queue-results {
-  margin-left: 40px;
+  width: 940px;
+  clear: both;
   background: #fff;
     img {
       width: 40px;
@@ -115,8 +136,8 @@ nav[role=queue-history] {
 }
 
 .song {
-  width: 600px;
-  height: 50px;
+  width: 940px;
+  height: 60px;
   font-family: 'Open Sans Condensed';
   font-size: 14px;
   clear: both;
