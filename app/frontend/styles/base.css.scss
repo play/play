@@ -1,18 +1,25 @@
 @import url(reset.css);
 
-
-
 body {
   background: #ccc url('/images/tactile_noise.png') repeat;
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
+.wrapper {
+  width: 960px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.column {
+  float: left;
+}
 
 a {
-  color: blue;
+  color: #ea36f5;
+  text-decoration: none;
+
 }
-
-
 
 
 #top-bar {
@@ -27,23 +34,40 @@ a {
 
 #logo {
   float: left;
+  width: 100px;
+  color: #fff;
+
 }
 
 form.search {
   display: inline;
   float: left;
-  margin-left: 40px;
+  margin-left: 240px;
 
 }
 
 .user-logged-in {
- 
   float: right; 
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 1px;
 }
 
 
 
 
+
+
+
+#now-playing {
+
+}
+
+#now-playing-stats {
+  margin-top: 20px;
+  clear: both;
+}
 
 
 
@@ -51,34 +75,40 @@ form.search {
 #controls {
   float: left;
   width: 300px;
-
+  height: 40px;
+  margin-bottom: 40px;
   background: #fff;
-  margin-right: 40px;
-
+    #play {
+      background: url('/public/images/')
+    }
 }
 
 
-#queue {
-  width: 600px;
 
+
+
+
+
+
+
+#queue {
+  width: 620px;
+  margin-left: 40px;
   background: #fff;
 }
 
 
 
 nav[role=queue-history] {
+  padding: 10px;
   a {
     margin-right: 20px;
+    font-family: 'Cabin Condensed';
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 }
 
 
-.wrapper {
-  width: 940px;
-  position: relative;
-  margin: 0 auto;
-}
-
-.column {
-  float: left;
-}
