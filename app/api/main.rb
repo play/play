@@ -6,6 +6,8 @@ module Play
       content_type 'image/png'
 
       if art = Song.find(params[:id]).album_art_data
+        response['Cache-Control'] = 'public, max-age=2500000'
+        etag params[:id]
         art
       else
         dir = File.dirname(File.expand_path(__FILE__))
