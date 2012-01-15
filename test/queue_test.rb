@@ -2,8 +2,16 @@ require File.expand_path("../helper", __FILE__)
 
 context "Queue" do
 
-  test "playlist name" do
-    assert_equal 'Play', Play.name
+  setup do
+    @song = Song.new \
+              :id     => 'xyz',
+              :artist => 'Justice',
+              :name   => 'Stress'
+  end
+
+  test "queued?" do
+    Play::Queue.stubs(:songs).returns([@song])
+    assert Play::Queue.queued?(@song)
   end
 
 end

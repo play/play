@@ -54,6 +54,13 @@ module Play
       end
     end
 
+    # Is this song queued up to play?
+    #
+    # Returns a Boolean.
+    def self.queued?(song)
+      songs.include?(song)
+    end
+
     # Returns the context of this Queue as JSON. This contains all of the songs
     # in the Queue.
     #

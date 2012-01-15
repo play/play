@@ -3,10 +3,12 @@ class window.Song
 
   # Creates a new Song.
   #
-  # id     - The String permanent_id of the iTunes track.
-  # name   - The String name of the Song.
-  # artist - The String name of the Artist.
-  # album  - The String name of the Album.
+  # id      - The String permanent_id of the iTunes track.
+  # name    - The String name of the Song.
+  # artist  - The String name of the Artist.
+  # album   - The String name of the Album.
+  # starred - Did the user star this? A Boolean.
+  # queued  - Is this queued up? A Boolean.
   #
   # Returns a glorious Song.
   constructor: (json) ->
@@ -15,6 +17,7 @@ class window.Song
     @artist  = json['artist']
     @album   = json['album']
     @starred = json['starred']
+    @queued  = json['queued']
 
   # The album art for this song.
   #
@@ -26,7 +29,7 @@ class window.Song
   #
   # Uses hawt data-artist fields to populate the artist.
   artist_tag: () ->
-    "<a href=\"#\" data-artist=\"#{@artist}\" class=\"artist\" >#{@artist}</a>"
+    "<a href=\"#\" data-artist=\"#{@artist}\" class=\"artist\">#{@artist}</a>"
 
 
 # A listing of Songs.

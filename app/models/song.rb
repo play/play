@@ -88,6 +88,20 @@ module Play
       History.count_by_song(self)
     end
 
+    # The ID tells the tale.
+    #
+    # Returns a Boolean, duh.
+    def ==(song)
+      self.id == song.id
+    end
+
+    # Is this song queued up to play?
+    #
+    # Returns a Boolean.
+    def queued?
+      Play::Queue.queued?(self)
+    end
+
     # The JSON representation of a Song, suitable for API responses.
     #
     # Returns a String-encoded JSON fragment.
@@ -97,7 +111,8 @@ module Play
         :name    => name,
         :artist  => artist,
         :album   => album,
-        :starred => starred || false
+        :starred => starred || false,
+        :queued  => queued?
       }
       Yajl.dump hash
     end

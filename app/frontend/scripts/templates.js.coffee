@@ -47,7 +47,13 @@ templates.star = """
 """
 
 templates.queuing = """
-  [add to queue or remove from queue]
+  {{#queued}}
+    REMOVE FROM QUEUE
+  {{/queued}}
+
+  {{^queued}}
+    ADD TO QUEUE
+  {{/queued}}
 """
 
 templates.downloading = """
