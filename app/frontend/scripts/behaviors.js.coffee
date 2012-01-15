@@ -5,6 +5,7 @@ play = exports ? this
 
 $(document).ready () ->
 
+  # Refreshes the Queue.
   $('.queue').click () ->
     play.renderQueue()
     false
