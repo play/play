@@ -7,4 +7,8 @@ context "Queue" do
               :artist => 'Justice',
               :name   => 'Stress'
   end
+
+  test "nothing" do
+    assert true
+  end
 end
