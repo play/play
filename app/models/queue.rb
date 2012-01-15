@@ -69,7 +69,9 @@ module Play
     #
     # Returns a Boolean.
     def self.queued?(song)
-      songs.include?(song)
+      Play::Queue.playlist.tracks[
+        Appscript.its.persistent_ID.eq(song.id)
+      ].get.size != 0
     end
 
     # Returns the context of this Queue as JSON. This contains all of the songs
