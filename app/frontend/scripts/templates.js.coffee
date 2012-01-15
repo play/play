@@ -18,6 +18,7 @@ templates.song = """
     by {{{artist_tag}}}
     from {{album}}
     {{{art_tag}}}
+
     {{>star}}
     {{>queuing}}
     {{>downloading}}
