@@ -62,14 +62,15 @@ $(document).ready () ->
   # data-song-id - The Data attribute set on the link whose value is the 
   #                persistent ID of the song.
   $('.star').live 'click', () ->
-    id = $(@).data('song-id')
+    element = $(@)
+    id = element.data('song-id')
     $.ajax
       url: '/star',
       type: 'POST',
       data:
         id: id
       success: (response) ->
-        alert response
+        element.replaceWith(renderStar(id, true))
     false
 
   # Unstars this song.
@@ -77,14 +78,15 @@ $(document).ready () ->
   # data-song-id - The Data attribute set on the link whose value is the 
   #                persistent ID of the song.
   $('.unstar').live 'click', () ->
-    id = $(@).data('song-id')
+    element = $(@)
+    id = element.data('song-id')
     $.ajax
       url: '/star',
       type: 'DELETE',
       data:
         id: id
       success: (response) ->
-        alert response
+        element.replaceWith(renderStar(id, false))
     false
 
 # Update the Songs listing with, you know, songs.
@@ -114,6 +116,11 @@ play.renderNowPlaying = (json) ->
 # starred - The Boolean value of whether this should render as "star" or
 #           "unstar".
 play.renderStar = (id, starred) ->
+  song = new Song({
+    id: id
+    starred: starred
+  })
+  Mustache.to_html(templates.star,song,templates)
 
 # Takes a JSON response and parses it for our common Song attributes.
 #
