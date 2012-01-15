@@ -10,6 +10,7 @@ require 'sinatra/base'
 require 'mustache/sinatra'
 require 'sinatra_auth_github'
 require 'yajl'
+require 'sass'
 require 'appscript' if RUBY_PLATFORM.downcase.include?("darwin")
 
 require 'play'
