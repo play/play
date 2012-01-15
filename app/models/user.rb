@@ -11,7 +11,7 @@ module Play
   #                               been starred by `login`.
   class User
 
-    # Public: The redis key to stash User data.
+    # The redis key to stash User data.
     KEY = 'play:users'
 
     # Public: The username of the user's GitHub account.

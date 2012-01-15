@@ -1,10 +1,18 @@
 module Play
-
   # Keeps track of the historical record of Play. Think plays and user votes and
   # playcounts, oh my.
+  #
+  # redis:
+  #
+  #   play:histories:ids            - A List of all song IDs played.
+  #   play:histories:songs          - A Sorted Set of all songs played. Values:
+  #                                     - ID
+  #                                     - Date
+  #   play:histories:#{login}:ids   - A List of all song IDs played by the user.
+  #   play:histories:#{login}:songs - A Sorted Set of all songs played by user.
   class History
-    
-    @@index_key = 'play:histories'
+    # The redis key to stash History data.
+    KEY = 'play:histories'
 
     # Public: Add a play history for a song.
     #
@@ -34,7 +42,5 @@ module Play
     def self.increment(song)
       #$redis.incr("deez nuts")
     end
-
   end
-
 end
