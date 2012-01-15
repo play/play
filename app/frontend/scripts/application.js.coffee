@@ -7,12 +7,14 @@
 
 play = exports ? this
 
+# Automatically pull in Now Playing.
 $.ajax
   url: '/now_playing',
   dataType: 'json',
   success: (response) ->
     renderNowPlaying(response)
 
+# Automatically pull in your Queue.
 $.ajax
   url: '/queue',
   dataType: 'json',
