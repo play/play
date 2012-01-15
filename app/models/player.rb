@@ -96,6 +96,8 @@ module Play
     # Returns a Song.
     def self.now_playing
       Song.new(app.current_track.persistent_ID.get)
+    rescue Appscript::CommandError
+      nil
     end
 
     # Search all songs for a given song title.

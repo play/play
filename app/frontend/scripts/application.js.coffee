@@ -12,7 +12,8 @@ $.ajax
   url: '/now_playing',
   dataType: 'json',
   success: (response) ->
-    renderNowPlaying(response)
+    if response
+      renderNowPlaying(response)
 
 # Automatically pull in your Queue.
 $.ajax
