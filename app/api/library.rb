@@ -1,7 +1,6 @@
 module Play
   # API endpoints to query and modify your library.
   class App < Sinatra::Base
-
     get "/search" do
       songs_as_json(Player.search(params[:q]),current_user)
     end
@@ -21,5 +20,9 @@ module Play
       current_user.unstar(song)
     end
 
+    get "/artist/:name" do
+      artist = Artist.new(params[:name])
+      songs_as_json(artist.songs,current_user)
+    end
   end
 end
