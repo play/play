@@ -15,6 +15,14 @@ body {
   float: left;
 }
 
+.left {
+  width: 300px;
+}
+
+.right {
+  width: 660px;
+}
+
 a {
   color: #ea36f5;
   text-decoration: none;
@@ -30,6 +38,8 @@ a {
   background: rgba(0,0,0,.3);
   border-bottom: 1px solid #222222;
   
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5);
+
 }
 
 #logo {
@@ -55,13 +65,10 @@ form.search {
 }
 
 
-
-
-
-
-
 #now-playing {
-
+  img {
+    width: 280px;
+  }
 }
 
 #now-playing-stats {
@@ -74,7 +81,6 @@ form.search {
 
 #controls {
   float: left;
-  width: 300px;
   height: 40px;
   margin-bottom: 40px;
   background: #fff;
@@ -87,14 +93,12 @@ form.search {
 
 
 
-
-
-
-
-#queue {
-  width: 620px;
+#queue-results {
   margin-left: 40px;
   background: #fff;
+    img {
+      width: 40px;
+    }
 }
 
 
@@ -103,12 +107,18 @@ nav[role=queue-history] {
   padding: 10px;
   a {
     margin-right: 20px;
-    font-family: 'Cabin Condensed';
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
 }
 
+.song {
+  width: 600px;
+  height: 50px;
+  font-family: 'Open Sans Condensed';
+  font-size: 14px;
+  clear: both;
+}
 

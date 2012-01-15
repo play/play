@@ -17,8 +17,7 @@ templates.song = """
     {{name}}
     by {{{artist_tag}}}
     from {{album}}
-    and here's some art and shit: {{{art_tag}}}
-
+    {{{art_tag}}}
     {{>star}}
     {{>queuing}}
     {{>downloading}}
@@ -48,11 +47,11 @@ templates.star = """
 
 templates.queuing = """
   {{#queued}}
-    REMOVE FROM QUEUE
+    -
   {{/queued}}
 
   {{^queued}}
-    ADD TO QUEUE
+    +
   {{/queued}}
 """
 
