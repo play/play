@@ -29,5 +29,10 @@ module Play
       album = Album.new(params[:album],params[:artist])
       songs_as_json(album.songs,current_user)
     end
+
+    get "/song/:id/download" do
+      song = Song.find(params[:id])
+      send_file song.path, :disposition => 'attachment'
+    end
   end
 end

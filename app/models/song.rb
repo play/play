@@ -102,6 +102,13 @@ module Play
       Play::Queue.queued?(self)
     end
 
+    # The path on disk to this song.
+    #
+    # Returns a String.
+    def path
+      record.location.get.to_s
+    end
+
     # The JSON representation of a Song, suitable for API responses.
     #
     # Returns a String-encoded JSON fragment.
