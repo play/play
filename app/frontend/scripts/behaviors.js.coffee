@@ -1,7 +1,13 @@
 # Behaviors are reactionary; this file details how to react when shit is clicked
 # or submitted or prodded or poked or tebow'd.
 
+play = exports ? this
+
 $(document).ready () ->
+
+  $('.queue').click () ->
+    play.renderQueue()
+    false
 
   # Plays music.
   $('#play').click () ->
