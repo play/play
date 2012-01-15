@@ -1,4 +1,4 @@
-
+@import url(reset.css);
 
 
 body {
@@ -16,11 +16,26 @@ a {
 
 #top-bar {
   width: 100%;
-
+  height: 40px;
+  
   background: #fff;
   margin-bottom: 40px;
+  
 }
 
+#logo {
+  float: left;
+}
+
+.search {
+  display: inline;
+  float: left;
+}
+
+.user-logged-in {
+ 
+  float: right; 
+}
 
 
 
@@ -70,4 +85,5 @@ nav[role=queue-history] {
   width: 940px;
   position: relative;
   margin: 0 auto;
+  border: 1px solid red;
 }
