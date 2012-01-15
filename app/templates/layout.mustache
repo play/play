@@ -21,9 +21,9 @@
 
   <section id="top-bar">
     <header class="row">
-
+      
       <a id="logo">[Play]</a>
-
+      
       <section id="controls">
         <a href="/prev" id="previous">Previous</a>
 
@@ -37,7 +37,7 @@
 
         <a href="/next" id="next">Next</a>
       </section><!-- /#controls -->
-
+      
       <a class="user-logged-in" href="/{{login}}">@{{login}}</a>
     
     </header>
@@ -46,41 +46,26 @@
   
   <section id="now-playing" class="row">
 
-<<<<<<< HEAD
-     <section id="queue-results">
-      <header>
-        <nav role="queue-history">
-           <a href="/" class="queue">Queue</a>
-           <a class="{{history_page}}" href="/history">History</a>
-        </nav>
-      <header>
-
-      <section id="songs">
-          {{{yield}}}
-      </section>
-    </section>
-=======
   </section>
->>>>>>> new layout basic positioning
 
-
-  <section id="queue-results" class="row">
-
+  
+  <section id="queue-results" class="row"> 
+    
     <header>
       <nav role="queue-history">
         <a class="{{queue_page}}" href="/">Queue</a>
         <a class="{{history_page}}" href="/history">History</a>
       </nav>
-
+      
       <form class="search" method="get" action="/search" id="search">
         <input type="search" name="q" value="find music" />
-      </form>
+      </form>  
     </header>
 
     <section id="songs">
       {{{yield}}}
     </section>
-
+    
   </section>
 
 
