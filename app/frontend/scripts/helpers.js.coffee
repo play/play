@@ -22,6 +22,29 @@ play.renderNowPlaying = (json) ->
   rendered = Mustache.to_html(templates.now_playing,song,templates)
   $('#now-playing').html(rendered)
 
+# Makes an ajax call and then sends the response over to render.
+#
+# This space intentionally filled with nonsense.
+play.requestAndRenderNowPlaying = () ->
+  $.ajax
+    url: '/now_playing',
+    dataType: 'json',
+    success: (response) ->
+      if response
+        renderNowPlaying(response)
+
+# Pushes out an ajax call and renders the damn queue.
+#
+# Returns like a boss.
+play.renderQueue = () ->
+  $.ajax
+    url: '/queue',
+    dataType: 'json',
+    success: (response) ->
+      song   = listFromJson(response)
+      stache = Mustache.to_html(templates.list,song,templates)
+      $('#songs').html(stache)
+
 # Renders the star partial. It handles rendering whether something display "star
 # this song" or "unstar this song".
 #

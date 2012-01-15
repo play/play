@@ -9,21 +9,10 @@
 play = exports ? this
 
 # Automatically pull in Now Playing.
-$.ajax
-  url: '/now_playing',
-  dataType: 'json',
-  success: (response) ->
-    if response
-      renderNowPlaying(response)
+play.requestAndRenderNowPlaying()
 
 # Automatically pull in your Queue.
-$.ajax
-  url: '/queue',
-  dataType: 'json',
-  success: (response) ->
-    song   = listFromJson(response)
-    stache = Mustache.to_html(templates.list,song,templates)
-    $('#songs').html(stache)
+play.renderQueue()
 
 $(document).ready () ->
 
