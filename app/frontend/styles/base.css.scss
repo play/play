@@ -1,6 +1,7 @@
 @import url(reset.css);
 
 
+
 body {
   background: #ccc;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
@@ -27,25 +28,17 @@ a {
   float: left;
 }
 
-.search {
+form.search {
   display: inline;
   float: left;
+  margin-left: 40px;
+
 }
 
 .user-logged-in {
  
   float: right; 
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -85,5 +78,4 @@ nav[role=queue-history] {
   width: 940px;
   position: relative;
   margin: 0 auto;
-  border: 1px solid red;
 }
