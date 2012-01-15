@@ -10,6 +10,8 @@
   <script type="text/javascript" src="/js/jquery.js"></script>
   <script type="text/javascript" src="/js/application.js"></script>
 
+  <link rel="stylesheet" href="stylesheets/base.css.scss">
+
   <title>Play: {{title}}</title>
 
 </head>
@@ -35,8 +37,8 @@
 
   <div id="main" class="wrapper">
 
-        <section id="controller">
-
+      <div class="column">
+        <section id="controls">
           <a href="/prev" id="previous">Previous</a>
 
           {{#playing?}}
@@ -48,6 +50,7 @@
           {{/playing?}}
 
           <a href="/next" id="next">Next</a>
+          
 	        
         <section id="now-playing">
 
@@ -57,11 +60,13 @@
           <p>Here's where rad stats, likes, and shit like that go</p>
         </section>
       </section>
+  </div>
 
-
-
-
-    <section id="queue">
+  
+  
+  
+  <div class="column">
+     <section id="queue">
       <header>
         <nav role="queue-history">
            <a class="{{queue_page}}" href="/">Queue</a>
@@ -73,7 +78,7 @@
           {{{yield}}}
       </section>
     </section>
-
+  </div>
 
 
 
