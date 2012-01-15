@@ -5,10 +5,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   
+  <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/base.css">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,700,600' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-
 
   <script type="text/javascript" src="/js/jquery.js"></script>
   <script type="text/javascript" src="/js/application.js"></script>
@@ -19,56 +19,34 @@
 
 <body>
 
-  <div id="top-bar">
-         
-    <header class="wrapper">
+  <section id="top-bar">
+    <header class="row">
+
       <a id="logo">[Play]</a>
 
-        <section id="controls">
-          <a href="/prev" id="previous">Previous</a>
+      <section id="controls">
+        <a href="/prev" id="previous">Previous</a>
 
-          {{#playing?}}
-          <a href="/pause" id="pause">Pause</a>
-          {{/playing?}}
+        {{#playing?}}
+        <a href="/pause" id="pause">Pause</a>
+        {{/playing?}}
 
-          {{^playing?}}
-          <a href="/play" id="play">Play</a>
-          {{/playing?}}
+        {{^playing?}}
+        <a href="/play" id="play">Play</a>
+        {{/playing?}}
 
-          <a href="/next" id="next">Next</a>
-        </section>
-
-
-      <form class="search" method="get" action="/search" id="search">
-        <input type="search" name="q" value="find music" />
-      </form>
+        <a href="/next" id="next">Next</a>
+      </section><!-- /#controls -->
 
       <a class="user-logged-in" href="/{{login}}">@{{login}}</a>
-	</header>
-
-  </div><!-- /#top-bar -->
-
-
     
-
-  <div id="main" class="wrapper">
-
-        <div id="now-playing-wrapper">
-
-        <section id="now-playing">
-
-        </section>
-        
-        <section id="now-playing-stats">
-         <p>ahoy</p>
-        </section>
-
-        </div>
-
+    </header>
+  </section><!-- /#top-bar -->
   
   
-  
+  <section id="now-playing" class="row">
 
+<<<<<<< HEAD
      <section id="queue-results">
       <header>
         <nav role="queue-history">
@@ -81,12 +59,29 @@
           {{{yield}}}
       </section>
     </section>
+=======
+  </section>
+>>>>>>> new layout basic positioning
 
 
+  <section id="queue-results" class="row">
 
+    <header>
+      <nav role="queue-history">
+        <a class="{{queue_page}}" href="/">Queue</a>
+        <a class="{{history_page}}" href="/history">History</a>
+      </nav>
 
-  </div><!-- /#main -->
+      <form class="search" method="get" action="/search" id="search">
+        <input type="search" name="q" value="find music" />
+      </form>
+    </header>
 
+    <section id="songs">
+      {{{yield}}}
+    </section>
+
+  </section>
 
 
 </body>
