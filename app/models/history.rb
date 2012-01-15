@@ -14,10 +14,11 @@ module Play
   #
   #   The keys are stored in redis as follows:
   #
-  #     play:histories:ids            - A List of all song IDs played.
-  #     play:histories:songs          - A Sorted Set of all songs played.
-  #     play:histories:#{login}:ids   - A List of song IDs played by the user.
-  #     play:histories:#{login}:songs - A Sorted Set of songs played by user.
+  #     play:histories:ids               - A List of all song IDs played.
+  #     play:histories:songs             - A Sorted Set of all songs played.
+  #     play:histories:songs:#{id}:count - The playcount of the song.
+  #     play:histories:#{login}:ids      - List of song IDs played by the user.
+  #     play:histories:#{login}:songs    - Sorted Set of songs played by user.
   class History
     # The redis key to stash History data.
     KEY = 'play:histories'
@@ -29,6 +30,7 @@ module Play
     #
     # Returns nothing important.
     def self.add(song,user)
+
     end
 
     # Public: The total playcount of the library. Ever.
