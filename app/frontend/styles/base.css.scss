@@ -1,11 +1,10 @@
-@import url(reset.css);
 
 body {
-  background: url('/images/tactile_noise.png') repeat;
+  background: url('/images/tactile_noise_mid.png') repeat;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
-.wrapper {
+.row {
   width: 960px;
   position: relative;
   margin: 0 auto;
@@ -33,8 +32,9 @@ a {
 #top-bar {
   width: 100%;
   height: 40px;
-  padding-top: 15px;
-  margin-bottom: 40px;
+  padding-top: 10px;
+  margin-bottom: 20px;
+
   background: rgba(0,0,0,.3);
   border-bottom: 1px solid #222222;
   
@@ -49,12 +49,7 @@ a {
 
 }
 
-form.search {
-  display: inline;
-  float: left;
-  margin-left: 240px;
 
-}
 
 .user-logged-in {
   float: right; 
@@ -64,36 +59,25 @@ form.search {
   letter-spacing: 1px;
 }
 
-#now-playing-wrapper {
-  width: 960px;
-  height: 220px;
-}
-
-
 #now-playing {
-  float: left;
-  height: 220px;
-  margin-top: 40px;
+  height: 200px;
+  margin-bottom: 20px;
   background: #fff;
-  ul {
-    float: left;
-    width: 400px;
-    height: 220px;
-
+    ul {
+      width: 400px;
+      height: 160px;
+      font-size: 36px;
+      font-weight: 300;
+      line-height: 1.4;
+      padding: 20px;
   }
 
   img {
-    float: left;
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 200px;
   }
-}
-
-#now-playing-stats {
-   float: left;
-   width: 320px;
-   height: 220px;
-   margin-left: 20px;
-   background: #fff;
 }
 
 
@@ -104,7 +88,6 @@ form.search {
   width: 200px;
   height: 40px;
     a {
-      display: inline-block;
 
     }
 }
@@ -114,18 +97,24 @@ form.search {
 
 
 #queue-results {
-  width: 940px;
-  clear: both;
-  background: #fff;
+  margin-bottom: 20px;
     img {
       width: 40px;
     }
 }
 
+#queue-results header {
+  height: 40px;
+  background: rgba(0,0,0,.3);
+  border-bottom: 1px solid #222222;
 
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5);
+}
 
 nav[role=queue-history] {
-  padding: 10px;
+  position: absolute;
+  top: 12px;
+  left: 20px;
   a {
     margin-right: 20px;
     font-size: 16px;
@@ -135,11 +124,18 @@ nav[role=queue-history] {
   }
 }
 
+form.search {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+
+}
+
 .song {
-  width: 940px;
-  height: 60px;
+  height: 50px;
+  padding: 10px 20px;
+  background: #fff;
   font-family: 'Open Sans Condensed';
-  font-size: 14px;
-  clear: both;
+  font-size: 18px;
 }
 
