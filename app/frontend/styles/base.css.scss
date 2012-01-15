@@ -3,7 +3,7 @@
 
 
 body {
-  background: #ccc;
+  background: #ccc url('/images/tactile_noise.png') repeat;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
 }
 
@@ -18,9 +18,10 @@ a {
 #top-bar {
   width: 100%;
   height: 40px;
-  
-  background: #fff;
+  padding-top: 15px;
   margin-bottom: 40px;
+  background: rgba(0,0,0,.3);
+  border-bottom: 1px solid #222222;
   
 }
 
@@ -47,7 +48,7 @@ form.search {
 
 
 
-#controller {
+#controls {
   float: left;
   width: 300px;
 
@@ -58,14 +59,12 @@ form.search {
 
 
 #queue {
-  float: left;
-
-
   width: 600px;
 
   background: #fff;
-
 }
+
+
 
 nav[role=queue-history] {
   a {
@@ -78,4 +77,8 @@ nav[role=queue-history] {
   width: 940px;
   position: relative;
   margin: 0 auto;
+}
+
+.column {
+  float: left;
 }
