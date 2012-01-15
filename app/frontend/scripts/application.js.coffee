@@ -45,6 +45,10 @@ $(document).ready () ->
     updateSongs("/next", "PUT")
     false
 
+  # Clear out search copy on click.
+  $('#search input').click () ->
+    $(@).val('')
+
   # Searches things.
   $('#search').submit () ->
     keyword = $('#search').find('input')[0].value
