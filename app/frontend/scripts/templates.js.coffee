@@ -33,6 +33,10 @@ templates.now_playing = """
 """
 
 templates.star = """
-  <a href="/star"   class="star"   data-song-id="{{id}}">star it</a>
-  <a href="/unstar" class="unstar" data-song-id="{{id}}">unstar it</a>
+  {{#starred}}
+    <a href="/unstar" class="unstar" data-song-id="{{id}}">unstar it</a>
+  {{/starred}}
+  {{^starred}}
+    <a href="/star" class="star" data-song-id="{{id}}">star it</a>
+  {{/starred}}
 """

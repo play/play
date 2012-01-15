@@ -3,7 +3,7 @@ module Play
   class App < Sinatra::Base
 
     get "/queue" do
-      Queue.to_json
+      songs_as_json(Queue.songs,current_user)
     end
 
     post "/queue/add" do

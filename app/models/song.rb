@@ -14,6 +14,12 @@ module Play
     # The song's String album value.
     attr_accessor :album
 
+    # The song's Boolean starred value. Is this song starred? This is a special
+    # attribute since it's usually never populated or accessed until directly
+    # before serving as JSON, in which this attribute is populated by whether
+    # the current_user has starred this song.
+    attr_accessor :starred
+
     # Initializes a new Song.
     #
     # options - One of two possible arguments:
@@ -80,10 +86,11 @@ module Play
     # Returns a String-encoded JSON fragment.
     def to_json
       hash = {
-        :id     => id,
-        :name   => name,
-        :artist => artist,
-        :album  => album
+        :id      => id,
+        :name    => name,
+        :artist  => artist,
+        :album   => album,
+        :starred => starred || false
       }
       Yajl.dump hash
     end

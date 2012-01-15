@@ -80,6 +80,15 @@ module Play
       end
     end
 
+    # Public: Did this user star this song?
+    #
+    # song - The Song.
+    #
+    # Returns a Boolean value.
+    def starred?(song)
+      stars.map(&:id).include?(song.id)
+    end
+
     # Public: Stars a song. Likes a song. Saves a song.
     #
     # song - The Song to star.

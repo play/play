@@ -9,6 +9,8 @@ context "api/library" do
               :album   => 'Cross',
               :song_id => 'xyz'
     @user = User.create 'holman', 'zach@example.com'
+
+    app.any_instance.stubs(:current_user).returns(@user)
   end
 
   test "/search" do

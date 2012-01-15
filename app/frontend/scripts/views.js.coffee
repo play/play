@@ -9,7 +9,12 @@ class window.Song
   # album  - The String name of the Album.
   #
   # Returns a glorious Song.
-  constructor: (@id, @name, @artist, @album) ->
+  constructor: (json) ->
+    @id      = json['id']
+    @name    = json['name']
+    @artist  = json['artist']
+    @album   = json['album']
+    @starred = json['starred']
 
   # The album art for this song.
   #

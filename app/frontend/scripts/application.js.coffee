@@ -121,7 +121,7 @@ play.renderStar = (id, starred) ->
 #
 # Returns a Song.
 songFromJson = (json) ->
-  new Song(json.id, json.name, json.artist, json.album)
+  new Song(json)
 
 # Create a List from a JSON-backed Array of Songs.
 #
