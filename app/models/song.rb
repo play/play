@@ -118,11 +118,11 @@ module Play
       record.location.get.to_s
     end
 
-    # The JSON representation of a Song, suitable for API responses.
+    # The hashed representation of a Song, suitable for API responses.
     #
-    # Returns a String-encoded JSON fragment.
-    def to_json
-      hash = {
+    # Returns a Hash.
+    def to_hash
+      {
         :id      => id,
         :name    => name,
         :artist  => artist,
@@ -130,7 +130,6 @@ module Play
         :starred => starred || false,
         :queued  => queued?
       }
-      Yajl.dump hash
     end
 
   end

@@ -16,7 +16,7 @@ module Play
     def songs_as_json(songs,user)
       songs.map! do |song|
         song.starred = user.starred?(song)
-        song
+        song.to_hash
       end
 
       hash = {

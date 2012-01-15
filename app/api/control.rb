@@ -4,7 +4,7 @@ module Play
   class App < Sinatra::Base
 
     get "/now_playing" do
-      Player.now_playing.to_json
+      Yajl.dump Player.now_playing.to_hash
     end
 
     put "/play" do
