@@ -29,8 +29,19 @@ $(document).ready () ->
   #               artist name for this song.
   $('.artist').live 'click', () ->
     element = $(@)
-    artist = element.data('artist')
+    artist = escape(element.data('artist'))
     updateSongs("/artist/"+artist, "GET")
+    false
+
+  # Pull in all the songs for a particular artist.
+  #
+  # data-artist - The Data attribute set on the link whose value is the 
+  #               artist name for this song.
+  $('.album').live 'click', () ->
+    element = $(@)
+    artist = escape(element.data('artist'))
+    album  = escape(element.data('album'))
+    updateSongs("/artist/"+artist+"/album/"+album, "GET")
     false
 
   # Clear out search copy on click.

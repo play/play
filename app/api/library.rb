@@ -24,5 +24,10 @@ module Play
       artist = Artist.new(params[:name])
       songs_as_json(artist.songs,current_user)
     end
+
+    get "/artist/:artist/album/:album" do
+      album = Album.new(params[:album],params[:artist])
+      songs_as_json(album.songs,current_user)
+    end
   end
 end
