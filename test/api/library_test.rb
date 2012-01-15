@@ -43,7 +43,7 @@ context "api/library" do
     assert last_response.ok?
   end
 
-  test "add a star" do
+  test "delete a star" do
     Play::App.any_instance.stubs(:current_user).returns(@user)
     Song.stubs(:find).returns(@song)
     delete "/star", :id => @song.id

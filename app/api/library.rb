@@ -18,7 +18,7 @@ module Play
 
     delete "/star" do
       song = Song.find(params[:id])
-      current_user.star(song)
+      current_user.unstar(song)
     end
 
   end
