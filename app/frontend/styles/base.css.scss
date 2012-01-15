@@ -1,3 +1,62 @@
-html{
-  background-color: #fff;
+body {
+  background: #ccc;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#top-bar {
+  width: 100%;
+
+  background: #fff;
+  margin-bottom: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#controller {
+  float: left;
+  width: 300px;
+
+  background: #fff;
+  margin-right: 40px;
+
+}
+
+
+#queue {
+  float: left;
+
+
+  width: 600px;
+
+  background: #fff;
+
+}
+
+nav[role=queue-history] {
+  a {
+    margin-right: 20px;
+  }
+}
+
+
+.wrapper {
+  width: 940px;
+  position: relative;
+  margin: 0 auto;
 }

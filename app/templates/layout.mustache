@@ -1,33 +1,26 @@
 <!DOCTYPE html>
 
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width" />
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
   
   <link rel="stylesheet" href="/css/base.css">
 
   <script type="text/javascript" src="/js/jquery.js"></script>
   <script type="text/javascript" src="/js/application.js"></script>
 
-  <!-- Combine and Compress These CSS Files
-    <link rel="stylesheet" href="stylesheets/globals.css">
-    <link rel="stylesheet" href="stylesheets/typography.css">
-    <link rel="stylesheet" href="stylesheets/grid.css">
-    <link rel="stylesheet" href="stylesheets/ui.css">
-    <link rel="stylesheet" href="stylesheets/forms.css">
-    <link rel="stylesheet" href="stylesheets/orbit.css">
-    <link rel="stylesheet" href="stylesheets/reveal.css">
-    <link rel="stylesheet" href="stylesheets/mobile.css">
-    <link rel="stylesheet" href="stylesheets/play.css">
-  <!-- End Combine and Compress These CSS Files -->
+  <link rel="stylesheet" href="stylesheets/base.css.scss">
 
   <title>Play: {{title}}</title>
 
 </head>
+
 <body>
-  <div id="top-bar" class="container">
+
+  <div id="top-bar">
          
-    <header id="admin" class="row">
+    <header class="wrapper">
       <a id="logo">[Play]</a>
 
       <form class="search" method="get" action="/search" id="search">
@@ -35,14 +28,17 @@
       </form>
 
       <a class="user" class="two" href="/{{login}}">@{{login}}</a>
-	  </header>
+	</header>
+
+  </div><!-- /#top-bar -->
+
+
     
-  </div><!-- #top-bar .container -->
-	    
-  <div id="main" class="container">
-    <div class="row">
-      <div id="left" class="three columns">
+
+  <div id="main" class="wrapper">
+
         <section id="controller">
+
           <a href="/prev" id="previous">Previous</a>
 
           {{#playing?}}
@@ -54,29 +50,39 @@
           {{/playing?}}
 
           <a href="/next" id="next">Next</a>
-        </section>
 	        
         <section id="now-playing">
+
         </section>
         
         <section id="song-stats">
           <p>Here's where rad stats, likes, and shit like that go</p>
         </section>
-      </div>
-
-      <section id="queue" class="nine columns">
-        <dl class="tabs">
-           <dd><a class="{{queue_page}}" href="/">Queue</a></dd>
-           <dd><a class="{{history_page}}" href="/history">History</a></dd>
-        </dl>
-
-        <section id="songs">
-        </section>
-
-        {{{yield}}}
       </section>
-    </div>
-  </div>
+
+
+
+
+    <section id="queue">
+      <header>
+        <nav role="queue-history">
+           <a class="{{queue_page}}" href="/">Queue</a>
+           <a class="{{history_page}}" href="/history">History</a>
+        </nav>
+      <header>
+
+      <section id="songs">
+          {{{yield}}}
+      </section>
+    </section>
+
+
+
+
+  </div><!-- /#main -->
+
+
+
 </body>
 
 </html>
