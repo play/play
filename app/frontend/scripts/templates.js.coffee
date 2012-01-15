@@ -19,6 +19,7 @@ templates.song = """
     from {{album}}
     and here's some art and shit: {{{art_tag}}}
     {{>star}}
+    {{>queuing}}
   </div>
 """
 
@@ -40,4 +41,8 @@ templates.star = """
   {{^starred}}
     <a href="/star" class="star" data-song-id="{{id}}">star it</a>
   {{/starred}}
+"""
+
+templates.queuing = """
+  [add to queue or remove from queue]
 """
