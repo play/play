@@ -33,10 +33,10 @@ context "History" do
     History.add(@song, @user)
 
     last = History.last(3)
-    assert 3, last.size
+    assert_equal 3, last.size
 
     last = History.last
-    assert 1, last.size
+    assert_equal 1, last.size
   end
 
 end
