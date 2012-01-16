@@ -4,7 +4,11 @@ module Play
   class App < Sinatra::Base
 
     get "/now_playing" do
-      Yajl.dump Player.now_playing.to_hash
+      if Player.now_playing
+        Yajl.dump Player.now_playing.to_hash
+      else
+        nil
+      end
     end
 
     put "/play" do
