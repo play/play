@@ -12,7 +12,7 @@ context "api/control" do
   end
 
   test "/now_playing" do
-    Player.expects(:now_playing).returns(@song)
+    Player.expects(:now_playing).times(2).returns(@song)
     get "/now_playing"
     response = parse_json(last_response.body.strip)
 
