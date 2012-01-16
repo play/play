@@ -10,6 +10,11 @@ $(document).ready () ->
     play.renderQueue()
     false
 
+  # Loads up the History.
+  $('.history').click () ->
+    updateSongs("/history", "GET")
+    false
+
   # Plays music.
   $('#play').click () ->
     updateSongs("/play", "PUT")

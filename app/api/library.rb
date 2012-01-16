@@ -34,5 +34,10 @@ module Play
       song = Song.find(params[:id])
       send_file song.path, :disposition => 'attachment'
     end
+
+    get "/history" do
+      songs = History.last(30)
+      songs_as_json(songs,current_user)
+    end
   end
 end

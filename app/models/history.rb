@@ -78,7 +78,10 @@ module Play
     #
     # Returns an Array of Songs.
     def self.last(number=1)
-      $redis.lrange "#{KEY}:song_ids", -number, -1
+      ids = $redis.lrange "#{KEY}:song_ids", -number, -1
+      ids.map do |id|
+        Song.find(id)
+      end
     end
 
     # The current datetime in UTC in convenient integer format.

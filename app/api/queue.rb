@@ -13,6 +13,8 @@ module Play
         song = Song.new(:name => params[:name], :artist => params[:artist])
       end
       Queue.add_song(song)
+      History.add(song,current_user)
+      true
     end
 
     delete "/queue" do
@@ -22,6 +24,7 @@ module Play
         song = Song.new(:name => params[:name], :artist => params[:artist])
       end
       Queue.remove_song(song)
+      true
     end
     
   end
