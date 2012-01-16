@@ -1,4 +1,4 @@
-//= require mustache
+//= require_tree ./frameworks
 
 //= require views
 //= require templates
