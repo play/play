@@ -39,6 +39,10 @@ $(document).ready () ->
   $('body').bind 'dragenter', (e) ->
     $('body').fadeTo(200,0.4)
 
+  # If we drop some file, try to fade shit out. This is a hack. It's okay.
+  $('body').bind 'drop', (e) ->
+    $('body').fadeTo(200,1)
+
   # If the mouse leaves, try to fade shit out. This is a hack. It's okay.
   $('body').bind 'mouseout', (e) ->
     $('body').fadeTo(200,1)
