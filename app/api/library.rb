@@ -35,6 +35,12 @@ module Play
       send_file song.path, :disposition => 'attachment'
     end
 
+    get "/artist/:artist/album/:album/download" do
+      album = Album.new(params[:album],params[:artist])
+      album.zipped!
+      send_file album.zip_path, :disposition => 'attachment'
+    end
+
     get "/history" do
       songs = History.last(30)
       songs_as_json(songs,current_user)

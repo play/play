@@ -57,6 +57,6 @@ templates.queuing = """
 """
 
 templates.downloading = """
-  [download this album]
+  <a href="/artist/{{artist}}/album/{{album}}/download">download this album</a>
   <a href="/song/{{id}}/download">download this song</a>
 """

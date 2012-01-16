@@ -29,5 +29,36 @@ module Play
       end
     end
 
+    # Zips up an album and stashes in it a temporary directory.
+    #
+    # Returns nothing.
+    def zipped!
+      return if File.exist?(zip_path)
+      FileUtils.mkdir_p "/tmp/play-zips"
+      system 'tar', '-cf', zip_path, '-C', File.expand_path('..',path), File.basename(path)
+    end
+
+    # The name of the zipfile.
+    #
+    # Returns a String.
+    def zip_name
+      "#{artist} - #{name}.zip"
+    end
+
+    # The path to the album on-disk. We can figure this out by looking at a
+    # song on this album, and then traversing the path up a directory. That's
+    # probably good.
+    #
+    # Returns a String path on the filesystem.
+    def path
+      File.expand_path('../', songs.first.path)
+    end
+
+    # The path to the zipfile.
+    #
+    # Returns a String.
+    def zip_path
+      "/tmp/play-zips/#{zip_name}"
+    end
   end
 end
