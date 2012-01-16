@@ -39,7 +39,7 @@ a {
 
   background: rgba(0,0,0,.5);
   border-bottom: 1px solid #222222;
-  
+
   -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5);
 
 }
@@ -166,6 +166,7 @@ form.search {
 
 
 #uploads {
+  display: none;
   position: fixed;
   left: 0;
   bottom: 0;

@@ -7,9 +7,7 @@ $(document).ready () ->
     dropZone: $('body'),
     dataType: 'json',
     sequentialUploads: true,
-    url: '/upload',
-    done: (e, data) ->
-      #console.log 'done!'
+    url: '/upload'
   })
 
   updateProgress = (value) ->
@@ -21,11 +19,13 @@ $(document).ready () ->
     updateProgress(total)
 
   $('#fileupload').bind 'fileuploadsend', (e, data) ->
+    $('body').fadeTo(0,1)
+    $('#uploads').slideDown(75)
     file = data.files[0].fileName
     $('#current').text(file)
 
   $('#fileupload').bind 'fileuploadstop', (e, data) ->
-    # $('#progressbar').slideDown()
+    $('#progressbar').slideUp(75)
     $('#uploads').hide()
 
   $('body').bind 'dragenter', (e) ->
