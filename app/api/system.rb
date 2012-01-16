@@ -17,6 +17,9 @@ module Play
     end
 
     post '/upload' do
+      puts "uploaded"
+      return ''
+
       params[:files].each do |file|
         tmpfile = file[:tempfile]
         name    = file[:filename]

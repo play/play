@@ -161,3 +161,37 @@ form.search {
   font-size: 18px;
 }
 
+
+
+
+#uploads {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 20px;
+  width: 100%;
+  background-color: #000;
+  opacity: 0.9;
+  padding: 10px;
+  color: #fff;
+}
+
+#current {
+  float: left;
+  font-size: 12px;
+  padding-top: 4px;
+}
+
+#progressbar {
+  float: right;
+  margin-right: 20px;
+  width: 350px;
+  background-color: #222;
+}
+
+.ui-progressbar-value {
+  background-image: url(/images/pbar-ani.gif);
+  border-radius: 3px;
+  height: 20px;
+}
+
