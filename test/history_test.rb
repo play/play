@@ -32,6 +32,8 @@ context "History" do
     History.add(@song, @user)
     History.add(@song, @user)
 
+    Song.stubs(:find).returns(@song)
+
     last = History.last(3)
     assert_equal 3, last.size
 
