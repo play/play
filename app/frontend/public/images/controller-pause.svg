@@ -9,11 +9,18 @@
 	 xml:space="preserve">
 <defs>
 </defs>
-<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-172.0586" y1="-606.2397" x2="-202.0581" y2="-606.2397" gradientTransform="matrix(0 1 -1 0 -593.25 202.0586)">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-317.0024" y1="-61.5059" x2="-287.0029" y2="-61.5059" gradientTransform="matrix(0 -1 1 0 65.4082 -287.0029)">
 	<stop  offset="0" style="stop-color:#636466"/>
 	<stop  offset="0.5" style="stop-color:#484849"/>
 	<stop  offset="0.5" style="stop-color:#5E5F61"/>
 	<stop  offset="1" style="stop-color:#545556"/>
 </linearGradient>
-<polygon fill="url(#SVGID_1_)" points="0,0 25.979,15 0,30 "/>
+<rect fill="url(#SVGID_1_)" width="7.805" height="30"/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-317.0024" y1="-43.2949" x2="-287.0029" y2="-43.2949" gradientTransform="matrix(0 -1 1 0 65.4082 -287.0029)">
+	<stop  offset="0" style="stop-color:#636466"/>
+	<stop  offset="0.5" style="stop-color:#484849"/>
+	<stop  offset="0.5" style="stop-color:#5E5F61"/>
+	<stop  offset="1" style="stop-color:#545556"/>
+</linearGradient>
+<rect x="18.21" fill="url(#SVGID_2_)" width="7.806" height="30"/>
 </svg>
