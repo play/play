@@ -33,7 +33,7 @@ templates.now_playing = """
     <li class="album"><em>from</em> {{{album_tag}}}</li>
   </ul>
 
-  <a class="album-art" href="#">{{{art_tag}}}</a>
+  <a href="#" data-artist="{{{artist}}}" data-album="{{{album}}}" class="album album-art">{{{art_tag}}}</a>
 """
 
 templates.star = """
