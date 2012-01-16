@@ -1,8 +1,8 @@
 require 'api/control'
 require 'api/helpers'
 require 'api/library'
-require 'api/main'
 require 'api/queue'
+require 'api/system'
 
 module Play
   class App < Sinatra::Base

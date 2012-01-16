@@ -1,4 +1,5 @@
-//= require_tree ./frameworks
+//= require_directory ./frameworks
+//= require_directory ./plugins
 
 //= require views
 //= require templates
@@ -6,6 +7,7 @@
 
 //= require realtime
 //= require behaviors
+//= require upload
 
 play = exports ? this
 
