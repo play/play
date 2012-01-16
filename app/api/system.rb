@@ -17,14 +17,16 @@ module Play
     end
 
     post '/upload' do
-      puts params.inspect
-      unless params[:file] && (tmpfile = params[:file][:tempfile]) && (name = params[:file][:filename])
-        return haml(:upload)
+      params[:files].each do |file|
+        tmpfile = file[:tempfile]
+        name    = file[:filename]
+
+        # iTunes needs a filetype it likes, so fuck it, .mp3 it.
+        system "mv", tmpfile.path, tmpfile.path + '.mp3'
+        system "./bin/add-to-itunes", tmpfile.path + '.mp3'
       end
-      while blk = tmpfile.read(65536)
-          File.open(File.join(Dir.pwd,"public/uploads", name), "wb") { |f| f.write(tmpfile.read) }
-      end
-     'success'
+
+      true
     end
 
   end
