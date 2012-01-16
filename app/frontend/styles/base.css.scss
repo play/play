@@ -1,3 +1,4 @@
+/* GLOBAL AND LAYOUT */
 
 body {
   background: url('/images/tactile_noise_mid.png') repeat center center;
@@ -28,10 +29,7 @@ a {
 
 }
 
-
-
-
-
+/* TOP BAR SECTION */
 
 #top-bar {
   width: 100%;
@@ -45,42 +43,6 @@ a {
   -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5);
 
 }
-
-.user-logged-in {
-  float: right; 
-  margin-top: 12px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 300;
-  letter-spacing: 1px;
-}
-
-
-
-
-
-
-#now-playing {
-  height: 200px;
-  background: #fff;
-    ul {
-      height: 160px;
-      font-size: 30px;
-      font-weight: 300;
-      line-height: 1.4;
-      padding: 20px;
-  }
-
-  img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 200px;
-  }
-}
-
-
-
 
 #controls {
   float: left;
@@ -115,19 +77,58 @@ a {
 }
 
 
+.user-logged-in {
+  float: right;
+  margin-top: 12px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
 
 
+
+
+/* NOW PLAYING */
+
+#now-playing {
+  height: 220px;
+  background: #fff;
+
+  ul {
+      height: 160px;
+      font-size: 30px;
+      font-weight: 300;
+      line-height: 1.4;
+      padding: 20px;
+  }
+
+  img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 200px;
+  }
+
+  .name {
+    font-weight: 700;
+  }
+
+  em {
+    font-size: 10px;
+  }
+}
+
+
+/* QUEUE, HISTORY, AND SEARCH SECTION */
 
 #queue-results {
   margin-bottom: 20px;
-    img {
-      width: 40px;
-    }
 }
 
 #queue-results header {
   height: 40px;
-  background: rgba(0,0,0,.5);
+  background: rgba(0,0,0,1);
   border-bottom: 1px solid #222222;
 
   -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5);
@@ -154,11 +155,11 @@ form.search {
 }
 
 .song {
-  height: 50px;
-  padding: 10px 20px;
+  margin-bottom: 1px;
+  padding: 20px 20px;
   background: #fff;
   font-family: 'Open Sans Condensed';
-  font-size: 18px;
+  font-size: 16px;
 }
 
 
