@@ -47,10 +47,18 @@ module Play
       end
     end
 
+    def api_request
+      !!params[:login]
+    end
+
     def login
-      authenticate!
-      user   = User.find(github_user.login)
-      user ||= User.create(github_user.login,github_user.email)
+      if api_request
+        user = User.find(params[:login])
+      else
+        authenticate!
+        user   = User.find(github_user.login)
+        user ||= User.create(github_user.login,github_user.email)
+      end
       @current_user = session[:user] = user
     end
 
