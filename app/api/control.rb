@@ -20,7 +20,7 @@ module Play
     end
 
     put "/next" do
-      Player.play_next
+      Yajl.dump Player.play_next.to_hash
     end
 
     put "/previous" do

@@ -35,8 +35,11 @@ module Play
     end
 
     # Play the next song.
+    #
+    # Returns the new song.
     def self.play_next
       app.next_track
+      now_playing
     end
 
     # Play the previous song.
