@@ -26,6 +26,16 @@ module Play
       Queue.remove_song(song)
       true
     end
-    
+
+    post "/queue/stars" do
+      songs = current_user.stars.shuffle[0..4]
+      songs.each do |song|
+        Queue.add_song(song)
+        History.add(song,current_user)
+      end
+
+      songs_as_json(songs,current_user)
+    end
+
   end
 end
