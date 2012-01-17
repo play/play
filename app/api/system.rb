@@ -16,6 +16,10 @@ module Play
       end
     end
 
+    get "/stream_url" do
+      Play.config.stream_url
+    end
+
     post '/upload' do
       puts "uploaded"
       return ''
