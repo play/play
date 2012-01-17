@@ -18,6 +18,15 @@ module Play
       @artist = artist
     end
 
+    # Pull all of the songs from a given Album name.
+    #
+    # Returns an Array of Songs.
+    def self.songs_by_name(name)
+      Player.library.file_tracks[Appscript.its.album.eq(name)].get.map do |record|
+        Song.new(record.persistent_ID.get)
+      end
+    end
+
     # The songs attached to this album.
     #
     # Returns an Array of Songs.

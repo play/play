@@ -1,6 +1,6 @@
 module Play
   class Song
-    
+
     # The persistent ID of the song in the player's database.
     attr_accessor :id
 
@@ -65,6 +65,21 @@ module Play
       return nil if record.nil?
 
       initialize_from_record(record)
+    end
+
+    # Find the most popular song by its name. Compares against playcount and
+    # gets the greatest.
+    #
+    # Returns a Song.
+    def self.find_by_name(name)
+      top = Player.library.tracks[Appscript.its.name.eq(name)].get.sort do |a,b|
+        History.count_by_song(Song.new(:id => b.persistent_ID.get)) <=>
+          History.count_by_song(Song.new(:id => a.persistent_ID.get))
+      end[0]
+
+      if top
+        find(top.get.persistent_ID.get)
+      end
     end
 
     # The Appscript record.

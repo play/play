@@ -37,5 +37,39 @@ module Play
       songs_as_json(songs,current_user)
     end
 
+    post "/freeform" do
+      subject = params[:subject]
+
+      # Do we have an Artist match?
+      songs = Artist.new(subject).songs
+      if songs.size > 0
+        songs = songs.shuffle[0..9]
+        puts songs.inspect
+        songs.each do |song|
+          Queue.add_song(song)
+          History.add(song,current_user)
+        end
+        return songs_as_json(songs,current_user)
+      end
+
+      # No? Maybe we have an album.
+      songs = Album.songs_by_name(subject)
+      if songs.size > 0
+        songs.each do |song|
+          Queue.add_song(song)
+          History.add(song,current_user)
+        end
+        return songs_as_json(songs,current_user)
+      end
+
+      # Well maybe the shit's just a song.
+      song = Song.find_by_name(subject)
+      if song
+        Queue.add_song(song)
+        History.add(song,current_user)
+        return songs_as_json([song],current_user)
+      end
+    end
+
   end
 end
