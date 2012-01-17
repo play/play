@@ -11,6 +11,12 @@ module Play
       end
     end
 
+    post "/now_playing" do
+      song = Player.now_playing
+      current_user.star(song)
+      Yajl.dump song.to_hash
+    end
+
     put "/play" do
       Player.play
     end
