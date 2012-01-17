@@ -32,7 +32,7 @@ context "api/control" do
   end
 
   test "/next" do
-    Player.expects(:play_next).returns(true)
+    Player.expects(:play_next).returns(@song)
     put "/next"
   end
 
