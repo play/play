@@ -31,6 +31,16 @@ module Play
       if params[:message] && params[:message].size > 0
         Player.say params[:message]
       end
+      true
+    end
+
+    get "/volume" do
+      Player.app_volume.to_s
+    end
+
+    put "/volume" do
+      Player.app_volume = params[:volume]
+      Player.app_volume.to_s
     end
 
   end
