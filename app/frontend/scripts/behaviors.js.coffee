@@ -73,7 +73,7 @@ $(document).ready () ->
   # Clicking on a link with a class of `user` takes you to the user page.
   #
   # Assumes the anchor text is `@login`, which then gets its `@` stripped.
-  $('.user-logged-in').click () ->
+  $('.user-logged-in a').click () ->
     user = @text.substr(1)
     updateSongs("/user/#{user}","GET")
     false
