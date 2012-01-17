@@ -28,8 +28,10 @@ module Play
     end
 
     post "/say" do
-      Player.say params[:message]
+      if params[:message] && params[:message].size > 0
+        Player.say params[:message]
+      end
     end
-    
+
   end
 end
