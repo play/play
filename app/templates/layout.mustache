@@ -27,17 +27,12 @@
       <!-- <a id="logo">[Play]</a> -->
 
       <section id="controls">
-        <a href="/prev" id="previous"><span>Previous</span></a>
-
-        {{#playing?}}
-        <a href="/pause" id="pause"><span>Pause</span></a>
-        {{/playing?}}
-
-        {{^playing?}}
-        <a href="/play" id="play"><span>Play</span></a>
-        {{/playing?}}
-
-        <a href="/next" id="next"><span>Next</span></a>
+        <a href="/play" id="play">
+          <audio id="play-stream">
+            <source src="{{stream}}" type="audio/mp3" />
+          </audio>
+          <span>Play</span>
+        </a>
       </section><!-- /#controls -->
 
       <span class="user-logged-in">Hello, <a  href="/{{login}}">@{{login}}</a></span>

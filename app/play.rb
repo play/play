@@ -6,8 +6,9 @@ module Play
   # Returns an OpenStruct so you can chain methods off of `Play.config`.
   def self.config
     OpenStruct.new \
-      :secret    => yaml['gh_secret'],
-      :client_id => yaml['gh_key']
+      :secret     => yaml['gh_secret'],
+      :client_id  => yaml['gh_key'],
+      :stream_url => yaml['stream_url']
   end
 
 private

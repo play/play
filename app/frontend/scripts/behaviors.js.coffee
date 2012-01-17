@@ -15,11 +15,15 @@ $(document).ready () ->
     updateSongs("/history", "GET")
     false
 
-  # Plays music.
+  # Plays the stream.
   $('#play').click () ->
-    updateSongs("/play", "PUT")
+    stream = $('#play-stream').get(0)
+    if stream.paused
+      stream.play()
+    else
+      stream.pause()
     false
-  
+
   # Pauses music.
   $('#pause').click () ->
     updateSongs("/pause", "PUT")
@@ -37,7 +41,7 @@ $(document).ready () ->
 
   # Pull in all the songs for a particular artist.
   #
-  # data-artist - The Data attribute set on the link whose value is the 
+  # data-artist - The Data attribute set on the link whose value is the
   #               artist name for this song.
   $('.artist').live 'click', () ->
     element = $(@)
@@ -47,7 +51,7 @@ $(document).ready () ->
 
   # Pull in all the songs for a particular artist.
   #
-  # data-artist - The Data attribute set on the link whose value is the 
+  # data-artist - The Data attribute set on the link whose value is the
   #               artist name for this song.
   $('.album').live 'click', () ->
     element = $(@)
@@ -76,7 +80,7 @@ $(document).ready () ->
 
   # Stars this song.
   #
-  # data-song-id - The Data attribute set on the link whose value is the 
+  # data-song-id - The Data attribute set on the link whose value is the
   #                persistent ID of the song.
   $('.star').live 'click', () ->
     element = $(@)
@@ -92,7 +96,7 @@ $(document).ready () ->
 
   # Unstars this song.
   #
-  # data-song-id - The Data attribute set on the link whose value is the 
+  # data-song-id - The Data attribute set on the link whose value is the
   #                persistent ID of the song.
   $('.unstar').live 'click', () ->
     element = $(@)
@@ -108,7 +112,7 @@ $(document).ready () ->
 
   # Queues up this song.
   #
-  # data-song-id - The Data attribute set on the link whose value is the 
+  # data-song-id - The Data attribute set on the link whose value is the
   #                persistent ID of the song.
   $('.add-to-queue').live 'click', () ->
     element = $(@)
@@ -124,7 +128,7 @@ $(document).ready () ->
 
   # Removes this song from the queue.
   #
-  # data-song-id - The Data attribute set on the link whose value is the 
+  # data-song-id - The Data attribute set on the link whose value is the
   #                persistent ID of the song.
   $('.remove-from-queue').live 'click', () ->
     element = $(@)

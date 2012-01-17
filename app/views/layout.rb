@@ -6,10 +6,10 @@ module Play
         @current_user.login
       end
 
-      def playing?
-        !Player.paused?
+      def stream
+        Play.config.stream_url
       end
-      
+
       def now_playing
         Player.now_playing
       end
