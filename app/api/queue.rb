@@ -27,6 +27,11 @@ module Play
       true
     end
 
+    delete "/queue/all" do
+      Queue.clear
+      true
+    end
+
     post "/queue/stars" do
       songs = current_user.stars.shuffle[0..4]
       songs.each do |song|

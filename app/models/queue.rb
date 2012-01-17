@@ -56,6 +56,13 @@ module Play
       ].first.delete
     end
 
+    # Clear the queue. Shit's pretty destructive.
+    #
+    # Returns who the fuck knows.
+    def self.clear
+      Play::Queue.playlist.tracks.get.each { |record| record.delete }
+    end
+
     # The songs currently in the Queue.
     #
     # Returns an Array of Songs.
