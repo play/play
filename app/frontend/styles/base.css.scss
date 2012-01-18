@@ -64,11 +64,11 @@ a:hover {
 #controls {
   float: left;
   height: 40px;
-  margin-left: 10px;
+  margin-left: 30px;
   a {
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 26px;
+    height: 30px;
     text-indent: -5000px;
   }
   span {
@@ -76,19 +76,29 @@ a:hover {
   }
 }
 
+
+
 #play {
-  background: url('/images/controller-play.svg') no-repeat center center;
-  margin-left: 4px;
+  background: url('/images/controller-play.png') no-repeat left top;
+}
+
+#play:hover {
+  background-position: right top;
 }
 
 #pause {
-  background: url('/images/controller-pause.svg') no-repeat center center;
+  background: url('/images/controller-pause.png') no-repeat left top;
 }
+
+#pause {
+  background: url('/images/controller-pause.png') no-repeat left top;
+}
+
 
 .user-logged-in {
   float: right;
   margin-top: 12px;
-  color: #fff;
+  color: #5c5e60;
   font-size: 13px;
   font-weight: 300;
   letter-spacing: 1px;
