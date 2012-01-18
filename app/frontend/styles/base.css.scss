@@ -1,3 +1,9 @@
+/* Variables */
+
+$purple: #ea36f5;
+
+
+
 /* GLOBAL AND LAYOUT */
 
 * {
@@ -17,22 +23,26 @@ body {
   margin: 0 auto;
 }
 
-.column {
-  float: left;
-}
-
-.left {
-  width: 300px;
-}
-
-.right {
-  width: 660px;
-}
-
 a {
-  color: #ea36f5;
   text-decoration: none;
+
+  transition-property: color;
+  transition-duration: 1s;
+  transition-timing-function: ease-out;
+  -webkit-transition-property: color;
+  -webkit-transition-duration: 1s;
+  color: $purple;
 }
+
+a:hover {
+  transition-property: color;
+  transition-duration: 1s;
+  transition-timing-function: ease-out;
+  -webkit-transition-property: color;
+  -webkit-transition-duration: 1s;
+  color: darken($purple, 25%);
+}
+
 
 /* TOP BAR SECTION */
 
@@ -174,6 +184,14 @@ form.search {
   font-size: 21px;
   font-weight: 600;
 
+  transition-property: background-color;
+  transition-duration: 1s;
+  transition-timing-function: ease-out;
+  -webkit-transition-property: background-color;
+  -webkit-transition-duration: 1s;
+
+  background-color: #fff;
+
   ul.song-info {
     float: left;
     width: 600px;
@@ -210,6 +228,15 @@ form.search {
     margin-right: 5px;
   }
 
+}
+
+.song:hover {
+  transition-property: background-color;
+  transition-duration: 1s;
+  transition-timing-function: ease-out;
+  -webkit-transition-property: background-color;
+  -webkit-transition-duration: 1s;
+  background-color: #fef2ff;
 }
 
 
