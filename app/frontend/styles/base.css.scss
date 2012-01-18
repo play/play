@@ -6,8 +6,8 @@
 }
 
 body {
-  background: url('/images/tactile_noise_mid.png') repeat center center;
-/*   background: #f1f1f1; */
+/*   background: url('/images/tactile_noise_mid.png') repeat center center; */
+  background: #f1f1f1;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
@@ -42,10 +42,12 @@ a {
   padding: 10px 0;
   margin-bottom: 0px;
 
+/*
   background: rgba(0,0,0,.5);
   border-bottom: 1px solid #222222;
 
-/*   -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5); */
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5);
+*/
 
 }
 
@@ -175,7 +177,6 @@ form.search {
   ul.song-info {
     float: left;
     width: 600px;
-    line-height: 1.2;
     margin-top: 30px;
   }
 
@@ -215,8 +216,8 @@ form.search {
 
 .icon {
   display: inline-block;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   overflow: hidden;
   text-indent: -5000px;
   background: #ccc;
