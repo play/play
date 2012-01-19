@@ -4,11 +4,6 @@ context "Office" do
   setup do
   end
 
-  test "url returns config office_url" do
-    Play.expects(:config).returns({'office_url' => 'http://zachholman.com'})
-    assert_equal 'http://zachholman.com', Office.url
-  end
-
   test "user string returns a string o' user data" do
     object = "lol"
     object.stubs(:read).returns("holman,kneath")
@@ -19,7 +14,7 @@ context "Office" do
   test "users are returned based on office string" do
     holman = User.create 'holman', 'zach@example.com'
     kneath = User.create 'kneath', 'kyle@example.com'
-    
+
     Office.stubs(:user_string).returns("holman,defunkt")
     assert_equal ['holman'], Office.users.map{|user| user.login}
   end

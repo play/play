@@ -67,6 +67,8 @@ module Play
     #
     # Returns nothing.
     def self.clean
+      pad
+
       ids = Play::Queue.playlist.tracks.get.map{ |record| record.persistent_ID.get }
       current = Play::Player.now_playing.id
       position = ids.index(current)
@@ -74,6 +76,15 @@ module Play
       ids[0..position].each do |id|
         return if id == current
         Play::Queue.playlist.tracks[Appscript.its.persistent_ID.eq(id)].get[0].delete
+      end
+    end
+
+    # Pad the queue with songs.
+    #
+    # Returns nothing.
+    def self.pad
+      if Play::Queue.songs.size < 3
+        add_song Song.new(Play::Player.app.tracks.any.get.persistent_ID.get)
       end
     end
 

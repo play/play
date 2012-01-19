@@ -27,7 +27,7 @@ module Play
     #
     # Returns the User.
     def initialize(login,email)
-      @login = login
+      @login = login.downcase
       @email = email
     end
 
@@ -47,6 +47,7 @@ module Play
     #
     # Returns the User, nil if no User found.
     def self.find(login)
+      login.downcase!
       return nil if !$redis.sismember(KEY, login)
       email = $redis.get "#{KEY}:#{login}:email"
 

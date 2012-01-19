@@ -35,7 +35,7 @@ module Play
     #
     # Returns the String configuration value for `office_url`.
     def self.url
-      Play.config['office_url']
+      Play.config.office_url
     end
   end
 end
