@@ -34,9 +34,13 @@ private
   def current
     now_playing = Play::Player.now_playing
     now_playing = now_playing.to_hash if now_playing
+
+    songs = Play::Queue.songs
+    songs.shift
+
     Yajl.dump({
       :now_playing => now_playing,
-      :songs => Play::Queue.songs
+      :songs => songs.map {|song| song.to_hash }
     })
   end
 end
