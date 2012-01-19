@@ -75,5 +75,5 @@ templates.download_song = """
 """
 
 templates.download_album = """
-  <a class="dl-song icon" href="/song/{{id}}/download">download album</a>
+  <a class="dl-song icon" href="/artist/{{artist}}/album/{{album}}/download">download album</a>
 """
