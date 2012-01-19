@@ -63,6 +63,20 @@ module Play
       Play::Queue.playlist.tracks.get.each { |record| record.delete }
     end
 
+    # Cleans the queue. Removes already-played songs.
+    #
+    # Returns nothing.
+    def self.clean
+      ids = Play::Queue.playlist.tracks.get.map{ |record| record.persistent_ID.get }
+      current = Play::Player.now_playing.id
+      position = ids.index(current)
+
+      ids[0..position].each do |id|
+        return if id == current
+        Play::Queue.playlist.tracks[Appscript.its.persistent_ID.eq(id)].get[0].delete
+      end
+    end
+
     # The songs currently in the Queue.
     #
     # Returns an Array of Songs.
