@@ -31,8 +31,11 @@ private
   #
   # Returns a String, JSON-encoded.
   def current
-    hash = { :now_playing => Play::Player.now_playing.to_json }
-    hash.merge Play::Queue.to_json
-    Yajl.dump hash
+    now_playing = Play::Player.now_playing
+    now_playing = now_playing.to_hash if now_playing
+    Yajl.dump({
+      :now_playing => now_playing,
+      :songs => Play::Queue.songs
+    })
   end
 end
