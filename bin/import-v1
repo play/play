@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+#
+# import-v1
+#
+# Imports your data from the Original Gangster™ version of Play.
+#
+# Dependencies (if you haven't already):
+#
+#   gem install mysql2 redis
+
+require 'rubygems'
+require 'mysql2'
+require 'app/boot'
+
+client = Mysql2::Client.new(:host => "localhost", :username => "root", :database => 'play')
+
+
+# USERS
+client.query("SELECT * FROM users").each do |row|
+  Play::User.new(row['login'], row['email'])
+
+  puts "Birthed one shaggy #{row['login']} scro"
+end
+
+# PLAYS
+client.query("SELECT artists.name AS artist,
+                     songs.title AS song,
+                     users.login AS login
+              FROM votes
+              JOIN users ON users.id = votes.user_id
+              JOIN songs ON songs.id = votes.song_id
+              JOIN artists ON artists.id = songs.artist_id").each do |row|
+
+  song = Play::Song.new \
+    :artist => row['artist'],
+    :name   => row['song']
+  song.id = song.record.get.persistent_ID.get
+
+  Play::History.add song, Play::User.find(row['login'])
+
+  puts "Sup playcount for #{song.id}"
+end
+
+# STARS
+client.query("SELECT artists.name AS artist,
+                     songs.title AS song,
+                     users.login AS login
+              FROM stars
+              JOIN users ON users.id = stars.user_id
+              JOIN songs ON songs.id = stars.song_id
+              JOIN artists ON artists.id = songs.artist_id").each do |row|
+
+  song = Play::Song.new \
+    :artist => row['artist'],
+    :name   => row['song']
+  song.id = song.record.get.persistent_ID.get
+
+  user = Play::User.find(row['login'])
+  user.star(song)
+
+  puts "Starred the holy hell out of #{song.id}"
+end
