@@ -34,7 +34,12 @@ client.query("SELECT artists.name AS artist,
   song = Play::Song.new \
     :artist => row['artist'],
     :name   => row['song']
-  song.id = song.record.get.persistent_ID.get
+  record = song.record
+  if song.record
+    song.id = record.get.persistent_ID.get
+  else
+    "ERROR: No song found."
+  end
 
   Play::History.add song, Play::User.find(row['login'])
 
