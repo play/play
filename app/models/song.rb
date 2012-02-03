@@ -93,7 +93,7 @@ module Play
       if id
         Player.library.tracks[Appscript.its.persistent_ID.eq(id)].get[0]
       else
-        song = Artist.new(artist).songs.select{|song| song.name =~ /^#{name}$/i}.first
+        song = Artist.new(artist).songs.select{|song| song.name =~ /^#{Regexp.escape(name)}$/i}.first
         song.record if song
       end
     end
