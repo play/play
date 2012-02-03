@@ -17,8 +17,12 @@ module Play
     #
     # Returns an Array of Songs.
     def songs
-      Player.app.tracks[Appscript.its.artist.contains(name)].get.map do |record|
-        Song.initialize_from_record(record)
+      if name
+        Player.app.tracks[Appscript.its.artist.contains(name)].get.map do |record|
+          Song.initialize_from_record(record)
+        end
+      else
+        []
       end
     end
 
