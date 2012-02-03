@@ -37,13 +37,11 @@ client.query("SELECT artists.name AS artist,
   record = song.record
   if song.record
     song.id = record.get.persistent_ID.get
+    Play::History.add song, Play::User.find(row['login'])
+    puts "Sup playcount for #{song.id}"
   else
-    "ERROR: No song found."
+    puts "ERROR: No song found."
   end
-
-  Play::History.add song, Play::User.find(row['login'])
-
-  puts "Sup playcount for #{song.id}"
 end
 
 # STARS
