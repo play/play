@@ -1,6 +1,6 @@
 play = exports ? this
 
-socket = new WebSocket('ws://<%= Play.config.hostname %>/realtime')
+socket = new WebSocket('wss://<%= Play.config.hostname %>/realtime')
 
 socket.onopen = () ->
 
