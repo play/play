@@ -83,6 +83,9 @@ module Play
     #
     # Returns nothing.
     def self.pad
+      current_song = Song.find(Play::Player.now_playing.id)
+      add_song current_song if not queued?(current_song)
+
       if Play::Queue.songs.size < 3
         add_song Song.new(Play::Player.app.tracks.any.get.persistent_ID.get)
       end
