@@ -9,7 +9,8 @@ module Play
       :secret     => yaml['gh_secret'],
       :client_id  => yaml['gh_key'],
       :stream_url => yaml['stream_url'],
-      :office_url => yaml['office_url']
+      :office_url => yaml['office_url'],
+      :hostname   => yaml['hostname']
   end
 
 private
