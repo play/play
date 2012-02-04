@@ -1,6 +1,7 @@
 /* Variables */
 
 $purple: #ea36f5;
+$button-gray: #eee;
 
 
 
@@ -12,8 +13,7 @@ $purple: #ea36f5;
 }
 
 body {
-/*   background: url('/images/tactile_noise_mid.png') repeat center center; */
-  background: #f4f4f4;
+  background: url('/images/bg-gray-noise.png') #E2E1DE repeat center center;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
@@ -24,18 +24,16 @@ body {
 }
 
 a {
+  color: $purple;
   text-decoration: none;
-
   transition-property: color;
   transition-duration: .5s;
   transition-timing-function: ease-out;
   -webkit-transition-property: color;
   -webkit-transition-duration: .5s;
-  color: $purple;
 }
 
 a:hover {
-
   color: darken($purple, 25%);
 }
 
@@ -47,14 +45,6 @@ a:hover {
   height: 60px;
   padding: 10px 0;
   margin-bottom: 0px;
-
-/*
-  background: rgba(0,0,0,.5);
-  border-bottom: 1px solid #222222;
-
-  -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5);
-*/
-
 }
 
 #controls {
@@ -72,8 +62,6 @@ a:hover {
   }
 }
 
-
-
 #play {
   background: url('/images/controller-play.png') no-repeat left top;
 }
@@ -89,7 +77,6 @@ a:hover {
 #pause {
   background: url('/images/controller-pause.png') no-repeat left top;
 }
-
 
 .user-logged-in {
   float: right;
@@ -115,28 +102,24 @@ a:hover {
       font-weight: 300;
       line-height: 1.3;
       text-align: bottom;
-      
   }
 
   .name {
     font-weight: 700;
   }
-
   .album-art {
     position: absolute;
     top: 10px;
     right: 10px;
     -webkit-backface-visibility: hidden;
   }
-
   .album-art:hover {
-  }
 
+  }
   img {
     width: 200px;
     height: 200px;
     -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5);
-
   }
 
   em {
@@ -146,8 +129,6 @@ a:hover {
   ul.song-actions {
     position: absolute;
   }
-  
-  
 }
 
 /* QUEUE, HISTORY, AND SEARCH SECTION */
@@ -160,8 +141,6 @@ a:hover {
   height: 43px;
   background: rgba(0,0,0,1);
   border-bottom: 1px solid #222222;
-
-/*   -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5); */
 }
 
 nav[role=queue-history] {
@@ -180,7 +159,6 @@ nav[role=queue-history] {
 form.search {
   position: absolute;
   top: 9px;   right: 30px;
-
 }
 
 .song {
@@ -215,23 +193,7 @@ form.search {
     font-weight: 400;
   }
 
-  ul.song-actions {
-    position: absolute;
-    top: 60px;
 
-    li {
-      display: inline;
-      float: left;
-      margin-right: 10px;
-    }
-    
-    a {
-    font-size: 10px;
-    padding: 5px;
-    background: #eee;
-    color: #ccc;
-    }
-  }
 
   img {
     height: 80px;
@@ -255,19 +217,36 @@ form.search {
   background-color: #fef2ff;
 }
 
+ul.song-actions {
+    position: absolute;
+    top: 60px;
+
+    li {
+      display: inline;
+      float: left;
+      margin-right: 10px;
+    }
+
+    a {
+      font-size: 10px;
+      padding: 5px;
+      background: $button-gray;
+      color: #ccc;
+      border-radius: 2px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+    }
+
+    a:hover {
+      color: darken($purple, 25%);
+      background: darken($button-gray, 10%);
+    }
+  }
 
 
-.icon {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  overflow: hidden;
-  text-indent: -5000px;
-  background: #ccc;
-}
 
 .star, .unstar {
-  display: inline-block; 
+  display: inline-block;
   width: 20px;
   height: 20px;
   overflow: hidden;
@@ -293,8 +272,6 @@ form.search {
   background: url('/images/remove-from-queue.png') no-repeat top left;
 }
 
-
-
 .icon:hover {
   background-position: top right;
 }
@@ -309,7 +286,6 @@ form.search {
 .dl-album {
 
 }
-
 
 /* UPLOADS */
 
