@@ -40,7 +40,7 @@ client.query("SELECT artists.name AS artist,
     Play::History.add song, Play::User.find(row['login'])
     puts "Sup playcount for #{song.id}"
   else
-    puts "ERROR: No song found."
+    puts "ERROR: No song found"
   end
 end
 
@@ -56,10 +56,15 @@ client.query("SELECT artists.name AS artist,
   song = Play::Song.new \
     :artist => row['artist'],
     :name   => row['song']
-  song.id = song.record.get.persistent_ID.get
 
-  user = Play::User.find(row['login'])
-  user.star(song) if user
+  record = song.record
+  if song.record
+    song.id = record.get.persistent_ID.get
+    user = Play::User.find(row['login'])
+    user.star(song) if user
 
-  puts "Starred the holy hell out of #{song.id}"
+    puts "Starred the holy hell out of #{song.id}"
+  else
+    puts "ERROR starring"
+  end
 end
