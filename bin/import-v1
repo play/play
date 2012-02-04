@@ -59,7 +59,7 @@ client.query("SELECT artists.name AS artist,
   song.id = song.record.get.persistent_ID.get
 
   user = Play::User.find(row['login'])
-  user.star(song)
+  user.star(song) if user
 
   puts "Starred the holy hell out of #{song.id}"
 end
