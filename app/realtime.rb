@@ -19,7 +19,6 @@ class Realtime < Rack::WebSocket::Application
 
     @timer = EM::PeriodicTimer.new(1) do
       if last != last=current
-        Play::Queue.clean
         send_data last
       end
       sleep 0.5
