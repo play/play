@@ -87,7 +87,7 @@ module Play
     #
     # Returns a Boolean value.
     def starred?(song)
-      stars.map(&:id).include?(song.id)
+      $redis.smembers("${KEY}:#{login}:stars").include?(song.id)
     end
 
     # Public: Stars a song. Likes a song. Saves a song.
