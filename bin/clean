@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+#
+# clean
+#
+# Cleans your Queue.
+
+require 'app/boot'
+
+Play::Queue.clean
+sleep 1

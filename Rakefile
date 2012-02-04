@@ -33,6 +33,7 @@ end
 
 desc "Start the server"
 task :start do
+  sh "bin/clean &"
   sh "thin start -p5050"
 end
 
