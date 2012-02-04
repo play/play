@@ -6,5 +6,8 @@
 
 require 'app/boot'
 
-Play::Queue.clean
-sleep 1
+while true
+  Play::Queue.clean
+  sleep 1
+  break if `ps aux | grep '[t]hin'`.lines.count` == 0
+end
