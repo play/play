@@ -17,7 +17,7 @@ client = Mysql2::Client.new(:host => "localhost", :username => "root", :database
 
 # USERS
 client.query("SELECT * FROM users").each do |row|
-  Play::User.new(row['login'], row['email'])
+  Play::User.create(row['login'], row['email'])
 
   puts "Birthed one shaggy #{row['login']} scro"
 end
