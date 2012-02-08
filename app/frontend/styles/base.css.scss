@@ -164,7 +164,14 @@ nav[role=queue-history] {
 
 form.search {
   position: absolute;
-  top: 9px;   right: 30px;
+  top: 9px;
+  right: 10px;
+}
+
+.search input {
+  width: 200px;
+  font-size: 25px;
+  color: $purple;
 }
 
 .song {
