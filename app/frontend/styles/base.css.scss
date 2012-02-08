@@ -236,7 +236,6 @@ ul.song-actions {
     a {
       font-size: 10px;
       padding: 5px;
-      background: $button-gray;
       color: #ccc;
       border-radius: 2px;
       -webkit-border-radius: 2px;
@@ -245,7 +244,6 @@ ul.song-actions {
 
     a:hover {
       color: darken($purple, 25%);
-      background: darken($button-gray, 10%);
     }
   }
 
@@ -285,7 +283,6 @@ ul.song-actions {
 .download {
   font-size: 10px;
   padding: 5px;
-  background: #eee;
   color: #ccc;
 }
 
