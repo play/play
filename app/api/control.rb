@@ -40,13 +40,22 @@ module Play
       true
     end
 
-    get "/volume" do
+    get "/app-volume" do
       Player.app_volume.to_s
     end
 
-    put "/volume" do
+    put "/app-volume" do
       Player.app_volume = params[:volume]
       Player.app_volume.to_s
+    end
+
+    get "/system-volume" do
+      Player.system_volume.to_s
+    end
+
+    put "/system-volume" do
+      Player.system_volume = params[:volume]
+      Player.system_volume.to_s
     end
 
   end
