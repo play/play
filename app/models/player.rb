@@ -61,7 +61,7 @@ module Play
     #
     # Returns the current volume setting.
     def self.system_volume=(setting)
-      `osascript -e 'set volume output volume #{setting}' 2>/dev/null"`
+      `osascript -e 'set volume output volume #{setting}' 2>/dev/null`
       setting
     end
 
