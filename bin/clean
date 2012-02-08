@@ -6,6 +6,8 @@
 
 require 'app/boot'
 
+sleep 2
+
 while true
   Play::Queue.clean
   sleep 1
