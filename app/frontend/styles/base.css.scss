@@ -262,6 +262,10 @@ ul.song-actions {
 
 }
 
+  .star:hover, .unstar:hover {
+    opacity: .5;
+  }
+
 .unstar {
   background: url('/images/star-it.png') no-repeat top right;
 }
