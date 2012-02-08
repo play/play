@@ -9,5 +9,5 @@ require 'app/boot'
 while true
   Play::Queue.clean
   sleep 1
-  break if `ps aux | grep '[t]hin'`.lines.count == 0
+  break if `ps aux | grep '[t]hin'`.lines.count < 1
 end
