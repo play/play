@@ -15,7 +15,7 @@ templates.list = """
 
 templates.song = """
   <div class="song">
-        
+
     <ul class="song-info">
       <li>{{{artist_tag}}}</li>
       <li>{{name}}</li>
@@ -41,11 +41,11 @@ templates.now_playing = """
     <li class="artist"><em>by</em> {{{artist_tag}}}</li>
     <li class="album"><em>from</em> {{{album_tag}}}</li>
   </ul>
-  
-  
+
+
   {{>star}}
   {{>download_song}}
-  
+
 
 
   <a href="#" data-artist="{{{artist}}}" data-album="{{{album}}}" class="album album-art" alt="{{{album}}}">{{{art_tag}}}</a>
@@ -53,7 +53,7 @@ templates.now_playing = """
 
 templates.star = """
   {{#starred}}
-    <a href="/unstar" class="unstar data-song-id="{{id}}">unstar it</a>
+    <a href="/unstar" class="unstar" data-song-id="{{id}}">unstar it</a>
   {{/starred}}
 
   {{^starred}}
