@@ -83,6 +83,7 @@ $(document).ready () ->
   # data-song-id - The Data attribute set on the link whose value is the
   #                persistent ID of the song.
   $('.star').live 'click', () ->
+    play.spin(true)
     element = $(@)
     id = element.data('song-id')
     $.ajax
@@ -92,6 +93,7 @@ $(document).ready () ->
         id: id
       success: (response) ->
         element.replaceWith(renderStar(id, true))
+        play.spin(false)
     false
 
   # Unstars this song.
@@ -99,6 +101,7 @@ $(document).ready () ->
   # data-song-id - The Data attribute set on the link whose value is the
   #                persistent ID of the song.
   $('.unstar').live 'click', () ->
+    play.spin(true)
     element = $(@)
     id = element.data('song-id')
     $.ajax
@@ -108,6 +111,7 @@ $(document).ready () ->
         id: id
       success: (response) ->
         element.replaceWith(renderStar(id, false))
+        play.spin(false)
     false
 
   # Queues up this song.
