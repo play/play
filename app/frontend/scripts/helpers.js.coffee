@@ -6,6 +6,7 @@ play = exports ? this
 #
 # Does that.
 play.updateSongs = (path, method) ->
+  play.spin(true)
   $.ajax
     type: method,
     url: path,
@@ -13,6 +14,7 @@ play.updateSongs = (path, method) ->
       list = listFromJson(JSON.parse(response))
       songs = Mustache.to_html(templates.list,list,templates)
       $('#songs').html(songs)
+      play.spin(false)
 
 # Renders the "Now Playing" block off of JSON.
 #
@@ -37,6 +39,7 @@ play.requestAndRenderNowPlaying = () ->
 #
 # Returns like a boss.
 play.renderQueue = () ->
+  play.spin(true)
   $.ajax
     url: '/queue',
     dataType: 'json',
@@ -44,6 +47,7 @@ play.renderQueue = () ->
       song   = listFromJson(response)
       stache = Mustache.to_html(templates.list,song,templates)
       $('#songs').html(stache)
+      play.spin(false)
 
 # Renders the star partial. It handles rendering whether something display "star
 # this song" or "unstar this song".
@@ -65,6 +69,17 @@ play.renderStar = (id, starred) ->
 # Returns a Song.
 play.songFromJson = (json) ->
   new Song(json)
+
+# Renders or hides the spinner.
+#
+# display - a Boolean value of whether to display the spinner.
+#
+# Cool.
+play.spin = (display) ->
+  if display
+    $('.spinner').show()
+  else
+    $('.spinner').hide()
 
 # Create a List from a JSON-backed Array of Songs.
 #
