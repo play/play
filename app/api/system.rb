@@ -11,7 +11,7 @@ module Play
         art
       else
         dir = File.dirname(File.expand_path(__FILE__))
-        send_file "#{dir}/../frontend/public/images/album-placeholder.png",
+        send_file "#{dir}/../frontend/public/images/art-placeholder.png",
           :disposition => 'inline'
       end
     end
