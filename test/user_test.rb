@@ -41,16 +41,6 @@ context "User" do
     assert_equal 'xyz', @user.stars.first.id
   end
 
-  test "starred?" do
-    song = Song.new(:id => 'xyz')
-
-    Song.stubs(:find).with('xyz').returns(song)
-    @user.star(song)
-
-    assert  @user.starred?(song)
-    assert !@user.starred?(Song.new(:id => 'abc'))
-  end
-
   test "unstar" do
     song = Song.new(:id => 'xyz')
     Song.stubs(:find).with('xyz').returns(song)
