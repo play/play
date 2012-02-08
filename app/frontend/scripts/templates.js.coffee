@@ -35,18 +35,14 @@ templates.song = """
 """
 
 templates.now_playing = """
-
   <ul>
     <li class="name">{{name}}</li>
     <li class="artist"><em>by</em> {{{artist_tag}}}</li>
     <li class="album"><em>from</em> {{{album_tag}}}</li>
   </ul>
 
-
   {{>star}}
   {{>download_song}}
-
-
 
   <a href="#" data-artist="{{{artist}}}" data-album="{{{album}}}" class="album album-art" alt="{{{album}}}">{{{art_tag}}}</a>
 """
