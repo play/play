@@ -68,6 +68,7 @@ module Play
     # Returns nothing.
     def self.clean
       pad
+      ensure_playlist
 
       ids = Play::Queue.playlist.tracks.get.map{ |record| record.persistent_ID.get }
       current = Play::Player.now_playing.id
@@ -76,6 +77,16 @@ module Play
       ids[0..position].each do |id|
         return if id == current
         Play::Queue.playlist.tracks[Appscript.its.persistent_ID.eq(id)].get[0].delete
+      end
+    end
+
+    # Ensure that we're currently playing on the Play playlist. Don't let anyone
+    # else use iTunes, because fuck 'em.
+    #
+    # Returns nil.
+    def self.ensure_playlist
+      if Play::Player.app.current_playlist.get.name.get != name
+        Play::Player.app.playlists[name].get.play
       end
     end
 
