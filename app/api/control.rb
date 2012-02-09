@@ -5,7 +5,9 @@ module Play
 
     get "/now_playing" do
       if Player.now_playing
-        Yajl.dump Player.now_playing.to_hash
+        song = Player.now_playing
+        song.starred = current_user.starred?(song)
+        Yajl.dump song.to_hash
       else
         nil
       end
