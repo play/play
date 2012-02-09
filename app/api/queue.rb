@@ -52,7 +52,6 @@ module Play
       songs = Artist.new(subject).songs
       if songs.size > 0
         songs = songs.shuffle[0..9]
-        puts songs.inspect
         songs.each do |song|
           Queue.add_song(song)
           History.add(song,current_user)
