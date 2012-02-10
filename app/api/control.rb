@@ -4,8 +4,6 @@ module Play
   class App < Sinatra::Base
 
     get "/now_playing" do
-      content_type :json
-      
       if Player.now_playing
         song = Player.now_playing
         song.starred = current_user.starred?(song)
