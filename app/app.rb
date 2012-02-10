@@ -37,6 +37,8 @@ module Play
     before do
       return if ENV['RACK_ENV'] == 'test'
 
+      content_type :json
+
       session_not_required = request.path_info =~ /\/login/ ||
                              request.path_info =~ /\/auth/
 
@@ -67,10 +69,12 @@ module Play
     end
 
     get "/" do
+      content_type :html
       mustache :index
     end
 
     get "/logout" do
+      content_type :html
       logout!
       redirect 'https://github.com'
     end
