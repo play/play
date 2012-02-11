@@ -11,5 +11,5 @@ sleep 2
 while true
   Play::Queue.clean
   sleep 1
-  break if `ps aux | grep '[t]hin'`.lines.count < 1
+  break if `ps aux | grep thin | grep -v grep`.lines.count < 1
 end
