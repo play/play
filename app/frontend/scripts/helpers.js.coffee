@@ -11,7 +11,7 @@ play.updateSongs = (path, method) ->
     type: method,
     url: path,
     success: (response) ->
-      list = listFromJson(JSON.parse(response))
+      list = listFromJson(response)
       songs = Mustache.to_html(templates.list,list,templates)
       $('#songs').html(songs)
       play.spin(false)
