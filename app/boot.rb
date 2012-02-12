@@ -12,6 +12,7 @@ require 'sinatra_auth_github'
 require 'yajl'
 require 'sass'
 require 'appscript' if RUBY_PLATFORM.downcase.include?("darwin") && !ENV['CI']
+require 'pusher'
 
 require 'play'
 

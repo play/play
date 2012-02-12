@@ -10,8 +10,8 @@ gem 'sinatra_auth_github', '~>0.3.0'
 gem 'sprockets'
 gem 'sass',          '~>3.1'
 gem 'coffee-script'
-gem 'eventmachine',  '~>1.0.0.beta.4'
 gem 'websocket-rack'
+gem 'pusher'
 
 if RUBY_PLATFORM.downcase.include?("darwin")
   gem 'rb-appscript'
