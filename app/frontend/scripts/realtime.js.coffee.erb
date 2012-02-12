@@ -1,15 +1,10 @@
 play = exports ? this
 
-socket = new WebSocket('wss://<%= Play.config.hostname %>/realtime')
+pusher = new Pusher('<%= Play.config.pusher_key %>')
+channel = pusher.subscribe('now_playing_updates')
 
-socket.onopen = () ->
-
-socket.onmessage = (message) ->
-  song = JSON.parse(message.data).now_playing
-
-  if song
-    play.renderNowPlaying(song)
-
-  list = listFromJson(JSON.parse(message.data))
+channel.bind 'update_now_playing', (message) ->
+  play.renderNowPlaying(message.now_playing)
+  list = listFromJson(message)
   songs = Mustache.to_html(templates.list,list,templates)
   $('#songs').html(songs)
