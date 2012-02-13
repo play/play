@@ -31,7 +31,12 @@
       <!-- <a id="logo">[Play]</a> -->
 
       <section id="controls">
-        <span>Play</span>
+        <a href="/play" id="play" title="Click to begin streaming music in your browser">
+          <audio id="play-stream">
+            <source src="{{stream}}" type="audio/mp3" />
+          </audio>
+          <span>Play</span>
+        </a>
       </section><!-- /#controls -->
 
       <span class="user-logged-in">Hello, <a href="/{{login}}">@{{login}}</a></span>
