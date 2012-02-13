@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+#
+# realtime
+#
+# Sends now_playing to pusher to update web clients
+
+require 'app/boot'
+
+class Realtime
+  def initialize
+    @last = nil
+  end
+
+  def update
+    if @last != @last=current
+      Pusher['now_playing_updates'].trigger('update_now_playing', @last)
+    end
+  end
+
+private
+
+  # The current JSON representation of Play that we send back.
+  #
+  # Returns a String, JSON-encoded.
+  def current
+    now_playing = Play::Player.now_playing
+    now_playing = now_playing.to_hash if now_playing
+
+    songs = Play::Queue.songs
+    songs.shift
+
+    Yajl.dump({
+      :now_playing => now_playing,
+      :songs => songs.map {|song| song.to_hash }
+    })
+  end
+end
+
+sleep 2
+
+realtime = Realtime.new
+
+while true
+  realtime.update
+  sleep 0.5
+  break if `ps aux | grep thin | grep -v grep`.lines.count < 1
+end

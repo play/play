@@ -7,9 +7,6 @@ stylesheets.append_path 'app/frontend/styles'
 javascripts = Sprockets::Environment.new
 javascripts.append_path 'app/frontend/scripts'
 
-require 'realtime'
-map('/realtime') { run Realtime.new }
-
 map("/css")      { run stylesheets }
 map("/js")       { run javascripts }
 
