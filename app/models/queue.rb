@@ -88,6 +88,8 @@ module Play
       if Play::Player.app.current_playlist.get.name.get != name
         Play::Player.app.playlists[name].get.play
       end
+    rescue Exception => e
+      # just in case!
     end
 
     # Pad the queue with songs.
@@ -106,6 +108,8 @@ module Play
       playlist.tracks.get.map do |record|
         Song.find(record.persistent_ID.get)
       end
+    rescue Exception => e
+      # just in case!
     end
 
     # Is this song queued up to play?
