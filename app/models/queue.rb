@@ -94,7 +94,7 @@ module Play
     #
     # Returns nothing.
     def self.pad
-      if Play::Queue.songs.size < 3
+      if Play::Queue.songs.size < 2
         add_song Song.new(Play::Player.app.tracks.any.get.persistent_ID.get)
       end
     end
