@@ -8,31 +8,13 @@ module Play
     #
     # Returns a String.
     def self.name
-      'Play'
-    end
-
-    # Does the Queue exist as a playlist in iTunes?
-    #
-    # Returns a Boolean.
-    def self.created?
-      !Player.app.playlists[Appscript.its.name.eq(name)].get.empty?
-    end
-
-    # Handles all the setup for the Queue.
-    #
-    # Returns nothing.
-    def self.setup
-      if !created?
-        Player.app.make(:new => :playlist, :with_properties => {:name => name})
-      end
+      'iTunes DJ'
     end
 
     # The Playlist object that the Queue resides in.
     #
     # Returns an Appscript::Reference to the Playlist.
     def self.playlist
-      setup
-
       Player.app.playlists[name].get
     end
 
@@ -63,23 +45,6 @@ module Play
       Play::Queue.playlist.tracks.get.each { |record| record.delete }
     end
 
-    # Cleans the queue. Removes already-played songs.
-    #
-    # Returns nothing.
-    def self.clean
-      pad
-      ensure_playlist
-
-      ids = Play::Queue.playlist.tracks.get.map{ |record| record.persistent_ID.get }
-      current = Play::Player.now_playing.id
-      position = ids.index(current)
-
-      ids[0..position].each do |id|
-        return if id == current
-        Play::Queue.playlist.tracks[Appscript.its.persistent_ID.eq(id)].get[0].delete
-      end
-    end
-
     # Ensure that we're currently playing on the Play playlist. Don't let anyone
     # else use iTunes, because fuck 'em.
     #
@@ -90,15 +55,6 @@ module Play
       end
     rescue Exception => e
       # just in case!
-    end
-
-    # Pad the queue with songs.
-    #
-    # Returns nothing.
-    def self.pad
-      if Play::Queue.songs.size < 2
-        add_song Song.new(Play::Player.app.tracks.any.get.persistent_ID.get)
-      end
     end
 
     # The songs currently in the Queue.
