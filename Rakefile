@@ -33,8 +33,7 @@ end
 
 desc "Start the server"
 task :start do
-  sh "bin/realtime &"
-  sh "thin start -p5050"
+  Kernel.exec "bundle exec foreman start"
 end
 
 namespace :redis do
