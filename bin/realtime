@@ -15,6 +15,7 @@ class Realtime
     if @last != @last=current
       Pusher['now_playing_updates'].trigger('update_now_playing', @last)
     end
+  rescue Pusher::ConfigurationError
   end
 
 private
@@ -31,7 +32,7 @@ private
 
     Yajl.dump({
       :now_playing => now_playing,
-      :songs => songs.map {|song| song.to_hash }
+      :songs       => songs.map {|song| song.to_hash }
     })
   end
 end
@@ -41,7 +42,10 @@ sleep 2
 realtime = Realtime.new
 
 while true
-  realtime.update
-  sleep 0.5
-  break if `ps aux | grep thin | grep -v grep`.lines.count < 1
+  begin
+    sleep 1
+    realtime.update
+  rescue Exception => e
+    puts "An Exception: \n  #{e}"
+  end
 end
