@@ -8,6 +8,7 @@
 //= require realtime
 //= require behaviors
 //= require upload
+//= require tv
 
 play = exports ? this
 
