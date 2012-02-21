@@ -1,9 +1,6 @@
 module Play
   class Player
 
-    # The last played song.
-    attr_accessor :last_played
-    
     # The application we're using. iTunes, dummy.
     #
     # Returns an Appscript instance of the music app.
