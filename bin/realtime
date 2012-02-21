@@ -4,6 +4,8 @@
 #
 # Sends now_playing to pusher to update web clients
 
+$PROGRAM_NAME = 'play [realtime-daemon]'
+
 require 'app/boot'
 
 class Realtime
