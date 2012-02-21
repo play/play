@@ -17,21 +17,11 @@ module Play
       
     # Public: Sends updated now playing song and queue.
     #
-    # now_playing_and_queue - JSON string of now_playing Song and the
-    # current Queue.
+    # now_playing - Song we want the web client to say is now playing.
     #
-    def self.update_queue_and_now_playing(now_playing, queue)
-      now_playing = now_playing.to_hash if now_playing
-
-      songs = queue
-      songs.shift
-
-      data = Yajl.dump({
-        :now_playing => now_playing,
-        :songs       => songs.map {|song| song.to_hash }
-      })
-
-      push_update("now_playing_updates", "update_now_playing", data)
+    def self.update_now_playing(now_playing)
+      song = Yajl.dump now_playing.to_hash
+      push_update("now_playing_updates", "update_now_playing", song)
     end
 
   end
