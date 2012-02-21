@@ -6,45 +6,17 @@
 
 require 'app/boot'
 
-class Realtime
-  def initialize
-    @last = nil
-  end
-
-  def update
-    if @last != @last=current
-      Pusher['now_playing_updates'].trigger('update_now_playing', @last)
-    end
-  rescue Pusher::ConfigurationError
-  end
-
-private
-
-  # The current JSON representation of Play that we send back.
-  #
-  # Returns a String, JSON-encoded.
-  def current
-    now_playing = Play::Player.now_playing
-    now_playing = now_playing.to_hash if now_playing
-
-    songs = Play::Queue.songs
-    songs.shift
-
-    Yajl.dump({
-      :now_playing => now_playing,
-      :songs       => songs.map {|song| song.to_hash }
-    })
-  end
-end
-
 sleep 2
 
-realtime = Realtime.new
+last_song = nil
 
 while true
   begin
-    sleep 1
-    realtime.update
+    sleep 0.1
+    if last_song != Play::Player.now_playing
+      last_song = Play::Player.now_playing
+      Play::Player.song_changed!
+    end
   rescue Exception => e
     puts "An Exception: \n  #{e}"
   end

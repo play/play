@@ -1,6 +1,9 @@
 module Play
   class Player
 
+    # The last played song.
+    attr_accessor :last_played
+    
     # The application we're using. iTunes, dummy.
     #
     # Returns an Appscript instance of the music app.
@@ -101,6 +104,13 @@ module Play
       Song.new(app.current_track.persistent_ID.get)
     rescue Appscript::CommandError
       nil
+    end
+    
+    # Handle song change event.
+    #
+    #
+    def self.song_changed!
+      Realtime.update_queue_and_now_playing(now_playing, Queue.songs)
     end
 
     # Search all songs for a given song title.
