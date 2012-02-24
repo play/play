@@ -9,12 +9,12 @@ context "Realtime" do
               :name   => 'Stress'
   end
 
-  test "pusher push" do
+  test "pusher credentials" do
     assert_nothing_raised do
-      assert Pusher["test"].trigger("test_event", "some valid data")
+      assert Pusher["test"].trigger!("test_event", "some valid data")
     end
   end
-  
+
   test "push now_playing update" do
     assert Realtime.update_now_playing(@song)
   end
