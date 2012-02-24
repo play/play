@@ -3,3 +3,131 @@
 # bootstrap
 #
 # TURN THIS MAC INTO A MUSIC STREAMING MACHINEEEEEEEEEE
+
+set -e
+
+#
+# Welcome to Play
+#
+
+echo ""
+echo "  play ►"
+echo "  a nifty server for your musics."
+echo ""
+
+#
+# Check for Redis
+#
+if test ! $(which redis-cli)
+then
+  echo "  x You need to install Redis. If you use Homebrew, you can run:"
+  echo "    brew install redis"
+  exit
+else
+  echo "  + Redis found."
+fi
+
+#
+# Check for Bundler
+#
+if test ! $(which bundle)
+then
+  echo "  x You need to install Bundler:"
+  echo "    gem install bundler"
+  exit
+else
+  echo "  + Bundler found."
+fi
+
+#
+# iTunes
+#
+if test $(osascript -e '
+  tell application "iTunes"
+    if exists playlist "iTunes DJ" then
+      0
+    else
+      return
+    end if
+  end tell')
+then
+  echo "  + iTunes is ready to rock."
+else
+  echo "  x You need to set up iTunes DJ. Open iTunes, go into its preferences, "
+  echo "    and then make sure the 'iTunes DJ' box is checked."
+  exit
+fi
+
+#
+# Install gems
+#
+echo "  + Bootstrapping your Rubies."
+bundle install --quiet
+
+#
+# Check for Nicecast
+#
+if test -d /Applications/Nicecast.app -o -d ~/Applications/Nicecast.app
+then
+  echo "  + Nicecast was found; you can stream!"
+else
+  echo "  - Couldn't find Nicecast. While not required, Nicecast is how we stream"
+  echo "    Play to other clients outside of the office. You can download and buy"
+  echo "    Nicecast from:"
+  echo ""
+  echo "    http://rogueamoeba.com/nicecast/"
+  exit
+fi
+
+#
+#
+#
+
+#
+# GitHub setup
+#
+echo ""
+echo "  + You need to register your Play instance on GitHub. "
+echo ""
+echo "    Unless you're putting play on a different hostname, you likely will"
+echo "    want to use the following values:"
+echo ""
+echo "       Main URL:     http://localhost:5050"
+echo "       Callback URL: http://localhost:5050/auth/github/callback"
+echo ""
+echo "    Once you've registered a new application, you'll need to grab the"
+echo "    *client ID* and the *client secret*."
+echo ""
+echo "    Press \"return\" to open a browser window and enter your OAuth details."
+read
+open "https://github.com/account/applications/new"
+
+echo "  + What's your GitHub client ID?     › \c"
+read client_id
+echo "  + What's your GitHub client secret? › \c"
+read client_secret
+
+
+#
+# Cache Pusher credentials
+#
+
+
+#
+# SUCCESS, BRO!
+#
+
+echo "  + Configuration settings saved to config/play.yml."
+echo "    Feel free to manually update the file anytime you'd like."
+
+echo ""
+
+
+#
+# Startup instructions
+#
+
+echo ""
+
+echo "  Good work. We're ready to rock."
+echo "  Run 'rake start' to start playing."
