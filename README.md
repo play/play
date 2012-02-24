@@ -67,7 +67,7 @@ Next, you need to run the bootstrap process, which will verify that we can talk
 to iTunes, that you have all of your settings set up correctly, and will guide
 you through the configuration setup:
 
-    bin/bootstrap
+    script/bootstrap
 
 During the bootstrap process you'll be asked to enter your [Pusher][pusher]
 credentials. This is optional, but it'll let you get realtime updates to your

@@ -27,7 +27,7 @@ module Play
 
         # iTunes needs a filetype it likes, so fuck it, .mp3 it.
         system "mv", tmpfile.path, tmpfile.path + '.mp3'
-        system "./bin/add-to-itunes", tmpfile.path + '.mp3'
+        system "./script/add-to-itunes", tmpfile.path + '.mp3'
       end
 
       true
