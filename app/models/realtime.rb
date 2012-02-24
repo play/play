@@ -12,8 +12,6 @@ module Play
     def self.update_now_playing(now_playing)
       song = Yajl.dump now_playing.to_hash
       Pusher["now_playing_updates"].trigger("update_now_playing", song)
-    rescue Pusher::Error => e
-      false
     end
 
   end
