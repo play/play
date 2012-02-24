@@ -150,6 +150,6 @@ fine ladies and gentlemen at [GitHub](https://github.com/github). We've also
 benefited from a lot of hard work from our
 [contributors](https://github.com/holman/play/contributors).
 
-[nicecast]: https://github.com
-[campfire]: https://github.com
-[pusher]:   https://github.com
+[nicecast]: http://rogueamoeba.com/nicecast/
+[campfire]: http://campfirenow.com/
+[pusher]:   http://pusher.com/
