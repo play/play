@@ -147,7 +147,7 @@ Fork the project, make your commits, then send a Pull Request.
 
 Play was written by [Zach Holman](https://twitter.com/holman) and shaped by the
 fine ladies and gentlemen at [GitHub](https://github.com/github). We've also
-benefitted from a lot of hard work from our
+benefited from a lot of hard work from our
 [contributors](https://github.com/holman/play/contributors).
 
 [nicecast]: https://github.com
