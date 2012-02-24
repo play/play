@@ -140,6 +140,10 @@ module Play
       }.to_json
     end
 
+    get "/api/online" do
+      { :users => Office.users.map{ |user| user[:office_string] } }.to_json
+    end
+
     def api_user
       User.find_by_login(params[:user_login]) ||
       User.find_by_alias(params[:user_login])

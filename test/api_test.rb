@@ -14,6 +14,8 @@ context "Api" do
                                 :artist => @artist,
                                 :album  => @album)
     @user = Play::User.create(:login => 'holman', :alias => 'zach')
+    @trobrock = Play::User.create(:login => 'trobrock', :alias => 'trobrock', :office_string => 'trobrock')
+    @jsurdilla = Play::User.create(:login => 'jsurdilla', :alias => 'jsurdilla', :office_string => 'jsurdilla')
 
     Play.class_eval do
       def self.client
@@ -165,5 +167,12 @@ context "Api" do
     post "/api/next"
     resp = parse_json(last_response.body.strip)
     assert_equal true, resp[:success]
+  end
+
+  test "/api/online" do
+    Play::Office.expects(:user_string).returns("trobrock,jsurdilla")
+    get "/api/online"
+    resp = parse_json(last_response.body.strip)
+    assert_equal ["trobrock","jsurdilla"], resp[:users]
   end
 end
