@@ -103,15 +103,28 @@ module Play
       nil
     end
 
-    # Search all songs for a given song title.
+    # Search all songs for a keyword.
+    #
+    # Search workflow:
+    #   - Search for exact match on Artist name.
+    #   - Search for exact match on Song title.
+    #   - Search for fuzzy match on Song title.
     #
     # keyword - The String keyword to search for.
     #
     # Returns an Array of matching Songs.
     def self.search(keyword)
-      library.search(:for => keyword).map do |record|
-        Song.new(record.persistent_ID.get)
-      end
+      # Exact Artist match.
+      songs = library.tracks[Appscript.its.artist.eq(keyword)].get
+      return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
+
+      # Exact Song match.
+      songs = library.tracks[Appscript.its.name.eq(keyword)].get
+      return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
+
+      # Fuzzy Song match.
+      songs = library.tracks[Appscript.its.name.contains(keyword)].get
+      songs.map{|record| Song.new(record.persistent_ID.get)}
     end
 
   end
