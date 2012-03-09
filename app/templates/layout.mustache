@@ -31,26 +31,34 @@
 
       <!-- <a id="logo">[Play]</a> -->
 
-      <section id="controls">
-        <a href="#" id="play">
-          <span>Play</span>
-        </a>
-      </section><!-- /#controls -->
-
       <span class="user-logged-in">Hello, <a href="/{{login}}">@{{login}}</a></span>
 
     </header>
   </section>
 
+  <section id="controls">
+    <a href="#" id="previous">
+      <span>Previous</span>
+    </a>
+    <a href="#" id="play" {{^paused?}}style="display: none;"{{/paused?}}>
+      <span>Play</span>
+    </a>
+    <a href="#" id="pause" {{#paused?}}style="display: none;"{{/paused?}}>
+      <span>Pause</span>
+    </a>
+    <a href="#" id="next">
+      <span>Next</span>
+    </a>
+  </section>
 
   <section id="now-playing" class="row">
 
   </section>
 
-
   <section id="queue-results" class="row">
 
     <header>
+
       <nav role="queue-history">
         <a class="queue" href="/">Queue</a>
         <a class="history" href="/history">History</a>
