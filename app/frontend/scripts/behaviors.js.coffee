@@ -17,26 +17,32 @@ $(document).ready () ->
 
   # Plays the stream.
   $('#play').click () ->
-    stream = $('#play-stream').get(0)
-    if stream.paused
-      stream.play()
-    else
-      stream.pause()
+    $.ajax
+      url: "/play",
+      type: "PUT",
+      success: () =>
+        $(this).toggle()
+        $('#pause').toggle()
     false
 
   # Pauses music.
   $('#pause').click () ->
-    updateSongs("/pause", "PUT")
+    $.ajax 
+      url: "/pause",
+      type: "PUT",
+      success: () =>
+        $(this).toggle()
+        $('#play').toggle()
     false
 
   # Goes back to the previous track.
   $('#previous').click () ->
-    updateSongs("/previous", "PUT")
+     $.ajax({url: "/previous", type: "PUT"})
     false
 
   # Goes to the next track.
   $('#next').click () ->
-    updateSongs("/next", "PUT")
+     $.ajax({url: "/next", type: "PUT"})
     false
 
   # Pull in all the songs for a particular artist.

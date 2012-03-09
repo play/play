@@ -54,14 +54,17 @@ a:hover {
 }
 
 #controls {
-  float: left;
-  height: 40px;
-  margin: 5px 0 0 30px;
+  position: relative;
+  width: 790px;
+  height: 30px;
+  margin: -40px auto 0 auto;
   a {
     display: inline-block;
-    width: 26px;
-    height: 30px;
+    cursor: pointer;
+    width: 13px;
+    height: 15px;
     text-indent: -5000px;
+    margin: 0 5px;
   }
   span {
     visibility: hidden;
@@ -69,7 +72,7 @@ a:hover {
 }
 
 #play {
-  background: url('/images/controller-play.png') no-repeat left top;
+  background: url('/images/controller-play-small.png') no-repeat left top;
 }
 
 #play:hover {
@@ -77,11 +80,30 @@ a:hover {
 }
 
 #pause {
-  background: url('/images/controller-pause.png') no-repeat left top;
+  background: url('/images/controller-pause-small.png') no-repeat left top;
 }
 
-#pause {
-  background: url('/images/controller-pause.png') no-repeat left top;
+#previous {
+  background: url('/images/controller-seek-small.png') no-repeat left top;
+  -webkit-transform: rotate(180deg);
+     -moz-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+       -o-transform: rotate(180deg);
+          transform: rotate(180deg);
+             filter: progid:DXImageTransform.Microsoft.Matrix(
+                     M11=-1, M12=-1.2246063538223773e-16, M21=1.2246063538223773e-16, M22=-1, sizingMethod='auto expand');
+               zoom: 1;
+  -webkit-transform: scale(-1);
+     -moz-transform: scale(-1);
+      -ms-transform: scale(-1);
+       -o-transform: scale(-1);
+          transform: scale(-1);
+             filter: progid:DXImageTransform.Microsoft.Matrix(
+                     M11=0.9998476951563913, M12=0.01745240643728351, M21=-0.01745240643728351, M22=0.9998476951563913,SizingMethod='auto expand');
+}
+
+#next {
+  background: url('/images/controller-seek-small.png') no-repeat left top;
 }
 
 .user-logged-in {
@@ -98,7 +120,7 @@ a:hover {
 #now-playing {
   min-height: 220px;
   background: #fff;
-  padding: 30px;
+  padding: 30px 30px 10px 30px;
   -moz-box-sizing:border-box; /* Firefox */
   -webkit-box-sizing:border-box; /* Safari */
   ul {
