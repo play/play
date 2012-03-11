@@ -111,6 +111,33 @@ read client_secret
 #
 # Cache Pusher credentials
 #
+echo ""
+echo "  + You need a Pusher.com account for the Play web client to get realtime"
+echo "    updates. This is optional."
+echo ""
+echo "    Once you've signed up for a pusher account you will need to setup"
+echo "    an app for play."
+echo ""
+echo "    1. Once you have a pusher account, sign in and click the"
+echo "       *Add new app* button."
+echo ""
+echo "    2. Enter *play* for the name, or whatever you prefer, then click"
+echo "       *Create app*."
+echo ""
+echo "    3. Click on the *API access* tab."
+echo "       Under *API Credentials* you will see an *APP_ID*, *KEY*, and *SECRET*,"
+echo "       we need all three of those."
+echo ""
+echo "    Press \"return\" to open a browser window to the Pusher website."
+read
+open "http://pusher.com"
+
+echo "  + What's your Pusher app ID?       › \c"
+read pusher_app_id
+echo "  + What's your Pusher token KEY?    › \c"
+read pusher_key
+echo "  + What's your Pusher token SECRET? › \c"
+read pusher_secret
 
 #
 # Save config settings
