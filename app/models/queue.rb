@@ -61,9 +61,10 @@ module Play
     #
     # Returns an Array of Songs.
     def self.songs
-      playlist.tracks.get.map do |record|
+      songs = playlist.tracks.get.map do |record|
         Song.find(record.persistent_ID.get)
       end
+      songs.slice(6, songs.length - 6)
     rescue Exception => e
       # just in case!
     end
