@@ -22,8 +22,8 @@ context "api/helpers" do
     songs = json["songs"]
 
     assert_equal ["songs"], json.keys
-    assert_equal ["id", "name", "artist", "album", "starred", "queued"], songs[0].keys
-    assert_equal ["id", "name", "artist", "album", "starred", "queued"], songs[1].keys
+    assert_equal ["album", "artist", "id", "name", "queued", "starred"], songs[0].keys.sort
+    assert_equal ["album", "artist", "id", "name", "queued", "starred"], songs[1].keys.sort
     assert_equal 2, songs.length
 
     @songs.each_with_index do |song, index|
