@@ -12,17 +12,24 @@ module Play
     # songs - An Array of Songs.
     # user  - The User object of the currently logged-in user.
     #
+    # songs and user are both required. If they are not the return JSON
+    # string will contain the "songs" key with an empty array.
+    #
     # Returns a JSONified String.
     def songs_as_json(songs,user)
-      songs.map! do |song|
-        song.starred = user.starred?(song)
-        song.to_hash
+      if songs && user
+        songs.map! do |song|
+          song.starred = user.starred?(song)
+          song.to_hash
+        end
+      else
+        songs = nil
       end
 
       hash = {
-        :songs => songs
+        :songs => songs || []
       }
-      
+
       Yajl.dump hash
     end
 

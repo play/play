@@ -18,20 +18,40 @@ context "api/helpers" do
   end
 
   test "valid songs_as_json with valid parameters" do
-    json = JSON.parse(songs_as_json(@songs, @user))
-    result = json["songs"]
+    json = JSON.parse(songs_as_json @songs, @user)
+    songs = json["songs"]
 
-    assert_equal result[0].keys, ["id", "name", "artist", "album", "starred", "queued"]
-    assert_equal 2, result.length
+    assert_equal ["songs"], json.keys
+    assert_equal ["id", "name", "artist", "album", "starred", "queued"], songs[0].keys
+    assert_equal ["id", "name", "artist", "album", "starred", "queued"], songs[1].keys
+    assert_equal 2, songs.length
 
     @songs.each_with_index do |song, index|
-      assert_equal song[:id], result[index]["id"]
-      assert_equal song[:name], result[index]["name"]
-      assert_equal song[:artist], result[index]["artist"]
-      assert_equal song[:album], result[index]["album"]
-      assert_equal false, result[index]["starred"]
-      assert_equal false, result[index]["queued"]
+      assert_equal song[:id], songs[index]["id"]
+      assert_equal song[:name], songs[index]["name"]
+      assert_equal song[:artist], songs[index]["artist"]
+      assert_equal song[:album], songs[index]["album"]
+      assert_equal false, songs[index]["starred"]
+      assert_equal false, songs[index]["queued"]
     end
+  end
+
+  test "songs_as_json with empty parameters" do
+    json = JSON.parse(songs_as_json nil, nil)
+    assert_equal ["songs"], json.keys
+    assert_equal 0, json["songs"].length
+  end
+
+  test "songs_as_json with songs parameter only" do
+    json = JSON.parse(songs_as_json @songs, nil)
+    assert_equal ["songs"], json.keys
+    assert_equal 0, json["songs"].length
+  end
+
+  test "songs_as_json with user parameter only" do
+    json = JSON.parse(songs_as_json nil, @user)
+    assert_equal ["songs"], json.keys
+    assert_equal 0, json["songs"].length
   end
 
 end
