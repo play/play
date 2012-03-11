@@ -3,10 +3,7 @@ module Play
   class App < Sinatra::Base
 
     get "/queue" do
-      songs = Queue.songs
-      songs.shift
-
-      songs_as_json(songs,current_user)
+      songs_as_json(Queue.songs,current_user)
     end
 
     post "/queue" do

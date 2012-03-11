@@ -18,6 +18,24 @@ module Play
       Player.app.playlists[name].get
     end
 
+    # Get the queue start offset for the iTunes DJ playlist.
+    #
+    # iTunes DJ keeps the current song in the playlist and
+    # x number of songs that have played. This method returns
+    # the current song index in the playlist. Using this we
+    # can calculate how many songs iTunes is keeping as history.
+    # 
+    # Example:
+    #
+    #   Calculate how many songs kept as history:
+    #     playlist_offset - 1
+    #
+    #
+    # Returns Integer offset to queued songs.
+    def self.playlist_offset
+      Player.app.current_track.index.get
+    end
+
     # Public: Adds a song to the Queue.
     #
     # song - A Song instance.
@@ -61,9 +79,10 @@ module Play
     #
     # Returns an Array of Songs.
     def self.songs
-      playlist.tracks.get.map do |record|
+      songs = playlist.tracks.get.map do |record|
         Song.find(record.persistent_ID.get)
       end
+      songs.slice(playlist_offset, songs.length - playlist_offset)
     rescue Exception => e
       # just in case!
     end
