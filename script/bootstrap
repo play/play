@@ -18,7 +18,7 @@ echo ""
 #
 # Check for Redis
 #
-if test ! $(which redis-cli)
+if test ! $(which redis-server)
 then
   echo "  x You need to install Redis. If you use Homebrew, you can run:"
   echo "    brew install redis"
