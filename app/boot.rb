@@ -26,6 +26,8 @@ require 'models/song'
 require 'models/user'
 require 'models/speaker'
 require 'models/airfoil'
+require 'models/realtime'
+
 
 require 'app'
 require 'views/layout'
