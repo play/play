@@ -76,4 +76,4 @@ context "api/speaker" do
     end
   end
 
-end if Airfoil.installed?
+end if Airfoil.installed? and ENV['CI'] != '1'
