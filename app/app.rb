@@ -31,6 +31,8 @@ module Play
     Pusher.key = Play.config.pusher_key
     Pusher.secret = Play.config.pusher_secret
 
+    Airfoil.audio_source = "iTunes" if Airfoil.installed?
+
     set :public_folder, "#{dir}/frontend/public"
     set :static, true
     set :mustache, {

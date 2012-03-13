@@ -39,4 +39,12 @@ context "Airfoil" do
   	end
   end
 
+  test "audio source name get and set" do
+    Airfoil.audio_source = "QuickTime Player"
+    assert_equal "QuickTime Player", Airfoil.audio_source
+
+    Airfoil.audio_source = "iTunes"
+    assert_equal "iTunes", Airfoil.audio_source
+  end
+
 end if Airfoil.installed? and ENV['CI'] != '1'

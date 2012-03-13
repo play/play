@@ -27,6 +27,28 @@ module Play
       }
     end
 
+    # Get the current Airfoil audio source name.
+    #
+    # Returns String Airfoil audio source name.
+    def self.audio_source
+      app.current_audio_source.name.get
+    end
+
+    # Set audio source for Airfoil.
+    #
+    # setting - String application name.
+    #
+    # Returns String audio source name.
+    def self.audio_source=(setting)
+      app.application_sources.id_.get.each do |id|
+        name = app.application_sources.ID(id).name.get
+        if name.eql?(setting)
+          app.current_audio_source.set(app.application_sources.get[id])
+        end
+      end
+      audio_source
+    end
+
     # Get volume for all speakers.
     #
     # Returns Array of Floats speaker volumefrom 0.0 to 1.0.
