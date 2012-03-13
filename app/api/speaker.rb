@@ -3,7 +3,7 @@ module Play
   class App < Sinatra::Base
 
     before do
-      if !Airfoil.installed?
+      if !Airfoil.enabled?
         halt 501
       end
     end

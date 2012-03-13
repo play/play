@@ -91,4 +91,37 @@ context "api/speaker" do
     end
   end
 
+  test "API calls return 501 when airfoil isn't enabled" do
+    Airfoil.enabled = false
+
+    get "/speakers"
+    assert_equal 501, last_response.status
+
+    get "/speaker/#{@speaker.id}"
+    assert_equal 501, last_response.status
+
+    put "/speaker/#{@speaker.id}/volume", :volume => 1
+    assert_equal 501, last_response.status
+
+    put "/speaker/invalid_song_id_4815162342/volume", :volume => 1
+    assert_equal 501, last_response.status
+
+    put "/speaker/#{@speaker.id}/connect"
+    assert_equal 501, last_response.status
+
+    put "/speaker/invalid_song_id_4815162342/connect"
+    assert_equal 501, last_response.status
+
+    put "/speaker/#{@speaker.id}/disconnect"
+    assert_equal 501, last_response.status
+
+    put "/speaker/invalid_song_id_4815162342/disconnect"
+    assert_equal 501, last_response.status
+
+    put "/volume", :volume => 1
+    assert_equal 501, last_response.status
+
+    Airfoil.enabled = true
+  end
+
 end if Airfoil.installed? and ENV['CI'] != '1'

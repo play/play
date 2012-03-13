@@ -1,6 +1,25 @@
 module Play
   class Airfoil
 
+    # Class variable to check if Airfoil is enabled.
+    @@enabled = false
+
+    # Get enabled class variable.
+    #
+    # Returns Boolean.
+    def self.enabled?
+      @@enabled
+    end
+
+    # Set enabled class variable.
+    #
+    # setting - Boolean value.
+    #
+    # Return Boolean.
+    def self.enabled=(setting)
+      @@enabled = setting
+    end
+
     # Get appscript handle for airfoil.
     #
     # Returns an Appscript instance of the airfoil app.

@@ -12,6 +12,14 @@ context "Airfoil" do
     @speaker = Speaker.new "com.rogueamoeba.airfoil.LocalSpeaker"
   end
 
+  test "enabled?" do
+    Airfoil.enabled = false
+    assert_equal false, Airfoil.enabled?
+
+    Airfoil.enabled = true
+    assert Airfoil.enabled?
+  end
+
   test "Get speakers" do
   	speakers = Airfoil.get_speakers
   	assert speakers.length > 0
