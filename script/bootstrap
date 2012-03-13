@@ -113,7 +113,7 @@ read client_secret
 #
 echo ""
 echo "  + You need a Pusher.com account for the Play web client to get realtime"
-echo "    updates. This is optional."
+echo "    updates such as the currently playing track. This is optional."
 echo ""
 echo "    Once you've signed up for a pusher account you will need to setup"
 echo "    an app for play."
