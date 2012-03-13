@@ -41,6 +41,11 @@ context "api/speaker" do
     assert_equal 1, speaker["volume"]
   end
 
+  test "/speaker/:id/volume with invalid id" do
+    put "/speaker/invalid_song_id_4815162342/volume", :volume => 1
+    assert_equal 404, last_response.status
+  end
+
   test "/speaker/:id/connect" do
     @speaker.disconnect!
     assert_equal false, @speaker.connected?
@@ -52,6 +57,11 @@ context "api/speaker" do
     assert_equal true, speaker["connected"]
   end
 
+  test "/speaker/:id/connect with invalid id" do
+    put "/speaker/invalid_song_id_4815162342/connect"
+    assert_equal 404, last_response.status
+  end
+
   test "/speaker/:id/disconnect" do
     @speaker.connect!
     assert @speaker.connected?
@@ -61,6 +71,11 @@ context "api/speaker" do
 
     speaker = response_json["speaker"]
     assert_equal false, speaker["connected"]
+  end
+
+  test "/speaker/:id/disconnect with invalid id" do
+    put "/speaker/invalid_song_id_4815162342/disconnect"
+    assert_equal 404, last_response.status
   end
 
   test "/volume" do

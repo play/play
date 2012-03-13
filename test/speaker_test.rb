@@ -47,4 +47,9 @@ context "Speaker" do
     assert_equal @speaker.volume, speaker[:volume]
   end
 
+  test "speaker valid_id?" do
+    assert Speaker.valid_id?(@speaker.id)
+    assert_equal false, Speaker.valid_id?("wtf_invalid_speaker_id_4815162342")
+  end
+
 end if Airfoil.installed? and ENV['CI'] != '1'

@@ -79,5 +79,15 @@ module Play
       }
     end
 
+    # Check if the speaker ID is valid.
+    #
+    # id - Airfoil speaker ID.
+    #
+    # Returns boolean
+    def self.valid_id?(id)
+      speaker_ids = Airfoil.get_speakers.map { |speaker| speaker.id }
+      speaker_ids.include?(id)
+    end
+
   end
 end
