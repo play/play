@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# Handles recording of system audio.
+#
+# $1 - The function to perform. Possible values:
+#
+#      start - Starts recording.
+#      stop  - Stops recording.
+
+if test "$1" = "start"
+then
+  osascript << APPLESCRIPT
+  tell application "QuickTime Player"
+      activate
+      set recording to new audio recording
+      start recording
+  end tell
+APPLESCRIPT
+else
+  osascript << APPLESCRIPT
+  tell application "QuickTime Player"
+      activate
+      stop document 1
+  end tell
+APPLESCRIPT
+fi
