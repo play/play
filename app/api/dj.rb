@@ -7,8 +7,9 @@ module Play
     end
 
     delete "/dj" do
-      `script/record stop #{current_user.login}`
+      `script/record stop #{params[:note]}`
       Player.play
+      params[:note]
     end
   end
 end
