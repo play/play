@@ -100,7 +100,7 @@ echo "    *client ID* and the *client secret*."
 echo ""
 echo "    Press \"return\" to open a browser window and enter your OAuth details."
 read
-open "https://github.com/account/applications/new"
+open "https://github.com/settings/applications/new"
 
 echo "  + What's your GitHub client ID?     › \c"
 read client_id
