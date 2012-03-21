@@ -11,7 +11,7 @@ module Play
     def vote_for(song)
       votes.create(:song => song, :artist => song.artist)
     end
-    
+
     # The count of the votes for this user. Used for Mustache purposes.
     #
     # Returns the Integer number of votes.
@@ -48,13 +48,10 @@ module Play
     #
     # Returns the User account.
     def self.authenticate(auth)
-      if user = User.where(:login => auth['nickname']).first
-        user
-      else
-        user = User.create(:login => auth['nickname'],
-                           :name => auth['name'],
-                           :email => auth['email'])
-     end
+      User.find_or_create_by_login(auth['nickname']) do |user|
+        user.name = auth['name']
+        user.email = auth['email']
+      end
     end
   end
 end
