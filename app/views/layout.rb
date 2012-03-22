@@ -14,6 +14,10 @@ module Play
         Player.now_playing
       end
 
+      def airfoil?
+        Airfoil.enabled?
+      end
+
     end
   end
 end

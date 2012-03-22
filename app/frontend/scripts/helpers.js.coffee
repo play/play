@@ -90,3 +90,48 @@ play.listFromJson = (json) ->
   songs = json.songs.map (song) ->
     songFromJson(song)
   new List(songs)
+
+# Render the list of speakers from the Speaker api into
+# the speaker controls.
+#
+# Returns nothing.
+play.renderSpeakers = () ->
+  $.ajax
+    url: '/speakers',
+    type: 'GET',
+    success: (response) ->
+      $('section.speakers').html ''
+      for speaker, index in response.speakers
+        s = new Speaker(index, speaker)
+        $('section.speakers').append Mustache.to_html(templates.speaker,s,templates)
+        $('#slider_' + index + '_volume').slider
+          range: "min",
+          value: speaker.volume,
+          min: 0,
+          max: 1,
+          step: 0.05,
+          disabled: !speaker.connected,
+          slide: (event, ui) ->
+            updateSpeakerVolume $(this).data('speaker-id'), ui.value
+            return
+      if $('section.speakers').is(":hidden")
+        $('section.speakers').fadeIn()
+      return
+  return
+
+# Update speaker volume slider.
+#
+# speaker - String speaker Id.
+# volume  - Float 0.0 to 1.0 speaker volume.
+#
+# Returns nothing.
+play.updateSpeakerVolume = (speaker, volume) ->
+  url = "/speaker/" + speaker + "/volume"
+  $.ajax
+    url: url,
+    type: 'put',
+    data: {volume: volume}
+    complete: () ->
+      renderSpeakers()
+      return
+  return

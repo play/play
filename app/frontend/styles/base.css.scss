@@ -21,6 +21,7 @@ body {
   width: 840px;
   position: relative;
   margin: 0 auto;
+  z-index: 2;
 }
 
 a {
@@ -93,12 +94,96 @@ a:hover {
   letter-spacing: 1px;
 }
 
+/* SPEAKER CONTROLS */
+
+a#speaker {
+  background: url("/images/controller-speaker.svg") no-repeat left top;
+  cursor: pointer;
+  margin: 0 20px;
+  height: 26px;
+  width: 30px;
+}
+
+#speaker:hover {
+  background: url("/images/controller-speaker-on.svg") no-repeat left top;
+}
+
+#controls {
+  section.speakers {
+    display: none;
+    background: #fff;
+    border: 1px solid #EA36F5;
+    border-radius: 3px;
+    margin: 10px 0 0 27px;
+    padding: 5px 0 4px 0;
+    border-top-left-radius: 0;
+  }
+
+  div.speaker {
+    margin: 10px 20px;
+    vertical-align: top;
+  }
+
+  span.name {
+    visibility: visible;
+    display: inline-block;
+    vertical-align: top;
+    cursor: default;
+    font-size: 0.9em;
+    vertical-align: top;
+    margin: 3px 0 0 0;
+  }
+}
+
+.speaker img {
+  cursor: pointer;
+  margin: 0;
+  vertical-align: top;
+}
+
+.volume {
+  background: #222;
+  border: none;
+  border-radius: 24px;
+  padding: 0;
+  display: block;
+  width: 6em;
+  height: 0.6em;
+  margin: 7px 10px 0 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.volume .ui-slider-range {
+  background: #EA36F5;
+  border-radius: 24px;
+  margin: 2px;
+  padding: 0;
+  height: 0.5em;
+  max-width: 8.2em;
+}
+
+.ui-disabled .ui-slider-range {
+  background: #aaa;
+}
+
+/*
+   Sorry for the hack. Since these styles override jquery.ui.css
+   for a custom style it require more work than I wish to do just to
+   hide a blue gradient focus box that appears when the speaker
+   audio level slider is being moved.
+*/
+.volume a.ui-slider-handle {
+  display: none !important;
+}
+
 /* NOW PLAYING */
 
 #now-playing {
   min-height: 220px;
   background: #fff;
   padding: 30px;
+  z-index: 1;
   -moz-box-sizing:border-box; /* Firefox */
   -webkit-box-sizing:border-box; /* Safari */
   ul {
@@ -335,4 +420,3 @@ ul.song-actions {
   border-radius: 3px;
   height: 30px;
 }
-

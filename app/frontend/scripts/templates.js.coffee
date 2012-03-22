@@ -74,3 +74,11 @@ templates.download_song = """
 templates.download_album = """
   <a class="download" href="/artist/{{artist}}/album/{{album}}/download">download album</a>
 """
+
+templates.speaker = """
+  <div class="speaker" data-speaker-id="{{id}}">
+    {{{connection_tag}}}
+    <div id="{{slider_selector}}" class="volume" data-speaker-id="{{id}}"></div>
+    <span class="name">{{name}}</span>
+  </div>
+"""

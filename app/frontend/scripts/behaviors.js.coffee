@@ -145,3 +145,20 @@ $(document).ready () ->
       success: (response) ->
         alert 'removed!'
     false
+
+  # Show the speaker list when the speaker icon is clicked.
+  $('#speaker').live 'click', (e) ->
+    e.preventDefault()
+    renderSpeakers()
+    return
+
+  # Toggle a speakers connection to the Airfoil audio source.
+  $('.toggle-connect').live 'click', (e) ->
+    e.preventDefault()
+    Speaker.toggleConnection $(this).data('speaker-id'), $(this).data('speaker-connected')
+    return
+
+  # Hide the speaker control panel when the mouse leaves the area.
+  $('section.speakers').mouseleave () ->
+    $(this).fadeOut()
+    return
