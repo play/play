@@ -1,6 +1,6 @@
 require File.expand_path("../helper", __FILE__)
 
-if !Airfoil.installed?
+unless Airfoil.installed?
 	puts "\nAirfoil is not installed, skipping Speaker tests."
 	puts "You can get Airfoil from http://rogueamoeba.com/airfoil/\n\n"
 end

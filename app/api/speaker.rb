@@ -3,7 +3,7 @@ module Play
   class App < Sinatra::Base
 
     before do
-      if !Airfoil.enabled?
+      unless Airfoil.enabled?
         halt 501
       end
     end
@@ -14,7 +14,7 @@ module Play
     #
     # Returns nothing.
     def validate_speaker_id(id)
-      if !Speaker.valid_id?(id)
+      unless Speaker.valid_id?(id)
         halt 404
       end
     end
