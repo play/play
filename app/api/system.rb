@@ -25,9 +25,9 @@ module Play
         tmpfile = file[:tempfile]
         name    = file[:filename]
 
-        # iTunes needs a filetype it likes, so fuck it, .mp3 it.
-        system "mv", tmpfile.path, tmpfile.path + '.mp3'
-        system "./script/add-to-itunes", tmpfile.path + '.mp3'
+        sane_path = File.join(File.dirname(tmpfile), name)
+        system "mv", tmpfile.path, sane_path
+        system "./script/add-to-itunes", sane_path
       end
 
       true
