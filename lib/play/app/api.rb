@@ -145,8 +145,7 @@ module Play
     end
 
     def api_user
-      User.find_by_login(params[:user_login]) ||
-      User.find_by_alias(params[:user_login])
+      User.where("login = ? OR alias = ?", params[:user_login], params[:user_login]).first
     end
 
     def api_authenticate
