@@ -111,4 +111,4 @@ context "api/speaker" do
     Airfoil.enabled = true
   end if false
 
-end if Airfoil.installed? and ENV['CI'] != '1'
+end if false

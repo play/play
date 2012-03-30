@@ -33,7 +33,7 @@ module Play
     Pusher.secret = Play.config.pusher_secret
 
     Airfoil.enabled = Airfoil.installed?
-    Airfoil.audio_source = "System Audio" if Airfoil.enabled?
+    Airfoil.audio_source = "System Audio" if Airfoil.installed?
 
     set :public_folder, "#{dir}/frontend/public"
     set :static, true

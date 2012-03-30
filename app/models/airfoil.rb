@@ -24,6 +24,7 @@ module Play
     #
     # Returns an Appscript instance of the airfoil app.
     def self.app
+      return false if ENV['RACK_ENV'] == 'test'
       Appscript.app('Airfoil')
     end
 
@@ -31,7 +32,7 @@ module Play
     #
     # Returns Boolean.
     def self.installed?
-      File.exists?('/Applications/Airfoil.app')
+      File.exists?('/Applications/Airfoil.app') && ENV['RACK_ENV'] != 'test'
     end
 
     # Get all the connected speakers.
