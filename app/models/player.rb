@@ -103,6 +103,15 @@ module Play
       nil
     end
 
+    # Handle song change event.
+    #
+    # Push song_update to web clients.
+    #
+    # Returns nothing.
+    def self.song_changed!
+      Realtime.update_now_playing(now_playing)
+    end
+
     # Search all songs for a keyword.
     #
     # Search workflow:
