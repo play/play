@@ -1,13 +1,6 @@
 module Play
   # API endpoints for Airfoil speaker controls.
   class App < Sinatra::Base
-
-    before do
-      if !Airfoil.enabled?
-        halt 501
-      end
-    end
-
     # Validates speaker id, send 404 if invalid.
     #
     # id - Airfoil speaker id to check.
