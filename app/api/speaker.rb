@@ -62,13 +62,5 @@ module Play
         :speaker => speaker.to_hash
       }.to_json
     end
-
-    put "/volume" do
-      Airfoil.speakers_volume = params[:volume]
-      speakers = {
-        :speakers => Airfoil.get_speakers.map { |speaker| speaker.to_hash }
-      }.to_json
-    end
-
   end
  end
