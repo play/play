@@ -4,6 +4,7 @@ require 'api/helpers'
 require 'api/library'
 require 'api/queue'
 require 'api/system'
+require 'api/speaker'
 
 module Play
   class App < Sinatra::Base
@@ -30,6 +31,9 @@ module Play
     Pusher.app_id =  Play.config.pusher_app_id
     Pusher.key = Play.config.pusher_key
     Pusher.secret = Play.config.pusher_secret
+
+    Airfoil.enabled = Airfoil.installed?
+    Airfoil.audio_source = "iTunes" if Airfoil.enabled?
 
     set :public_folder, "#{dir}/frontend/public"
     set :static, true
