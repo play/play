@@ -31,7 +31,7 @@ module Play
     #
     # Returns Boolean.
     def self.installed?
-      Dir.exists?('/Applications/Airfoil.app')
+      File.exists?('/Applications/Airfoil.app')
     end
 
     # Get all the connected speakers.
