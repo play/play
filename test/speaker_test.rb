@@ -20,14 +20,6 @@ context "Speaker" do
     assert_equal "Computer", @speaker.name
   end
 
-  test "Speaker volume setting and getting" do
-    @speaker.volume = 0
-    assert_equal 0, @speaker.volume
-
-    @speaker.volume = 1
-    assert_equal 1, @speaker.volume
-  end
-
   test "speaker connect, disconnect and connected status" do
     @speaker.disconnect!
     assert_equal false, @speaker.connected?

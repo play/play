@@ -78,19 +78,6 @@ context "api/speaker" do
     assert_equal 404, last_response.status
   end
 
-  test "/volume" do
-    Airfoil.speakers_volume = 0
-    put "/volume", :volume => 1
-    response_json = JSON.parse(last_response.body.strip)
-
-    assert response_json.keys.include?("speakers")
-    assert response_json["speakers"].length > 0
-
-    response_json["speakers"].each do |speaker|
-      assert_equal 1, speaker["volume"]
-    end
-  end
-
   test "API calls return 501 when airfoil isn't enabled" do
     Airfoil.enabled = false
 

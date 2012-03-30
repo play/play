@@ -6,7 +6,6 @@ unless Airfoil.installed?
 end
 
 context "Airfoil" do
-
   setup do
   	Airfoil.app.get
     @speaker = Speaker.new "com.rogueamoeba.airfoil.LocalSpeaker"
@@ -28,31 +27,4 @@ context "Airfoil" do
     assert_equal @speaker.connected?, speakers[0].connected?
   	assert_equal @speaker.volume, speakers[0].volume
   end
-
-  test "All speaker volumes getting and setting" do
-  	speakers = Airfoil.get_speakers
-  	Airfoil.speakers_volume = 0
-  	speakers.each do |speaker|
-  		assert_equal 0, speaker.volume
-  	end
-
-  	Airfoil.speakers_volume = 1
-  	speakers.each do |speaker|
-  		assert_equal 1, speaker.volume
-  	end
-
-   	Airfoil.speakers_volume = 0
-  	speakers.each do |speaker|
-  		assert_equal 0, speaker.volume
-  	end
-  end
-
-  test "audio source name get and set" do
-    Airfoil.audio_source = "QuickTime Player"
-    assert_equal "QuickTime Player", Airfoil.audio_source
-
-    Airfoil.audio_source = "iTunes"
-    assert_equal "iTunes", Airfoil.audio_source
-  end
-
 end if Airfoil.installed? and ENV['CI'] != '1'
