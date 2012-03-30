@@ -16,6 +16,16 @@ context "Album" do
     @album.enqueue!(@user)
   end
 
+  test "lastfm_url" do
+    Play.stubs(:config).returns({ 'lastfm_key' => "abcd1234" })
+
+    album = Album.create(:artist => @artist, :name => nil)
+
+    assert_nothing_raised do
+      album.lastfm_url
+    end
+  end
+
   test "path" do
     assert_equal "/tmp/music", @album.path
   end
