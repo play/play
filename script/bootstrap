@@ -76,7 +76,6 @@ else
   echo "    Nicecast from:"
   echo ""
   echo "    http://rogueamoeba.com/nicecast/"
-  exit
 fi
 
 #
@@ -152,6 +151,20 @@ echo "    Feel free to manually update the file anytime you'd like."
 
 echo ""
 
+# Set up play.yml
+if test -f config/play.yml
+then
+  echo "  + Backing up your existing play.yml configuration."
+  rm -f config/play.backup.yml
+  mv config/play.yml config/play.backup.yml
+fi
+cat config/play.example.yml | sed \
+  -e "s/__OAUTH_KEY__/$client_id/" \
+  -e "s/__OAUTH_SECRET__/$client_secret/" \
+  -e "s/__PUSHER_APP_ID__/$pusher_app_id/" \
+  -e "s/__PUSHER_KEY__/$pusher_key/" \
+  -e "s/__PUSHER_SECRET__/$pusher_secret/" \
+  > config/play.yml
 
 #
 # Startup instructions
