@@ -62,5 +62,14 @@ module Play
     def self.volume=(volume)
       system "amixer set Master #{volume}% > /dev/null 2>&1"
     end
+    
+    # Get the current volume level
+    #
+    # Returns the current volume from 0 to 100
+    def self.volume
+      vol = `amixer get Master`.scan(/([0-9]+)%/).first.last
+      vol.to_i
+    end
+    
   end
 end
