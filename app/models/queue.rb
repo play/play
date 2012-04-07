@@ -42,7 +42,7 @@ module Play
     #
     # Returns a Boolean of whether the song was added.
     def self.add_song(song)
-      song.record.get.duplicate(:to => playlist.get)
+      Player.app.add(song.record.location.get, :to => playlist.get)
     end
 
     # Public: Removes a song from the Queue.

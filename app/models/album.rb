@@ -22,7 +22,7 @@ module Play
     #
     # Returns an Array of Songs.
     def self.songs_by_name(name)
-      Player.library.shared_tracks[Appscript.its.album.eq(name)].get.map do |record|
+      Player.library.file_tracks[Appscript.its.album.eq(name)].get.map do |record|
         Song.new(record.persistent_ID.get)
       end
     end
@@ -31,7 +31,7 @@ module Play
     #
     # Returns an Array of Songs.
     def songs
-      Player.library.shared_tracks[
+      Player.library.file_tracks[
         Appscript.its.album.eq(name).and(Appscript.its.artist.eq(artist))
       ].get.map do |record|
         Song.new(record.persistent_ID.get)
