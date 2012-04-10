@@ -17,7 +17,7 @@ module Play
     end
 
     get "/stream_url" do
-      Play.config.stream_url
+      Yajl.dump({:stream_url => Play.config.stream_url})
     end
 
     post '/upload' do
