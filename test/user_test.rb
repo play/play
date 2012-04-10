@@ -8,10 +8,11 @@ context "User" do
   end
 
   test "new" do
-    user = User.new('jason','jason@example.com')
+    user = User.new('jason','jason@example.com', '52df9')
 
     assert_equal 'jason', user.login
     assert_equal 'jason@example.com', user.email
+    assert_equal '52df9', user.token
   end
 
   test "can't find a user" do

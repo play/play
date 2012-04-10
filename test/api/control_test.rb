@@ -13,7 +13,7 @@ context "api/control" do
 
   test "/now_playing" do
     Player.expects(:now_playing).times(2).returns(@song)
-    app.any_instance.stubs(:current_user).returns(User.new('user','user@example.com'))
+    app.any_instance.stubs(:current_user).returns(User.new('user','user@example.com', '43234'))
     get "/now_playing"
     response = parse_json(last_response.body.strip)
 

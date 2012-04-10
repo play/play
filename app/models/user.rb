@@ -7,6 +7,7 @@ module Play
   #
   #   play:users                - A Set of all user IDs.
   #   play:users:#{login}:email - The String email for the given `login`.
+  #   play:users:#{login}:token - The String token for the given `login`.
   #   play:users:#{login}:stars - A Set of all Song `permanent_id`s that have
   #                               been starred by `login`.
   class User
@@ -20,15 +21,20 @@ module Play
     # Public: The public email address listed on GitHub.
     attr_accessor :email
 
+    # Public: The token used to auth with Play from a client.
+    attr_accessor :token
+
     # Public: Initializes a User.
     #
     # login - The String login of their GitHub account.
     # email - The String email address of their GitHub account.
+    # token - The String used to auth with Play from a client.
     #
     # Returns the User.
-    def initialize(login,email)
+    def initialize(login,email,token)
       @login = login.downcase
       @email = email
+      @token = token
     end
 
     # Public: Create a User.
@@ -38,7 +44,8 @@ module Play
     #
     # Returns the User.
     def self.create(login,email)
-      User.new(login,email).save
+      hashed_token = Digest::MD5.hexdigest(login + Time.now.to_i.to_s)[0..5]
+      User.new(login,email,hashed_token).save
     end
 
     # Public: Finds a User.
@@ -50,8 +57,9 @@ module Play
       login.downcase!
       return nil if !$redis.sismember(KEY, login)
       email = $redis.get "#{KEY}:#{login}:email"
+      token = $redis.get "#{KEY}:#{login}:token"
 
-      User.new(login,email)
+      User.new(login,email,token)
     end
 
     # Public: Saves the User.
@@ -60,6 +68,7 @@ module Play
     def save
       $redis.sadd KEY, login
       $redis.set  "#{KEY}:#{login}:email", email
+      $redis.set  "#{KEY}:#{login}:token", token
       self
     end
 
