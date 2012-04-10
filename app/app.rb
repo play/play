@@ -60,17 +60,22 @@ module Play
     end
 
     def api_request
-      !!params[:login]
+      !!params[:token] || !!request.env["HTTP_AUTHORIZATION"]
     end
+
 
     def login
       if api_request
-        user = User.find(params[:login])
+        token = request.env["HTTP_AUTHORIZATION"] || params[:token]
+        user = User.find_by_token(token)
       else
         authenticate!
         user   = User.find(github_user.login)
         user ||= User.create(github_user.login,github_user.email)
       end
+
+      halt 401 if !user
+
       @current_user = session[:user] = user
     end
 
