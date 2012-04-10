@@ -66,8 +66,16 @@ module Play
 
     def login
       if api_request
-        token = request.env["HTTP_AUTHORIZATION"] || params[:token]
-        user = User.find_by_token(token)
+        token = request.env["HTTP_AUTHORIZATION"] || params[:token] || ""
+        login = request.env["HTTP_X_PLAY_LOGIN"] || params[:login] || ""
+
+        if token == Play.config.auth_token
+          user = User.find(login)
+          puts user.inspect
+        else
+          user = User.find_by_token(token)
+        end
+
       else
         authenticate!
         user   = User.find(github_user.login)
