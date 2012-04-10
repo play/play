@@ -29,6 +29,12 @@ module Play
       album = Album.new(params[:album],params[:artist])
       songs_as_json(album.songs,current_user)
     end
+    
+    get "/song/:id" do
+      song = Song.find(params[:id])
+      song.starred = current_user.starred?(song)
+      Yajl.dump song.to_hash
+    end
 
     get "/song/:id/download" do
       song = Song.find(params[:id])
