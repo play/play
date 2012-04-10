@@ -49,7 +49,8 @@ module Play
       content_type :json
 
       session_not_required = request.path_info =~ /\/login/ ||
-                             request.path_info =~ /\/auth/
+                             request.path_info =~ /\/auth/ ||
+                             request.path_info =~ /\/images\/art\/.*.png/
 
       if session_not_required || @current_user
         true
