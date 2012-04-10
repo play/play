@@ -10,6 +10,7 @@ module Play
   #   play:users:#{login}:token - The String token for the given `login`.
   #   play:users:#{login}:stars - A Set of all Song `permanent_id`s that have
   #                               been starred by `login`.
+  #   play:users:#{token}:login - The String login for the given `token`.
   class User
 
     # The redis key to stash User data.
@@ -69,6 +70,7 @@ module Play
       $redis.sadd KEY, login
       $redis.set  "#{KEY}:#{login}:email", email
       $redis.set  "#{KEY}:#{login}:token", token
+      $redis.set  "#{KEY}:#{token}:login", login
       self
     end
 
