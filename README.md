@@ -36,7 +36,7 @@ Play also expects MySQL to be installed. Play runs in Ruby 1.8.7.
 
 Play is installed by cloning down the repository:
 
-    git clone https://github.com/holman/play
+    git clone https://github.com/play/play
 
 Then run the `setup` script. It's cool.
 
