@@ -151,6 +151,12 @@ echo "    Feel free to manually update the file anytime you'd like."
 
 echo ""
 
+#
+# Generating the system auth token
+# 
+
+auth_token=`date | md5`
+
 # Set up play.yml
 if test -f config/play.yml
 then
@@ -164,6 +170,7 @@ cat config/play.example.yml | sed \
   -e "s/__PUSHER_APP_ID__/$pusher_app_id/" \
   -e "s/__PUSHER_KEY__/$pusher_key/" \
   -e "s/__PUSHER_SECRET__/$pusher_secret/" \
+  -e "s/__AUTH_TOKEN__/$auth_token/" \
   > config/play.yml
 
 #
