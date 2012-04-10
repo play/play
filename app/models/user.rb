@@ -63,6 +63,16 @@ module Play
       User.new(login,email,token)
     end
 
+    # Public: Finds a User by token.
+    #
+    # token - The String auth token.
+    #
+    # Returns the User, nil if no User found.
+    def self.find_by_token(token)
+      return nil if !login = $redis.get("#{KEY}:#{token}:login")
+      self.find(login)
+    end
+
     # Public: Saves the User.
     #
     # Returns itself.

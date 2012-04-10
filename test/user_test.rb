@@ -26,6 +26,18 @@ context "User" do
     assert_equal @user.email, user.email
   end
 
+  test "can't find a user by token" do
+    assert User.find_by_token('XXXXX').nil?
+  end
+
+  test "totes can find a user by token" do
+    user = User.find_by_token(@user.token)
+
+    assert_equal @user.login, user.login
+    assert_equal @user.email, user.email
+  end
+
+
   test "gravatar_id" do
     assert_equal "fb8d9bbe8a1150bc9fed0b0f99bbfc47", @user.gravatar_id
   end
