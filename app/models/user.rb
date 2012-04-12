@@ -45,8 +45,7 @@ module Play
     #
     # Returns the User.
     def self.create(login,email)
-      hashed_token = Digest::MD5.hexdigest(login + Time.now.to_i.to_s)[0..5]
-      User.new(login,email,hashed_token).save
+      User.new(login,email).save
     end
 
     # Public: Finds a User.
@@ -94,6 +93,7 @@ module Play
     #
     # Returns bool.
     def save_token
+      self.token ||= Digest::MD5.hexdigest(login + Time.now.to_i.to_s)[0..5]
       $redis.set  "#{KEY}:#{login}:token", token
       $redis.set  "#{KEY}:#{token}:login", login
     end
