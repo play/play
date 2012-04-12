@@ -118,6 +118,10 @@ module Play
       songs = library.tracks[Appscript.its.artist.eq(keyword)].get
       return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
 
+      # Exact Album match.
+      songs = library.tracks[Appscript.its.album.eq(keyword)].get
+      return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
+
       # Exact Song match.
       songs = library.tracks[Appscript.its.name.eq(keyword)].get
       return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
