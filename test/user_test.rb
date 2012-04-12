@@ -37,6 +37,27 @@ context "User" do
     assert_equal @user.email, user.email
   end
 
+  test "save email" do
+    user = User.create('maddox','1@example.com')
+    user.email = "saved@example.com"
+    user.save_email
+
+    found_user = User.find('maddox')
+
+    assert_equal 'saved@example.com', found_user.email
+  end
+
+  test "save token" do
+    user = User.create('tater','2@example.com')
+    user.token = "YYYYYY"
+    user.save_token
+
+    found_user = User.find('tater')
+
+    assert_equal 'YYYYYY', found_user.token
+  end
+
+
 
   test "gravatar_id" do
     assert_equal "fb8d9bbe8a1150bc9fed0b0f99bbfc47", @user.gravatar_id

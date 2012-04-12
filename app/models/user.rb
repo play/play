@@ -78,10 +78,24 @@ module Play
     # Returns itself.
     def save
       $redis.sadd KEY, login
+      save_email
+      save_token
+      self
+    end
+
+    # Public: Saves the email.
+    #
+    # Returns bool.
+    def save_email
       $redis.set  "#{KEY}:#{login}:email", email
+    end
+
+    # Public: Saves the token.
+    #
+    # Returns bool.
+    def save_token
       $redis.set  "#{KEY}:#{login}:token", token
       $redis.set  "#{KEY}:#{token}:login", login
-      self
     end
 
     # Public: The MD5 hash of the user's email account. Used for showing their
