@@ -32,7 +32,7 @@ module Play
     # token - The String used to auth with Play from a client.
     #
     # Returns the User.
-    def initialize(login,email,token)
+    def initialize(login,email,token=nil)
       @login = login.downcase
       @email = email
       @token = token
