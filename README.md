@@ -82,7 +82,7 @@ match up. It could be anything, though; we actually use MAC addresses here.
 Play has a full API that you can use to do tons of fun stuff. In fact, the API
 is more feature-packed than the web UI. Because we're programmers. And baller.
 
-Check out the [API docs on the wiki](https://github.com/holman/play/wiki/API).
+Check out the [API docs on the wiki](https://github.com/play/play/wiki/API).
 
 ## ♬ ★★★
 
