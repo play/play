@@ -49,7 +49,8 @@ module Play
       content_type :json
 
       session_not_required = request.path_info =~ /\/login/ ||
-                             request.path_info =~ /\/auth/
+                             request.path_info =~ /\/auth/ ||
+                             request.path_info =~ /\/images\/art\/.*.png/
 
       if session_not_required || @current_user
         true
@@ -59,17 +60,30 @@ module Play
     end
 
     def api_request
-      !!params[:login]
+      !!params[:token] || !!request.env["HTTP_AUTHORIZATION"]
     end
+
 
     def login
       if api_request
-        user = User.find(params[:login])
+        token = request.env["HTTP_AUTHORIZATION"] || params[:token] || ""
+        login = request.env["HTTP_X_PLAY_LOGIN"] || params[:login] || ""
+
+        if token == Play.config.auth_token
+          user = User.find(login)
+          puts user.inspect
+        else
+          user = User.find_by_token(token)
+        end
+
       else
         authenticate!
         user   = User.find(github_user.login)
         user ||= User.create(github_user.login,github_user.email)
       end
+
+      halt 401 if !user
+
       @current_user = session[:user] = user
     end
 
@@ -87,6 +101,14 @@ module Play
       logout!
       redirect 'https://github.com'
     end
+
+    get "/token" do
+      @back_to = params[:back_to]
+
+      content_type :html
+      mustache :token, :layout => false
+    end
+
 
   end
 end
