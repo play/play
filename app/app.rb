@@ -103,6 +103,8 @@ module Play
     end
 
     get "/token" do
+      @back_to = params[:back_to]
+
       content_type :html
       mustache :token, :layout => false
     end

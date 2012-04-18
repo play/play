@@ -6,6 +6,10 @@ module Play
         @current_user.token
       end
 
+      def back_to
+        @back_to
+      end
+
     end
   end
 end

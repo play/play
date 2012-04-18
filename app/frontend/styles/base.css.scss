@@ -97,7 +97,7 @@ a:hover {
 
 #token{
   background-color: #ffffff;
-  padding: 10px 40px 10px 40px;
+  padding: 10px 40px 40px 40px;
 }
 
 #token h2{
@@ -113,6 +113,11 @@ a:hover {
   font-size: 30px;
   font-weight: 700;
   color: $purple;
+}
+
+#token a{
+  display: block;
+  text-align: center;
 }
 
 
