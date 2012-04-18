@@ -102,5 +102,11 @@ module Play
       redirect 'https://github.com'
     end
 
+    get "/token" do
+      content_type :html
+      mustache :token, :layout => false
+    end
+
+
   end
 end
