@@ -144,6 +144,12 @@ module Play
       return @last_played ||= History.song_last_played_at(self)
     end
 
+    def last_played_iso8601
+      ret = last_played
+      return "" unless ret
+      return ret.iso8601
+    end
+
     # The hashed representation of a Song, suitable for API responses.
     #
     # Returns a Hash.
@@ -155,7 +161,7 @@ module Play
         :album   => album,
         :starred => starred || false,
         :queued  => queued?,
-        :last_played => last_played.iso8601(),
+        :last_played => last_played_iso8601,
       }
     end
 
