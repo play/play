@@ -89,10 +89,32 @@ audio).
 
 The following clients exist for Play:
 
-- [OS X]()
-- [Windows]()
-- [iPhone]()
-- [Android]()
+#### OS X
+
+[play/play-cocoa](https://github.com/play/play-cocoa)
+
+<a href="https://github.com/play/play-cocoa">![](http://f.cl.ly/items/3J2U1Z2x033R3p1I1J0b/play-item.png)</a>
+
+#### iOS
+
+[play/play-cocoa](https://github.com/play/play-cocoa)
+
+<a href="https://github.com/play/play-cocoa">![](http://f.cl.ly/items/1Z1W3P351q2V1m2v3n12/play-ios-iphone.png)</a>
+<a href="https://github.com/play/play-cocoa">![](http://f.cl.ly/items/2Z0O09320f142y3x163q/play-ios-ipad.png)</a>
+
+#### Windows
+
+[play/play-windows](https://github.com/play/play-windows)
+
+<a href="https://github.com/play/play-windows">![](http://cl.ly/3D0u3N102O1D0m1g3B1Y/Image%202012.04.19%202:35:54%20AM.png)</a>
+
+
+#### Android
+
+[play/play-android](https://github.com/play/play-android)
+
+<a href="https://github.com/play/play-android">![](http://cl.ly/382B3t2x2P2w2R0V1U3B/play-android.png)</a>
+
 
 We also have a TV at the office with the currently-playing song. This doesn't
 require any setup; just point your TV's browser at the main Play instance and
