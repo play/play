@@ -45,6 +45,13 @@ control your iTunes library over the web. The app also handles music upload:
 just drag your files to the browser window, then they'll get uploaded and
 indexed in iTunes. No complex file sharing and office VPN setups necessary.
 
+### Pusher
+
+Play's realtime notification is powered by [Pusher](http://pusher.com/). Pusher
+allows Play to provide realtime updating to any client that cares. This includes
+the site as well as Play clients. Clients will be updated in realtime as Play cycles
+through songs as well as when new songs get queued.
+
 ### API
 
 We primarily drive Play through [Campfire][campfire], the chat service we use
@@ -143,12 +150,9 @@ assets are compiled and delivered via Sprockets.
 
 ### Native Clients
 
-Right now all of our native clients exist only to deliver the Stream. They grab
-the Stream, parse out the metadata embedded in the Stream, and give you a nice
-view of what's currently playing while you listen to it.
-
-The idea is to build out all of our clients to include the full capabilities of
-Play.
+Native clients use (Pusher)[http://pusher.com/] to be updated in realtime. They will show
+what is currently playing, and with some clients, what is queued. All clients are built
+to consume the Shoutcast stream.
 
 ## Contributing
 
