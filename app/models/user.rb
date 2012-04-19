@@ -48,6 +48,15 @@ module Play
       User.new(login,email).save
     end
 
+    # Public: Return all users.
+    #
+    # Returns the User.
+    def self.all
+      logins = $redis.smembers KEY
+      logins.map{|login| find(login)}
+    end
+
+
     # Public: Finds a User.
     #
     # login - The String login.
