@@ -1,3 +1,5 @@
+require 'time'
+
 module Play
   class Song
 
@@ -20,6 +22,9 @@ module Play
     # the current_user has starred this song.
     attr_accessor :starred
 
+    # The last time a song was played
+    attr_accessor :last_played
+
     # Initializes a new Song.
     #
     # options - One of two possible arguments:
@@ -39,6 +44,7 @@ module Play
         @name   = options[:name]
         @artist = options[:artist]
         @album  = options[:album]
+        @last_played = options[:last_played]
       end
     end
 
@@ -134,6 +140,10 @@ module Play
       record.location.get.to_s
     end
 
+    def last_played
+      return @last_played ||= History.song_last_played_at(self)
+    end
+
     # The hashed representation of a Song, suitable for API responses.
     #
     # Returns a Hash.
@@ -144,7 +154,8 @@ module Play
         :artist  => artist,
         :album   => album,
         :starred => starred || false,
-        :queued  => queued?
+        :queued  => queued?,
+        :last_played => last_played.iso8601(),
       }
     end
 
