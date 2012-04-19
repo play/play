@@ -1,3 +1,5 @@
+require 'time'
+
 module Play
   # Keeps track of the historical record of Play. Think plays and user votes and
   # playcounts, oh my.
@@ -51,6 +53,7 @@ module Play
 
       # Increment the song's own playcount counter.
       $redis.incr  "#{KEY}:songs:#{song.id}:count"
+      $redis.set   "#{KEY}:songs:#{song.id}:last_played_at", Time.now.utc.iso8601
 
       # Persist into the specific user's histories.
       $redis.rpush "#{KEY}:#{user.login}:song_ids",       song.id
@@ -70,6 +73,16 @@ module Play
     # Returns an Integer. Return zero in case of nil.
     def self.count_by_song(song)
       $redis.get("#{KEY}:songs:#{song.id}:count").to_i || 0
+    end
+
+    # Public: The last time a song was played.
+    #
+    # song - The Song object to look up
+    #
+    # Returns a Time object, or nil if the song has never been played.
+    def self.song_last_played_at(song)
+      nil unless (val = $redis.get("#{KEY}:songs:#{song.id}:last_played_at"))
+      Time.iso8601(val)
     end
 
     # Public: The last x listens, with latest on top.
