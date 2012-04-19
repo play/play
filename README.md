@@ -121,11 +121,14 @@ The following clients exist for Play:
 
 <a href="https://github.com/play/play-android">![](http://cl.ly/382B3t2x2P2w2R0V1U3B/play-android.png)</a>
 
+#### Now Playing on TV
 
 We also have a TV at the office with the currently-playing song. This doesn't
 require any setup; just point your TV's browser at the main Play instance and
 the TV interface should show up as long as the screen ratio is 16:9
 (ie, 720p or 1080p).
+
+![](http://cl.ly/1c0D0d0Y1a1K0S3s0N0m/Image%202012.04.19%204:46:51%20PM.png)
 
 ## Technical Details
 
