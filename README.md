@@ -68,7 +68,7 @@ as we could.
 
 First, clone down the repository:
 
-    git clone https://github.com/holman/play.git && cd play
+    git clone https://github.com/play/play.git && cd play
 
 Next, you need to run the bootstrap process, which will verify that we can talk
 to iTunes, that you have all of your settings set up correctly, and will guide
@@ -174,7 +174,7 @@ Fork the project, make your commits, then send a Pull Request.
 Play was written by [Zach Holman](https://twitter.com/holman) and shaped by the
 fine ladies and gentlemen at [GitHub](https://github.com/github). We've also
 benefited from a lot of hard work from our
-[contributors](https://github.com/holman/play/contributors).
+[contributors](https://github.com/play/play/contributors).
 
 [nicecast]: http://rogueamoeba.com/nicecast/
 [campfire]: http://campfirenow.com/
