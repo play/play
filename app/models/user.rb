@@ -7,8 +7,10 @@ module Play
   #
   #   play:users                - A Set of all user IDs.
   #   play:users:#{login}:email - The String email for the given `login`.
+  #   play:users:#{login}:token - The String token for the given `login`.
   #   play:users:#{login}:stars - A Set of all Song `permanent_id`s that have
   #                               been starred by `login`.
+  #   play:users:#{token}:login - The String login for the given `token`.
   class User
 
     # The redis key to stash User data.
@@ -20,15 +22,20 @@ module Play
     # Public: The public email address listed on GitHub.
     attr_accessor :email
 
+    # Public: The token used to auth with Play from a client.
+    attr_accessor :token
+
     # Public: Initializes a User.
     #
     # login - The String login of their GitHub account.
     # email - The String email address of their GitHub account.
+    # token - The String used to auth with Play from a client.
     #
     # Returns the User.
-    def initialize(login,email)
+    def initialize(login,email,token=nil)
       @login = login.downcase
       @email = email
+      @token = token
     end
 
     # Public: Create a User.
@@ -50,8 +57,19 @@ module Play
       login.downcase!
       return nil if !$redis.sismember(KEY, login)
       email = $redis.get "#{KEY}:#{login}:email"
+      token = $redis.get "#{KEY}:#{login}:token"
 
-      User.new(login,email)
+      User.new(login,email,token)
+    end
+
+    # Public: Finds a User by token.
+    #
+    # token - The String auth token.
+    #
+    # Returns the User, nil if no User found.
+    def self.find_by_token(token)
+      return nil if !login = $redis.get("#{KEY}:#{token}:login")
+      self.find(login)
     end
 
     # Public: Saves the User.
@@ -59,8 +77,25 @@ module Play
     # Returns itself.
     def save
       $redis.sadd KEY, login
-      $redis.set  "#{KEY}:#{login}:email", email
+      save_email
+      save_token
       self
+    end
+
+    # Public: Saves the email.
+    #
+    # Returns bool.
+    def save_email
+      $redis.set  "#{KEY}:#{login}:email", email
+    end
+
+    # Public: Saves the token.
+    #
+    # Returns bool.
+    def save_token
+      self.token ||= Digest::MD5.hexdigest(login + Time.now.to_i.to_s)[0..5]
+      $redis.set  "#{KEY}:#{login}:token", token
+      $redis.set  "#{KEY}:#{token}:login", login
     end
 
     # Public: The MD5 hash of the user's email account. Used for showing their

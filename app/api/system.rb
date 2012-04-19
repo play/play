@@ -16,6 +16,11 @@ module Play
       end
     end
 
+    get "/streaming_info" do
+      streaming_data = {:stream_url => Play.config.stream_url, :pusher_key => Play.config.pusher_key}
+      Yajl.dump(streaming_data)
+    end
+
     get "/stream_url" do
       Yajl.dump({:stream_url => Play.config.stream_url})
     end
