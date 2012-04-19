@@ -155,7 +155,7 @@ module Play
         :album   => album,
         :starred => starred || false,
         :queued  => queued?,
-        :last_played => last_played,
+        :last_played => last_played.iso8601(),
       }
     end
 
