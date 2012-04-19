@@ -91,8 +91,7 @@ That'll start the server up on [localhost:5050](http://localhost:5050).
 
 Part of the fun with Play is getting it everywhere: in your office, on your
 desktop, and on your phone. Once you get Play set up correctly, you'll need to
-install [Nicecast][nicecast] and set it up to stream iTunes (not the system
-audio).
+install [Nicecast][nicecast].
 
 The following clients exist for Play:
 
