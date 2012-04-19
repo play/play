@@ -81,7 +81,7 @@ module Play
     #
     # Returns a Time object, or nil if the song has never been played.
     def self.song_last_played_at(song)
-      nil unless (val = $redis.get("#{KEY}:songs:#{song.id}:last_played_at"))
+      return nil unless (val = $redis.get("#{KEY}:songs:#{song.id}:last_played_at"))
       Time.iso8601(val)
     end
 
