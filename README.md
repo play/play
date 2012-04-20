@@ -87,6 +87,41 @@ At this point, you should be ready to play:
 
 That'll start the server up on [localhost:5050](http://localhost:5050).
 
+This adds user authentication to requests made as a client. Play's API is used throughout the entire app whether its front end or general API requests, so authentication has to be smart.
+
+### API/Client Auth
+
+Each user on Play has a unique auth `token`. They will give this `token` to each Play client for it to make requests on their behalf.
+
+In addition to these unique tokens, each Play installation also has its own unique system wide auth `token`. This can be used to auth and masquerade as any user on the system. When using this system wide `token`, a `login` must be provided in the request so Play knows what user the request is masquerading as. This is essentially how [Hubot](https://github.com/github/hubot) will commnuicate with Play.
+
+Both of these styles tokens can be included as a **header** or as a **query param**.
+
+### User Token
+
+When using a user's `token`, only the `token` needs to be included. It can be added to the request in the header or as a query param.
+
+#### Header
+
+    "Authorization: 5422fd"
+
+#### Query Param
+
+    ?token=5422fd
+
+### System Token
+
+When using a system token, a `login` needs to be added to the request in addition to the system `token` added by the means described above. It can be added to the request in the header or as a query param.
+
+#### Header
+
+    "X-PLAY-LOGIN: maddox"
+
+#### Query Param
+
+    ?login=maddox
+
+
 ### Clients
 
 Part of the fun with Play is getting it everywhere: in your office, on your
