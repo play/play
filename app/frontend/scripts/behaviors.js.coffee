@@ -130,6 +130,22 @@ $(document).ready () ->
         alert 'added!'
     false
 
+  # Queues up this song's album.
+  #
+  # data-album - The Data attribute set on the link whose value is the
+  #              name of this song's album
+  $('.add-album-to-queue').live 'click', () ->
+    element = $(@)
+    album = element.data('album')
+    $.ajax
+      url: '/freeform',
+      type: 'POST',
+      data:
+        subject: album
+      success: (response) ->
+        alert 'added album!'
+    false
+
   # Removes this song from the queue.
   #
   # data-song-id - The Data attribute set on the link whose value is the
