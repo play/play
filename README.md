@@ -154,7 +154,7 @@ The following clients exist for Play:
 
 [play/play-android](https://github.com/play/play-android)
 
-<a href="https://github.com/play/play-android">![](http://cl.ly/382B3t2x2P2w2R0V1U3B/play-android.png)</a>
+<a href="https://github.com/play/play-android">![](http://img.skitch.com/20120421-bh8qce8u7x8e9bwepymmy62djc.png)</a>
 
 #### Now Playing on TV
 
