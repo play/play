@@ -11,7 +11,7 @@ code? It's true. It's in a README.
 We listen to music constantly at GitHub. So I wrote Play. Initially it was a
 modest shell-oriented music server, but we've since grown it to quite the setup:
 
-![Play at GitHub](http://cl.ly/EHBs/play.png)
+![Play at GitHub](http://cl.ly/1l3o0p0K3O1r0C2U3a3Z/play.png)
 
 We have employees all over the world, but Play lets us all listen to the same
 music as if we were all in the office together. This has actually made a big
