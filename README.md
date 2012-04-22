@@ -187,7 +187,7 @@ assets are compiled and delivered via Sprockets.
 
 ### Native Clients
 
-Native clients use (Pusher)[http://pusher.com/] to be updated in realtime. They will show
+Native clients use [Pusher](http://pusher.com/) to be updated in realtime. They will show
 what is currently playing, and with some clients, what is queued. All clients are built
 to consume the Shoutcast stream.
 
