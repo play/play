@@ -22,7 +22,7 @@ GEM
     json (1.6.5)
     metaclass (0.0.1)
     mime-types (1.17.2)
-    mocha (0.10.3)
+    mocha (0.11.1)
       metaclass (~> 0.0.1)
     multi_json (1.0.4)
     multipart-post (1.1.4)
