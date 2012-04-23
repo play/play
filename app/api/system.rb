@@ -5,7 +5,8 @@ module Play
     get "/images/art/:id.png" do
       content_type 'image/png'
 
-      if art = Song.find(params[:id]).album_art_data
+      song = Song.find(params[:id])
+      if song and art = song.album_art_data
         response['Cache-Control'] = 'public, max-age=2500000'
         etag params[:id]
         art
