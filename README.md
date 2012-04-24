@@ -80,7 +80,10 @@ During the bootstrap process you'll be asked to enter your [Pusher][pusher]
 credentials. This is optional, but it'll let you get realtime updates to your
 Play queue. It's like the future. Websockets and shit.
 
-Open up iTunes and start playing music from the iTunes DJ playlist.
+### Starting It Up
+
+Open up iTunes and start playing music from the iTunes DJ playlist. It's important that you **do this first**. **Yes** the DJ playlist is required.
+
 At this point, you should be ready to play:
 
     rake start
