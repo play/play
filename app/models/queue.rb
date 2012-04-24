@@ -24,7 +24,7 @@ module Play
     # x number of songs that have played. This method returns
     # the current song index in the playlist. Using this we
     # can calculate how many songs iTunes is keeping as history.
-    # 
+    #
     # Example:
     #
     #   Calculate how many songs kept as history:
@@ -85,7 +85,7 @@ module Play
       songs.slice(playlist_offset, songs.length - playlist_offset)
     rescue Exception => e
       # just in case!
-      []
+      nil
     end
 
     # Is this song queued up to play?
