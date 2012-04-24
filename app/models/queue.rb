@@ -85,6 +85,7 @@ module Play
       songs.slice(playlist_offset, songs.length - playlist_offset)
     rescue Exception => e
       # just in case!
+      []
     end
 
     # Is this song queued up to play?
