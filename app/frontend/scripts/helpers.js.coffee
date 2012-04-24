@@ -62,6 +62,19 @@ play.renderStar = (id, starred) ->
   })
   Mustache.to_html(templates.star,song,templates)
 
+# Queue or unqueue a song
+#
+# id     - The ID of the song
+# queued - The Boolean value of whether this song should be queued or not.
+#          'true' means Add to Queue, 'false' means Remove from Queue
+#
+play.queue = (id, queued) ->
+  song = new Song({
+    id: id
+    queued: queued
+  })
+  Mustache.to_html(templates.queuing,song,templates)
+
 # Takes a JSON response and parses it for our common Song attributes.
 #
 # json - The common JSON endpoint we return.
