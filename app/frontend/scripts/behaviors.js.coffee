@@ -43,7 +43,7 @@ $(document).ready () ->
   #
   # data-artist - The Data attribute set on the link whose value is the
   #               artist name for this song.
-  $('.artist').live 'click', () ->
+  $(document).on 'click', '.artist', () ->
     element = $(@)
     artist = escape(element.data('artist'))
     updateSongs("/artist/"+artist, "GET")
@@ -53,7 +53,7 @@ $(document).ready () ->
   #
   # data-artist - The Data attribute set on the link whose value is the
   #               artist name for this song.
-  $('.album').live 'click', () ->
+  $(document).on 'click', '.album', () ->
     element = $(@)
     artist = escape(element.data('artist'))
     album  = escape(element.data('album'))
@@ -118,7 +118,8 @@ $(document).ready () ->
   #
   # data-song-id - The Data attribute set on the link whose value is the
   #                persistent ID of the song.
-  $('.add-to-queue').live 'click', () ->
+  $(document).on 'click', '.add-to-queue', () ->
+    play.spin(true)
     element = $(@)
     id = element.data('song-id')
     $.ajax
@@ -127,14 +128,16 @@ $(document).ready () ->
       data:
         id: id
       success: (response) ->
-        alert 'added!'
+        element.replaceWith(queue(id, true))
+        play.spin(false)
     false
 
   # Removes this song from the queue.
   #
   # data-song-id - The Data attribute set on the link whose value is the
   #                persistent ID of the song.
-  $('.remove-from-queue').live 'click', () ->
+  $(document).on 'click', '.remove-from-queue', () ->
+    play.spin(true)
     element = $(@)
     id = element.data('song-id')
     $.ajax
@@ -143,5 +146,6 @@ $(document).ready () ->
       data:
         id: id
       success: (response) ->
-        alert 'removed!'
+        element.replaceWith(queue(id, false))
+        play.spin(false)
     false
