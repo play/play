@@ -90,8 +90,6 @@ At this point, you should be ready to play:
 
 That'll start the server up on [localhost:5050](http://localhost:5050).
 
-This adds user authentication to requests made as a client. Play's API is used throughout the entire app whether its front end or general API requests, so authentication has to be smart.
-
 ### API/Client Auth
 
 Each user on Play has a unique auth `token`. They will give this `token` to each Play client for it to make requests on their behalf.
