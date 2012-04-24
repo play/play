@@ -20,7 +20,7 @@ end
 
 group :test do
   gem 'rack-test'
-  gem 'mocha'
+  gem 'mocha',        '~>0.11.1'
 end
 
 group :development do
