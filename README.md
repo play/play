@@ -84,6 +84,8 @@ Play queue. It's like the future. Websockets and shit.
 
 Open up iTunes and start playing music from the iTunes DJ playlist. It's important that you **do this first**. **Yes** the DJ playlist is required.
 
+**iTunes Match is mostly NOT supported. See more details on this at the bottom of this README.**
+
 At this point, you should be ready to play:
 
     rake start
@@ -191,6 +193,17 @@ assets are compiled and delivered via Sprockets.
 Native clients use [Pusher](http://pusher.com/) to be updated in realtime. They will show
 what is currently playing, and with some clients, what is queued. All clients are built
 to consume the Shoutcast stream.
+
+## iTunes Match
+
+Like many people have experienced on iOS with apps that use your music library, iTunes Match royally
+screws this up. iTunes does nothing to differentiate songs that are actually available on disk, and those
+that would need to be pulled down first by Match in order to play them.
+
+This screws up Play, just as it screws up iOS apps that naively (not their fault) attempt to play something
+out of the music library that is actually only available via Match.
+
+This can hopefully be addressed in the future. For now, skip Match.
 
 ## Contributing
 
