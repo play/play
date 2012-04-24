@@ -114,9 +114,6 @@ $(document).ready () ->
         play.spin(false)
     false
 
-  # Determines whether this song should be added or removed from the queue
-  #
-
   # Queues up this song.
   #
   # data-song-id - The Data attribute set on the link whose value is the
