@@ -64,6 +64,10 @@ play.renderStar = (id, starred) ->
 
 # Queue or unqueue a song
 #
+# id     - The ID of the song
+# queued - The Boolean value of whether this song should be queued or not.
+#          'true' means Add to Queue, 'false' means Remove from Queue
+#
 play.queue = (id, queued) ->
   song = new Song({
     id: id
