@@ -122,6 +122,7 @@ $(document).ready () ->
   # data-song-id - The Data attribute set on the link whose value is the
   #                persistent ID of the song.
   $(document).on 'click', '.add-to-queue', () ->
+    play.spin(true)
     element = $(@)
     id = element.data('song-id')
     $.ajax
@@ -130,7 +131,8 @@ $(document).ready () ->
       data:
         id: id
       success: (response) ->
-
+        element.replaceWith(queue(id, true))
+        play.spin(false)
     false
 
   # Removes this song from the queue.
@@ -138,6 +140,7 @@ $(document).ready () ->
   # data-song-id - The Data attribute set on the link whose value is the
   #                persistent ID of the song.
   $(document).on 'click', '.remove-from-queue', () ->
+    play.spin(true)
     element = $(@)
     id = element.data('song-id')
     $.ajax
@@ -146,5 +149,6 @@ $(document).ready () ->
       data:
         id: id
       success: (response) ->
-
+        element.replaceWith(queue(id, false))
+        play.spin(false)
     false
