@@ -96,7 +96,7 @@ That'll start the server up on [localhost:5050](http://localhost:5050).
 
 Each user on Play has a unique auth `token`. They will give this `token` to each Play client for it to make requests on their behalf.
 
-In addition to these unique tokens, each Play installation also has its own unique system wide auth `token`. This can be used to auth and masquerade as any user on the system. When using this system wide `token`, a `login` must be provided in the request so Play knows what user the request is masquerading as. This is essentially how [Hubot](https://github.com/github/hubot) will commnuicate with Play.
+In addition to these unique tokens, each Play installation also has its own unique system wide auth `token`. This can be used to auth and masquerade as any user on the system. When using this system wide `token`, a `login` must be provided in the request so Play knows what user the request is masquerading as. This is essentially how [Hubot](https://github.com/github/hubot) will communicate with Play.
 
 Both of these styles tokens can be included as a **header** or as a **query param**.
 
