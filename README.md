@@ -92,6 +92,12 @@ At this point, you should be ready to play:
 
 That'll start the server up on [localhost:5050](http://localhost:5050).
 
+### Hubot Integration
+
+We use Play primarily through Campfire, through Hubot. There's a
+[play.coffee](https://github.com/github/hubot-scripts/blob/master/src/scripts/play.coffee)
+file that you can drop into your Hubot installation to integration with Play.
+
 ### API/Client Auth
 
 Each user on Play has a unique auth `token`. They will give this `token` to each Play client for it to make requests on their behalf.
