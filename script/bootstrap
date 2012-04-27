@@ -83,7 +83,7 @@ fi
 #
 # GitHub setup
 #
-if test -n "$(cat config/play.yml | grep gh_key)"
+if test -f "config/play.yml"
 then
   echo "  + GitHub config found in config/play.yml"
 else
@@ -113,7 +113,7 @@ fi
 #
 # Cache Pusher credentials
 #
-if test -n "$(cat config/play.yml | grep gh_key)"
+if test -f "config/play.yml"
 then
   echo "  + Pusher config found in config/play.yml"
 else
@@ -163,6 +163,7 @@ then
   #echo "  + Backing up your existing play.yml configuration."
   #rm -f config/play.backup.yml
   #mv config/play.yml config/play.backup.yml
+  echo "  + Set up!"
 else
   cat config/play.example.yml | sed \
     -e "s/__OAUTH_KEY__/$client_id/" \
