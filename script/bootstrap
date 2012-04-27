@@ -62,7 +62,7 @@ fi
 # Install gems
 #
 echo "  + Bootstrapping your Rubies."
-bundle install --quiet
+bundle install --binstubs --local --path vendor/gems --quiet
 
 #
 # Check for Nicecast
@@ -153,7 +153,7 @@ echo ""
 
 #
 # Generating the system auth token
-# 
+#
 
 auth_token=`date | md5`
 
