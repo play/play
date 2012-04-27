@@ -146,22 +146,15 @@ else
   read pusher_secret
 fi
 
-
-#
-# Save config settings
-#
-
 #
 # SUCCESS, BRO!
 #
-
 echo "  + Configuration settings saved to config/play.yml."
 echo "    Feel free to manually update the file anytime you'd like."
 
 #
 # Generating the system auth token
 #
-
 auth_token=`date | md5`
 
 # Set up play.yml
@@ -183,7 +176,6 @@ cat config/play.example.yml | sed \
 #
 # Startup instructions
 #
-
 echo ""
 
 echo "  Good work. We're ready to rock."
