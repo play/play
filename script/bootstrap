@@ -62,7 +62,7 @@ fi
 # Install gems
 #
 echo "  + Bootstrapping your Rubies."
-bundle install --quiet
+bundle install --binstubs --local --path vendor/gems --quiet
 
 #
 # Check for Nicecast
@@ -73,9 +73,7 @@ then
 else
   echo "  - Couldn't find Nicecast. While not required, Nicecast is how we stream"
   echo "    Play to other clients outside of the office. You can download and buy"
-  echo "    Nicecast from:"
-  echo ""
-  echo "    http://rogueamoeba.com/nicecast/"
+  echo "    Nicecast from: http://rogueamoeba.com/nicecast/"
 fi
 
 #
@@ -85,76 +83,78 @@ fi
 #
 # GitHub setup
 #
-echo ""
-echo "  + You need to register your Play instance on GitHub. "
-echo ""
-echo "    Unless you're putting play on a different hostname, you likely will"
-echo "    want to use the following values:"
-echo ""
-echo "       Main URL:     http://localhost:5050"
-echo "       Callback URL: http://localhost:5050/auth/github/callback"
-echo ""
-echo "    Once you've registered a new application, you'll need to grab the"
-echo "    *client ID* and the *client secret*."
-echo ""
-echo "    Press \"return\" to open a browser window and enter your OAuth details."
-read
-open "https://github.com/settings/applications/new"
+if test -n "$(cat config/play.yml | grep gh_key)"
+then
+  echo "  + GitHub config found in config/play.yml"
+else
+  echo ""
+  echo "  + You need to register your Play instance on GitHub. "
+  echo ""
+  echo "    Unless you're putting play on a different hostname, you likely will"
+  echo "    want to use the following values:"
+  echo ""
+  echo "       Main URL:     http://localhost:5050"
+  echo "       Callback URL: http://localhost:5050/auth/github/callback"
+  echo ""
+  echo "    Once you've registered a new application, you'll need to grab the"
+  echo "    *client ID* and the *client secret*."
+  echo ""
+  echo "    Press \"return\" to open a browser window and enter your OAuth details."
+  read
+  open "https://github.com/settings/applications/new"
 
-echo "  + What's your GitHub client ID?     › \c"
-read client_id
-echo "  + What's your GitHub client secret? › \c"
-read client_secret
+  echo "  + What's your GitHub client ID?     › \c"
+  read client_id
+  echo "  + What's your GitHub client secret? › \c"
+  read client_secret
+fi
 
 
 #
 # Cache Pusher credentials
 #
-echo ""
-echo "  + You need a Pusher.com account for the Play web client to get realtime"
-echo "    updates such as the currently playing track. This is optional."
-echo ""
-echo "    Once you've signed up for a pusher account you will need to setup"
-echo "    an app for play."
-echo ""
-echo "    1. Once you have a pusher account, sign in and click the"
-echo "       *Add new app* button."
-echo ""
-echo "    2. Enter *play* for the name, or whatever you prefer, then click"
-echo "       *Create app*."
-echo ""
-echo "    3. Click on the *API access* tab."
-echo "       Under *API Credentials* you will see an *APP_ID*, *KEY*, and *SECRET*,"
-echo "       we need all three of those."
-echo ""
-echo "    Press \"return\" to open a browser window to the Pusher website."
-read
-open "http://pusher.com"
+if test -n "$(cat config/play.yml | grep gh_key)"
+then
+  echo "  + Pusher config found in config/play.yml"
+else
+  echo ""
+  echo "  + You need a Pusher.com account for the Play web client to get realtime"
+  echo "    updates such as the currently playing track. This is optional."
+  echo ""
+  echo "    Once you've signed up for a pusher account you will need to setup"
+  echo "    an app for play."
+  echo ""
+  echo "    1. Once you have a pusher account, sign in and click the"
+  echo "       *Add new app* button."
+  echo ""
+  echo "    2. Enter *play* for the name, or whatever you prefer, then click"
+  echo "       *Create app*."
+  echo ""
+  echo "    3. Click on the *API access* tab."
+  echo "       Under *API Credentials* you will see an *APP_ID*, *KEY*, and *SECRET*,"
+  echo "       we need all three of those."
+  echo ""
+  echo "    Press \"return\" to open a browser window to the Pusher website."
+  read
+  open "http://pusher.com"
 
-echo "  + What's your Pusher app ID?       › \c"
-read pusher_app_id
-echo "  + What's your Pusher token KEY?    › \c"
-read pusher_key
-echo "  + What's your Pusher token SECRET? › \c"
-read pusher_secret
-
-#
-# Save config settings
-#
+  echo "  + What's your Pusher app ID?       › \c"
+  read pusher_app_id
+  echo "  + What's your Pusher token KEY?    › \c"
+  read pusher_key
+  echo "  + What's your Pusher token SECRET? › \c"
+  read pusher_secret
+fi
 
 #
 # SUCCESS, BRO!
 #
-
 echo "  + Configuration settings saved to config/play.yml."
 echo "    Feel free to manually update the file anytime you'd like."
 
-echo ""
-
 #
 # Generating the system auth token
-# 
-
+#
 auth_token=`date | md5`
 
 # Set up play.yml
@@ -176,7 +176,6 @@ cat config/play.example.yml | sed \
 #
 # Startup instructions
 #
-
 echo ""
 
 echo "  Good work. We're ready to rock."

@@ -1,5 +1,7 @@
+.bundle
 backups
+bin
 config/play.yml
 config/play.backup.yml
-db/*.sqlite3
 .sass-cache
+vendor

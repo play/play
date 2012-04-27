@@ -11,7 +11,7 @@ code? It's true. It's in a README.
 We listen to music constantly at GitHub. So I wrote Play. Initially it was a
 modest shell-oriented music server, but we've since grown it to quite the setup:
 
-![Play at GitHub](http://cl.ly/EHBs/play.png)
+![Play at GitHub](http://cl.ly/1l3o0p0K3O1r0C2U3a3Z/play.png)
 
 We have employees all over the world, but Play lets us all listen to the same
 music as if we were all in the office together. This has actually made a big
@@ -80,20 +80,29 @@ During the bootstrap process you'll be asked to enter your [Pusher][pusher]
 credentials. This is optional, but it'll let you get realtime updates to your
 Play queue. It's like the future. Websockets and shit.
 
-Open up iTunes and start playing music from the iTunes DJ playlist.
+### Starting It Up
+
+Open up iTunes and start playing music from the iTunes DJ playlist. It's important that you **do this first**. **Yes** the DJ playlist is required.
+
+**iTunes Match is mostly NOT supported. See more details on this at the bottom of this README.**
+
 At this point, you should be ready to play:
 
     rake start
 
 That'll start the server up on [localhost:5050](http://localhost:5050).
 
-This adds user authentication to requests made as a client. Play's API is used throughout the entire app whether its front end or general API requests, so authentication has to be smart.
+### Hubot Integration
+
+We use Play primarily through Campfire, through Hubot. There's a
+[play.coffee](https://github.com/github/hubot-scripts/blob/master/src/scripts/play.coffee)
+file that you can drop into your Hubot installation to integration with Play.
 
 ### API/Client Auth
 
 Each user on Play has a unique auth `token`. They will give this `token` to each Play client for it to make requests on their behalf.
 
-In addition to these unique tokens, each Play installation also has its own unique system wide auth `token`. This can be used to auth and masquerade as any user on the system. When using this system wide `token`, a `login` must be provided in the request so Play knows what user the request is masquerading as. This is essentially how [Hubot](https://github.com/github/hubot) will commnuicate with Play.
+In addition to these unique tokens, each Play installation also has its own unique system wide auth `token`. This can be used to auth and masquerade as any user on the system. When using this system wide `token`, a `login` must be provided in the request so Play knows what user the request is masquerading as. This is essentially how [Hubot](https://github.com/github/hubot) will communicate with Play.
 
 Both of these styles tokens can be included as a **header** or as a **query param**.
 
@@ -187,9 +196,20 @@ assets are compiled and delivered via Sprockets.
 
 ### Native Clients
 
-Native clients use (Pusher)[http://pusher.com/] to be updated in realtime. They will show
+Native clients use [Pusher](http://pusher.com/) to be updated in realtime. They will show
 what is currently playing, and with some clients, what is queued. All clients are built
 to consume the Shoutcast stream.
+
+## iTunes Match
+
+Like many people have experienced on iOS with apps that use your music library, iTunes Match royally
+screws this up. iTunes does nothing to differentiate songs that are actually available on disk, and those
+that would need to be pulled down first by Match in order to play them.
+
+This screws up Play, just as it screws up iOS apps that naively (not their fault) attempt to play something
+out of the music library that is actually only available via Match.
+
+This can hopefully be addressed in the future. For now, skip Match.
 
 ## Contributing
 
