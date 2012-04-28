@@ -77,7 +77,11 @@ module Play
         end
 
       else
-        authenticate!
+        if Play.config.gh_org != ''
+          github_organization_authenticate!(Play.config.gh_org)
+        else
+          authenticate!
+        end
         user   = User.find(github_user.login)
         user ||= User.create(github_user.login,github_user.email)
       end
@@ -108,7 +112,5 @@ module Play
       content_type :html
       mustache :token, :layout => false
     end
-
-
   end
 end

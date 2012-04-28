@@ -8,6 +8,7 @@ module Play
     OpenStruct.new \
       :secret        => yaml['gh_secret'],
       :client_id     => yaml['gh_key'],
+      :gh_org        => yaml['gh_org'],
       :stream_url    => yaml['stream_url'],
       :office_url    => yaml['office_url'],
       :hostname      => yaml['hostname'],
