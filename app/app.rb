@@ -76,7 +76,7 @@ module Play
         end
 
       else
-        if Play.config.gh_org != ''
+        if Play.config.gh_org && Play.config.gh_org != ''
           github_organization_authenticate!(Play.config.gh_org)
         else
           authenticate!
