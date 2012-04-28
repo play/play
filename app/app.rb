@@ -16,7 +16,7 @@ module Play
     # development mode `shotgun` won't regenerate a session secret and
     # invalidate all of our sessions.
     enable :sessions
-    set    :session_secret, Play.config.client_id
+    set    :session_secret, Play.config.auth_token
 
     register Mustache::Sinatra
     register Sinatra::Auth::Github
