@@ -71,7 +71,6 @@ module Play
 
         if token == Play.config.auth_token
           user = User.find(login)
-          puts user.inspect
         else
           user = User.find_by_token(token)
         end
