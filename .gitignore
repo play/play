@@ -4,4 +4,4 @@ bin
 config/play.yml
 config/play.backup.yml
 .sass-cache
-vendor
+vendor/gems
