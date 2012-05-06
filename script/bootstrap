@@ -90,6 +90,18 @@ else
   echo ""
   echo "  + You need to register your Play instance on GitHub. "
   echo ""
+  echo "    Play access can be limited to users in a GitHub organization."
+  echo ""
+  echo "  + Would you like to use Play with a Github organization? (y or n) > \c"
+  read use_gh_org
+
+  if [ "$use_gh_org" == "y" ]
+  then
+    echo "  + What's your GitHub organization name? › \c"
+    read gh_org
+  fi
+
+  echo ""
   echo "    Unless you're putting play on a different hostname, you likely will"
   echo "    want to use the following values:"
   echo ""
@@ -100,8 +112,15 @@ else
   echo "    *client ID* and the *client secret*."
   echo ""
   echo "    Press \"return\" to open a browser window and enter your OAuth details."
+  echo ""
   read
-  open "https://github.com/settings/applications/new"
+
+  if [ -z "$gh_org" ]
+  then
+    open "https://github.com/settings/applications/new"
+  else
+    open "https://github.com/organizations/$gh_org/settings/applications/new"
+  fi
 
   echo "  + What's your GitHub client ID?     › \c"
   read client_id
@@ -168,6 +187,7 @@ else
   cat config/play.example.yml | sed \
     -e "s/__OAUTH_KEY__/$client_id/" \
     -e "s/__OAUTH_SECRET__/$client_secret/" \
+    -e "s/__GITHUB_ORG__/$gh_org/" \
     -e "s/__PUSHER_APP_ID__/$pusher_app_id/" \
     -e "s/__PUSHER_KEY__/$pusher_key/" \
     -e "s/__PUSHER_SECRET__/$pusher_secret/" \
