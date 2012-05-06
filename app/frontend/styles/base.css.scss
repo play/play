@@ -355,3 +355,38 @@ ul.song-actions {
   height: 30px;
 }
 
+/* 403 Error Page */
+
+.error-403 {
+
+  width: 940px;
+  margin: 0 auto;
+
+  h1,
+  h2 {
+    font-size: 3em;
+    font-weight: bold;
+  }
+
+  h1 {
+    margin-bottom: 0.4em;
+  }
+
+  h2 {
+    font-size: 1.6em;
+    line-height: 1.5;
+    width: 12em;
+  }
+
+  section.notice,
+  img {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0.5em;
+  }
+
+  section.notice {
+    margin: 6em 2em 6em 3em;
+  }
+
+}
