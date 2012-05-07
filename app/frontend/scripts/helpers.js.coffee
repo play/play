@@ -14,6 +14,8 @@ play.updateSongs = (path, method) ->
       list = listFromJson(response)
       songs = Mustache.to_html(templates.list,list,templates)
       $('#songs').html(songs)
+      page = path.match(/[(\w)]+/)[0]
+      $('#queue-results').attr('data-page', page)
       play.spin(false)
 
 # Renders the "Now Playing" block off of JSON.
@@ -47,6 +49,7 @@ play.renderQueue = () ->
       song   = listFromJson(response)
       stache = Mustache.to_html(templates.list,song,templates)
       $('#songs').html(stache)
+      $('#queue-results').attr('data-page', 'queue')
       play.spin(false)
 
 # Renders the star partial. It handles rendering whether something display "star

@@ -4,6 +4,7 @@ pusher = new Pusher('<%= Play.config.pusher_key %>')
 channel = pusher.subscribe('now_playing_updates')
 
 channel.bind 'update_now_playing', (message) ->
+  return if $('#queue-results').attr('data-page') isnt 'queue'
   play.renderNowPlaying(message.now_playing)
   list = listFromJson(message)
   songs = Mustache.to_html(templates.list,list,templates)
