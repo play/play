@@ -8,3 +8,7 @@ channel.bind 'update_now_playing', (message) ->
   list = listFromJson(message)
   songs = Mustache.to_html(templates.list,list,templates)
   $('#songs').html(songs)
+  if $('#itunes-notice:visible').length is 1 &&
+    (list.songs.length isnt 0 || $('#now-playing').children().length isnt 0)
+      $('#itunes-notice').hide()
+      $('#now-playing').show()

@@ -321,6 +321,28 @@ ul.song-actions {
 
 }
 
+/* ITUNES DJ NOTICE */
+
+#itunes-notice {
+  
+  background: #fff;
+  padding: 1em 2em 2em 2em;
+  text-align: center;
+  display: none;
+
+  h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 1em;
+  }
+
+  img {
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    margin: 1em;
+  }
+
+}
+
 /* UPLOADS */
 
 #uploads {
