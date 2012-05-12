@@ -31,3 +31,5 @@ require 'views/layout'
 
 REDIS_URL = 'redis://127.0.0.1'
 $redis = Redis.connect(:url => REDIS_URL, :thread_safe => true)
+
+Play::Realtime.hook

@@ -44,19 +44,13 @@ namespace :redis do
 end
 
 namespace :hook do
-  compiler = "gcc"
+  compiler = 'gcc'
   path = 'src/itunes-hook'
   script_path = 'script'
 
-  desc "Copy precompiled iTunes hook binary to script directory."
-  task :copy do
-    sh "rm #{script_path}/itunes-hook" if File.exists?("#{script_path}/itunes-hook")
-    sh "cp #{path}/build/itunes-hook #{script_path}/itunes-hook"
-  end
-
   desc "Compile iTunes hook and copy to script directory."
   task :compile do
-    sh "mkdir #{path}/build" if !Dir.exists?("#{path}/build")
+    sh "mkdir #{path}/build" if !File.exists?("#{path}/build")
     sh "rm #{script_path}/itunes-hook" if File.exists?("#{script_path}/itunes-hook")
     sh "#{compiler} -x objective-c #{path}/playhook.m #{path}/itunes-hook.m -o #{path}/build/itunes-hook -framework Cocoa"
     sh "chmod +x #{path}/build/itunes-hook"
