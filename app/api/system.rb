@@ -5,7 +5,10 @@ module Play
     get "/images/art/:id.png" do
       content_type 'image/png'
 
-      if art = Song.find(params[:id]).album_art_data
+      song = Song.find(params[:id])
+      art = song.album_art_data if song
+
+      if art
         response['Cache-Control'] = 'public, max-age=2500000'
         etag params[:id]
         art
@@ -16,18 +19,24 @@ module Play
       end
     end
 
+    get "/streaming_info" do
+      streaming_data = {:stream_url => Play.config.stream_url, :pusher_key => Play.config.pusher_key}
+      Yajl.dump(streaming_data)
+    end
+
     get "/stream_url" do
-      Play.config.stream_url
+      Yajl.dump({:stream_url => Play.config.stream_url})
     end
 
     post '/upload' do
       params[:files].each do |file|
         tmpfile = file[:tempfile]
-        name    = file[:filename]
+        name    = file[:filename].chomp
 
-        # iTunes needs a filetype it likes, so fuck it, .mp3 it.
-        system "mv", tmpfile.path, tmpfile.path + '.mp3'
-        system "./script/add-to-itunes", tmpfile.path + '.mp3'
+        file_with_name = File.join("/tmp", name)
+        system "mv", tmpfile.path, file_with_name
+        system "./script/add-to-itunes", file_with_name
+        system "rm", file_with_name
       end
 
       true

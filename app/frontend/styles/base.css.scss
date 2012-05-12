@@ -57,23 +57,14 @@ a:hover {
   float: left;
   height: 40px;
   margin: 5px 0 0 30px;
-  a {
-    display: inline-block;
-    width: 26px;
-    height: 30px;
-    text-indent: -5000px;
-  }
-  span {
-    visibility: hidden;
-  }
 }
 
 #play {
   background: url('/images/controller-play.png') no-repeat left top;
-}
-
-#play:hover {
-  background-position: right top;
+  display: inline-block;
+  width: 26px;
+  height: 30px;
+  text-indent: -5000px;
 }
 
 #pause {
@@ -92,6 +83,34 @@ a:hover {
   font-weight: 300;
   letter-spacing: 1px;
 }
+
+/* TOKEN */
+
+#token{
+  background-color: #ffffff;
+  padding: 10px 40px 40px 40px;
+}
+
+#token h2{
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px
+}
+
+#token #user-token{
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: 30px;
+  font-weight: 700;
+  color: $purple;
+}
+
+#token a{
+  display: block;
+  text-align: center;
+}
+
 
 /* NOW PLAYING */
 
@@ -336,3 +355,38 @@ ul.song-actions {
   height: 30px;
 }
 
+/* 403 Error Page */
+
+.error-403 {
+
+  width: 940px;
+  margin: 0 auto;
+
+  h1,
+  h2 {
+    font-size: 3em;
+    font-weight: bold;
+  }
+
+  h1 {
+    margin-bottom: 0.4em;
+  }
+
+  h2 {
+    font-size: 1.6em;
+    line-height: 1.5;
+    width: 12em;
+  }
+
+  section.notice,
+  img {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0.5em;
+  }
+
+  section.notice {
+    margin: 6em 2em 6em 3em;
+  }
+
+}

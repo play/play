@@ -24,6 +24,8 @@ require 'models/player'
 require 'models/queue'
 require 'models/song'
 require 'models/user'
+require 'models/speaker'
+require 'models/airfoil'
 require 'models/realtime'
 
 require 'app'
