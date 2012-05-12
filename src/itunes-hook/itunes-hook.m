@@ -11,15 +11,9 @@
 
 int main (int argc, const char * argv[])
 {
-	if(argc != 2)
-	{
-	    printf("Usage: itunes-hook path/to/play/bin/play-hook\n");
-	    exit(1);
-	}
-
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 
-	PlayHook* hook = [[PlayHook alloc] initWithStr:[NSString stringWithUTF8String:argv[1]]];
+	PlayHook* hook = [[PlayHook alloc] init];
 
 	[[NSApplication sharedApplication] run];
 

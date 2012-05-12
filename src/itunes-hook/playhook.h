@@ -16,15 +16,11 @@
 
 // Initializes the PlayHook with a String path to the Play hook app
 // that runs when an iTunes Event is fired.
-- (id) initWithStr: (NSString*)inString;
+- (id) init;
 
 // Called when iTunes fires an event.
 //
 // Runs the Play hook application.
 - (void) sendEvent;
-
-// Contains the path and app name of the play hook that is ran
-// when iTunes fires an event.
-@property (retain) NSString* playHookPath;
 
 @end
