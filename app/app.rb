@@ -90,14 +90,23 @@ module Play
         end
 
       else
-        if Play.config.gh_org && Play.config.gh_org != ''
-          github_organization_authenticate!(Play.config.gh_org)
-        else
-          authenticate!
+        if Play.config.auth_method == :gh  
+          
+          if Play.config.gh_org && Play.config.gh_org != ''
+            github_organization_authenticate!(Play.config.gh_org)
+          else
+            authenticate!
+          end
+          
         end
 
-        user   = User.find(github_user.login)
-        user ||= User.create(github_user.login,github_user.email)
+        if Play.config.auth_method == :gh
+          user   = User.find(github_user.login)
+          user ||= User.create(github_user.login,github_user.email)
+        elsif Play.config.auth_method == :anon
+          user = User.find('anonymous')
+          user ||= User.create('anonymous', 'anonymous@localhost')
+        end
       end
 
       halt 401 if !user
