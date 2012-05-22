@@ -83,49 +83,69 @@ fi
 #
 # GitHub setup
 #
-if test -f "config/play.yml"
+if test -f "config/play.yml" && test -n "$( cat config/play.yml | grep :gh )"
 then
   echo "  + GitHub config found in config/play.yml"
+elif test -f "config/play.yml" && test -n "$( cat config/play.yml | grep :anon )"
+then
+  echo "  + Anonymous auth config found in config/play.yml"
 else
   echo ""
-  echo "  + You need to register your Play instance on GitHub. "
-  echo ""
-  echo "    Play access can be limited to users in a GitHub organization."
-  echo ""
-  echo "  + Would you like to use Play with a Github organization? (y or n) > \c"
-  read use_gh_org
-
-  if [ "$use_gh_org" == "y" ]
+  echo "  + Do you want to authenticate Play using Github? (y or n) > \c"
+  read use_gh
+  
+  if [ "$use_gh" == "y" ]
   then
-    echo "  + What's your GitHub organization name? › \c"
-    read gh_org
-  fi
+      auth_method=":gh"
 
-  echo ""
-  echo "    Unless you're putting play on a different hostname, you likely will"
-  echo "    want to use the following values:"
-  echo ""
-  echo "       Main URL:     http://localhost:5050"
-  echo "       Callback URL: http://localhost:5050/auth/github/callback"
-  echo ""
-  echo "    Once you've registered a new application, you'll need to grab the"
-  echo "    *client ID* and the *client secret*."
-  echo ""
-  echo "    Press \"return\" to open a browser window and enter your OAuth details."
-  echo ""
-  read
-
-  if [ -z "$gh_org" ]
-  then
-    open "https://github.com/settings/applications/new"
+      echo ""
+      echo "  + You need to register your Play instance on GitHub. "
+      echo ""
+      echo "    Play access can be limited to users in a GitHub organization."
+      echo ""
+      echo "  + Would you like to use Play with a Github organization? (y or n) > \c"
+      read use_gh_org
+    
+      if [ "$use_gh_org" == "y" ]
+      then
+        echo "  + What's your GitHub organization name? › \c"
+        read gh_org
+      fi
+    
+      echo ""
+      echo "    Unless you're putting play on a different hostname, you likely will"
+      echo "    want to use the following values:"
+      echo ""
+      echo "       Main URL:     http://localhost:5050"
+      echo "       Callback URL: http://localhost:5050/auth/github/callback"
+      echo ""
+      echo "    Once you've registered a new application, you'll need to grab the"
+      echo "    *client ID* and the *client secret*."
+      echo ""
+      echo "    Press \"return\" to open a browser window and enter your OAuth details."
+      echo ""
+      read
+    
+      if [ -z "$gh_org" ]
+      then
+        open "https://github.com/settings/applications/new"
+      else
+        open "https://github.com/organizations/$gh_org/settings/applications/new"
+      fi
+    
+      echo "  + What's your GitHub client ID?     › \c"
+      read client_id
+      echo "  + What's your GitHub client secret? › \c"
+      read client_secret
   else
-    open "https://github.com/organizations/$gh_org/settings/applications/new"
+      echo "  + OK, Anonymous auth will be used."
+      
+      auth_method=":anon"
+      use_gh_org="n"
+      gh_org=""
+      client_id=""
+      client_secret=""
   fi
-
-  echo "  + What's your GitHub client ID?     › \c"
-  read client_id
-  echo "  + What's your GitHub client secret? › \c"
-  read client_secret
 fi
 
 
@@ -192,6 +212,7 @@ else
     -e "s/__PUSHER_KEY__/$pusher_key/" \
     -e "s/__PUSHER_SECRET__/$pusher_secret/" \
     -e "s/__AUTH_TOKEN__/$auth_token/" \
+    -e "s/__AUTH_METHOD__/$auth_method/" \
     > config/play.yml
 fi
 
