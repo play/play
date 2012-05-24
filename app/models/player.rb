@@ -7,6 +7,17 @@ module Play
     def self.app
       Appscript.app('iTunes')
     end
+    
+    # Selects the iTunes DJ playlist, and causes it to be what's Now Playing by
+    # hitting play (and then pausing if we're currently paused)
+    def self.select_itunes_dj
+      currently_paused = now_playing.nil? || paused?
+
+      app.browser_windows.get.first.view.set(:to => app.playlists["iTunes DJ"])
+      play
+
+      pause if currently_paused
+    end
 
     # All songs in the library.
     def self.library
