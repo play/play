@@ -46,7 +46,9 @@ module Play
     Pusher.app_id =  Play.config.pusher_app_id
     Pusher.key = Play.config.pusher_key
     Pusher.secret = Play.config.pusher_secret
-
+    
+    Player.select_itunes_dj
+    
     Airfoil.enabled = Airfoil.installed?
     Airfoil.audio_source = "System Audio" if Airfoil.installed?
 
