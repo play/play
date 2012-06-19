@@ -59,20 +59,28 @@ a:hover {
   margin: 5px 0 0 30px;
 }
 
+#controls span {
+  cursor: pointer;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 20px;
+}
+
 #play {
   background: url('/images/controller-play.png') no-repeat left top;
-  display: inline-block;
   width: 26px;
-  height: 30px;
   text-indent: -5000px;
 }
 
 #pause {
   background: url('/images/controller-pause.png') no-repeat left top;
+  width: 26px;
+  text-indent: -5000px;
 }
 
-#pause {
-  background: url('/images/controller-pause.png') no-repeat left top;
+#next {
+  
 }
 
 .user-logged-in {

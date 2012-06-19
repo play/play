@@ -5,6 +5,14 @@ play = exports ? this
 
 $(document).ready () ->
 
+  play.volume = 100
+  play.volumeMin = 0
+  play.volumeMax = 100
+  play.playing = false
+  
+  $.get "/app-volume", (data) ->
+    play.volume = Number data
+
   # Refreshes the Queue.
   $('.queue').click () ->
     play.renderQueue()
@@ -17,16 +25,14 @@ $(document).ready () ->
 
   # Plays the stream.
   $('#play').click () ->
-    stream = $('#play-stream').get(0)
-    if stream.paused
-      stream.play()
-    else
-      stream.pause()
-    false
+    $.ajax
+      type: "PUT"
+      url: "/play"
 
   # Pauses music.
   $('#pause').click () ->
     updateSongs("/pause", "PUT")
+    play.playing = false
     false
 
   # Goes back to the previous track.
@@ -38,6 +44,23 @@ $(document).ready () ->
   $('#next').click () ->
     updateSongs("/next", "PUT")
     false
+  
+  volume = (units) ->
+    units = units + play.volume
+    units = Math.max(units, play.volumeMin)
+    units = Math.min(units, play.volumeMax)
+    $.ajax
+      type: "PUT"
+      data: {volume: units}
+      url: "/app-volume"
+      success: (data) ->
+        play.volume = Number data
+  
+  $("#volume-up").click () ->
+    volume +10
+  
+  $("#volume-down").click () ->
+    volume -10
 
   # Pull in all the songs for a particular artist.
   #
