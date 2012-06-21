@@ -101,7 +101,7 @@ play.spin = (display) ->
 #
 # Returns a List of Songs.
 play.listFromJson = (json) ->
-  return new List(null) unless json
+  json = [] unless json?
   songs = json.songs.map (song) ->
     songFromJson(song)
   new List(songs)
