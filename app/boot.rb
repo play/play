@@ -3,6 +3,8 @@ $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
 require "rubygems"
 require "bundler/setup"
 require 'logger'
+require 'tempfile'
+require 'open-uri'
 
 require 'redis'
 require 'coffee-script'
@@ -33,9 +35,8 @@ require 'views/layout'
 REDIS_URL = 'redis://127.0.0.1'
 $redis = Redis.connect(:url => REDIS_URL, :thread_safe => true)
 
-# FIX
-
-require 'open-uri'
+# FIX (Hack)
+# Patch HTTP to use a ca_bundle.crt
 require 'net/https'
 
 module Net
@@ -43,14 +44,16 @@ module Net
     alias_method :original_use_ssl=, :use_ssl=
     
     def use_ssl=(flag)
+      
+      app_root = File.dirname(File.expand_path(File.dirname(__FILE__)))
+      ca_file = File.join(app_root, "ca_bundle.crt")
+      
       # Ubuntu
       if File.exists?('/etc/ssl/certs')
         self.ca_path = '/etc/ssl/certs'
-      
       # MacPorts on OS X
-      # You'll need to run: sudo port install curl-ca-bundle
-      elsif File.exists?('/usr/local/play/ca_bundle.crt')
-        self.ca_file = '/usr/local/play/ca_bundle.crt'
+      elsif File.exists?(ca_file)
+        self.ca_file = ca_file
       end
 
       self.verify_mode = OpenSSL::SSL::VERIFY_PEER
