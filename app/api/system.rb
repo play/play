@@ -27,6 +27,14 @@ module Play
     get "/stream_url" do
       Yajl.dump({:stream_url => Play.config.stream_url})
     end
+    
+    post '/fetch' do
+      if params[:url]
+        system "./script/fetch", params[:url]
+      end
+      
+      true
+    end
 
     post '/upload' do
       params[:files].each do |file|
