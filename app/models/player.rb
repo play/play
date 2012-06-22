@@ -117,17 +117,9 @@ module Play
       # Exact Artist match.
       songs = library.tracks[Appscript.its.artist.eq(keyword)].get
       return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
-      
-      # Fuzzy Artist match.
-      songs = library.tracks[Appscript.its.artist.contains(keyword)].get
-      return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
 
       # Exact Album match.
       songs = library.tracks[Appscript.its.album.eq(keyword)].get
-      return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
-
-      # Fuzzy Album match.
-      songs = library.tracks[Appscript.its.album.contains(keyword)].get
       return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
 
       # Exact Song match.
@@ -136,7 +128,16 @@ module Play
 
       # Fuzzy Song match.
       songs = library.tracks[Appscript.its.name.contains(keyword)].get
+      return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
+      
+      # Fuzzy Artist match.
+      songs = library.tracks[Appscript.its.artist.contains(keyword)].get
+      return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
+
+      # Fuzzy Album match.
+      songs = library.tracks[Appscript.its.album.contains(keyword)].get
       songs.map{|record| Song.new(record.persistent_ID.get)}
+      
     end
 
   end
