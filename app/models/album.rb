@@ -22,8 +22,11 @@ module Play
     #
     # Returns an Array of Songs.
     def self.songs_by_name(name)
-      Player.library.file_tracks[Appscript.its.album.eq(name)].get.map do |record|
-        Song.new(record.persistent_ID.get)
+      songs = `osascript -e 'tell application "iTunes" to get persistent ID of every track whose album is \"#{name}\"'`.chomp.split(", ")
+      if songs.empty?
+        nil
+      else
+        songs.map { |id| Song.find(id) }
       end
     end
 
@@ -31,11 +34,7 @@ module Play
     #
     # Returns an Array of Songs.
     def songs
-      Player.library.file_tracks[
-        Appscript.its.album.eq(name).and(Appscript.its.artist.eq(artist))
-      ].get.map do |record|
-        Song.new(record.persistent_ID.get)
-      end
+      Album.songs_by_name(self.name)
     end
 
     # Zips up an album and stashes in it a temporary directory.

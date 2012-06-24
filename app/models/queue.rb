@@ -11,14 +11,10 @@ module Play
       'iTunes DJ'
     end
 
-    # The Playlist object that the Queue resides in.
-    #
-    # Returns an Appscript::Reference to the Playlist.
-    def self.playlist
-      Player.app.playlists[name].get
-    end
-
     # Get the queue start offset for the iTunes DJ playlist.
+    #
+    # Bug: When player is stopped with no song, returns 0 resulting
+    #      in queue including any song history from iTunes DJ.
     #
     # iTunes DJ keeps the current song in the playlist and
     # x number of songs that have played. This method returns
@@ -33,7 +29,11 @@ module Play
     #
     # Returns Integer offset to queued songs.
     def self.playlist_offset
-      Player.app.current_track.index.get
+      if [:playing, :paused].include?(Player.state)
+        `osascript -e 'tell application "iTunes" to get index of current track'`.chomp.to_i
+      else
+        0
+      end
     end
 
     # Public: Adds a song to the Queue.
@@ -42,7 +42,7 @@ module Play
     #
     # Returns a Boolean of whether the song was added.
     def self.add_song(song)
-      Player.app.add(song.record.location.get, :to => playlist.get)
+      `osascript -e 'tell application "iTunes" to add add (get location of first track whose persistent ID is \"#{song.id}\") to playlist \"#{name}\"'`
     end
 
     # Public: Removes a song from the Queue.
@@ -51,16 +51,15 @@ module Play
     #
     # Returns a Boolean of whether the song was removed maybe.
     def self.remove_song(song)
-      Play::Queue.playlist.tracks[
-        Appscript.its.persistent_ID.eq(song.id)
-      ].first.delete
+      `osascript -e 'tell application "iTunes" to delete (first track of playlist \"#{name}\" whose persistent ID is \"#{song.id}\")'`
     end
 
     # Clear the queue. Shit's pretty destructive.
     #
-    # Returns who the fuck knows.
+    # Returns nil.
     def self.clear
-      Play::Queue.playlist.tracks.get.each { |record| record.delete }
+      `osascript -e 'tell application "iTunes" to delete (every track of playlist \"#{name}\")'`
+      nil
     end
 
     # Ensure that we're currently playing on the Play playlist. Don't let anyone
@@ -68,33 +67,32 @@ module Play
     #
     # Returns nil.
     def self.ensure_playlist
-      if Play::Player.app.current_playlist.get.name.get != name
-        Play::Player.app.playlists[name].get.play
+      current_playlist = `osascript -e 'tell application "iTunes to get name of current playlist'`.chomp
+      if current_playlist != name
+        `osascript -e 'tell application "iTunes" to play playlist \"#{name}\"'`
       end
-    rescue Exception => e
-      # just in case!
+      nil
     end
 
     # The songs currently in the Queue.
     #
     # Returns an Array of Songs.
     def self.songs
-      songs = playlist.tracks.get.map do |record|
-        Song.find(record.persistent_ID.get)
+      songs = `osascript -e 'tell application "iTunes" to get persistent ID of every track of playlist \"#{name}\"'`.chomp.split(", ")
+      if songs.empty?
+        nil
+      else
+        songs.map! { |id| Song.find(id) }
+        songs.slice(playlist_offset, songs.length - playlist_offset)
       end
-      songs.slice(playlist_offset, songs.length - playlist_offset)
-    rescue Exception => e
-      # just in case!
-      nil
     end
 
     # Is this song queued up to play?
     #
     # Returns a Boolean.
     def self.queued?(song)
-      Play::Queue.playlist.tracks[
-        Appscript.its.persistent_ID.eq(song.id)
-      ].get.size != 0
+      queued = `osascript -e 'tell application "iTunes" to get exists (first track of playlist \"#{name}\" whose persistent ID is \"#{song.id}\")'`.chomp.to_sym
+      queued == :true
     end
 
     # Returns the context of this Queue as JSON. This contains all of the songs

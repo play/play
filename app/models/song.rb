@@ -27,37 +27,15 @@ module Play
 
     # Initializes a new Song.
     #
-    # options - One of two possible arguments:
-    #           Song.new('2799A5071CD3E516') # creates from a persistent_id
-    #           Song.new(args)               # `args` is a Hash of attributes
+    # attributes = Hash containing song attributes.
     #
     # Returns a new Song instance.
-    def initialize(options)
-      if options.kind_of?(String)
-        song = Song.find(options)
-        @id     = song.id
-        @name   = song.name
-        @artist = song.artist
-        @album  = song.album
-      else
-        @id     = options[:id]
-        @name   = options[:name]
-        @artist = options[:artist]
-        @album  = options[:album]
-        @last_played = options[:last_played]
-      end
-    end
-
-    # Optimization. This loads a new Song instance from an iTunes record. This
-    # means we can bypass the expensive lookup and initialization inherant in
-    # the #find method.
-    #
-    # Returns a new Song instance.
-    def self.initialize_from_record(record)
-      new :id     => record.persistent_ID.get,
-          :name   => record.name.get,
-          :artist => record.artist.get,
-          :album  => record.album.get
+    def initialize(attributes)
+      @id     = attributes[:id]
+      @name   = attributes[:name]
+      @artist = attributes[:artist]
+      @album  = attributes[:album]
+      @last_played = attributes[:last_played]
     end
 
     # Finds a song in the database.
@@ -66,11 +44,23 @@ module Play
     #
     # Returns an instance of a Song.
     def self.find(id)
-      record = Player.library.tracks[Appscript.its.persistent_ID.eq(id)].get[0]
+      attributes = `osascript -e 'tell application "iTunes" to get {persistent id, name, album, artist, duration} of (get first track whose persistent ID is \"#{id}\")'`.chomp.split(", ")
+      keys = [:id, :name, :album, :artist, :duration]
+      if !attributes.empty?
+        song = {}
+        keys.each_with_index do |k,i|
+          song[k] = process_value(attributes[i])
+        end
 
-      return nil if record.nil?
+        last_played = `osascript -e 'tell application "iTunes" to get played date of (get first track whose persistent ID is \"#{id}\")'`.chomp
+        last_played = process_value(last_played)
+        if last_played != nil
+          last_played.slice!(0, 5)
+          song[:last_played] = last_played
+        end
 
-      initialize_from_record(record)
+        Song.new(song)
+      end
     end
 
     # Find the most popular song by its name. Compares against playcount and
@@ -78,38 +68,32 @@ module Play
     #
     # Returns a Song.
     def self.find_by_name(name)
-      top = Player.library.tracks[Appscript.its.name.eq(name)].get.sort do |a,b|
-        History.count_by_song(Song.new(:id => b.persistent_ID.get)) <=>
-          History.count_by_song(Song.new(:id => a.persistent_ID.get))
-      end[0]
-
-      if top
-        find(top.get.persistent_ID.get)
+      songs = `osascript -e 'tell application "iTunes" to get persistent ID of every track whose name is \"#{name}\"'`.chomp.split(", ")
+      if songs.empty?
+        return nil
       end
-    end
 
-    # The Appscript record.
-    #
-    # Returns an Appscript::Reference to this song.
-    #
-    # If we have an ID for this song, let's use that to find it (preferred,
-    # since that'll be quick). If not, search through a combination Artist +
-    # Song name match and return that record.
-    def record
-      if id
-        Player.library.tracks[Appscript.its.persistent_ID.eq(id)].get[0]
-      else
-        song = Artist.new(artist).songs.select{|song| song.name =~ /^#{Regexp.escape(name)}$/i}.first
-        song.record if song
+      top = songs.sort do |a, b|
+        History.count_by_song(Song.find(b)) <=> History.count_by_song(Song.find(a))
+      end
+
+      if top.first
+        find(top.first)
       end
     end
 
     # The raw data of the album art provided for this song.
     #
-    # Returns a String of the binary image or some shit. If there's no art
-    # available, returns nil.
+    # Returns String of jpeg binary data as hex (high nimble bit first) string.
     def album_art_data
-      record.artworks.get.empty? ? nil : record.artworks[1].raw_data.get.data
+      image_data = `osascript -e 'tell application "iTunes" to get raw data of artwork 1 of (get first track whose persistent ID is "#{self.id}")' 2>&1`.chomp
+      if $? == 0
+        image_data.slice!(0, 10)
+        image_data.chop!
+        [image_data].pack('H*')
+      else
+        nil
+      end
     end
 
     # The playcount for this song.
@@ -137,7 +121,7 @@ module Play
     #
     # Returns a String.
     def path
-      record.location.get.to_s
+      `osascript -e 'tell application "iTunes" to get POSIX path of (get location of first track whose persistent ID is \"#{self.id}\")'`.chomp
     end
 
     def last_played
@@ -145,9 +129,11 @@ module Play
     end
 
     def last_played_iso8601
-      ret = last_played
-      return "" unless ret
-      return ret.iso8601
+      if last_played
+        Time.parse(last_played).iso8601
+      else
+        nil
+      end
     end
 
     # The hashed representation of a Song, suitable for API responses.
@@ -163,6 +149,15 @@ module Play
         :queued  => queued?,
         :last_played => last_played_iso8601,
       }
+    end
+
+    # Convert applescript missing value to nils.
+    #
+    # Value - string applescript property.
+    #
+    # Returns value or nil.
+    def self.process_value(value)
+      value == "missing value" ? nil : value
     end
 
   end

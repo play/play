@@ -17,12 +17,11 @@ module Play
     #
     # Returns an Array of Songs.
     def songs
-      if name
-        Player.app.tracks[Appscript.its.artist.contains(name)].get.map do |record|
-          Song.initialize_from_record(record)
-        end
+      songs = `osascript -e 'tell application "iTunes" to get persistent ID of every track whose artist is \"#{self.name}\"'`.chomp.split(", ")
+      if songs.empty?
+        nil
       else
-        []
+        songs.map { |id| Song.find(id) }
       end
     end
 

@@ -1,50 +1,47 @@
 module Play
   class Player
 
-    # The application we're using. iTunes, dummy.
-    #
-    # Returns an Appscript instance of the music app.
-    def self.app
-      Appscript.app('iTunes')
-    end
-
-    # All songs in the library.
-    def self.library
-      app.playlists['Library'].get
-    end
-
     # Play the music.
     def self.play
-      app.play
+      `osascript -e 'tell application "iTunes" to play'`
     end
 
     # Pause the music.
     def self.pause
-      app.pause
+      `osascript -e 'tell application "iTunes" to pause'`
+    end
+
+    # Get current state.
+    #
+    # Returns symbol.
+    def self.state
+      `osascript -e 'tell application "iTunes" to get player state'`.chomp.to_sym
     end
 
     # Is there music currently playing?
     def self.paused?
-      state = app.player_state.get
       state == :paused
     end
 
     # Maybe today is the day the music stopped.
     def self.stop
-      app.stop
+      `osascript -e 'tell application "iTunes" to stop'`
     end
 
     # Play the next song.
     #
     # Returns the new song.
     def self.play_next
-      app.next_track
+      `osascript -e 'tell application "iTunes" to play next track'`
       now_playing
     end
 
     # Play the previous song.
+    #
+    # Returns the new song.
     def self.play_previous
-      app.previous_track
+      `osascript -e 'tell application "iTunes" to play previous track'`
+      now_playing
     end
 
     # Get the current numeric volume.
@@ -69,7 +66,7 @@ module Play
     #
     # Returns an Integer from 0-100.
     def self.app_volume
-      app.sound_volume.get
+      `osascript -e 'tell application "iTunes" to get sound volume'`.chomp.to_i
     end
 
     # Set the app volume.
@@ -79,7 +76,7 @@ module Play
     #
     # Returns the current volume setting.
     def self.app_volume=(setting)
-      app.sound_volume.set(setting)
+      `osascript -e 'tell application "iTunes" to set sound volume to #{setting}'`
       setting
     end
 
@@ -94,13 +91,22 @@ module Play
       self.app_volume = previous
     end
 
+    # Get persistent id of current track.
+    #
+    # Returns string.
+    def self.current_track
+      `osascript -e 'tell application "iTunes" to get persistent ID of current track'`.chomp
+    end
+
     # Currently-playing song.
     #
     # Returns a Song.
     def self.now_playing
-      Song.new(app.current_track.persistent_ID.get)
-    rescue Appscript::CommandError
-      nil
+      if state == :playing
+        Song.find(current_track)
+      else
+        nil
+      end
     end
 
     # Search all songs for a keyword.
@@ -115,20 +121,28 @@ module Play
     # Returns an Array of matching Songs.
     def self.search(keyword)
       # Exact Artist match.
-      songs = library.tracks[Appscript.its.artist.eq(keyword)].get
-      return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
+      songs = `osascript -e 'tell application "iTunes" to get persistent ID of every track whose artist is \"#{keyword}\"' 2>&1`.chomp.split(", ")
+      if $? == 0 && !songs.empty?
+        return songs.map { |id| Song.find(id) }
+      end
 
       # Exact Album match.
-      songs = library.tracks[Appscript.its.album.eq(keyword)].get
-      return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
+      songs = `osascript -e 'tell application "iTunes" to get persistent ID of every track whose album is \"#{keyword}\"' 2>&1`.chomp.split(", ")
+      if $? == 0 && !songs.empty?
+        return songs.map { |id| Song.find(id) }
+      end
 
       # Exact Song match.
-      songs = library.tracks[Appscript.its.name.eq(keyword)].get
-      return songs.map{|record| Song.new(record.persistent_ID.get)} if songs.size != 0
+      songs = `osascript -e 'tell application "iTunes" to get persistent ID of every track whose name is \"#{keyword}\"' 2>&1`.chomp.split(", ")
+      if $? == 0 && !songs.empty?
+        return songs.map { |id| Song.find(id) }
+      end
 
       # Fuzzy Song match.
-      songs = library.tracks[Appscript.its.name.contains(keyword)].get
-      songs.map{|record| Song.new(record.persistent_ID.get)}
+      songs = `osascript -e 'tell application "iTunes" to get persistent ID of every track whose name contains \"#{keyword}\"' 2>&1`.chomp.split(", ")
+      if $? == 0 && !songs.empty?
+        return songs.map { |id| Song.find(id) }
+      end
     end
 
   end
