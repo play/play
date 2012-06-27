@@ -39,6 +39,15 @@ task :start do
   Kernel.exec "bundle exec foreman start"
 end
 
+desc "Warm up song cache"
+task :warm_cache do
+  # Cache all Song data.
+  songs = `osascript -e 'tell application "iTunes" to get persistent ID of every track'`.chomp.split(", ")
+  songs.each do |id|
+    Play::Song.find(id)
+  end
+end
+
 namespace :redis do
   desc "Wipe all data in redis"
   task :reset do

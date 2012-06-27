@@ -44,6 +44,22 @@ module Play
     #
     # Returns an instance of a Song.
     def self.find(id)
+      song_cache = $redis.hgetall id
+      if song_cache.empty?
+        applescript_find_by_id id
+      else
+        song = {
+          :id     => id,
+          :name   => song_cache["name"],
+          :artist => song_cache["artist"],
+          :album  => song_cache["album"],
+          :last_played => song_cache["last_played"]
+        }
+        Song.new(song)
+      end
+    end
+
+    def self.applescript_find_by_id(id)
       attributes = `osascript -e 'tell application "iTunes" to get {persistent id, name, album, artist, duration} of (get first track whose persistent ID is \"#{id}\")'`.chomp.split(", ")
       keys = [:id, :name, :album, :artist, :duration]
       if !attributes.empty?
@@ -59,8 +75,19 @@ module Play
           song[:last_played] = last_played
         end
 
-        Song.new(song)
+        Song.new(song).save
       end
+    end
+
+    # Public: Saves the Song.
+    #
+    # Returns Song self.
+    def save
+      $redis.hset id, 'name', name
+      $redis.hset id, 'artist', artist
+      $redis.hset id, 'album', album
+      $redis.hset id, 'last_played', last_played
+      self
     end
 
     # Find the most popular song by its name. Compares against playcount and
@@ -129,7 +156,7 @@ module Play
     end
 
     def last_played_iso8601
-      if last_played
+      if last_played && last_played != ""
         Time.parse(last_played).iso8601
       else
         nil
