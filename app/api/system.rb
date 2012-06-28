@@ -4,18 +4,25 @@ module Play
 
     get "/images/art/:id.png" do
       content_type 'image/png'
+      cached_artwork = "/tmp/play-artwork/#{params[:id]}.png"
 
-      song = Song.find(params[:id])
-      art = song.album_art_data if song
-
-      if art
+      if File.exists? cached_artwork
         response['Cache-Control'] = 'public, max-age=2500000'
         etag params[:id]
-        art
+        send_file cached_artwork, :disposition => 'inline'
       else
-        dir = File.dirname(File.expand_path(__FILE__))
-        send_file "#{dir}/../frontend/public/images/art-placeholder.png",
-          :disposition => 'inline'
+        song = Song.find(params[:id])
+        art = song.album_art_data if song
+
+        if art
+          FileUtils.mkdir_p("/tmp/play-artwork")
+          File.write(cached_artwork, art)
+          art
+        else
+          dir = File.dirname(File.expand_path(__FILE__))
+          send_file "#{dir}/../frontend/public/images/art-placeholder.png",
+            :disposition => 'inline'
+        end
       end
     end
 
