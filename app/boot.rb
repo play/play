@@ -11,7 +11,11 @@ require 'mustache/sinatra'
 require 'sinatra_auth_github'
 require 'yajl'
 require 'sass'
-require 'appscript' if RUBY_PLATFORM.downcase.include?("darwin") && !ENV['CI']
+if RUBY_PLATFORM.downcase.include?("darwin") && !ENV['CI']
+  require 'appscript'
+  require 'sdefToRBAppscriptModule'
+  require 'sandboxed_appscript'
+end
 require 'pusher'
 
 require 'play'
