@@ -16,6 +16,7 @@ gem 'thin'
 
 if RUBY_PLATFORM.downcase.include?("darwin")
   gem 'rb-appscript'
+  gem 'nokogiri'
 end
 
 group :test do
