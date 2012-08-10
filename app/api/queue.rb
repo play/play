@@ -8,22 +8,33 @@ module Play
 
     post "/queue" do
       if params[:id]
-        song = Song.find(params[:id])
+        songs = [Song.find(params[:id])]
+      elsif params[:album] && params[:artist]
+        album = Album.new(:album => params[:album], :artist => params[:artist])
+        songs = album.songs
       else
-        song = Song.new(:name => params[:name], :artist => params[:artist])
+        songs = [Song.new(:name => params[:name], :artist => params[:artist])]
       end
-      Queue.add_song(song)
-      History.add(song,current_user)
+
+      songs.each do |song|
+        Queue.add_song(song)
+        History.add(song,current_user)
       true
     end
 
     delete "/queue" do
       if params[:id]
-        song = Song.find(params[:id])
+        songs = [Song.find(params[:id])]
+      elsif params[:album] && params[:artist]
+        album = Album.new(:album => params[:album], :artist => params[:artist])
+        songs = album.songs
       else
-        song = Song.new(:name => params[:name], :artist => params[:artist])
+        songs = [Song.new(:name => params[:name], :artist => params[:artist])]
       end
-      Queue.remove_song(song)
+
+      songs.each do |song|
+        Queue.remove_song(song)
+      end
       true
     end
 
