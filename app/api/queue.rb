@@ -10,7 +10,7 @@ module Play
       if params[:id]
         songs = [Song.find(params[:id])]
       elsif params[:album] && params[:artist]
-        album = Album.new(:album => params[:album], :artist => params[:artist])
+        album = Album.new(params[:album], params[:artist])
         songs = album.songs
       else
         songs = [Song.new(:name => params[:name], :artist => params[:artist])]
@@ -19,14 +19,15 @@ module Play
       songs.each do |song|
         Queue.add_song(song)
         History.add(song,current_user)
-      true
+      end
+      songs_as_json(songs, current_user)
     end
 
     delete "/queue" do
       if params[:id]
         songs = [Song.find(params[:id])]
       elsif params[:album] && params[:artist]
-        album = Album.new(:album => params[:album], :artist => params[:artist])
+        album = Album.new(params[:album], params[:artist])
         songs = album.songs
       else
         songs = [Song.new(:name => params[:name], :artist => params[:artist])]
