@@ -20,7 +20,7 @@ end
 
 task :environment do
   require 'lib/play'
-  require "bundler/setup"
+  require 'bundler/setup'
 end
 
 desc "Run tests as CI sees them"
@@ -31,17 +31,5 @@ end
 
 desc "Open an irb session preloaded with this library"
 task :console do
-  sh "irb -rubygems -r ./app/boot"
-end
-
-desc "Start the server"
-task :start do
-  Kernel.exec "bundle exec foreman start"
-end
-
-namespace :redis do
-  desc "Wipe all data in redis"
-  task :reset do
-    $redis.flushdb
-  end
+  sh "irb -rubygems -r ./lib/play"
 end
