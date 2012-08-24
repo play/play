@@ -51,5 +51,15 @@ module Play
       songs = History.last(30)
       songs_as_json(songs,current_user)
     end
+
+    # GET /popular?days=7&limit=50
+    #
+    # Get the 50 most popular songs for the last 7 days. Returns a JSON hash of songs (with score).
+    get "/popular" do
+      lookback = (params[:days] || 1).to_i
+      limit = (params[:limit] || 15).to_i
+      scored_songs = History.starred(Time.now-lookback*24*60*60, Time.now, limit)
+      scored_songs_as_json(scored_songs,current_user)
+    end
   end
 end
