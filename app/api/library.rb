@@ -52,9 +52,10 @@ module Play
       songs_as_json(songs,current_user)
     end
 
-    # GET /popular?days=7&limit=50
+    # GET /popular?days=N&limit=M
     #
-    # Get the 50 most popular songs for the last 7 days. Returns a JSON hash of songs (with score).
+    # Get the M most popular songs for the last N days. Returns a JSON hash of songs (with score).
+    # By default, N=7 and M=15.
     get "/popular" do
       lookback = (params[:days] || 1).to_i
       limit = (params[:limit] || 15).to_i
