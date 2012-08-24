@@ -59,7 +59,7 @@ module Play
     get "/popular" do
       lookback = (params[:days] || 1).to_i
       limit = (params[:limit] || 15).to_i
-      scored_songs = History.starred(Time.now-lookback*24*60*60, Time.now, limit)
+      scored_songs = History.popular(Time.now-lookback*24*60*60, Time.now, limit)
       scored_songs_as_json(scored_songs,current_user)
     end
   end

@@ -44,7 +44,7 @@ module Play
 
     post "/queue/popular" do
       days = (params[:days] || 7).to_i
-      scored_songs = History.starred(Time.now - days*24*60*60, Time.now).shuffle[0..4]
+      scored_songs = History.popular(Time.now - days*24*60*60, Time.now).shuffle[0..4]
 
       songs = scored_songs.each(&:first)
 

@@ -129,7 +129,7 @@ module Play
     end
 
     # Return the top N starred songs for the time range (with per-day "granularity")
-    def self.starred(from, to, n=15)
+    def self.popular(from, to, n=15)
       from_day = from.strftime("%Y%m%d")
       to_day = to.strftime("%Y%m%d")
 
