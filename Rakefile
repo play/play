@@ -4,8 +4,6 @@ require 'yaml'
 
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/app')
 
-require 'boot'
-
 task :default do
   ENV['RACK_ENV'] = 'test'
   Rake::Task['test'].invoke
@@ -21,10 +19,4 @@ end
 task :environment do
   require 'lib/play'
   require 'bundler/setup'
-end
-
-desc "Run tests as CI sees them"
-task :ci do
-  ENV['CI'] = '1'
-  Rake::Task['test'].invoke
 end
