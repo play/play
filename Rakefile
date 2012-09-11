@@ -28,8 +28,3 @@ task :ci do
   ENV['CI'] = '1'
   Rake::Task['test'].invoke
 end
-
-desc "Open an irb session preloaded with this library"
-task :console do
-  sh "irb -rubygems -r ./lib/play"
-end

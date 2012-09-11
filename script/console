@@ -1,0 +1,3 @@
+#!/bin/sh
+
+irb -rubygems -r ./lib/play
