@@ -30,10 +30,7 @@ case "$1" in
     play_usage
     exit 0
     ;;
-  update)
-	./script/update
-	;;
   *)
-    break
+    ./script/$1 $2
     ;;
 esac
