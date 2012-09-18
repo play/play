@@ -1,4 +1,4 @@
 #!/bin/sh
 #
 # Loads the Play Ruby environment into an interactive shell.
-irb -rubygems -r ./lib/play.rb
+irb -rubygems -r ./app/play.rb

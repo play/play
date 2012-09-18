@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/play/library
-  revision: c8cc719b4c03aa5d39cea6ddad540dc5ba37ec8b
-  specs:
-    library (0)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -12,4 +6,3 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  library (= 0)!
