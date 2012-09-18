@@ -1,24 +1,24 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'app'))
 
 require 'test/unit'
+require 'rubygems'
 
-begin
-  require 'rubygems'
-  require 'redgreen'
-  require 'leftright'
-rescue LoadError
-end
-
+Bundler.require(:test)
 require 'spec/mini'
 
 require 'play'
 include Play
+include Rack::Test::Methods
 
 # Set up our test mpd instance and its "music"
 system 'rm -rf   /tmp/play-test'
 system 'mkdir -p /tmp/play-test/.mpd'
 system 'cp -R     test/music /tmp/play-test'
 system './test/daemon/start.sh'
+
+def app
+  Play::App
+end
 
 module Play
   class Client

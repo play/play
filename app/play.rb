@@ -15,6 +15,8 @@ require_relative 'app'
 require_relative 'views/layout'
 
 module Play
+  include Play::Helpers
+  
   def self.client
     Client
   end
