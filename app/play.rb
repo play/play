@@ -11,9 +11,10 @@ require_relative 'models/helpers'
 require_relative 'models/queue'
 require_relative 'models/song'
 
-module Play
-  include Helpers
+require_relative 'app'
+require_relative 'views/layout'
 
+module Play
   def self.client
     Client
   end
