@@ -41,7 +41,7 @@ module Play
     #
     # Returns an Array of Strings.
     def playlist
-      native :playlist, ["-f","'%artist% :: %title% :: %file%'"]
+      native :playlist, ["-f","%artist% :: %title% :: %file%"]
     end
 
     # Clears a playlist.

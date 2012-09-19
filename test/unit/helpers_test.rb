@@ -13,6 +13,6 @@ context "Artist" do
 
     assert_equal 'Justice',         song.artist.name
     assert_equal 'Stress',          song.name
-    #assert_equal '/path/to/Stress', song.path
+    assert_equal '/path/to/Stress', song.path
   end
 end
