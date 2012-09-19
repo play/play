@@ -14,7 +14,7 @@ module Play
     #
     # Returns an Array of Songs.
     def self.songs
-      results = client.playlist
+      results = Play.client.playlist
       results.map do |result|
         song_from_tuple(result)
       end

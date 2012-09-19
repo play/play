@@ -14,10 +14,10 @@ require_relative 'models/song'
 require_relative 'app'
 require_relative 'views/layout'
 
-module Play
-  include Play::Helpers
-  
+include Play::Helpers
+
+module Play  
   def self.client
-    Client
+    Client.new
   end
 end

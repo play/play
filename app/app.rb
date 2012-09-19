@@ -22,6 +22,7 @@ module Play
     }
 
     get "/" do
+      @songs = Queue.songs
       mustache :index
     end
   end

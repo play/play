@@ -29,6 +29,7 @@ module Play
     #
     # Returns a Boolean.
     def ==(other)
+      return false if other.class != self.class
       name == other.name
     end
   end
