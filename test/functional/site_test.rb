@@ -24,4 +24,11 @@ context "Site" do
     assert last_response.ok?
     assert last_response.body.include?('Stress')
   end
+
+  test "song page" do
+    get "/artist/Justice/song/Stress"
+
+    assert last_response.ok?
+    assert last_response.body.include?('Stress')
+  end
 end

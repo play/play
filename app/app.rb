@@ -38,5 +38,11 @@ module Play
       @songs  = @album.songs
       mustache :album_details
     end
+
+    get "/artist/:name/song/:title" do
+      @artist = Artist.new(params[:name])
+      @song  = @artist.songs.find{|song| song.title == params[:title]}
+      mustache :song_details
+    end
   end
 end
