@@ -3,8 +3,11 @@ module Play
     # The title of the Song.
     attr_accessor :title
 
-    # The Artist this Song points towards.
+    # The Artist this Song belongs to.
     attr_accessor :artist
+
+    # The Album this Song belongs to.
+    attr_accessor :album
 
     # The String file path.
     attr_accessor :path
@@ -23,6 +26,7 @@ module Play
         tag     = file.tag
 
         @artist = Artist.new(tag.artist)
+        @album  = Album.new(tag.artist, tag.album)
         @title  = tag.title
         @path   = path
       end
