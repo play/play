@@ -25,5 +25,11 @@ module Play
       @songs = Queue.songs
       mustache :index
     end
+
+    get "/artist/:name" do
+      @artist = Artist.new(params[:name])
+      @songs  = @artist.songs
+      mustache :artist_profile
+    end
   end
 end
