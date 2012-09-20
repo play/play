@@ -31,5 +31,12 @@ module Play
       @songs  = @artist.songs
       mustache :artist_profile
     end
+
+    get "/artist/:name/album/:title" do
+      @artist = Artist.new(params[:name])
+      @album  = Album.new(@artist.name, params[:title])
+      @songs  = @album.songs
+      mustache :album_details
+    end
   end
 end
