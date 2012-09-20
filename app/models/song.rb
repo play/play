@@ -31,5 +31,13 @@ module Play
         @path   = path
       end
     end
+
+    # Is this Song basically the same thing as another Song?
+    #
+    # Returns a Boolean.
+    def ==(other)
+      return false if other.class != self.class
+      title == other.title
+    end
   end
 end

@@ -18,6 +18,15 @@ module Play
       end
     end
 
+    # All of the Songs associated with this Artist.
+    #
+    # Returns an Array of Songs.
+    def songs
+      client.search([:artist, name]).map do |path|
+        Song.new(path)
+      end
+    end
+
     # A simple String representation of this instance.
     #
     # Returns a String.

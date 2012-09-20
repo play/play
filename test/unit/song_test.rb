@@ -21,4 +21,8 @@ context "Song" do
   test "has an album" do
     assert_equal 'Cross', @song.album.name
   end
+
+  test "knows equivalence" do
+    assert_equal Song.new('Justice/Cross/Stress.mp3'), @song
+  end
 end
