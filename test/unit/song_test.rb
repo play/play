@@ -2,7 +2,7 @@ require File.expand_path("../../helper", __FILE__)
 
 context "Song" do
   setup do
-    @song = Song.new('Justice', 'Stress')
+    @song = Song.new('Justice/Cross/Stress.mp3')
   end
 
   test "belongs to an artist" do
@@ -10,13 +10,11 @@ context "Song" do
     assert_equal artist, @song.artist
   end
 
-  test "has an name" do
-    assert_equal 'Stress', @song.name
+  test "has an title" do
+    assert_equal 'Stress', @song.title
   end
 
   test "has a path" do
-    @song.path = '/path'
-    assert_equal '/path', @song.path
-    assert_equal '/path', Song.new('a','song','/path').path
+    assert_equal 'Justice/Cross/Stress.mp3', @song.path
   end
 end

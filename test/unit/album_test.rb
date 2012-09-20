@@ -17,6 +17,6 @@ context "Album" do
   test "has songs" do
     song = @album.songs.first
     assert_equal 1, @album.songs.size
-    assert_equal 'Stress', song.name
+    assert_equal 'Stress', song.title
   end
 end

@@ -22,8 +22,8 @@ module Play
     # Returns an Array of Songs.
     def songs
       results = client.search([:artist, artist.name, :album, name])
-      results.map do |result|
-        Song.new(artist,name_from_path(result))
+      results.map do |path|
+        Song.new(path)
       end
     end
   end

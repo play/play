@@ -21,6 +21,12 @@ def app
 end
 
 module Play
+  def self.music_path
+    'test/music'
+  end
+end
+
+module Play
   class Client
     # Test mpd runs on a different port (6611 instead of 6600).
     def port

@@ -1,24 +1,31 @@
 module Play
   class Song
-    # The name of the Song.
-    attr_accessor :name
+    # The title of the Song.
+    attr_accessor :title
 
     # The Artist this Song points towards.
     attr_accessor :artist
 
-    # The String file path (this is usually present, but could be optional).
+    # The String file path.
     attr_accessor :path
 
     # Create a new Song.
     #
-    # artist_name - The String name of the Artist.
-    # name - The String name of the Song.
+    # path - The String path to the Song on disk.
     #
     # Returns nothing.
-    def initialize(artist_name,name,path=nil)
-      @artist = Artist.new(artist_name)
-      @name   = name
-      @path   = path
+    def initialize(path)
+      path.chomp!
+
+      full_path = File.join(Play.music_path,path)
+
+      TagLib::FileRef.open(full_path) do |file|
+        tag     = file.tag
+
+        @artist = Artist.new(tag.artist)
+        @title  = tag.title
+        @path   = path
+      end
     end
   end
 end

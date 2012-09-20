@@ -5,6 +5,7 @@ gem 'mustache', :require => 'mustache/sinatra'
 gem 'sinatra'
 gem 'sinatra_auth_github'
 gem 'sprockets'
+gem 'taglib-ruby', :require => 'taglib'
 
 group :development do
   gem 'shotgun'
