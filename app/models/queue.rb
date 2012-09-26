@@ -14,7 +14,7 @@ module Play
     #
     # Returns the current Song.
     def self.now_playing
-      if path = client.current
+      if path = client.now_playing
         Song.new(path)
       end
     end

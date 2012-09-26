@@ -51,10 +51,10 @@ module Play
       native :clear
     end
 
-    # Current playing song
+    # Current playing song.
     #
-    # Returns the path to the current song
-    def current
+    # Returns the path to the current song.
+    def now_playing
       (native :current, ["-f","%file%"]).first
     end
 
@@ -68,25 +68,25 @@ module Play
       native :add, options
     end
 
-    # Resume play
+    # Resume play.
     #
     # Returns an Array of Strings.
     def play
       native :play
     end
 
-    # Clear the current playlist
+    # Clear the current playlist.
     #
     # Returns an Array of Strings.
     def clear
       native :clear
     end
 
-    # Change the volume
+    # Change the volume.
     #
-    # value - Volume value, can be [-+]num
+    # value - Volume value, can be [-+]num.
     def volume(value)
-      native :volumne, [value.to_s]
+      native :volume, [value.to_s]
     end
   end
 end
