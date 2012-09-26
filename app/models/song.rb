@@ -23,11 +23,11 @@ module Play
       full_path = File.join(Play.music_path,path)
 
       TagLib::FileRef.open(full_path) do |file|
-        tag     = file.tag
-
-        @artist = Artist.new(tag.artist)
-        @album  = Album.new(tag.artist, tag.album)
-        @title  = tag.title
+        if tag = file.tag
+          @artist = Artist.new(tag.artist)
+          @album  = Album.new(tag.artist, tag.album)
+          @title  = tag.title
+        end
         @path   = path
       end
     end

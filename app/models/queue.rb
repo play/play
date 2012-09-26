@@ -10,6 +10,15 @@ module Play
       songs
     end
 
+    # Get the current playing song
+    #
+    # Returns the current Song.
+    def self.now_playing
+      if path = client.current
+        Song.new(path)
+      end
+    end
+
     # List all of the songs in the Queue.
     #
     # Returns an Array of Songs.

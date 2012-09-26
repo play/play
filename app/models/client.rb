@@ -51,6 +51,13 @@ module Play
       native :clear
     end
 
+    # Current playing song
+    #
+    # Returns the path to the current song
+    def current
+      (native :current, ["-f","%file%"]).first
+    end
+
     # Adds a file to a playlist
     #
     # options - An Array of Symbols or Strings to pass on to mpc.
@@ -59,6 +66,27 @@ module Play
     def add(options)
       options = [options] if !options.kind_of?(Array)
       native :add, options
+    end
+
+    # Resume play
+    #
+    # Returns an Array of Strings.
+    def play
+      native :play
+    end
+
+    # Clear the current playlist
+    #
+    # Returns an Array of Strings.
+    def clear
+      native :clear
+    end
+
+    # Change the volume
+    #
+    # value - Volume value, can be [-+]num
+    def volume(value)
+      native :volumne, [value.to_s]
     end
   end
 end
