@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/app/boot')
+require File.expand_path(File.dirname(__FILE__) + '/app/play')
 require 'sprockets'
 
 stylesheets = Sprockets::Environment.new

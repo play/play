@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Reports on the status of the stack.
+set -x
+
+echo "MUSIC: $(ps aux| grep mpd)"

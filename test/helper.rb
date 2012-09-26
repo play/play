@@ -1,60 +1,36 @@
-require 'test/unit'
-
-begin
-  require 'rubygems'
-  require 'redgreen'
-  require 'leftright'
-rescue LoadError
-end
-
-require 'rack/test'
-require 'mocha'
-require 'spec/mini'
-
-ENV['RACK_ENV'] = 'test'
-ENV['CI'] = '1' if !RUBY_PLATFORM.downcase.include?("darwin")
-
-$LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'app'))
 
-require 'boot'
+require 'test/unit'
+require 'rubygems'
+
+Bundler.require(:test)
+require 'spec/mini'
+
+require 'play'
 include Play
 include Rack::Test::Methods
+
+# Set up our test mpd instance and its "music"
+system 'rm -rf   /tmp/play-test'
+system 'mkdir -p /tmp/play-test/.mpd'
+system 'cp -R     test/music /tmp/play-test'
+system './test/daemon/start.sh'
 
 def app
   Play::App
 end
 
-def parse_json(json)
-  Yajl.load(json, :symbolize_keys => true)
+module Play
+  def self.music_path
+    'test/music'
+  end
 end
 
-def authorized_rack_header
-  user = User.create('maddox', 'maddox@github.com')
-  {"HTTP_AUTHORIZATION" => user.token}
+module Play
+  class Client
+    # Test mpd runs on a different port (6611 instead of 6600).
+    def port
+      '6611'
+    end
+  end
 end
-
-def authorized_get(uri, opts={})
-  get uri, opts, authorized_rack_header
-end
-
-def authorized_post(uri, opts={})
-  post uri, opts, authorized_rack_header
-end
-
-def authorized_put(uri, opts={})
-  put uri, opts, authorized_rack_header
-end
-
-def authorized_delete(uri, opts={})
-  delete uri, opts, authorized_rack_header
-end
-
-def unauthorized_get(uri, opts={})
-  rack_env = {"HTTP_AUTHORIZATION" => "xxxxxxxxxxxxxxxxxx"}
-  get uri, opts, rack_env
-end
-
-
-
-

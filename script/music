@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Manages the music daemon powering Play.
+set -x
+
+case $1 in
+	start)
+		mpd config/mpd.conf
+		exit 0
+		;;
+	stop)
+		mpd config/mpd.conf --kill
+		exit 0
+		;;
+esac

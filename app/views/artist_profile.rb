@@ -1,6 +1,10 @@
 module Play
   module Views
-    class Index < Layout
+    class ArtistProfile < Layout
+      def artist
+        @artist
+      end
+      
       def songs
         @songs
       end

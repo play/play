@@ -1,34 +1,36 @@
-# Sets Play up to be used by its friendly friends.
-module Play
+require 'rubygems'
+require 'bundler'
 
-  # Public: The config located in config/play.yml.
-  #
-  # Returns an OpenStruct so you can chain methods off of `Play.config`.
-  def self.config
-    OpenStruct.new \
-      :secret        => yaml['gh_secret'],
-      :client_id     => yaml['gh_key'],
-      :gh_org        => yaml['gh_org'],
-      :stream_url    => yaml['stream_url'],
-      :office_url    => yaml['office_url'],
-      :hostname      => yaml['hostname'],
-      :pusher_app_id => yaml['pusher_app_id'],
-      :pusher_key    => yaml['pusher_key'],
-      :pusher_secret => yaml['pusher_secret'],
-      :auth_token    => yaml['auth_token']
+Bundler.setup(:default)
+Bundler.require(:default)
+
+require_relative 'models/album'
+require_relative 'models/artist'
+require_relative 'models/client'
+require_relative 'models/helpers'
+require_relative 'models/queue'
+require_relative 'models/song'
+
+require_relative 'app'
+require_relative 'views/layout'
+
+include Play::Helpers
+
+module Play  
+  def self.client
+    Client.new
   end
 
-private
-
-  # Load the config YAML.
+  # mpd only really knows about the relative path to songs:
+  # Justice/Cross/Stress.mp3, for example. We need to know the path before
+  # that for a few things (reading in the MP3 tag data, for one). This method
+  # reads the path from your config/mpd.conf and loads up the value you have
+  # for `music_directory`.
   #
-  # Returns a memoized Hash.
-  def self.yaml
-    if File.exist?('config/play.yml')
-      @yaml ||= YAML.load_file('config/play.yml')
-    else
-      {}
-    end
+  # Returns a String.
+  def self.music_path
+    config = File.read('config/mpd.conf')
+    config.match(/music_directory\s+"(.+)"/)
+    $1
   end
-
 end

@@ -13,6 +13,9 @@ def context(*args, &block)
     def self.xtest(*args) end
     def self.context(*args, &block) instance_eval(&block) end
     def self.setup(&block)
+      # Clear out the entire queue during each `setup` block.
+      Client.new.clear
+
       define_method(:setup) { self.class.setups.each { |s| instance_eval(&s) } }
       setups << block
     end
