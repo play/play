@@ -7,6 +7,7 @@ $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/app')
 task :default do
   ENV['RACK_ENV'] = 'test'
   Rake::Task['test'].invoke
+  system './test/daemon/stop.sh'
 end
 
 require 'rake/testtask'
