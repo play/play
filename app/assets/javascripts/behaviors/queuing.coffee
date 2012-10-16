@@ -8,7 +8,13 @@ $ ->
       (data) ->
         element.text(data)
 
-    $.delete '/queue',
-      path: path
-      (data) ->
+  $('.controls .remove').click ->
+    element = $(@)
+    path = element.parents('.song').data('path')
+
+    $.ajax
+      type: 'DELETE',
+      url:  '/queue',
+      data: {path: path},
+      success: (data) ->
         element.text(data)

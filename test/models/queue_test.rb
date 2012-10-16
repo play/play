@@ -31,4 +31,16 @@ context "Queue" do
     Play::Queue.clear
     assert_equal 0, Play::Queue.songs.size
   end
+
+  test "adds a song" do
+    # setup() handles adding
+
+    assert_equal 1, Play::Queue.songs.size
+  end
+
+  test "removes a song" do
+    Play::Queue.remove(@song)
+
+    assert_equal 0, Play::Queue.songs.size
+  end
 end

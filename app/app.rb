@@ -55,5 +55,11 @@ module Play
       Queue.add(song)
       'added!'
     end
+
+    delete "/queue" do
+      song = Song.new(params[:path])
+      Queue.remove(song)
+      'deleted!'
+    end
   end
 end

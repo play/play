@@ -10,6 +10,23 @@ module Play
       songs
     end
 
+    # Finds all the songs in the queue that we're looking for and removes
+    # them.
+    #
+    # song - The Song instance to remove from the Queue.
+    #
+    # Returns the Queue.
+    def self.remove(song)
+      positions = []
+      songs.each_with_index do |queued_song, i|
+        positions << (i+1) if song.path == queued_song.path
+      end
+
+      positions.each { |position| client.remove(position) }
+
+      songs
+    end
+
     # Get the current playing song
     #
     # Returns the current Song.

@@ -46,4 +46,14 @@ context "Site" do
     assert last_response.ok?
     assert_equal 'added!', last_response.body
   end
+
+  test "add a song" do
+    song = Song.new('Justice/Cross/Stress.mp3')
+    Play::Queue.add(song)
+    delete "/queue", :path => song.path
+
+    assert last_response.ok?
+    assert_equal 'deleted!', last_response.body
+    assert_equal 0, Play::Queue.songs.size
+  end
 end
