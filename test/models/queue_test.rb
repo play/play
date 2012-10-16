@@ -25,4 +25,10 @@ context "Queue" do
     song = Play::Queue.now_playing
     assert_equal @song.title, song.title
   end
+
+  test "clears the queue" do
+    assert_equal 1, Play::Queue.songs.size
+    Play::Queue.clear
+    assert_equal 0, Play::Queue.songs.size
+  end
 end

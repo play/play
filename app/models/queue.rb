@@ -19,6 +19,13 @@ module Play
       end
     end
 
+    # Clears the queue.
+    #
+    # Returns nothing.
+    def self.clear
+      Client.new.clear
+    end
+
     # List all of the songs in the Queue.
     #
     # Returns an Array of Songs.
