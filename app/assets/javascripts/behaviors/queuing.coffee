@@ -3,7 +3,12 @@ $ ->
     element = $(@)
     path = element.parents('.song').data('path')
 
-    $.post '/add',
+    $.post '/queue',
+      path: path
+      (data) ->
+        element.text(data)
+
+    $.delete '/queue',
       path: path
       (data) ->
         element.text(data)

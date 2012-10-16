@@ -50,7 +50,7 @@ module Play
       mustache :song_details
     end
 
-    post "/add" do
+    post "/queue" do
       song = Song.new(params[:path])
       Queue.add(song)
       'added!'

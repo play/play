@@ -41,7 +41,7 @@ context "Site" do
   end
 
   test "add a song" do
-    post "/add", :path => 'Justice/Cross/Stress.mp3'
+    post "/queue", :path => 'Justice/Cross/Stress.mp3'
 
     assert last_response.ok?
     assert_equal 'added!', last_response.body
