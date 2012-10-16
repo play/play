@@ -62,12 +62,19 @@ module Play
       album.name
     end
 
+    # Is this song currently queued up?
+    #
+    # Returns a Boolean.
+    def queued?
+      Queue.songs.include?(self)
+    end
+
     # Is this Song basically the same thing as another Song?
     #
     # Returns a Boolean.
     def ==(other)
       return false if other.class != self.class
-      title == other.title
+      path == other.path
     end
   end
 end

@@ -48,4 +48,12 @@ context "Song" do
   test "album name" do
     assert_equal 'Cross', @song.album_name
   end
+
+  test "queued?" do
+    Play::Queue.clear
+    assert !@song.queued?
+
+    client.add(@song.path)
+    assert @song.queued?
+  end
 end
