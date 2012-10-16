@@ -40,4 +40,12 @@ context "Song" do
     songs = Song.find([:title, 'vancouver'])
     assert_equal 0, songs.size
   end
+
+  test "artist name" do
+    assert_equal 'Justice', @song.artist_name
+  end
+
+  test "album name" do
+    assert_equal 'Cross', @song.album_name
+  end
 end

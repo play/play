@@ -48,6 +48,20 @@ module Play
       results.map {|path| Song.new(path) }
     end
 
+    # The name of the artist of this song.
+    #
+    # Returns a String
+    def artist_name
+      artist.name
+    end
+
+    # The name of the album of this song.
+    #
+    # Returns a String
+    def album_name
+      album.name
+    end
+
     # Is this Song basically the same thing as another Song?
     #
     # Returns a Boolean.
