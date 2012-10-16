@@ -11,6 +11,7 @@ gem 'taglib-ruby',        :require => 'taglib'
 
 group :development do
   gem 'shotgun'
+  gem 'thin'
 end
 
 group :test do
