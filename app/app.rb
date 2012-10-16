@@ -49,5 +49,11 @@ module Play
       @song  = @artist.songs.find{|song| song.title == params[:title]}
       mustache :song_details
     end
+
+    post "/add" do
+      song = Song.new(params[:path])
+      Queue.add(song)
+      'added!'
+    end
   end
 end

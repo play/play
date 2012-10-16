@@ -39,4 +39,11 @@ context "Site" do
     assert last_response.ok?
     assert last_response.body.include?('Stress')
   end
+
+  test "add a song" do
+    post "/add", :path => 'Justice/Cross/Stress.mp3'
+
+    assert last_response.ok?
+    assert_equal 'added!', last_response.body
+  end
 end
