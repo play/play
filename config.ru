@@ -1,13 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/app/play')
 require 'sprockets'
 
-stylesheets = Sprockets::Environment.new
-stylesheets.append_path 'app/frontend/styles'
+assets = Sprockets::Environment.new
+assets.append_path 'app/assets/css'
+assets.append_path 'app/assets/javascripts'
 
-javascripts = Sprockets::Environment.new
-javascripts.append_path 'app/frontend/scripts'
-
-map("/css")      { run stylesheets }
-map("/js")       { run javascripts }
+map("/assets")   { run assets }
 
 map('/')         { run Play::App }
