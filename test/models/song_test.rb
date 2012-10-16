@@ -25,4 +25,19 @@ context "Song" do
   test "knows equivalence" do
     assert_equal Song.new('Justice/Cross/Stress.mp3'), @song
   end
+
+  test "finds a song by any" do
+    songs = Song.find([:any, 'justice'])
+    assert_equal 1, songs.size
+  end
+
+  test "finds a song by its title" do
+    songs = Song.find([:title, 'stress'])
+    assert_equal 1, songs.size
+  end
+
+  test "can't find a song if it's not there" do
+    songs = Song.find([:title, 'vancouver'])
+    assert_equal 0, songs.size
+  end
 end

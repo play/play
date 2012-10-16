@@ -11,6 +11,13 @@ context "Site" do
     assert last_response.body.include?('dat play')
   end
 
+  test "search" do
+    get "/search", :q => 'Justice'
+
+    assert last_response.ok?
+    assert last_response.body.include?('Stress')
+  end
+
   test "artist page" do
     get "/artist/Justice"
 

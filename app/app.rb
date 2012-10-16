@@ -26,6 +26,11 @@ module Play
       mustache :index
     end
 
+    get "/search" do
+      @songs = Song.find([:any,params[:q]])
+      mustache :search
+    end
+
     get "/artist/:name" do
       @artist = Artist.new(params[:name])
       @songs  = @artist.songs

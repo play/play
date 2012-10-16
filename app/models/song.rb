@@ -32,6 +32,22 @@ module Play
       end
     end
 
+    # Searches for matching Songs.
+    #
+    # options - An Array of mpc-friendly options to search on.
+    #
+    # Examples
+    #
+    #   find(:any,   'Justice')
+    #   find(:title, 'Stress')
+    #   find(:album, 'Cross')
+    #
+    # Returns an Array of Songs.
+    def self.find(options)
+      results = client.search(options)
+      results.map {|path| Song.new(path) }
+    end
+
     # Is this Song basically the same thing as another Song?
     #
     # Returns a Boolean.
