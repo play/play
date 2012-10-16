@@ -8,7 +8,8 @@ context "Site" do
     get "/"
 
     assert last_response.ok?
-    assert last_response.body.include?('dat play')
+    assert last_response.body.include?('Play')
+    assert last_response.body.include?('Search')
   end
 
   test "search" do
