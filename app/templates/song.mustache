@@ -1,3 +1,5 @@
-name:   {{title}}
-artist: {{#artist}} {{name}} {{/artist}}
-album:  {{#album}} {{name}} {{/album}}
+<div class="song">
+  <div class="title"><a href="/artist/{{artist_name}}/album/{{album_name}}/song/{{title}}">{{title}}</a></div>
+  <div class="artist"><a href="/artist/{{artist_name}}">{{artist_name}}</a></div>
+  <div class="album"><a href="/artist/{{artist_name}}/album/{{album_name}}">{{album_name}}</a></div>
+</div>
