@@ -1,3 +1,5 @@
+require "base64"
+
 module Play
   class Song
     # The title of the Song.
@@ -67,6 +69,15 @@ module Play
     # Returns a Boolean.
     def queued?
       Queue.songs.include?(self)
+    end
+
+    # The album art.
+    #
+    # Returns a String of binary data.
+    def art
+      output = `mediainfo "#{Play.music_path}/#{path}" -f | grep Cover_Data`
+      data = output.split(':').last.chomp
+      Base64.decode64(data)
     end
 
     # Is this Song basically the same thing as another Song?

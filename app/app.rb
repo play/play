@@ -50,6 +50,13 @@ module Play
       mustache :song_details
     end
 
+    get "/images/art/*" do
+      song = Song.new(params[:splat].first)
+
+      content_type 'image/png'
+      song.art
+    end
+
     post "/queue" do
       song = Song.new(params[:path])
       Queue.add(song)
