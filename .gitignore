@@ -1,3 +1,4 @@
 .bundle
 bin
+config/database.yml
 config/mpd.conf

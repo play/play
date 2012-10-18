@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'rake'
 require 'yaml'
+require 'sinatra/activerecord/rake'
+require './app/play'
 
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/app')
 
@@ -19,6 +21,16 @@ end
 task :environment do
   require 'lib/play'
   require 'bundler/setup'
+end
+
+namespace :db do
+  # TODO: hook into config/database.yml
+  task :create do
+    `mysql \
+      --user="root" \
+      --password="" \
+      --execute='CREATE DATABASE IF NOT EXISTS play CHARACTER SET utf8 COLLATE utf8_unicode_ci;'`
+  end
 end
 
 Kernel.trap("EXIT") do

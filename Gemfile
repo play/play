@@ -1,13 +1,16 @@
 source 'http://rubygems.org'
 
-gem 'coffee-script',      '~> 2.2.0', :require => 'coffee_script'
-gem 'rake',               '~> 0.9.2.2'
-gem 'mustache',           :require => 'mustache/sinatra'
-gem 'sass',               '~> 3.2.1'
+gem 'activerecord',                '~> 3.2.8'
+gem 'coffee-script',               '~> 2.2.0', :require => 'coffee_script'
+gem 'rake',                        '~> 0.9.2.2'
+gem 'mustache',                    :require => 'mustache/sinatra'
+gem 'mysql2',                      '~> 0.3.11'
+gem 'sass',                        '~> 3.2.1'
 gem 'sinatra'
+gem 'sinatra-activerecord',        '~> 1.1.1'
 gem 'sinatra_auth_github'
-gem 'sprockets',          '~> 2.5.0'
-gem 'taglib-ruby',        :require => 'taglib'
+gem 'sprockets',                   '~> 2.5.0'
+gem 'taglib-ruby',                 :require => 'taglib'
 
 group :development do
   gem 'shotgun'
@@ -15,5 +18,5 @@ group :development do
 end
 
 group :test do
-  gem 'rack-test',        :require => 'rack/test'
+  gem 'rack-test',                 :require => 'rack/test'
 end

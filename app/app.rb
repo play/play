@@ -5,6 +5,7 @@ module Play
 
     register Mustache::Sinatra
     register Sinatra::Auth::Github
+    register Sinatra::ActiveRecordExtension
 
     dir = File.dirname(File.expand_path(__FILE__))
 
@@ -20,6 +21,8 @@ module Play
       :secret    => ENV['GITHUB_CLIENT_SECRET'],
       :client_id => ENV['GITHUB_CLIENT_ID'],
     }
+
+    set :database, YAML::load(File.open('config/database.yml'))
 
     get "/" do
       @songs = Queue.songs
