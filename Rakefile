@@ -35,4 +35,4 @@ end
 
 Kernel.trap("EXIT") do
   system './test/daemon/stop.sh'
-end
+end if ENV['RACK_ENV'] == 'test'
