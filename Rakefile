@@ -26,10 +26,12 @@ end
 namespace :db do
   # TODO: hook into config/database.yml
   task :create do
+    name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
+
     `mysql \
       --user="root" \
       --password="" \
-      --execute='CREATE DATABASE IF NOT EXISTS play CHARACTER SET utf8 COLLATE utf8_unicode_ci;'`
+      --execute='CREATE DATABASE IF NOT EXISTS #{name} CHARACTER SET utf8 COLLATE utf8_unicode_ci;'`
   end
 end
 

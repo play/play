@@ -16,6 +16,10 @@ system 'mkdir -p /tmp/play-test/.mpd'
 system 'cp -R     test/music /tmp/play-test'
 system './test/daemon/start.sh'
 
+# Switch to a test database
+config = Play.config['db'].merge('database' => 'play_test')
+ActiveRecord::Base.establish_connection(config)
+
 def app
   Play::App
 end
