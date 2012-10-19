@@ -18,11 +18,11 @@ module Play
     }
     set :github_options, {
       :scopes    => "user",
-      :secret    => ENV['GITHUB_CLIENT_SECRET'],
-      :client_id => ENV['GITHUB_CLIENT_ID'],
+      :secret    => Play.config['github']['secret'],
+      :client_id => Play.config['github']['client_id'],
     }
 
-    set :database, YAML::load(File.open('config/database.yml'))
+    set :database, Play.config['db']
 
     get "/" do
       @songs = Queue.songs

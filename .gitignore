@@ -1,4 +1,4 @@
 .bundle
 bin
-config/database.yml
+config/play.yml
 config/mpd.conf

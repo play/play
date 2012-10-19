@@ -11,7 +11,6 @@ require_relative 'models/helpers'
 require_relative 'models/queue'
 require_relative 'models/song'
 
-require_relative 'app'
 require_relative 'views/layout'
 
 include Play::Helpers
@@ -33,4 +32,14 @@ module Play
     config.match(/music_directory\s+"(.+)"/)
     $1
   end
+
+  # The config file of Play. Contains things like keys, database config, and
+  # who shot JFK.
+  #
+  # Returns a Hash.
+  def self.config
+    YAML::load(File.open('config/play.yml'))
+  end
 end
+
+require_relative 'app'
