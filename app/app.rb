@@ -22,7 +22,8 @@ module Play
       :client_id => Play.config['github']['client_id'],
     }
 
-    set :database, Play.config['db']
+    db_name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
+    set :database, Play.config['db'].merge('database' => db_name)
 
     get "/" do
       @songs = Queue.songs
