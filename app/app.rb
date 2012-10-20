@@ -2,10 +2,15 @@ module Play
   class App < Sinatra::Base
     # Include our Sinatra Helpers.
     include Play::Helpers
+    include Play::AuthenticationHelper
 
     register Mustache::Sinatra
     register Sinatra::Auth::Github
     register Sinatra::ActiveRecordExtension
+    use Rack::Session::Cookie,
+      :path => '/',
+      :expire_after => 2628000,
+      :secret => Play.config['auth_token']
 
     dir = File.dirname(File.expand_path(__FILE__))
 
@@ -24,6 +29,18 @@ module Play
 
     db_name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
     set :database, Play.config['db'].merge('database' => db_name)
+
+    before do
+      session_not_required = request.path_info =~ /\/login/ ||
+                             request.path_info =~ /\/auth/ ||
+                             request.path_info =~ /\/images/
+
+      if ENV['RACK_ENV']=='test' || session_not_required || current_user
+        true
+      else
+        authenticate
+      end
+    end
 
     get "/" do
       @songs = Queue.songs

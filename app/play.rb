@@ -4,6 +4,8 @@ require 'bundler'
 Bundler.setup(:default)
 Bundler.require(:default)
 
+require_relative 'helpers/authentication_helper'
+
 require_relative 'models/album'
 require_relative 'models/artist'
 require_relative 'models/client'

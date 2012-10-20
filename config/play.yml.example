@@ -1,3 +1,4 @@
+auth_token:
 db:
   adapter: mysql2
   host: localhost
@@ -6,5 +7,6 @@ db:
   database: play
   reconnect: true
 github:
+  org:
   client_id: 
-  client_secret: 
+  secret:
