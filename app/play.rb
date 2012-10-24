@@ -12,6 +12,7 @@ require_relative 'models/client'
 require_relative 'models/helpers'
 require_relative 'models/queue'
 require_relative 'models/song'
+require_relative 'models/song_play'
 require_relative 'models/user'
 
 require_relative 'views/layout'

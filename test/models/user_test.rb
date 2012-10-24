@@ -9,4 +9,8 @@ context "User" do
     assert_equal 'holman', @user.login
     assert_equal 'holman@example.com', @user.email
   end
+
+  test "has plays" do
+    assert @user.plays.empty?
+  end
 end
