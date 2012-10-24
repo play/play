@@ -41,6 +41,7 @@ context "Site" do
   end
 
   test "user page" do
+    SongPlay.delete_all
     user = User.create(:login => 'holman')
     get "/holman"
 
@@ -65,7 +66,9 @@ context "Site" do
 
   test "add a song" do
     song = Song.new('Justice/Cross/Stress.mp3')
-    Play::Queue.add(song)
+    user = User.new(:login => 'holman')
+
+    Play::Queue.add(song,user)
     delete "/queue", :path => song.path
 
     assert last_response.ok?

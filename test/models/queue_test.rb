@@ -4,7 +4,8 @@ context "Queue" do
   setup do
     Play.client.clear
     @song = Song.new('Justice/Cross/Stress.mp3')
-    Play::Queue.add(@song)
+    @user = User.create(:login => 'holman')
+    Play::Queue.add(@song,@user)
   end
 
   test "has songs" do
@@ -39,7 +40,7 @@ context "Queue" do
   end
 
   test "removes a song" do
-    Play::Queue.remove(@song)
+    Play::Queue.remove(@song,@user)
 
     assert_equal 0, Play::Queue.songs.size
   end

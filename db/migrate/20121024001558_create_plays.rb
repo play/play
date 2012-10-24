@@ -2,7 +2,7 @@ class CreatePlays < ActiveRecord::Migration
   def up
     create_table :song_plays do |t|
       t.belongs_to :user
-      t.belongs_to :song
+      t.string :song_path
       t.timestamps
     end
   end

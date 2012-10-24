@@ -93,13 +93,13 @@ module Play
 
     post "/queue" do
       song = Song.new(params[:path])
-      Queue.add(song)
+      Queue.add(song,current_user)
       'added!'
     end
 
     delete "/queue" do
       song = Song.new(params[:path])
-      Queue.remove(song)
+      Queue.remove(song,current_user)
       'deleted!'
     end
   end

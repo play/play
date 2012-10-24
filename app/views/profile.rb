@@ -8,6 +8,10 @@ module Play
       def login
         @user.login
       end
+
+      def history
+        @user.plays
+      end
     end
   end
 end

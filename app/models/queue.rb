@@ -5,8 +5,9 @@ module Play
     # song - The Song instance to add to the Queue.
     #
     # Returns the Queue.
-    def self.add(song)
+    def self.add(song,user)
       client.add(song.path)
+      user.play!(song)
       songs
     end
 
@@ -16,7 +17,7 @@ module Play
     # song - The Song instance to remove from the Queue.
     #
     # Returns the Queue.
-    def self.remove(song)
+    def self.remove(song,user)
       positions = []
       songs.each_with_index do |queued_song, i|
         positions << (i+1) if song.path == queued_song.path

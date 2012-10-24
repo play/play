@@ -13,4 +13,9 @@ context "User" do
   test "has plays" do
     assert @user.plays.empty?
   end
+
+  test "plays a song" do
+    @user.play!(Song.new('Justice'))
+    assert !@user.plays.empty?
+  end
 end
