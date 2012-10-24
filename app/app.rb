@@ -40,6 +40,8 @@ module Play
       else
         authenticate
       end
+
+      @current_user = current_user
     end
 
     not_found do

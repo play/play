@@ -12,10 +12,14 @@
 <body>
   <a href="/">Play</a>
 
-  <form class="search" action="/search">
-    <label for="q">Search</label>
-    <input type="text" name="q" id="q" />
-  </form>
+  <section role="nav">
+    <form class="search" action="/search">
+      <label for="q">Search</label>
+      <input type="text" name="q" id="q" />
+    </form>
+
+    <a href="/{{current_login}}">{{current_login}}</a>
+  </section>
 
   {{{yield}}}
 </body>
