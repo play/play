@@ -16,6 +16,9 @@ system 'mkdir -p /tmp/play-test/.mpd'
 system 'cp -R     test/music /tmp/play-test'
 system './test/daemon/start.sh'
 
+# Silence logs
+ActiveRecord::Base.logger = nil
+
 def app
   Play::App
 end
