@@ -27,6 +27,14 @@ module Play
   def self.music_path
     'test/music'
   end
+
+  module Views
+    class Layout
+      def current_login
+        'holman'
+      end  
+    end
+  end
 end
 
 module Play
