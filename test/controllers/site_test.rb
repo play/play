@@ -40,6 +40,22 @@ context "Site" do
     assert last_response.body.include?('Stress')
   end
 
+  test "user page" do
+    user = User.create(:login => 'holman')
+    get "/holman"
+
+    User.delete_all
+    assert last_response.ok?
+    assert last_response.body.include?('holman')
+  end
+
+  test "user page with an invalid user" do
+    get "/trolololol"
+
+    assert_equal 404, last_response.status
+    assert last_response.body.include?('Not found')
+  end
+
   test "add a song" do
     post "/queue", :path => 'Justice/Cross/Stress.mp3'
 

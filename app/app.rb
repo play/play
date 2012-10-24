@@ -42,6 +42,10 @@ module Play
       end
     end
 
+    not_found do
+      mustache :four_oh_four
+    end
+
     get "/" do
       @songs = Queue.songs
       mustache :index
@@ -69,6 +73,13 @@ module Play
       @artist = Artist.new(params[:name])
       @song  = @artist.songs.find{|song| song.title == params[:title]}
       mustache :song_details
+    end
+
+    get "/:login" do
+      @user = User.find_by_login(params[:login])
+
+      not_found if !@user
+      mustache :profile
     end
 
     get "/images/art/*" do
