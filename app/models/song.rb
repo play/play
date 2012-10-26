@@ -76,8 +76,8 @@ module Play
     # Returns a String of binary data.
     def art
       output = `mediainfo "#{Play.music_path}/#{path}" -f | grep Cover_Data`
-      data = output.split(':').last.chomp
-      Base64.decode64(data)
+      data = output.split(':').last
+      data ? Base64.decode64(data.chomp) : nil
     end
 
     # Is this Song basically the same thing as another Song?

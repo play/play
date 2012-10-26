@@ -102,7 +102,8 @@ module Play
       song = Song.new(params[:splat].first)
 
       content_type 'image/png'
-      song.art
+      art = song.art
+      art.blank? ? File.read('app/assets/images/art-placeholder.png') : art
     end
 
     post "/queue" do
