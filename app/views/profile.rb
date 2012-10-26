@@ -9,8 +9,8 @@ module Play
         @user.login
       end
 
-      def history
-        @user.plays
+      def songs
+        @songs
       end
     end
   end

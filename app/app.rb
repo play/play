@@ -93,8 +93,17 @@ module Play
 
     get "/:login" do
       @user = User.find_by_login(params[:login])
-
       not_found if !@user
+
+      @songs = @user.plays
+      mustache :profile
+    end
+
+    get "/:login/likes" do
+      @user = User.find_by_login(params[:login])
+      not_found if !@user
+
+      @songs = @user.liked_songs
       mustache :profile
     end
 

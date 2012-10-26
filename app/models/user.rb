@@ -30,6 +30,15 @@ module Play
       play(song).save
     end
 
+    # All of the liked Songs.
+    #
+    # Returns an Array of Songs.
+    def liked_songs
+      likes.map do |like|
+        Song.new(like.song_path)
+      end
+    end
+
     # Like a Song.
     #
     # Returns nothing.

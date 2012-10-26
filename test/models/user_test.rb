@@ -19,6 +19,13 @@ context "User" do
     assert !@user.plays.empty?
   end
 
+  test "liked songs" do
+    @user.like('Justice/Cross/Stress.mp3')
+
+    assert @user.liked_songs.is_a?(Array)
+    assert @user.liked_songs.first.is_a?(Song)
+  end
+
   test "likes a song" do
     @user.like('any/song.mp3')
 

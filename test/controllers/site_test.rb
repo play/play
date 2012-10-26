@@ -55,11 +55,21 @@ context "Site" do
   end
 
   test "user page" do
-    user = User.create(:login => 'holman')
+    user = User.find_by_login('holman')
     get "/holman"
 
     assert last_response.ok?
     assert last_response.body.include?('holman')
+  end
+
+  test "user page with likes" do
+    user = User.find_by_login('holman')
+    user.like('Justice/Cross/Stress.mp3')
+    get "/holman/likes"
+
+    assert last_response.ok?
+    assert last_response.body.include?('holman')
+    assert last_response.body.include?('Stress')
   end
 
   test "user page with an invalid user" do
