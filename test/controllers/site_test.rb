@@ -87,4 +87,27 @@ context "Site" do
     assert_equal 'deleted!', last_response.body
     assert_equal 0, Play::Queue.songs.size
   end
+
+  test "likes a song" do
+    post "/like", :path => 'Stress.mp3'
+    user = User.where(:login => 'holman').first
+
+    assert_equal 1, user.likes.count
+    assert_equal 1, user.likes.last.value
+  end
+
+  test "unlikes a song" do
+    put "/like", :path => 'Stress.mp3'
+    user = User.where(:login => 'holman').first
+
+    assert_equal 0, user.likes.count
+  end
+
+  test "dislikes a song" do
+    delete "/like", :path => 'Stress.mp3'
+    user = User.where(:login => 'holman').first
+
+    assert_equal 1,  user.likes.count
+    assert_equal -1, user.likes.last.value
+  end
 end

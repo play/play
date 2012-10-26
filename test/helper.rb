@@ -31,11 +31,9 @@ module Play
     'test/music'
   end
 
-  module Views
-    class Layout
-      def current_login
-        'holman'
-      end  
+  class App
+    def current_user
+      User.find_or_create_by_login('holman')
     end
   end
 end

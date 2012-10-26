@@ -117,5 +117,17 @@ module Play
       Queue.remove(song,current_user)
       'deleted!'
     end
+
+    post "/like" do
+      current_user.like(params[:path])
+    end
+
+    put "/like" do
+      current_user.unlike(params[:path])
+    end
+
+    delete "/like" do
+      current_user.dislike(params[:path])
+    end
   end
 end
