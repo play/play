@@ -40,6 +40,20 @@ context "Site" do
     assert last_response.body.include?('Stress')
   end
 
+  test "song download" do
+    get "/download/Justice/Cross/Stress.mp3"
+
+    assert last_response.ok?
+    assert last_response.headers['Content-Disposition'].include?('Stress.mp3')
+  end
+
+  test "album download" do
+    get "/download/album/Justice/Cross/Stress.mp3"
+
+    assert last_response.ok?
+    assert last_response.headers['Content-Disposition'].include?('Justice - Cross.zip')
+  end
+
   test "user page" do
     SongPlay.delete_all
     user = User.create(:login => 'holman')

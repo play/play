@@ -19,4 +19,12 @@ context "Album" do
     assert_equal 1, @album.songs.size
     assert_equal 'Stress', song.title
   end
+
+  test "has a zip name" do
+    assert_equal 'Justice - Cross.zip', @album.zip_name
+  end
+
+  test "has a zip path" do
+    assert_equal '/tmp/play-zips/Justice - Cross.zip', @album.zip_path
+  end
 end

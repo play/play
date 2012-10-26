@@ -26,5 +26,31 @@ module Play
         Song.new(path)
       end
     end
+
+    # The path to the zipfile.
+    #
+    # Returns a String.
+    def zip_path
+      "/tmp/play-zips/#{zip_name}"
+    end
+
+    # The name of the zipfile.
+    #
+    # Returns a String.
+    def zip_name
+      "#{artist.name} - #{name}.zip"
+    end
+
+    # The path to the zipped file on-disk. Compresses this album if we haven't 
+    # yet.
+    #
+    # Returns a String.
+    def zipped(path)
+      return zip_path if File.exist?(zip_path)
+      FileUtils.mkdir_p "/tmp/play-zips"
+      system 'zip', '-0rjq', zip_path, path
+
+      zip_path
+    end
   end
 end

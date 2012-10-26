@@ -77,6 +77,20 @@ module Play
       mustache :song_details
     end
 
+    get "/download/album/*" do
+      song = Song.new(params[:splat].first)
+      path = File.expand_path('..', File.join(Play.music_path,song.path))
+      zipped = song.album.zipped(path)
+
+      send_file(zipped, :disposition => 'attachment')
+    end
+
+    get "/download/*" do
+      song = Song.new(params[:splat].first)
+
+      send_file(File.join(Play.music_path,song.path), :disposition => 'attachment')
+    end
+
     get "/:login" do
       @user = User.find_by_login(params[:login])
 
