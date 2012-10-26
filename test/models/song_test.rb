@@ -42,11 +42,19 @@ context "Song" do
   end
 
   test "artist name" do
-    assert_equal 'Justice', @song.artist_name
+    assert_equal '', Song.new('').artist_name
+  end
+
+  test "artist name without artist" do
+    assert_equal '', Song.new('').album_name
   end
 
   test "album name" do
     assert_equal 'Cross', @song.album_name
+  end
+
+  test "album name without album" do
+    assert_equal '', Song.new('').album_name
   end
 
   test "queued?" do

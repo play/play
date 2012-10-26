@@ -54,14 +54,14 @@ module Play
     #
     # Returns a String
     def artist_name
-      artist.name
+      artist ? artist.name : ''
     end
 
     # The name of the album of this song.
     #
     # Returns a String
     def album_name
-      album.name
+      album ? album.name : ''
     end
 
     # Is this song currently queued up?
