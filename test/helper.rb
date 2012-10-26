@@ -19,6 +19,9 @@ system './test/daemon/start.sh'
 # Silence logs
 ActiveRecord::Base.logger = nil
 
+# Set up db cleaning
+DatabaseCleaner.strategy = :truncation
+
 def app
   Play::App
 end

@@ -55,11 +55,9 @@ context "Site" do
   end
 
   test "user page" do
-    SongPlay.delete_all
     user = User.create(:login => 'holman')
     get "/holman"
 
-    User.delete_all
     assert last_response.ok?
     assert last_response.body.include?('holman')
   end
