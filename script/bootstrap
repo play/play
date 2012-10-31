@@ -122,5 +122,14 @@ else
   fail 'problem migrating data'
 fi
 
+info 'loading config'
+if test -f "config/splay.yml"
+then
+  success 'config loaded'
+else
+  success 'running config script'
+  . script/setup
+fi
+
 echo ""
 echo "  You're all set!"

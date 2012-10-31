@@ -6,4 +6,13 @@
 set -e
 
 echo ''
+echo '  CONFIG'
 
+printf "  - Are you going to use Play within a GitHub organization? (y,n) › "
+read use_gh_org
+
+if [ "$use_gh_org" == "y" ]
+then
+  printf "  - What's your GitHub organization name?                         › "
+  read gh_org
+fi
