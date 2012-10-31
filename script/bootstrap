@@ -82,22 +82,31 @@ fi
 
 # Create database. Assume root user and blank password. If this doesn't work,
 # tell them to do it manually.
-printf "  [    ] setting up mysql"
+info 'setting up mysql'
 
 [ $MYSQL_USER ] && user=$MYSQL_USER || user='root'
 [ $MYSQL_USER ] && password=$MYSQL_USER || password=''
 
 if mysql -u $user --password="$password" -e 'USE play' >> /tmp/play-bootstrap 2>&1
 then
-  printf "\r  [ ok ] mysql database ready\n"
+  success 'mysql database ready'
 else
   if mysql -u $user --password="$password" -e 'CREATE DATABASE IF NOT EXISTS play CHARACTER SET utf8 COLLATE utf8_unicode_ci;' >> /tmp/play-bootstrap 2>&1
   then
-    printf "\r  [ ok ] created mysql database\n"
+    success 'created mysql database'
   else
     echo "We assume MySQL credentials of root and a blank password. If that's not the case, run script/bootstrap with MYSQL_USER and MYSQL_PASSWORD environment variables set." >> /tmp/play-bootstrap
     fail 'could not create mysql database'
   fi
 fi
+
+info 'data migrations'
+if rake db:migrate >> /tmp/play-bootstrap
+then
+  success 'data migrated'
+else
+  fail 'problem migrating data'
+fi
+
 echo ""
 echo "  You're all set!"
