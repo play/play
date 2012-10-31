@@ -10,7 +10,7 @@ gem 'sinatra'
 gem 'sinatra-activerecord',        '~> 1.1.1'
 gem 'sinatra_auth_github'
 gem 'sprockets',                   '~> 2.5.0'
-gem 'taglib-ruby',                 :require => 'taglib'
+gem 'taglib-ruby',                 '~> 0.5.2', :require => 'taglib'
 
 group :development do
   gem 'shotgun'
