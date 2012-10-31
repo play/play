@@ -23,22 +23,9 @@ module Play
 
     dir = File.dirname(File.expand_path(__FILE__))
 
-    class Octobouncer < Sinatra::Base
-      # Handle bad authenication, clears the session and redirects to login.
-      get '/unauthenticated' do
-        if session[:user].nil?
-          redirect '/'
-        else
-          session.clear
-          redirect '/403.html'
-        end
-      end
-    end
-
     set :github_options, {
                             :secret    => Play.config.secret,
                             :client_id => Play.config.client_id,
-                            :failure_app => Octobouncer,
                             :organization => Play.config.gh_org,
                             :github_scopes => 'user,offline_access'
                          }
