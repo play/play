@@ -16,3 +16,25 @@ then
   printf "  - What's your GitHub organization name?                         › "
   read gh_org
 fi
+
+echo "  - You need to set up an OAuth application on GitHub. Go here:"
+echo ""
+
+if [ -z "$gh_org" ]
+then
+  echo "    https://github.com/settings/applications/new"
+else
+  echo "    https://github.com/organizations/$gh_org/settings/applications/new"
+fi
+
+echo ""
+echo "    and set up your application. Unless you're using a different"
+echo "    hostname, you'll want to use values that look like:"
+echo ""
+echo "      Main URL:     http://localhost:5050"
+echo "      Callback URL: http://localhost:5050/auth/github/callback"
+echo ""
+printf "  - What is your GitHub client ID?                                › "
+read client_id
+printf "  - What is your GitHub client secret?                            › "
+read client_secret
