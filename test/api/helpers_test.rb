@@ -1,4 +1,5 @@
 require File.expand_path("../../helper", __FILE__)
+require 'json'
 
 context "api/helpers" do
   include Helpers
@@ -22,8 +23,8 @@ context "api/helpers" do
     songs = json["songs"]
 
     assert_equal ["songs"], json.keys
-    assert_equal ["album", "artist", "id", "name", "queued", "starred"], songs[0].keys.sort
-    assert_equal ["album", "artist", "id", "name", "queued", "starred"], songs[1].keys.sort
+    assert_equal ["album", "artist", "duration", "id", "last_played", "name", "queued", "starred"], songs[0].keys.sort
+    assert_equal ["album", "artist", "duration", "id", "last_played", "name", "queued", "starred"], songs[1].keys.sort
     assert_equal 2, songs.length
 
     @songs.each_with_index do |song, index|
