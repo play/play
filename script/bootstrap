@@ -58,8 +58,22 @@ fi
 brew_install 'mysql'
 brew_install 'taglib'
 brew_install 'media-info'
-brew_install 'mpd'
-brew_install 'mpc'
+
+# Re-enable this once mxcl/homebrew#15788 lands. Until then, manual install.
+# brew_install 'mpd'
+info 'mpd'
+if brew_installed 'mpd'
+then
+  success 'mpd'
+else
+  if brew install https://raw.github.com/holman/homebrew/master/Library/Formula/mpd.rb >> /tmp/play-bootstrap
+  then
+    success 'mpd'
+  else
+    fail 'mpd'
+  fi
+  brew_install 'mpc'
+fi
 
 # bundler
 info 'bundler'
