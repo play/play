@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Bootstraps your world. Checks to see if dependencies are met, and then
 # installs them if they aren't.
@@ -51,7 +51,7 @@ if test $(which brew)
 then
   success 'homebrew'
 else
-  ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)" > /tmp/play-bootstrap
+  ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)" >> /tmp/play-bootstrap
   success 'homebrew'
 fi
 
@@ -73,12 +73,31 @@ fi
 
 # gems
 info 'gems'
-if bundle install --binstubs --path vendor/gems > /tmp/play-bootstrap
+if bundle install --binstubs --path vendor/gems >> /tmp/play-bootstrap
 then
   success 'gems'
 else
   fail 'gems'
 fi
 
+# Create database. Assume root user and blank password. If this doesn't work,
+# tell them to do it manually.
+printf "  [    ] setting up mysql"
+
+[ $MYSQL_USER ] && user=$MYSQL_USER || user='root'
+[ $MYSQL_USER ] && password=$MYSQL_USER || password=''
+
+if mysql -u $user --password="$password" -e 'USE play' >> /tmp/play-bootstrap 2>&1
+then
+  printf "\r  [ ok ] mysql database ready\n"
+else
+  if mysql -u $user --password="$password" -e 'CREATE DATABASE IF NOT EXISTS play CHARACTER SET utf8 COLLATE utf8_unicode_ci;' >> /tmp/play-bootstrap 2>&1
+  then
+    printf "\r  [ ok ] created mysql database\n"
+  else
+    echo "We assume MySQL credentials of root and a blank password. If that's not the case, run script/bootstrap with MYSQL_USER and MYSQL_PASSWORD environment variables set." >> /tmp/play-bootstrap
+    fail 'could not create mysql database'
+  fi
+fi
 echo ""
 echo "  You're all set!"

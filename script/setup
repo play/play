@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Sets up Play. This is designed to be run just once since it handles things
+# like config generation and database creation.
+
+set -e
+
+echo ''
+
