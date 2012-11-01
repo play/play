@@ -37,4 +37,16 @@ echo ""
 printf "  - What is your GitHub client ID?                                › "
 read client_id
 printf "  - What is your GitHub client secret?                            › "
-read client_secret
+read secret
+
+# Generate an auth token
+auth_token=$(date | md5)
+
+ruby -r yaml -e "
+  hash = YAML.load_file('config/play.yml.example')
+  hash['auth_token'] = '$auth_token'
+  hash['github']['org'] = '$gh_org'
+  hash['github']['client_id'] = '$client_id'
+  hash['github']['secret'] = '$secret'
+  File.open('config/play.yml', 'w') {|f| f.write(hash.to_yaml) }
+"
