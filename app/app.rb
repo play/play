@@ -7,13 +7,11 @@ module Play
     register Mustache::Sinatra
     register Sinatra::Auth::Github
     register Sinatra::ActiveRecordExtension
-    use Rack::Session::Cookie,
-      :path => '/',
-      :expire_after => 2628000,
-      :secret => Play.config['auth_token']
+
+    set :sessions, true
+    set :session_secret, Play.config['auth_token']
 
     dir = File.dirname(File.expand_path(__FILE__))
-
     set :public_folder, "#{dir}/frontend/public"
     set :static, true
     set :mustache, {
