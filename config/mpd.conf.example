@@ -1,3 +1,24 @@
+decoder {
+  plugin "mp4ff"
+  enabled "no"
+}
+
+audio_output {
+  type             "httpd"
+  name             "Play"
+  encoder          "lame"
+  port             "8000"
+  bitrate          "320"
+  format           "44100:16:1"
+  bind_to_address  "0.0.0.0"
+}
+
+audio_output {
+    type            "osx"
+    name            "Play"
+    mixer_type      "software"
+}
+
 # Files and directories #######################################################
 #
 # This setting controls the top directory which MPD will search to discover the
@@ -6,7 +27,7 @@
 # be disabled and audio files will only be accepted over ipc socket (using
 # file:// protocol) or streaming files over an accepted protocol.
 #
-#music_directory		"~/music"
+# music_directory		"~/music"
 #
 # This setting sets the MPD internal playlist directory. The purpose of this
 # directory is storage for playlists created by MPD. The server will use 
@@ -21,7 +42,7 @@
 # MPD to accept files over ipc socket (using file:// protocol) or streaming
 # files over an accepted protocol.
 #
-#db_file			"~/.mpd/database"
+db_file			"~/.mpd/database"
 # 
 # These settings are the locations for the daemon log files for the daemon.
 # These logs are great for troubleshooting, depending on your log_level
@@ -30,25 +51,25 @@
 # The special value "syslog" makes MPD use the local syslog daemon. This
 # setting defaults to logging to syslog, otherwise logging is disabled.
 #
-#log_file			"~/.mpd/log"
+log_file			"~/.mpd/log"
 #
 # This setting sets the location of the file which stores the process ID
 # for use of mpd --kill and some init scripts. This setting is disabled by
 # default and the pid file will not be stored.
 #
-#pid_file			"~/.mpd/pid"
+pid_file			"~/.mpd/pid"
 #
 # This setting sets the location of the file which contains information about
 # most variables to get MPD back into the same general shape it was in before
 # it was brought down. This setting is disabled by default and the server 
 # state will be reset on server start up.
 #
-#state_file			"~/.mpd/state"
+state_file			"~/.mpd/state"
 #
 # The location of the sticker database.  This is a database which
 # manages dynamic information attached to songs.
 #
-#sticker_file			"~/.mpd/sticker.sql"
+sticker_file			"~/.mpd/sticker.sql"
 #
 ###############################################################################
 
