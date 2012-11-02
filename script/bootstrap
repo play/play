@@ -46,6 +46,13 @@ brew_install() {
   fi
 }
 
+if test -f "config/play.yml"
+then
+  success 'config loaded'
+else
+  . script/setup
+fi
+
 # brew
 if test $(which brew)
 then
@@ -115,20 +122,11 @@ else
 fi
 
 info 'data migrations'
-if rake db:migrate >> /tmp/play-bootstrap
+if rake db:migrate >> /tmp/play-bootstrap 2>&1
 then
   success 'data migrated'
 else
   fail 'problem migrating data'
-fi
-
-info 'loading config'
-if test -f "config/play.yml"
-then
-  success 'config loaded'
-else
-  success 'running config script'
-  . script/setup
 fi
 
 echo ""

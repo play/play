@@ -5,9 +5,6 @@
 
 set -e
 
-echo ''
-echo '  CONFIG'
-
 printf "  - Are you going to use Play within a GitHub organization? (y,n) › "
 read use_gh_org
 
@@ -58,3 +55,5 @@ read path
 # Write out mpd.conf
 config_file=$(cat config/mpd.conf.example)
 echo "music_directory  \"$path\"\n\n$config_file" > config/mpd.conf
+
+echo ""
