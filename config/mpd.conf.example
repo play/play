@@ -5,7 +5,7 @@ decoder {
 
 audio_output {
   type             "httpd"
-  name             "Play"
+  name             "Play Stream"
   encoder          "lame"
   port             "8000"
   bitrate          "320"
