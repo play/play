@@ -42,6 +42,7 @@ read secret
 # Generate an auth token
 auth_token=$(date | md5)
 
+# Write out play.yml
 ruby -r yaml -e "
   hash = YAML.load_file('config/play.yml.example')
   hash['auth_token'] = '$auth_token'
@@ -50,3 +51,10 @@ ruby -r yaml -e "
   hash['github']['secret'] = '$secret'
   File.open('config/play.yml', 'w') {|f| f.write(hash.to_yaml) }
 "
+
+printf "  - What is the full, absolute path to your music?                › "
+read path
+
+# Write out mpd.conf
+config_file=$(cat config/mpd.conf.example)
+echo "music_directory  \"$path\"\n\n$config_file" > config/mpd.conf
