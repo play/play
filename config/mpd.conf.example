@@ -139,7 +139,7 @@ sticker_file			"~/.mpd/sticker.sql"
 # This setting enables automatic update of MPD's database when files in 
 # music_directory are changed.
 #
-#auto_update	"yes"
+auto_update	"yes"
 #
 # Limit the depth of the directories being watched, 0 means only watch
 # the music directory itself.  There is no limit by default.
