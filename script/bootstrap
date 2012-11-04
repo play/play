@@ -107,7 +107,7 @@ else
 fi
 
 info 'data migrations'
-if rake db:migrate >> /tmp/play-bootstrap 2>&1
+if bundle exec rake db:migrate >> /tmp/play-bootstrap 2>&1
 then
   success 'data migrated'
 else
