@@ -34,8 +34,8 @@ module Play
   # Returns a String.
   def self.music_path
     config = File.read('config/mpd.conf')
-    config.match(/music_directory\s+"(.+)"/)
-    $1
+    /^#?music_directory\s+"(?<music_path>(.+))"$/ =~ config
+    File.expand_path music_path
   end
 
   # The config file of Play. Contains things like keys, database config, and
