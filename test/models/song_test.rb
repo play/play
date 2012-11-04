@@ -57,6 +57,10 @@ context "Song" do
     assert_equal '', Song.new('').album_name
   end
 
+  test "album art_file" do
+    assert_equal '80b4dc3de74629cbf80fc85fdac0c89701a50887.png', @song.art_file
+  end
+
   test "queued?" do
     Play::Queue.clear
     assert !@song.queued?

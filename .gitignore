@@ -3,3 +3,4 @@ bin
 config/play.yml
 config/mpd.conf
 vendor
+public/art/*.png

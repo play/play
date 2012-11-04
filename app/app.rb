@@ -12,7 +12,8 @@ module Play
     set :session_secret, Play.config['auth_token']
 
     dir = File.dirname(File.expand_path(__FILE__))
-    set :public_folder, "#{dir}/frontend/public"
+    public_dir = File.dirname(File.expand_path("#{dir}/../public"))
+    set :public_folder, public_dir
     set :static, true
     set :mustache, {
       :namespace => Play,
@@ -27,6 +28,10 @@ module Play
 
     db_name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
     set :database, Play.config['db'].merge('database' => db_name)
+
+    Thread.new do
+      Play.client.listall.each { |path| Song.new(path).cache_album_art }
+    end
 
     before do
       session_not_required = request.path_info =~ /\/login/ ||
@@ -105,12 +110,16 @@ module Play
       mustache :profile
     end
 
-    get "/images/art/*" do
-      song = Song.new(params[:splat].first)
+    get "/images/art/:album_art_file" do
+      cached_album_art_path = "#{Play.album_art_cache_path}/#{params[:album_art_file]}"
 
-      content_type 'image/png'
-      art = song.art
-      art.blank? ? File.read('app/assets/images/art-placeholder.png') : art
+      if File.exists? cached_album_art_path
+        art_path = cached_album_art_path
+      else
+        art_path = 'app/assets/images/art-placeholder.png'
+      end
+
+      send_file(art_path, :disposition => 'inline')
     end
 
     post "/queue" do
