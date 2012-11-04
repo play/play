@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Updates the existing Play to the current version. Currently just a simple
+# git pull (but may run migrations and assorted fun later).
+
+echo "  - Updating code"
+git pull --quiet
+
+echo "  - Updating dependencies"
+script/bootstrap

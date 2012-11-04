@@ -1,9 +1,0 @@
-gh_key: __OAUTH_KEY__
-gh_secret: __OAUTH_SECRET__
-gh_org:  __GITHUB_ORG__
-pusher_app_id: __PUSHER_APP_ID__
-pusher_key: __PUSHER_KEY__
-pusher_secret: __PUSHER_SECRET__
-auth_token: __AUTH_TOKEN__
-office_url: http://example.com/office.macs
-stream_url: http://example.com:8000/listen

@@ -1,10 +1,10 @@
 require 'rubygems'
 require 'rake'
 require 'yaml'
+require 'sinatra/activerecord/rake'
+require './app/play'
 
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/app')
-
-require 'boot'
 
 task :default do
   ENV['RACK_ENV'] = 'test'
@@ -20,28 +20,21 @@ end
 
 task :environment do
   require 'lib/play'
-  require "bundler/setup"
+  require 'bundler/setup'
 end
 
-desc "Run tests as CI sees them"
-task :ci do
-  ENV['CI'] = '1'
-  Rake::Task['test'].invoke
-end
+namespace :db do
+  # TODO: hook into config/database.yml
+  task :create do
+    name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
 
-desc "Open an irb session preloaded with this library"
-task :console do
-  sh "irb -rubygems -r ./app/boot"
-end
-
-desc "Start the server"
-task :start do
-  Kernel.exec "bundle exec foreman start"
-end
-
-namespace :redis do
-  desc "Wipe all data in redis"
-  task :reset do
-    $redis.flushdb
+    `mysql \
+      --user="root" \
+      --password="" \
+      --execute='CREATE DATABASE IF NOT EXISTS #{name} CHARACTER SET utf8 COLLATE utf8_unicode_ci;'`
   end
 end
+
+Kernel.trap("EXIT") do
+  system './test/daemon/stop.sh'
+end if ENV['RACK_ENV'] == 'test'

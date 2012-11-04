@@ -1,55 +1,17 @@
-require 'api/control'
-require 'api/dj'
-require 'api/helpers'
-require 'api/library'
-require 'api/queue'
-require 'api/system'
-require 'api/speaker'
-
 module Play
   class App < Sinatra::Base
-
     # Include our Sinatra Helpers.
     include Play::Helpers
-
-    # Set up sessions and ensure we have a constant session_secret so that in
-    # development mode `shotgun` won't regenerate a session secret and
-    # invalidate all of our sessions.
-    enable :sessions
-    set    :session_secret, Play.config.auth_token
+    include Play::AuthenticationHelper
 
     register Mustache::Sinatra
     register Sinatra::Auth::Github
+    register Sinatra::ActiveRecordExtension
+
+    set :sessions, true
+    set :session_secret, Play.config['auth_token']
 
     dir = File.dirname(File.expand_path(__FILE__))
-
-    class Octobouncer < Sinatra::Base
-      # Handle bad authenication, clears the session and redirects to login.
-      get '/unauthenticated' do
-        if session[:user].nil?
-          redirect '/'
-        else
-          session.clear
-          redirect '/403.html'
-        end
-      end
-    end
-
-    set :github_options, {
-                            :secret    => Play.config.secret,
-                            :client_id => Play.config.client_id,
-                            :failure_app => Octobouncer,
-                            :organization => Play.config.gh_org,
-                            :github_scopes => 'user,offline_access'
-                         }
-
-    Pusher.app_id =  Play.config.pusher_app_id
-    Pusher.key = Play.config.pusher_key
-    Pusher.secret = Play.config.pusher_secret
-
-    Airfoil.enabled = Airfoil.installed?
-    Airfoil.audio_source = "System Audio" if Airfoil.installed?
-
     set :public_folder, "#{dir}/frontend/public"
     set :static, true
     set :mustache, {
@@ -57,74 +19,122 @@ module Play
       :templates => "#{dir}/templates",
       :views => "#{dir}/views"
     }
+    set :github_options, {
+      :scopes    => "user",
+      :secret    => Play.config['github']['secret'],
+      :client_id => Play.config['github']['client_id'],
+    }
+
+    db_name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
+    set :database, Play.config['db'].merge('database' => db_name)
 
     before do
-      return if ENV['RACK_ENV'] == 'test'
-
-      content_type :json
-
       session_not_required = request.path_info =~ /\/login/ ||
                              request.path_info =~ /\/auth/ ||
-                             request.path_info =~ /\/images\/art\/.*.png/
+                             request.path_info =~ /\/images/
 
-      if session_not_required || @current_user
+      if ENV['RACK_ENV']=='test' || session_not_required || current_user
         true
       else
-        login
-      end
-    end
-
-    def api_request
-      !!params[:token] || !!request.env["HTTP_AUTHORIZATION"]
-    end
-
-    def login
-      if api_request
-        token = request.env["HTTP_AUTHORIZATION"] || params[:token] || ""
-        login = request.env["HTTP_X_PLAY_LOGIN"] || params[:login] || ""
-
-        if token == Play.config.auth_token
-          user = User.find(login)
-        else
-          user = User.find_by_token(token)
-        end
-
-      else
-        if Play.config.gh_org && Play.config.gh_org != ''
-          github_organization_authenticate!(Play.config.gh_org)
-        else
-          authenticate!
-        end
-
-        user   = User.find(github_user.login)
-        user ||= User.create(github_user.login,github_user.email)
+        authenticate
       end
 
-      halt 401 if !user
-
-      @current_user = session[:user] = user
+      @current_user = current_user
     end
 
-    def current_user
-      @current_user
+    not_found do
+      mustache :four_oh_four
     end
 
     get "/" do
-      content_type :html
+      @songs = Queue.songs
       mustache :index
     end
 
-    get "/logout" do
-      content_type :html
-      logout!
-      redirect 'https://github.com'
+    get "/search" do
+      @songs = Song.find([:any,params[:q]])
+      mustache :search
     end
 
-    get "/token" do
-      @back_to = params[:back_to]
+    get "/artist/:name" do
+      @artist = Artist.new(params[:name])
+      @songs  = @artist.songs
+      mustache :artist_profile
+    end
 
-      content_type :html
-      mustache :token, :layout => false
+    get "/artist/:name/album/:title" do
+      @artist = Artist.new(params[:name])
+      @album  = Album.new(@artist.name, params[:title])
+      @songs  = @album.songs
+      mustache :album_details
+    end
+
+    get "/artist/:name/song/:title" do
+      @artist = Artist.new(params[:name])
+      @song  = @artist.songs.find{|song| song.title == params[:title]}
+      mustache :song_details
+    end
+
+    get "/download/album/*" do
+      song = Song.new(params[:splat].first)
+      path = File.expand_path('..', File.join(Play.music_path,song.path))
+      zipped = song.album.zipped(path)
+
+      send_file(zipped, :disposition => 'attachment')
+    end
+
+    get "/download/*" do
+      song = Song.new(params[:splat].first)
+
+      send_file(File.join(Play.music_path,song.path), :disposition => 'attachment')
+    end
+
+    get "/:login" do
+      @user = User.find_by_login(params[:login])
+      not_found if !@user
+
+      @songs = @user.plays
+      mustache :profile
+    end
+
+    get "/:login/likes" do
+      @user = User.find_by_login(params[:login])
+      not_found if !@user
+
+      @songs = @user.liked_songs
+      mustache :profile
+    end
+
+    get "/images/art/*" do
+      song = Song.new(params[:splat].first)
+
+      content_type 'image/png'
+      art = song.art
+      art.blank? ? File.read('app/assets/images/art-placeholder.png') : art
+    end
+
+    post "/queue" do
+      song = Song.new(params[:path])
+      Queue.add(song,current_user)
+      'added!'
+    end
+
+    delete "/queue" do
+      song = Song.new(params[:path])
+      Queue.remove(song,current_user)
+      'deleted!'
+    end
+
+    post "/like" do
+      current_user.like(params[:path])
+    end
+
+    put "/like" do
+      current_user.unlike(params[:path])
+    end
+
+    delete "/like" do
+      current_user.dislike(params[:path])
     end
   end
 end

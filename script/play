@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# `play` is our main Play CLI. Think of this as the overseer: it knows about
+# all of the services in Play and can control them via a number of helper
+# scripts.
+#
+# Helper scripts are located in this directory — script/ — and are loaded by
+# the subcommand you run:
+#
+#   play update
+#   # => Same as running `script/update`
+#
+# You should really only be interfacing with the processes and backend of Play
+# through this script. If you're manually dropping down into using commands
+# directly, You're Doing It Wrong™ (and should probably let us know so we can
+# write something to help you out!)
+
+# The trusty `set -x` (swap to `set -e` on :shipit:).
+set -x
+
+# Usage is grepped out of this file (i.e. The Tomayko Method).
+#/ usage: play [help|--help|-h] [command ...]
+play_usage() {
+  grep '^#/' <"$0" | cut -c4-
+}
+
+# Handle play commands.
+case "$1" in
+  help|--help|-h)
+    play_usage
+    exit 0
+    ;;
+  *)
+    ./script/$1 $2
+    ;;
+esac

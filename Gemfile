@@ -1,28 +1,23 @@
 source 'http://rubygems.org'
-gem 'rack',          '~>1.3.0'
-gem 'rake',          '~>0.9.2.1'
+
+gem 'activerecord',                '~> 3.2.8'
+gem 'coffee-script',               '~> 2.2.0', :require => 'coffee_script'
+gem 'rake',                        '~> 0.9.2.2'
+gem 'mustache',                    :require => 'mustache/sinatra'
+gem 'mysql2',                      '~> 0.3.11'
+gem 'sass',                        '~> 3.2.1'
 gem 'sinatra'
-gem 'mustache',      '~>0.99.4'
-gem "SystemTimer",   "~>1.2.3", :platforms => [:mri_18]
-gem 'yajl-ruby'
-gem 'redis'
-gem 'sinatra_auth_github', '~>0.8.2'
-gem 'sprockets'
-gem 'sass',          '~>3.1'
-gem 'coffee-script'
-gem 'pusher'
-gem 'foreman'
-gem 'thin'
-
-if RUBY_PLATFORM.downcase.include?("darwin")
-  gem 'rb-appscript'
-end
-
-group :test do
-  gem 'rack-test'
-  gem 'mocha',        '~>0.11.1'
-end
+gem 'sinatra-activerecord',        '~> 1.1.1'
+gem 'sinatra_auth_github'
+gem 'sprockets',                   '~> 2.5.0'
+gem 'taglib-ruby',                 '~> 0.5.2', :require => 'taglib'
 
 group :development do
   gem 'shotgun'
+  gem 'thin'
+end
+
+group :test do
+  gem 'database_cleaner',          '~> 0.9.1'
+  gem 'rack-test',                 :require => 'rack/test'
 end
