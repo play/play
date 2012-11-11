@@ -27,6 +27,13 @@ module Play
       native :list, options
     end
 
+    # List all the music in the music directory
+    #
+    # Returns Array of Strings.
+    def listall
+      native :listall
+    end
+
     # Searches for a paricular match.
     #
     # options - An Array of Symbols or Strings to pass on to mpc.

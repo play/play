@@ -38,6 +38,11 @@ module Play
     $1
   end
 
+  # Directory where cached album art images will be stored.
+  def self.album_art_cache_path
+    'public/art'
+  end
+
   # The config file of Play. Contains things like keys, database config, and
   # who shot JFK.
   #
