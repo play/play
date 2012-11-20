@@ -1,6 +1,15 @@
 module Play
   # Client gives us a nice interface to `mpc`, and, through `mpc`, `mpd`.
   class Client
+
+    # Convenience for configuring mpd.
+    #
+    # Returns self.
+    def config
+      yield self
+      self
+    end
+
     # A native command to run on the `mpc` binary.
     #
     # Returns the String output of the command.
@@ -25,6 +34,13 @@ module Play
     def list(options)
       options = [options] if !options.kind_of?(Array)
       native :list, options
+    end
+
+    # List all the songs in the music directory.
+    #
+    # file - path relative to music directory.
+    def listall(file=nil)
+      native :listall, [file].compact
     end
 
     # Searches for a paricular match.
@@ -97,5 +113,14 @@ module Play
     def volume(value)
       native :volume, [value.to_s]
     end
+
+    def method_missing(meth, *args, &block)
+      if command = meth.to_s.match(/(\w+)=$/)
+        native command[1], args
+      else
+        super
+      end
+    end
+
   end
 end

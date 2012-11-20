@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require './app/play'
+
+$client = Play::Client.new
+
+# Setup
+#
+# * played songs be removed
+# * playlist should not repeat
+$client.config do |c|
+  c.repeat = false
+  c.consume = true
+end
+
+# DJ the playlist and push updates to clients.
+loop do
+  if current_song = $client.now_playing
+    current_song = Play::Song.new(current_song)
+    # ensure atleast one pending song
+    if Play::Queue.songs.size < 2
+      song = Play::Song.new($client.listall.sample)
+      Play::Queue.add(song)
+
+      # might take a second for the song to show up
+      sleep 1 until Play::Queue.songs.size > 1
+    end
+
+    # [TODO]: Push updates to clients.
+  end
+
+  sleep 5
+end

@@ -21,7 +21,7 @@ context "Queue" do
   end
 
   test "can get the current song" do
-    Play.client.volume(0)
+    Play.client.volume = 0
     Play.client.play
     song = Play::Queue.now_playing
     assert_equal @song.title, song.title
