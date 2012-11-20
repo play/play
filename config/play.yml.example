@@ -1,0 +1,12 @@
+auth_token:
+db:
+  adapter: mysql2
+  host: localhost
+  username: root
+  password:
+  database: play
+  reconnect: true
+github:
+  org:
+  client_id: 
+  secret:

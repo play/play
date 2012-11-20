@@ -1,0 +1,118 @@
+#!/bin/bash
+#
+# Bootstraps your world. Checks to see if dependencies are met, and then
+# installs them if they aren't.
+
+set -e
+
+echo ''
+echo '' > /tmp/play-bootstrap
+
+info() {
+  printf "  [    ] $1"
+}
+
+success() {
+  printf "\r  [ ok ] $1           \n"
+}
+
+fail() {
+  printf "\r  [FAIL] $1           \n"
+  echo ''
+  echo 'See /tmp/play-bootstrap for more information.'
+  exit
+}
+
+brew_installed() {
+  brew list | grep -i $1 > /dev/null
+  [ $? -eq 0 ]
+}
+
+# Installs a dependency with Homebrew
+brew_install() {
+  if brew_installed $1
+  then
+    success $1
+    return
+  fi
+
+  info "installing $1"
+  if $2 >> /tmp/play-bootstrap
+  then
+    brew install $1 >> /tmp/play-bootstrap
+    success $1
+  else
+    fail $1
+  fi
+}
+
+if test -f "config/play.yml"
+then
+  success 'config loaded'
+else
+  . script/setup
+fi
+
+# brew
+if test $(which brew)
+then
+  success 'homebrew'
+else
+  ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)" >> /tmp/play-bootstrap
+  success 'homebrew'
+fi
+
+brew_install 'mysql'
+brew_install 'taglib'
+brew_install 'media-info'
+brew_install 'mpd'
+
+# bundler
+info 'bundler'
+if test $(which bundle)
+then
+  success 'bundler'
+else
+  gem install bundler > /tmp/play-bootstrap
+  success 'bundler'
+fi
+
+# gems
+info 'gems'
+if bundle install --binstubs --path vendor/gems >> /tmp/play-bootstrap
+then
+  success 'gems'
+else
+  fail 'gems'
+fi
+
+# Create database. Assume root user and blank password. If this doesn't work,
+# tell them to do it manually.
+info 'setting up mysql'
+
+[ $MYSQL_USER ] && user=$MYSQL_USER || user='root'
+[ $MYSQL_USER ] && password=$MYSQL_USER || password=''
+
+if mysql -u $user --password="$password" -e 'USE play' >> /tmp/play-bootstrap 2>&1
+then
+  success 'mysql database ready'
+else
+  if mysql -u $user --password="$password" -e 'CREATE DATABASE IF NOT EXISTS play CHARACTER SET utf8 COLLATE utf8_unicode_ci;' >> /tmp/play-bootstrap 2>&1
+  then
+    success 'created mysql database'
+  else
+    echo "We assume MySQL credentials of root and a blank password. If that's not the case, run script/bootstrap with MYSQL_USER and MYSQL_PASSWORD environment variables set." >> /tmp/play-bootstrap
+    fail 'could not create mysql database'
+  fi
+fi
+
+info 'data migrations'
+if bundle exec rake db:migrate >> /tmp/play-bootstrap 2>&1
+then
+  success 'data migrated'
+else
+  fail 'problem migrating data'
+fi
+
+echo ""
+echo "  You're all set!"

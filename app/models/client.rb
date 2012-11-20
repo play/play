@@ -98,6 +98,22 @@ module Play
       native :clear
     end
 
+    # Removes a song from the playlist.
+    #
+    # position - The Integer position of a song in the current playlist.
+    #
+    # Returns nothing.
+    def remove(position)
+      native :del, [position]
+    end
+
+    # Change the volume.
+    #
+    # value - Volume value, can be [-+]num.
+    def volume(value)
+      native :volume, [value.to_s]
+    end
+
     def method_missing(meth, *args, &block)
       if command = meth.to_s.match(/(\w+)=$/)
         native command[1], args

@@ -4,14 +4,18 @@ require 'bundler'
 Bundler.setup(:default)
 Bundler.require(:default)
 
+require_relative 'helpers/authentication_helper'
+
 require_relative 'models/album'
 require_relative 'models/artist'
 require_relative 'models/client'
 require_relative 'models/helpers'
+require_relative 'models/like'
 require_relative 'models/queue'
 require_relative 'models/song'
+require_relative 'models/song_play'
+require_relative 'models/user'
 
-require_relative 'app'
 require_relative 'views/layout'
 
 include Play::Helpers
@@ -33,4 +37,14 @@ module Play
     config.match(/music_directory\s+"(.+)"/)
     $1
   end
+
+  # The config file of Play. Contains things like keys, database config, and
+  # who shot JFK.
+  #
+  # Returns a Hash.
+  def self.config
+    YAML::load(File.open('config/play.yml'))
+  end
 end
+
+require_relative 'app'

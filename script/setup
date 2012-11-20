@@ -1,0 +1,59 @@
+#!/bin/sh
+#
+# Sets up Play. This is designed to be run just once since it handles things
+# like config generation and database creation.
+
+set -e
+
+printf "  - Are you going to use Play within a GitHub organization? (y,n) › "
+read use_gh_org
+
+if [ "$use_gh_org" == "y" ]
+then
+  printf "  - What's your GitHub organization name?                         › "
+  read gh_org
+fi
+
+echo "  - You need to set up an OAuth application on GitHub. Go here:"
+echo ""
+
+if [ -z "$gh_org" ]
+then
+  echo "    https://github.com/settings/applications/new"
+else
+  echo "    https://github.com/organizations/$gh_org/settings/applications/new"
+fi
+
+echo ""
+echo "    and set up your application. Unless you're using a different"
+echo "    hostname, you'll want to use values that look like:"
+echo ""
+echo "      Main URL:     http://localhost:5050"
+echo "      Callback URL: http://localhost:5050/auth/github/callback"
+echo ""
+printf "  - What is your GitHub client ID?                                › "
+read client_id
+printf "  - What is your GitHub client secret?                            › "
+read secret
+
+# Generate an auth token
+auth_token=$(date | md5)
+
+# Write out play.yml
+ruby -r yaml -e "
+  hash = YAML.load_file('config/play.yml.example')
+  hash['auth_token'] = '$auth_token'
+  hash['github']['org'] = '$gh_org'
+  hash['github']['client_id'] = '$client_id'
+  hash['github']['secret'] = '$secret'
+  File.open('config/play.yml', 'w') {|f| f.write(hash.to_yaml) }
+"
+
+printf "  - What is the full, absolute path to your music?                › "
+read path
+
+# Write out mpd.conf
+config_file=$(cat config/mpd.conf.example)
+echo "music_directory  \"$path\"\n\n$config_file" > config/mpd.conf
+
+echo ""

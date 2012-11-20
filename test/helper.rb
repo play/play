@@ -16,6 +16,12 @@ system 'mkdir -p /tmp/play-test/.mpd'
 system 'cp -R     test/music /tmp/play-test'
 system './test/daemon/start.sh'
 
+# Silence logs
+ActiveRecord::Base.logger = nil
+
+# Set up db cleaning
+DatabaseCleaner.strategy = :truncation
+
 def app
   Play::App
 end
@@ -23,6 +29,12 @@ end
 module Play
   def self.music_path
     'test/music'
+  end
+
+  class App
+    def current_user
+      User.find_or_create_by_login('holman')
+    end
   end
 end
 

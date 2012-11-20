@@ -1,3 +1,5 @@
 .bundle
 bin
+config/play.yml
 config/mpd.conf
+vendor
