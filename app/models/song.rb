@@ -45,10 +45,10 @@ module Play
     #   find(:title, 'Stress')
     #   find(:album, 'Cross')
     #
-    # Returns an Array of Songs.
+    # Returns an Array of Songs. Maxes out at a hard fifty... deal with it.
     def self.find(options)
       results = client.search(options)
-      results.map {|path| Song.new(path) }
+      results.map {|path| Song.new(path) }[0..50]
     end
 
     # The name of the artist of this song.
