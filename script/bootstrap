@@ -114,5 +114,13 @@ else
   fail 'problem migrating data'
 fi
 
+info 'caching album art'
+if script/cache-art >> /tmp/play-bootstrap 2>&1
+then
+  success 'album art cached'
+else
+  fail 'problem caching album art'
+fi
+
 echo ""
 echo "  You're all set!"
