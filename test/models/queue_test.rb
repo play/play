@@ -39,6 +39,13 @@ context "Queue" do
     assert_equal 1, Play::Queue.songs.size
   end
 
+  test "adds a song without a user" do
+    Play.client.clear
+    Play::Queue.add(@song,nil)
+
+    assert_equal 1, Play::Queue.songs.size
+  end
+
   test "removes a song" do
     Play::Queue.remove(@song,@user)
 
