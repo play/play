@@ -43,6 +43,10 @@ module Play
       @current_user = current_user
     end
 
+    # Set up mpd to natively consume songs
+    Play.client.native :repeat,  [true]
+    Play.client.native :consume, [true]
+
     not_found do
       mustache :four_oh_four
     end

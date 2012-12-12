@@ -7,8 +7,6 @@
 require './app/play'
 
 $client = Play::Client.new
-$client.native :repeat,  [true]
-$client.native :consume, [true]
 
 loop do
   # Eventually select fun songs in here.
