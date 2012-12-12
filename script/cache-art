@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+#
+# Caches all of the album art locally so we can muck around with it.
+#
+# This should only need to be run once, on installation. If you add songs
+# using the web interface, we'll cache those songs right then and there. If
+# you add songs outside of Play, or if you run into anything fish, feel free
+# to run this task multiple times- it won't hurt anything.
+
+require './app/play'
+
+paths = Play.client.listall
+puts "Caching art for #{paths.count} songs..."
+
+count = 0
+paths.each do |path| 
+  result = Play::Song.new(path).cache_album_art
+  count += 1 if result
+end
+
+puts "Done! #{count} songs updated."

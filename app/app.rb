@@ -29,10 +29,6 @@ module Play
     db_name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
     set :database, Play.config['db'].merge('database' => db_name)
 
-    Thread.new do
-      Play.client.listall.each { |path| Song.new(path).cache_album_art }
-    end
-
     before do
       session_not_required = request.path_info =~ /\/login/ ||
                              request.path_info =~ /\/auth/ ||

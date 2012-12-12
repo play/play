@@ -93,13 +93,15 @@ module Play
     # Stores a cache of the album art data to Play.album_art_cache_path
     # so we don't have to shell out for every song to get the album art.
     #
-    # Returns nothing.
+    # Returns the String path if we've written new art.
     def cache_album_art
-      FileUtils.mkdir_p Play.album_art_cache_path
+      FileUtils.mkdir_p(Play.album_art_cache_path)
       art_cache_path = "#{Play.album_art_cache_path}/#{art_file}"
-      if !File.exists? art_cache_path
+
+      if !File.exists?(art_cache_path)
         if !art.nil?
           File.write(art_cache_path, art, mode: 'wb')
+          art_cache_path
         end
       end
     end
