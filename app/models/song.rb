@@ -65,6 +65,15 @@ module Play
       album ? album.name : ''
     end
 
+    # The duration of the song in seconds.
+    #
+    # Returns an Integer.
+    def duration
+      string = `mediainfo "#{Play.music_path}/#{path}" -f | grep Duration | head -n 5 | tail -n 1`
+      array = string.split(':')
+      "#{array[2]}:#{array[3].split('.').first}"
+    end
+
     # Is this song currently queued up?
     #
     # Returns a Boolean.

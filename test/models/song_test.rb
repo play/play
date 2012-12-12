@@ -49,6 +49,10 @@ context "Song" do
     assert_equal '', Song.new('').album_name
   end
 
+  test "knows its duration" do
+    assert_equal '00:05', @song.duration
+  end
+
   test "album name" do
     assert_equal 'Cross', @song.album_name
   end
