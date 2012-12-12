@@ -6,8 +6,10 @@ module Play
     # Returns the String output of the command.
     def native(cmd, options = {})
       options = options.map(&:to_s)
-      output = IO.popen(['mpc', "--port=#{port}", "--quiet", cmd.to_s, *options])
-      output.readlines
+      pipe = IO.popen(['mpc', "--port=#{port}", "--quiet", cmd.to_s, *options])
+      output = pipe.readlines
+      pipe.close
+      output
     end
 
     # The port mpd runs on. Exists for the purpose of stubbing out in test.
