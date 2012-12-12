@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+#
+# Manages your queue for you. This is a long-running process that prunes songs
+# we've already played from the playlist and adds interesting songs to the
+# queue so the music ain't ever stop.
+
+require './app/play'
+
+$client = Play::Client.new
+$client.native :repeat,  [true]
+$client.native :consume, [true]
+
+loop do
+  # Eventually select fun songs in here.
+  sleep 60
+end
