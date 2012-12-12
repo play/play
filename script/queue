@@ -9,6 +9,9 @@ require './app/play'
 $client = Play::Client.new
 
 loop do
-  # Eventually select fun songs in here.
-  sleep 60
+  if Play::Queue.songs.size < 2
+    song = Play::Song.new($client.listall.sample)
+    Play::Queue.add(song,nil)
+  end
+  sleep 1
 end

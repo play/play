@@ -3,11 +3,12 @@ module Play
     # Add a song to the end of the Queue.
     #
     # song - The Song instance to add to the Queue.
+    # user - The User that requested this song (can be nil if auto-played).
     #
     # Returns the Queue.
     def self.add(song,user)
       client.add(song.path)
-      user.play!(song)
+      user.play!(song) if user
       songs
     end
 
