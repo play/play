@@ -1,4 +1,5 @@
 require "base64"
+require "digest"
 
 module Play
   class Song
@@ -78,6 +79,29 @@ module Play
       output = `mediainfo "#{Play.music_path}/#{path}" -f | grep Cover_Data`
       data = output.split(':').last
       data ? Base64.decode64(data.chomp) : nil
+    end
+
+    # Get the file name for the songs cached album art image.
+    #
+    # Returns String of the art file name.
+    def art_file
+      "#{Digest::SHA1.hexdigest("#{artist_name}/#{album_name}")}.png"
+    end
+
+    # Cache a songs album art.
+    #
+    # Stores a cache of the album art data to Play.album_art_cache_path
+    # so we don't have to shell out for every song to get the album art.
+    #
+    # Returns nothing.
+    def cache_album_art
+      FileUtils.mkdir_p Play.album_art_cache_path
+      art_cache_path = "#{Play.album_art_cache_path}/#{art_file}"
+      if !File.exists? art_cache_path
+        if !art.nil?
+          File.write(art_cache_path, art, mode: 'wb')
+        end
+      end
     end
 
     # Is this Song basically the same thing as another Song?
