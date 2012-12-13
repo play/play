@@ -66,6 +66,7 @@ brew_install 'mysql'
 brew_install 'taglib'
 brew_install 'media-info'
 brew_install 'mpd'
+brew_install 'mpc'
 
 # bundler
 info 'bundler'
