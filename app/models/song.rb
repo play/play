@@ -47,8 +47,8 @@ module Play
     #
     # Returns an Array of Songs. Maxes out at a hard fifty... deal with it.
     def self.find(options)
-      results = client.search(options)
-      results.map {|path| Song.new(path) }[0..50]
+      results = client.search(options)[0..50]
+      results.map {|path| Song.new(path) }
     end
 
     # The name of the artist of this song.
