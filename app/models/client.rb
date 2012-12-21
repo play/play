@@ -19,6 +19,14 @@ module Play
       '6600'
     end
 
+    # Can we talk to mpc and mpd?
+    #
+    # Returns a Boolean.
+    def running?
+      output = native :version
+      !!(output.first =~ /mpd version/)
+    end
+
     # Lists a particular type of information.
     #
     # options - An Array of Symbols or Strings to pass on to mpc.
