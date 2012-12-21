@@ -1,6 +1,23 @@
 #!/bin/sh
 #
 # Reports on the status of the stack.
-set -x
+set -e
 
-echo "MUSIC: $(ps aux| grep mpd)"
+echo ""
+
+if test "$(ps aux | grep "mpd config/mpd" | grep -v grep)"
+then
+  echo "  [ ok ] music"
+else
+  echo "  [down] music"
+  echo "         run \`script/music start\`"
+fi
+
+# Change from `rackup` whenever we figure out deployment
+if test "$(ps aux | grep "rackup" | grep -v grep)"
+then
+  echo "  [ ok ] web"
+else
+  echo "  [down] web"
+  echo "         run \`script/web start\`"
+fi
