@@ -13,6 +13,14 @@ else
   echo "         run \`script/music start\`"
 fi
 
+if test "$(ps aux | grep "queue" | grep -v grep)"
+then
+  echo "  [ ok ] queue"
+else
+  echo "  [down] queue"
+  echo "         run \`script/queue\`"
+fi
+
 # Change from `rackup` whenever we figure out deployment
 if test "$(ps aux | grep "rackup" | grep -v grep)"
 then
