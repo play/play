@@ -14,19 +14,26 @@
 # through this script. If you're manually dropping down into using commands
 # directly, You're Doing It Wrong™ (and should probably let us know so we can
 # write something to help you out!)
-
-# The trusty `set -x` (swap to `set -e` on :shipit:).
-set -x
+set -e
 
 # Usage is grepped out of this file (i.e. The Tomayko Method).
 #/ usage: play [help|--help|-h] [command ...]
 play_usage() {
-  grep '^#/' <"$0" | cut -c4-
+  echo "
+AVAILABLE COMMANDS:
+  cache-art
+  console
+  help
+  music
+  queue
+  status
+  update
+  "
 }
 
 # Handle play commands.
 case "$1" in
-  help|--help|-h)
+  help|--help|-h|'')
     play_usage
     exit 0
     ;;
