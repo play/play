@@ -1,4 +1,5 @@
 .bundle
+.sass-cache
 bin
 config/play.yml
 config/mpd.conf
