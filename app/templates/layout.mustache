@@ -13,15 +13,21 @@
   {{{not_running?}}}
 
   <a href="/">Play</a>
+  <div id="header">
+  <a href="/"><h1>Play</h1></a>
 
   <section role="nav">
     <form class="search" action="/search">
       <label for="q">Search</label>
       <input type="text" name="q" id="q" />
     </form>
-
-    <a href="/{{current_login}}">{{current_login}}</a>
+    <span id="login">
+      <a href="/{{current_login}}">{{current_login}}</a>
+    </span>
   </section>
+
+  </div><!-- end of header -->
+
 
   {{{yield}}}
 </body>

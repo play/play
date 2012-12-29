@@ -20,7 +20,7 @@ require_relative 'views/layout'
 
 include Play::Helpers
 
-module Play  
+module Play
   def self.client
     Client.new
   end
