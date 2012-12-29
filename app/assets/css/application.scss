@@ -1,0 +1,53 @@
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/css3/box-sizing";
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+  margin: 0;
+}
+
+#header {
+	background: #111;
+	padding: 10px;
+	display: inline-block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+
+	h1 {
+		display: inline-block;
+		float: left;
+		text-indent: -9999px;
+		height: 48px;
+		width: 114px;
+		background: url(asset-path("play-logo.png", image));
+	}
+
+	#login {
+		float: right;
+	}
+
+	.search {
+		float: right;
+		border-radius: 3px;
+		padding: 5px 10px;
+		display: inline-block;
+	}
+}
+
+#playing {
+	width: 300px;
+	height: 100%;
+	background: #212121;
+	position: fixed;
+	left: 0;
+	top: 60px;
+	bottom: 0;
+	display: inline-block;
+}
