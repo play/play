@@ -37,7 +37,12 @@ printf "  - What is your GitHub client secret?                            › "
 read secret
 
 # Generate an auth token
-auth_token=$(date | md5)
+if $(which md5)
+then
+  auth_token=$(date | md5)
+else
+  auth_token=$(date | md5sum)
+fi
 
 # Write out play.yml
 ruby -r yaml -e "
