@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# This file will install the much needed dependencies to get our OS X system up
+# and running for Play.
+
+brew_installed() {
+  brew list | grep -i $1 > /dev/null
+  [ $? -eq 0 ]
+}
+
+# Installs a dependency with Homebrew
+brew_install() {
+  if brew_installed $1
+  then
+    success $1
+    return
+  fi
+
+  info "installing $1"
+  if $2 >> /tmp/play-bootstrap
+  then
+    brew install $1 >> /tmp/play-bootstrap
+    success $1
+  else
+    fail $1
+  fi
+}
+
+# brew
+if test $(which brew)
+then
+  success 'homebrew'
+else
+  ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)" >> /tmp/play-bootstrap
+  success 'homebrew'
+fi
+
+brew_install 'mysql'
+brew_install 'taglib'
+brew_install 'media-info'
+brew_install 'mpd'
+brew_install 'mpc'
