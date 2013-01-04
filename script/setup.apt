@@ -4,7 +4,7 @@
 # and running for Play.
 
 apt_installed() {
-  dpkg -l $1 | grep 'ii  $1' > /dev/null
+  dpkg -l $1 | grep "ii  $1" > /dev/null
   [ $? -eq 0 ]
 }
 
