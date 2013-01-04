@@ -100,6 +100,10 @@ then
 else
   if mysql -u $user --password="$password" -e 'CREATE DATABASE IF NOT EXISTS play CHARACTER SET utf8 COLLATE utf8_unicode_ci;' >> /tmp/play-bootstrap 2>&1
   then
+    play_user=`cat config/play.yml | grep username`; play_user=${play_user/  username: /}
+    play_password=`cat config/play.yml | grep password`; play_password=${play_password/  password: /}
+
+    mysql -u $user --password="$password" -e "GRANT ALL PRIVILEGES ON play.* TO '$play_user'@'localhost' IDENTIFIED BY '$play_password'";
     success 'created mysql database'
   else
     echo "We assume MySQL credentials of root and a blank password. If that's not the case, run script/bootstrap with MYSQL_USER and MYSQL_PASSWORD environment variables set." >> /tmp/play-bootstrap
