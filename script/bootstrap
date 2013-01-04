@@ -28,6 +28,7 @@ then
   success 'config loaded'
 else
   . script/setup
+  success 'config loaded'
 fi
 
 # Install our system dependencies.
