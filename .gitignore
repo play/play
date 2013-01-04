@@ -5,3 +5,5 @@ config/play.yml
 config/mpd.conf
 vendor
 public/art/*.png
+public/art/*.jpg
+public/art/*.jpeg
