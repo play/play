@@ -35,6 +35,12 @@ fi
 if [ $(uname -s) = "Darwin" ]
 then
   . script/setup.osx
+elif [ $(uname -s) = "Linux" ]
+then
+  if test $(which apt-get)
+  then
+    . script/setup.apt
+  fi
 fi
 
 # bundler
