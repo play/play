@@ -41,6 +41,8 @@ then
   then
     . script/setup.apt
   fi
+else
+  fail 'platform not supported'
 fi
 
 # bundler
