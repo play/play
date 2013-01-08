@@ -34,13 +34,10 @@ fi
 # Install our system dependencies.
 if [ $(uname -s) = "Darwin" ]
 then
-  . script/setup.osx
+  . script/setup.apt
 elif [ $(uname -s) = "Linux" ]
 then
-  if test $(which apt-get)
-  then
-    . script/setup.apt
-  fi
+  . script/setup.apt
 else
   fail 'platform not supported'
 fi

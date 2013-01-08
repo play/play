@@ -3,12 +3,17 @@
 # This file will install the much needed dependencies to get our Linux system up
 # and running for Play.
 
+if test !$(which apt-get)
+then
+  fail "apt is not installed"
+fi
+
 apt_installed() {
   dpkg -l $1 | grep "ii  $1" > /dev/null
   [ $? -eq 0 ]
 }
 
-# Installs a dependency with Homebrew
+# Installs a dependency with apt
 apt_install() {
   if apt_installed $1
   then
