@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# This file will install the much needed dependencies to get our OS X system up
+# This file will install the much needed dependencies to get our Linux system up
 # and running for Play.
 
 apt_installed() {
