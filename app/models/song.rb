@@ -23,7 +23,11 @@ module Play
     def initialize(path)
       path.chomp!
 
-      full_path = File.join(Play.music_path,path)
+      if path[0] == '/'
+        full_path = path
+      else
+        full_path = File.join(Play.music_path,path)
+      end
 
       TagLib::FileRef.open(full_path) do |file|
         if tag = file.tag
