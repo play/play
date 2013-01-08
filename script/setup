@@ -44,6 +44,14 @@ else
   auth_token=$(date | md5sum)
 fi
 
+# Get the settings we are going to be using for our mysql instance. This helps in bootstrap.
+echo ""
+printf "  - What database username would you like to use › "
+read username
+printf "  - What password would you like this user to use › "
+read password
+echo ""
+
 # Write out play.yml
 ruby -r yaml -e "
   hash = YAML.load_file('config/play.yml.example')
@@ -51,6 +59,8 @@ ruby -r yaml -e "
   hash['github']['org'] = '$gh_org'
   hash['github']['client_id'] = '$client_id'
   hash['github']['secret'] = '$secret'
+  hash['db']['username'] = '$username'
+  hash['db']['password'] = '$password'
   File.open('config/play.yml', 'w') {|f| f.write(hash.to_yaml) }
 "
 
