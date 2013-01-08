@@ -1,0 +1,47 @@
+#!/bin/bash
+#
+# This file will install the much needed dependencies to get our OS X system up
+# and running for Play.
+
+apt_installed() {
+  dpkg -l $1 | grep "ii  $1" > /dev/null
+  [ $? -eq 0 ]
+}
+
+# Installs a dependency with Homebrew
+apt_install() {
+  if apt_installed $1
+  then
+    success $1
+    return
+  fi
+
+  info "installing $1"
+  if $2 >> /tmp/play-bootstrap
+  then
+    sudo apt-get install $1 >> /tmp/play-bootstrap
+    success $1
+  else
+    fail $1
+  fi
+}
+
+# mysql
+apt_install 'mysql-server'
+apt_install 'libmysqlclient-dev'
+apt_install 'mysql-client'
+
+# taglib
+apt_install 'libtag1-dev'
+
+# media-info
+apt_install 'mediainfo'
+
+# mpd
+apt_install 'mpd'
+
+# mpc
+apt_install 'mpc'
+
+# execjs requires a javascript runtime, nodejs is the easiest for us to install on the fly.
+apt_install 'nodejs'
