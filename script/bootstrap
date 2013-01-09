@@ -34,7 +34,7 @@ fi
 # Install our system dependencies.
 if [ $(uname -s) = "Darwin" ]
 then
-  . script/setup.apt
+  . script/setup.osx
 elif [ $(uname -s) = "Linux" ]
 then
   . script/setup.apt
