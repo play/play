@@ -1,3 +1,5 @@
+@import "compass";
+@import "compass/css3/font-face";
 @import "compass/reset";
 @import "compass/css3";
 @import "compass/css3/box-sizing";
@@ -23,10 +25,10 @@ html {
 	h1 {
 		display: inline-block;
 		float: left;
-		text-indent: -9999px;
 		height: 48px;
 		width: 114px;
-		background: url(asset-path("play-logo.png", image));
+		text-indent: -9999px;
+		background: url("/app/assets/images/play-logo.png") no-repeat center center;
 	}
 
 	#login {
@@ -47,7 +49,24 @@ html {
 	background: #212121;
 	position: fixed;
 	left: 0;
-	top: 60px;
+	top: 68px;
 	bottom: 0;
 	display: inline-block;
+	z-index: -9;
+}
+
+#queue {
+	margin-top: 40px;
+	padding: 20px;
+	margin-left: 300px;
+
+	.song {
+		display: inline-block;
+		margin-bottom: 20px;
+
+		img {
+			float: left;
+			margin-right: 20px;
+		}
+	}
 }
