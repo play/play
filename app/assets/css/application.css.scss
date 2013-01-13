@@ -11,6 +11,12 @@
 
 html {
   margin: 0;
+	font-family: "Helvetica Neue","Helvetica", Arial, Sans Serif;
+}
+
+a {
+	color: #cc33cc;
+	text-decoration: none;
 }
 
 #header {
@@ -57,16 +63,34 @@ html {
 
 #queue {
 	margin-top: 40px;
-	padding: 20px;
 	margin-left: 300px;
 
 	.song {
-		display: inline-block;
+		display: block;
 		margin-bottom: 20px;
+		margin-left: 20px;
 
 		img {
 			float: left;
 			margin-right: 20px;
+		}
+
+		.title {
+				display: inline-block;
+
+			a {
+				font-size: 24px;
+				color: #333;
+				text-decoration: none;
+			}
+		}
+
+		.artist {
+
+		}
+
+		.duration {
+			color: #959595;
 		}
 	}
 }
