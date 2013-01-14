@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Start the web server
+
+case "$1" in
+  start )
+    bundle exec thin --port 5050 --log /tmp/play/web.log --pid /tmp/play/web.pid --daemonize start
+    ;;
+  stop )
+    if [ -f /tmp/play/web.pid ]
+    then
+      kill `cat /tmp/play/web.pid`
+      rm -rf /tmp/play/web.pid
+    fi
+    ;;
+esac
