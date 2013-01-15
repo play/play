@@ -21,8 +21,8 @@ else
   echo "         run \`script/queue\`"
 fi
 
-# Change from `rackup` whenever we figure out deployment
-if test "$(ps aux | grep "rackup" | grep -v grep)"
+# Change from `thin server` whenever we figure out deployment
+if test "$(ps aux | grep "thin server" | grep -v grep)"
 then
   echo "  [ ok ] web"
 else
