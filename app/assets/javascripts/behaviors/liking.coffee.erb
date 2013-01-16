@@ -3,7 +3,7 @@ $ ->
     element = $(@)
     path = element.parents('.song').data('path')
 
-    $.post '/like',
+    $.post '<%= Play.uri_prefix %>/like',
       path: path
       (data) ->
         element.text('OK!')
@@ -12,7 +12,7 @@ $ ->
     element = $(@)
     path = element.parents('.song').data('path')
 
-    $.put '/like',
+    $.put '<%= Play.uri_prefix %>/like',
       path: path
       (data) ->
         element.text('OK!')
@@ -21,7 +21,7 @@ $ ->
     element = $(@)
     path = element.parents('.song').data('path')
 
-    $.delete '/like',
+    $.delete '<%= Play.uri_prefix %>/like',
       path: path
       (data) ->
         element.text('OK!')

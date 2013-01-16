@@ -1,6 +1,10 @@
 module Play
   module Views
     class Layout < Mustache
+      def uri_prefix
+        Play.uri_prefix
+      end
+
       def current_login
         @current_user.login
       end

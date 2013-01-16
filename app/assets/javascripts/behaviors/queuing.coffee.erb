@@ -3,7 +3,7 @@ $ ->
     element = $(@)
     path = element.parents('.song').data('path')
 
-    $.post '/queue',
+    $.post '<%= Play.uri_prefix %>/queue',
       path: path
       (data) ->
         element.text(data)
@@ -14,7 +14,7 @@ $ ->
 
     $.ajax
       type: 'DELETE',
-      url:  '/queue',
+      url:  '<%= Play.uri_prefix %>/queue',
       data: {path: path},
       success: (data) ->
         element.text(data)
