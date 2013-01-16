@@ -8,10 +8,14 @@ require './app/play'
 
 $client = Play::Client.new
 
-loop do
-  if Play::Queue.songs.size < 2
-    song = Play::Song.new($client.listall.sample)
-    Play::Queue.add(song,nil)
+job = fork do
+  loop do
+    if Play::Queue.songs.size < 2
+      song = Play::Song.new($client.listall.sample)
+      Play::Queue.add(song,nil)
+    end
+    sleep 1
   end
-  sleep 1
 end
+
+Process.detach(job)
