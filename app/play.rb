@@ -50,6 +50,12 @@ module Play
   def self.config
     YAML::load(File.open('config/play.yml'))
   end
+
+  # The uri prefix we have set for play. This allows us to run play in a sub-directory
+  # on our webserver if we want.
+  def self.uri_prefix
+    self.config['uri_prefix']
+  end
 end
 
 require_relative 'app'

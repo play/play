@@ -23,9 +23,10 @@ module Play
       :views => "#{dir}/views"
     }
     set :github_options, {
-      :scopes    => "user",
-      :secret    => Play.config['github']['secret'],
-      :client_id => Play.config['github']['client_id'],
+      :scopes       => "user",
+      :secret       => Play.config['github']['secret'],
+      :client_id    => Play.config['github']['client_id'],
+      :callback_url => "#{Play.uri_prefix}/auth/github/callback",
     }
 
     db_name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
