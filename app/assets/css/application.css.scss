@@ -32,10 +32,11 @@ a {
 	h1 {
 		display: inline-block;
 		float: left;
-		height: 48px;
+		height: 50px;
 		width: 114px;
 		text-indent: -9999px;
 		background: url("/app/assets/images/play-logo.png") no-repeat center center;
+		background-size: 114px 50px;
 	}
 
 	#login {
@@ -59,7 +60,8 @@ a {
 	top: 68px;
 	bottom: 0;
 	display: inline-block;
-	z-index: -9;
+	z-index: 0;
+	@include box-shadow( 1px 0 2px rgba(0,0,0, .3), inset -1px 0 0 rgba(#fff, .2));
 }
 
 #queue {
