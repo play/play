@@ -190,12 +190,12 @@ a {
 			display: inline-block;
 			vertical-align: middle;
 			height: 46px;
-			-webkit-transition: all .5s ease;
-			-moz-transition: all .5s ease;
-			transition: all .5s ease;
+			-webkit-transition: all .3s ease;
+			-moz-transition: all .3s ease;
+			transition: all .3s ease;
 
 			&:hover {
-				height: 100px;
+				height: 70px;
 			}
 		}
 
@@ -231,7 +231,6 @@ a {
 							color: lighten(#cc33cc, 20%);
 						}
 					}
-
 
 					a + a {
 						margin-left: 10px;
