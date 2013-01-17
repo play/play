@@ -10,6 +10,10 @@
 	box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
+body {
+	font-size: 14px;
+}
+
 html {
   margin: 0;
 	font-family: "Helvetica Neue","Helvetica", Arial, Sans Serif;
@@ -21,13 +25,15 @@ a {
 }
 
 #header {
-	background: #111;
+	background: #181818;
 	padding: 10px;
 	display: inline-block;
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
+	z-index: 10;
+	@include box-shadow(0 1px 2px rgba(0,0,0,.3));
 
 	h1 {
 		display: inline-block;
@@ -74,6 +80,7 @@ a {
 		display: inline-block;
 		width: 100%;
 		clear: both;
+		vertical-align: middle;
 		@include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
 
 		&:hover {
@@ -85,8 +92,16 @@ a {
 			margin-right: 20px;
 		}
 
+		a {
+			display: inline;
+			float: left;
+		}
+
 		.title {
-				display: inline-block;
+				display: inline;
+				float: left;
+				line-height: 30px;
+				margin-right: 5px;
 
 			a {
 				font-size: 24px;
@@ -95,12 +110,33 @@ a {
 			}
 		}
 
-		.artist {
-
-		}
-
 		.duration {
 			color: #959595;
+			line-height: 30px;
+		}
+
+		.artist {
+			margin-right: 10px;
+			display: inline-block;
+			float: left;
+		}
+
+		.controls {
+			margin-top: 10px;
+
+				a {
+					font-size: 13px;
+					color: #afafaf;
+
+					&:hover {
+						color: #cc33cc;
+					}
+				}
+
+
+				a + a {
+					margin-left: 10px;
+				}
 		}
 	}
 }
