@@ -3,6 +3,7 @@
 @import "compass/reset";
 @import "compass/css3";
 @import "compass/css3/box-sizing";
+@import "vars";
 
 * {
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
@@ -16,7 +17,7 @@ html {
 }
 
 a {
-  color: #cc33cc;
+  color: $pink;
   text-decoration: none;
 }
 
