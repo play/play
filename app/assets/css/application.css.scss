@@ -126,7 +126,7 @@ a {
   border-radius: 3px;
 
   li {
-    border-top: 1px solid #282828; 
+    border-top: 1px solid #282828;
     border-bottom: 1px solid #000;
 
     &:first-child { border-top: 0; }
@@ -154,13 +154,13 @@ a {
 }
 
 #queue {
-	margin-top: 40px;
+	margin-top: 58px;
 	margin-left: 300px;
 	background: #f9f9f9;
 
 	.song {
 		padding: 20px;
-		display: inline-block;
+		display: block;
 		width: 100%;
 		clear: both;
 		vertical-align: middle;
@@ -168,24 +168,39 @@ a {
 
 		&:hover {
 			background: rgba(#d830e2, .07);
+
+			.controls {
+				display: block;
+			}
 		}
 
 		img {
-			float: left;
+			display: inline-block;
 			margin-right: 20px;
 			@include border-radius(1px);
 			border: 1px solid #e1e1e1;
 		}
 
-		a {
-			display: inline;
-			float: left;
+		> a {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.details {
+			display: inline-block;
+			vertical-align: middle;
+			height: 46px;
+		  transition: opacity 1s;
+
+			&:hover {
+				height: 100px;
+				opacity: .5;
+			}
 		}
 
 		.title {
 				font-size: 24px;
-				display: inline;
-				float: left;
+				display: block;
 				line-height: 30px;
 				margin-right: 5px;
 				font-weight: 400;
@@ -200,36 +215,40 @@ a {
 			font-weight: 300;
 			font-size: 16px;
 			line-height: 30px;
+			display: inline;
 		}
 
-		.artist {
-			display: inline-block;
-			float: left;
-		}
+					.controls {
+				display: none;
+				margin-top: 10px;
 
-		.betweener {
-			color: #959595;
-			padding: 0 5px;
-			display: inline-block;
-			float: left;
-		}
+					a {
+						font-size: 13px;
+						color: #afafaf;
 
-		.controls {
-			margin-top: 10px;
-
-				a {
-					font-size: 13px;
-					color: #afafaf;
-
-					&:hover {
-						color: lighten(#cc33cc, 20%);
+						&:hover {
+							color: lighten(#cc33cc, 20%);
+						}
 					}
-				}
 
 
-				a + a {
-					margin-left: 10px;
-				}
+					a + a {
+						margin-left: 10px;
+					}
+			}
+
+		.meta {
+
+			.artist {
+				display: inline-block;
+
+			}
+
+			.betweener {
+				color: #959595;
+				padding: 0 5px;
+				display: inline-block;
+			}
 		}
 	}
 }
