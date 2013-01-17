@@ -64,6 +64,18 @@ a {
 	@include box-shadow( 1px 0 2px rgba(0,0,0, .3), inset -1px 0 0 rgba(#fff, .2));
 }
 
+.now-playing {
+
+}
+
+.now-playing-actions {
+  color: #999;
+  font-size: 13px; 
+
+  .now-playing-action:hover {
+  }
+}
+
 #queue {
 	margin-top: 40px;
 	margin-left: 300px;
