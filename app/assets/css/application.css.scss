@@ -3,6 +3,7 @@
 @import "compass/reset";
 @import "compass/css3";
 @import "compass/css3/box-sizing";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
 
 * {
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
@@ -12,6 +13,7 @@
 
 body {
 	font-size: 14px;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 html {
@@ -22,6 +24,10 @@ html {
 a {
 	color: #cc33cc;
 	text-decoration: none;
+
+	&:hover {
+		color: lighten(#cc33cc, 20%);
+	}
 }
 
 #header {
@@ -90,6 +96,8 @@ a {
 		img {
 			float: left;
 			margin-right: 20px;
+			@include border-radius(1px);
+			border: 1px solid #e1e1e1;
 		}
 
 		a {
@@ -98,25 +106,33 @@ a {
 		}
 
 		.title {
+				font-size: 24px;
 				display: inline;
 				float: left;
 				line-height: 30px;
 				margin-right: 5px;
+				font-weight: 400;
 
 			a {
-				font-size: 24px;
 				color: #333;
-				text-decoration: none;
 			}
 		}
 
 		.duration {
 			color: #959595;
+			font-weight: 300;
+			font-size: 16px;
 			line-height: 30px;
 		}
 
 		.artist {
-			margin-right: 10px;
+			display: inline-block;
+			float: left;
+		}
+
+		.betweener {
+			color: #959595;
+			padding: 0 5px;
 			display: inline-block;
 			float: left;
 		}
@@ -129,7 +145,7 @@ a {
 					color: #afafaf;
 
 					&:hover {
-						color: #cc33cc;
+						color: lighten(#cc33cc, 20%);
 					}
 				}
 
