@@ -19,6 +19,8 @@ html {
 a {
   color: $pink;
   text-decoration: none;
+
+  &:hover { text-decoration: underline; }
 }
 
 #header {
@@ -60,23 +62,81 @@ a {
   left: 0;
   top: 68px;
   bottom: 0;
+  padding: 25px;
   display: inline-block;
   z-index: 0;
   @include box-shadow( 1px 0 2px rgba(0,0,0, .3), inset -1px 0 0 rgba(#fff, .2));
 }
 
 .now-playing {
+  text-shadow: 0 1px 1px rgba(#000, .8);
 
+  .album-art {
+    overflow: hidden;
+    border-radius: 3px;
+    display: block;
+
+    img {
+      max-width: 250px;
+      display: block;
+    }
+  }
+
+  .album-info {
+    font-weight: 300;
+    font-size: 14px;
+    color: #666;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid #111;
+    border-bottom: 1px solid #363636;
+    margin: 15px 0;
+  }
+
+  .now-playing-meta {
+    padding: 0 8px;
+
+    h2 {
+      font-weight: 300;
+      font-size: 24px;
+      color: #fff;
+      margin: 15px 0 5px;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
 }
 
 // A list of iconned actions that appears in the Now Playing portion of the sidebar.
 .now-playing-actions {
+  background-color: #1a1a1a;
+  border: 1px solid #000;
+  box-shadow: 0 1px 0 #383838;
+  border-radius: 3px;
+
+  li {
+    border-top: 1px solid #282828; 
+    border-bottom: 1px solid #000;
+
+    &:first-child { border-top: 0; }
+    &:last-child { border-bottom: 0; }
+  }
+
+  .now-playing-action-icon { font-size: 15px; }
+
   .now-playing-action {
     color: #999;
-    font-size: 13px; 
+    font-size: 13px;
+    padding: 8px;
+    display: block;
+
+    &:hover { text-decoration: none; }
 
     &:hover span { color: $pink; }
-
 
     &:hover .icon-play-star:before,
     &.selected .icon-play-star:before { content: "\f005"; }
