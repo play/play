@@ -69,11 +69,20 @@ a {
 
 }
 
+// A list of iconned actions that appears in the Now Playing portion of the sidebar.
 .now-playing-actions {
-  color: #999;
-  font-size: 13px; 
+  .now-playing-action {
+    color: #999;
+    font-size: 13px; 
 
-  .now-playing-action:hover {
+    &:hover span { color: $pink; }
+
+
+    &:hover .icon-play-star:before,
+    &.selected .icon-play-star:before { content: "\f005"; }
+
+    &.selected:hover .icon-play-star:before,
+    .icon-play-star:before { content: "\f006"; }
   }
 }
 
