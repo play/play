@@ -75,7 +75,7 @@ module Play
     def duration
       string = `mediainfo "#{Play.music_path}/#{path}" -f | grep Duration | head -n 5 | tail -n 1`
       array = string.split(':')
-      "#{array[2]}:#{array[3].split('.').first}"
+      "#{array[2]}:#{array[3].split('.').first}" if array[3]
     end
 
     # Is this song currently queued up?
