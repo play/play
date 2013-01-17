@@ -190,11 +190,12 @@ a {
 			display: inline-block;
 			vertical-align: middle;
 			height: 46px;
-		  transition: opacity 1s;
+			-webkit-transition: all .5s ease;
+			-moz-transition: all .5s ease;
+			transition: all .5s ease;
 
 			&:hover {
 				height: 100px;
-				opacity: .5;
 			}
 		}
 
@@ -218,7 +219,7 @@ a {
 			display: inline;
 		}
 
-					.controls {
+			.controls {
 				display: none;
 				margin-top: 10px;
 
