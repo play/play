@@ -4,6 +4,7 @@ require 'sprockets'
 assets = Sprockets::Environment.new
 assets.append_path 'app/assets/css'
 assets.append_path 'app/assets/javascripts'
+assets.append_path 'app/assets/fonts'
 
 map("/assets")   { run assets }
 
