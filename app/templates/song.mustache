@@ -2,18 +2,19 @@
   <a href="/artist/{{artist_name}}/album/{{album_name}}">
     <img src="/images/art/{{art_file}}" width="100" height="100" />
   </a>
-  <div class="title"><a href="/artist/{{artist_name}}/song/{{title}}">{{title}}</a></div><div class="duration">({{duration}})</div>
+  <div class="details">
+    <div class="title"><a href="/artist/{{artist_name}}/song/{{title}}">{{title}}</a></div><div class="duration"> ({{duration}})</div>
 
-  <div class="artist"><a href="/artist/{{artist_name}}">{{artist_name}}</a></div>
-  <div class="album"><a href="/artist/{{artist_name}}/album/{{album_name}}">{{album_name}}</a></div>
-
-  <div class="controls">
-    <a href="#" class="add">add</a>
-    <a href="#" class="remove">remove</a>
-    <a href="/download/{{path}}">download song</a>
-    <a href="/download/album/{{path}}">download album</a>
-    <a href="#" class="like">like</a>
-    <a href="#" class="unlike">unlike</a>
-    <a href="#" class="dislike">dislike</a>
+    <div class="artist"><a href="/artist/{{artist_name}}">{{artist_name}}</a></div><span class="betweener"> - </span><div class="album"><a href="/artist/{{artist_name}}/album/{{album_name}}">{{album_name}}</a></div>
+    <br />
+    <div class="controls">
+      <a href="#" class="add">Add</a>
+      <a href="#" class="remove">Remove</a>
+      <a href="/download/{{path}}">Download Song</a>
+      <a href="/download/album/{{path}}">Download Album</a>
+      <a href="#" class="like">Like</a>
+      <a href="#" class="unlike">Unlike</a>
+      <a href="#" class="dislike">Dislike</a>
+    </div>
   </div>
 </div>

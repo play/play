@@ -44,13 +44,8 @@ fi
 
 # bundler
 info 'bundler'
-if test $(which bundle)
-then
-  success 'bundler'
-else
-  gem install bundler > /tmp/play-bootstrap
-  success 'bundler'
-fi
+gem install bundler > /tmp/play-bootstrap
+success 'bundler'
 
 # gems
 info 'gems'

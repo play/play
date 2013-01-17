@@ -4,11 +4,18 @@
 @import "compass/css3";
 @import "compass/css3/box-sizing";
 @import "vars";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
 
 * {
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+body {
+	font-size: 14px;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 html {
@@ -19,39 +26,39 @@ html {
 a {
   color: $pink;
   text-decoration: none;
-
-  &:hover { text-decoration: underline; }
 }
 
 #header {
-  background: #111;
-  padding: 10px;
-  display: inline-block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+	background: #181818;
+	padding: 10px;
+	display: inline-block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	@include box-shadow(0 1px 2px rgba(0,0,0,.3));
 
-  h1 {
-    display: inline-block;
-    float: left;
-    height: 50px;
-    width: 114px;
-    text-indent: -9999px;
-    background: url("/app/assets/images/play-logo.png") no-repeat center center;
-    background-size: 114px 50px;
-  }
+	h1 {
+		display: inline-block;
+		float: left;
+		height: 50px;
+		width: 114px;
+		text-indent: -9999px;
+		background: url("/app/assets/images/play-logo.png") no-repeat center center;
+		background-size: 114px 50px;
+	}
 
-  #login {
-    float: right;
-  }
+	#login {
+		float: right;
+	}
 
-  .search {
-    float: right;
-    border-radius: 3px;
-    padding: 5px 10px;
-    display: inline-block;
-  }
+	.search {
+		float: right;
+		border-radius: 3px;
+		padding: 5px 10px;
+		display: inline-block;
+	}
 }
 
 #sidebar {
@@ -147,42 +154,82 @@ a {
 }
 
 #queue {
-  margin-top: 40px;
-  margin-left: 300px;
-  background: #f9f9f9;
+	margin-top: 40px;
+	margin-left: 300px;
+	background: #f9f9f9;
 
-  .song {
-    padding: 20px;
-    display: inline-block;
-    width: 100%;
-    clear: both;
-    @include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
+	.song {
+		padding: 20px;
+		display: inline-block;
+		width: 100%;
+		clear: both;
+		vertical-align: middle;
+		@include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
 
-    &:hover {
-      background: rgba(#d830e2, .07);
-    }
+		&:hover {
+			background: rgba(#d830e2, .07);
+		}
 
-    img {
-      float: left;
-      margin-right: 20px;
-    }
+		img {
+			float: left;
+			margin-right: 20px;
+			@include border-radius(1px);
+			border: 1px solid #e1e1e1;
+		}
 
-    .title {
-        display: inline-block;
+		a {
+			display: inline;
+			float: left;
+		}
 
-      a {
-        font-size: 24px;
-        color: #333;
-        text-decoration: none;
-      }
-    }
+		.title {
+				font-size: 24px;
+				display: inline;
+				float: left;
+				line-height: 30px;
+				margin-right: 5px;
+				font-weight: 400;
 
-    .artist {
+			a {
+				color: #333;
+			}
+		}
 
-    }
+		.duration {
+			color: #959595;
+			font-weight: 300;
+			font-size: 16px;
+			line-height: 30px;
+		}
 
-    .duration {
-      color: #959595;
-    }
-  }
+		.artist {
+			display: inline-block;
+			float: left;
+		}
+
+		.betweener {
+			color: #959595;
+			padding: 0 5px;
+			display: inline-block;
+			float: left;
+		}
+
+		.controls {
+			margin-top: 10px;
+
+				a {
+					font-size: 13px;
+					color: #afafaf;
+
+					&:hover {
+						color: lighten(#cc33cc, 20%);
+					}
+				}
+
+
+				a + a {
+					margin-left: 10px;
+				}
+		}
+	}
 }
