@@ -5,63 +5,63 @@
 @import "compass/css3/box-sizing";
 
 * {
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box;         /* Opera/IE 8+ */
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
 html {
   margin: 0;
-	font-family: "Helvetica Neue","Helvetica", Arial, Sans Serif;
+  font-family: "Helvetica Neue","Helvetica", Arial, Sans Serif;
 }
 
 a {
-	color: #cc33cc;
-	text-decoration: none;
+  color: #cc33cc;
+  text-decoration: none;
 }
 
 #header {
-	background: #111;
-	padding: 10px;
-	display: inline-block;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
+  background: #111;
+  padding: 10px;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 
-	h1 {
-		display: inline-block;
-		float: left;
-		height: 50px;
-		width: 114px;
-		text-indent: -9999px;
-		background: url("/app/assets/images/play-logo.png") no-repeat center center;
-		background-size: 114px 50px;
-	}
+  h1 {
+    display: inline-block;
+    float: left;
+    height: 50px;
+    width: 114px;
+    text-indent: -9999px;
+    background: url("/app/assets/images/play-logo.png") no-repeat center center;
+    background-size: 114px 50px;
+  }
 
-	#login {
-		float: right;
-	}
+  #login {
+    float: right;
+  }
 
-	.search {
-		float: right;
-		border-radius: 3px;
-		padding: 5px 10px;
-		display: inline-block;
-	}
+  .search {
+    float: right;
+    border-radius: 3px;
+    padding: 5px 10px;
+    display: inline-block;
+  }
 }
 
 #sidebar {
-	width: 300px;
-	height: 100%;
-	background: #212121;
-	position: fixed;
-	left: 0;
-	top: 68px;
-	bottom: 0;
-	display: inline-block;
-	z-index: 0;
-	@include box-shadow( 1px 0 2px rgba(0,0,0, .3), inset -1px 0 0 rgba(#fff, .2));
+  width: 300px;
+  height: 100%;
+  background: #212121;
+  position: fixed;
+  left: 0;
+  top: 68px;
+  bottom: 0;
+  display: inline-block;
+  z-index: 0;
+  @include box-shadow( 1px 0 2px rgba(0,0,0, .3), inset -1px 0 0 rgba(#fff, .2));
 }
 
 .now-playing {
@@ -77,42 +77,42 @@ a {
 }
 
 #queue {
-	margin-top: 40px;
-	margin-left: 300px;
-	background: #f9f9f9;
+  margin-top: 40px;
+  margin-left: 300px;
+  background: #f9f9f9;
 
-	.song {
-		padding: 20px;
-		display: inline-block;
-		width: 100%;
-		clear: both;
-		@include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
+  .song {
+    padding: 20px;
+    display: inline-block;
+    width: 100%;
+    clear: both;
+    @include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
 
-		&:hover {
-			background: rgba(#d830e2, .07);
-		}
+    &:hover {
+      background: rgba(#d830e2, .07);
+    }
 
-		img {
-			float: left;
-			margin-right: 20px;
-		}
+    img {
+      float: left;
+      margin-right: 20px;
+    }
 
-		.title {
-				display: inline-block;
+    .title {
+        display: inline-block;
 
-			a {
-				font-size: 24px;
-				color: #333;
-				text-decoration: none;
-			}
-		}
+      a {
+        font-size: 24px;
+        color: #333;
+        text-decoration: none;
+      }
+    }
 
-		.artist {
+    .artist {
 
-		}
+    }
 
-		.duration {
-			color: #959595;
-		}
-	}
+    .duration {
+      color: #959595;
+    }
+  }
 }
