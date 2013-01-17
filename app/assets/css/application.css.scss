@@ -64,11 +64,18 @@ a {
 #queue {
 	margin-top: 40px;
 	margin-left: 300px;
+	background: #f9f9f9;
 
 	.song {
-		display: block;
-		margin-bottom: 20px;
-		margin-left: 20px;
+		padding: 20px;
+		display: inline-block;
+		width: 100%;
+		clear: both;
+		@include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
+
+		&:hover {
+			background: rgba(#d830e2, .07);
+		}
 
 		img {
 			float: left;
