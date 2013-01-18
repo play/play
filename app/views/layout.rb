@@ -10,6 +10,10 @@ module Play
           "<div>The music server isn't running. Spin it up with <code>script/music start</code>.</div>"
         end
       end
+
+      def now_playing
+        Song.now_playing
+      end
     end
   end
 end

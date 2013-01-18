@@ -55,6 +55,13 @@ module Play
       results.map {|path| Song.new(path) }
     end
 
+    # What's currently playing?
+    #
+    # Returns a Song.
+    def self.now_playing
+      new(Play.client.now_playing) if Play.client.now_playing
+    end
+
     # The name of the artist of this song.
     #
     # Returns a String
