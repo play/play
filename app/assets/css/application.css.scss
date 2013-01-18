@@ -50,15 +50,52 @@ a {
 	}
 
 	#login {
-		float: right;
+
 	}
 
 	.search {
-		float: right;
 		border-radius: 3px;
-		padding: 5px 10px;
 		display: inline-block;
+    position: relative;
+    margin-left: 5px;
+
+    .advanced-search {
+      display: inline-block;
+      background-color: #444;
+      border-radius: 30px 0 0 30px;
+      padding: 5px 5px 5px 8px;
+      border: 1px solid #000;
+      font-size: 16px;
+      color: #e8e8e8;
+
+      &:hover {
+        color: $pink;
+      }
+    }
+
+    .icon-search {
+      color: #e8e8e8;
+      position: absolute;
+      top: 5px;
+      right: 12px;
+      font-size: 16px;
+    }
+
+    input[type="text"] {
+      display: inline-block;
+      font-size: 14px;
+      background-color: #303030;
+      border-radius: 0 30px 30px 0;
+      padding: 5px 15px;
+      border: 1px solid #000;
+      border-left: 0;
+      margin: 0;
+    }
 	}
+}
+
+section[role="nav"] {
+  float: right;
 }
 
 #sidebar {
