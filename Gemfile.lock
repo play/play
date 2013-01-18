@@ -33,6 +33,8 @@ GEM
       multipart-post (~> 1.1)
     faraday_middleware (0.8.8)
       faraday (>= 0.7.4, < 0.9)
+    faye-websocket (0.4.6)
+      eventmachine (>= 0.12.0)
     fssm (0.2.9)
     hashie (1.2.0)
     hike (1.2.1)
@@ -107,6 +109,7 @@ DEPENDENCIES
   coffee-script (~> 2.2.0)
   compass
   database_cleaner (~> 0.9.1)
+  faye-websocket
   mustache
   mysql2 (~> 0.3.11)
   rack-test
