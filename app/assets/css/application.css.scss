@@ -42,6 +42,7 @@ a {
 	h1 {
 		display: inline-block;
 		float: left;
+    margin-left: 10px;
 		height: 50px;
 		width: 114px;
 		text-indent: -9999px;
@@ -185,8 +186,15 @@ section[role="nav"] {
     font-size: 13px;
     padding: 8px;
     display: block;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    transition: all .2s ease;
 
-    &:hover { text-decoration: none; }
+
+    &:hover {
+      text-decoration: none;
+      background-color: #222;
+    }
 
     &:hover span { color: $pink; }
 
