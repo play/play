@@ -26,6 +26,8 @@ brew_install() {
   fi
 }
 
+info "checking for homebrew"
+
 # brew
 if test $(which brew)
 then
