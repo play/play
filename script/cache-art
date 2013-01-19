@@ -4,7 +4,7 @@
 #
 # This should only need to be run once, on installation. If you add songs
 # using the web interface, we'll cache those songs right then and there. If
-# you add songs outside of Play, or if you run into anything fish, feel free
+# you add songs outside of Play, or if you run into anything fishy, feel free
 # to run this task multiple times- it won't hurt anything.
 
 require './app/play'
