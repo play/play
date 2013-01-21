@@ -16,6 +16,10 @@ success () {
   printf "\r\033[2K  [ \033[00;32mok\033[0m ] $1\n"
 }
 
+user () {
+  printf "\r\033[2K  [ \033[00;33m?\033[0m ] $1"
+}
+
 fail () {
   printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
   echo ''
@@ -23,12 +27,85 @@ fail () {
   exit
 }
 
+info 'configure play'
 if test -f "config/play.yml"
 then
-  success 'config loaded'
+  success 'play config loaded'
 else
-  . script/setup
-  success 'config loaded'
+  user "Are you going to use Play within a GitHub organization? (y,n) › "
+  read -n 1 use_gh_org
+
+  if [ "$use_gh_org" == "y" ]
+  then
+    user "What's your GitHub organization name? › "
+    read gh_org
+  fi
+
+  echo ""
+  echo ""
+  echo "    You need to set up an OAuth application on GitHub. Go here:"
+  echo ""
+
+  if [ -z "$gh_org" ]
+  then
+    echo "    https://github.com/settings/applications/new"
+  else
+    echo "    https://github.com/organizations/$gh_org/settings/applications/new"
+  fi
+
+  echo ""
+  echo "    and set up your application. Unless you're using a different"
+  echo "    hostname, you'll want to use values that look like:"
+  echo ""
+  echo "      Main URL:     http://localhost:5050"
+  echo "      Callback URL: http://localhost:5050/auth/github/callback"
+  echo ""
+
+  user "What is your GitHub client ID? › "
+  read client_id
+  user "What is your GitHub client secret? › "
+  read secret
+
+  # Generate an auth token
+  if test $(which md5)
+  then
+    auth_token=$(date | md5)
+  else
+    auth_token=$(date | md5sum)
+  fi
+
+  # Write out play.yml
+  if ruby -r yaml -e "
+    hash = YAML.load_file('config/play.yml.example')
+    hash['auth_token'] = '$auth_token'
+    hash['github']['org'] = '$gh_org'
+    hash['github']['client_id'] = '$client_id'
+    hash['github']['secret'] = '$secret'
+    File.open('config/play.yml', 'w') {|f| f.write(hash.to_yaml) }
+  " >> /tmp/play-bootstrap
+  then
+    success 'play config loaded'
+  else
+    fail 'configuring play'
+  fi
+fi
+
+info 'configure mpd'
+if test -f "config/mpd.conf"
+then
+  success 'mpd config loaded'
+else
+  user "What is the full, absolute path to your music? › "
+  read path
+
+  # Write out mpd.conf
+  config_file=$(cat config/mpd.conf.example)
+  if printf "music_directory \"%s\"\n\n%s" "$path" "$config_file" > config/mpd.conf 2> /tmp/play-bootstrap
+  then
+    success 'mpd config loaded'
+  else
+    fail 'configuring mpd'
+  fi
 fi
 
 # Install our system dependencies.
