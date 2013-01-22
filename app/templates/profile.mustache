@@ -1,10 +1,14 @@
-<h1>{{login}}</h1>
+<div id="queue">
+	<div class="heading">
+		Details for:
+		<span class="title">{{login}}</span>
+		<ul>
+		  <li><a href="/{{login}}">History</a></li>
+		  <li><a href="/{{login}}/likes">Likes</a></li>
+		</ul>
+	</div>
 
-<ul>
-  <li><a href="/{{login}}">history</a></li>
-  <li><a href="/{{login}}/likes">likes</a></li>
-</ul>
-
-{{#songs}}
-  {{>song}}
-{{/songs}}
+	{{#songs}}
+	  {{>song}}
+	{{/songs}}
+</div>

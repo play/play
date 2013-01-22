@@ -1,6 +1,9 @@
-name: {{#artist}}{{name}}{{/artist}}
+<div id="queue">
+	<div class="heading">
+		Songs and Albums by: <span class="title">{{#artist}}{{name}}{{/artist}}</span>
+	</div>
 
-{{#songs}}
-  <br />
-  {{>song}}
-{{/songs}}
+	{{#songs}}
+	  {{>song}}
+	{{/songs}}
+</div>

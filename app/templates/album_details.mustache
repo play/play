@@ -1,8 +1,10 @@
-{{#album}}
-  {{title}}
-{{/album}}
+<div id="queue">
 
-{{#songs}}
-  <br />
-  {{>song}}
-{{/songs}}
+	<div class="heading">
+		Track listings: <span class="title">{{#album}}{{name}}{{/album}}</span>
+	</div>
+
+	{{#songs}}
+	  {{>song}}
+	{{/songs}}
+</div>

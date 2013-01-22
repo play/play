@@ -4,6 +4,7 @@
 @import "compass/css3";
 @import "compass/css3/box-sizing";
 @import "vars";
+@import "media";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
 
 
@@ -167,6 +168,7 @@ section[role="nav"] {
     h2 {
       font-weight: 300;
       font-size: 24px;
+      line-height: 30px;
       color: #fff;
       margin: 15px 0 5px;
       width: 100%;
@@ -220,9 +222,24 @@ section[role="nav"] {
 }
 
 #queue {
-	margin-top: 58px;
+	margin-top: 56px;
 	margin-left: 300px;
 	background: #f9f9f9;
+
+  .heading {
+    padding: 20px;
+    @include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
+    color: #959595;
+
+    .title {
+        font-size: 24px;
+        display: block;
+        line-height: 30px;
+        margin-right: 5px;
+        font-weight: 400;
+        color: #000;
+    }
+  }
 
 	.song {
 		padding: 20px;
@@ -242,8 +259,6 @@ section[role="nav"] {
       .details {
         height: 70px;
       }
-
-
     }
 
     .album-art {
@@ -278,6 +293,17 @@ section[role="nav"] {
 			vertical-align: middle;
 		}
 
+    .title {
+        font-size: 24px;
+        display: block;
+        line-height: 30px;
+        margin-right: 5px;
+        font-weight: 400;
+
+      a {
+        color: #333;
+      }
+    }
 		.details {
 			display: inline-block;
 			vertical-align: middle;
@@ -288,18 +314,6 @@ section[role="nav"] {
 
 			&:hover {
 				height: 70px;
-			}
-		}
-
-		.title {
-				font-size: 24px;
-				display: block;
-				line-height: 30px;
-				margin-right: 5px;
-				font-weight: 400;
-
-			a {
-				color: #333;
 			}
 		}
 
@@ -343,4 +357,11 @@ section[role="nav"] {
 			}
 		}
 	}
+}
+
+@media all and (max-width: 500) {
+/* define mobile specific styles come here */
+  header {
+    background-color: red !important;
+  }
 }
