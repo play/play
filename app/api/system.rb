@@ -35,8 +35,13 @@ module Play
 
         file_with_name = File.join("/tmp", name)
         system "mv", tmpfile.path, file_with_name
-        system "./script/add-to-itunes", file_with_name
-        system "rm", file_with_name
+        case Play.config.player.downcase
+	when "itunes"
+          system "./script/add-to-itunes", file_with_name
+          system "rm", file_with_name
+        else
+          system "mv",file_with_name, File.join("/srv/mp3",name)
+        end
       end
 
       true
