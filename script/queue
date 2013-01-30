@@ -8,8 +8,10 @@ require './app/play'
 
 $client = Play::Client.new
 
+min_size = (Play.config['queue'] and Play.config['queue']['min_size'])? Play.config['queue']['min_size'] : 2
+
 loop do
-  if Play::Queue.songs.size < 2
+  if Play::Queue.songs.size < min_size
     song = Play::Song.new($client.listall.sample)
     Play::Queue.add(song,nil)
   end
