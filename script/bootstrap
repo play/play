@@ -81,6 +81,7 @@ else
     hash['github']['org'] = '$gh_org'
     hash['github']['client_id'] = '$client_id'
     hash['github']['secret'] = '$secret'
+    hash['queue']['min_size'] = 2
     File.open('config/play.yml', 'w') {|f| f.write(hash.to_yaml) }
   " >> /tmp/play-bootstrap
   then

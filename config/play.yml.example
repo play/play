@@ -8,5 +8,7 @@ db:
   reconnect: true
 github:
   org:
-  client_id: 
+  client_id:
   secret:
+queue:
+  min_size: 2
