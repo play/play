@@ -6,7 +6,7 @@ gem 'mustache',      '~>0.99.4'
 gem "SystemTimer",   "~>1.2.3", :platforms => [:mri_18]
 gem 'yajl-ruby'
 gem 'redis'
-gem 'sinatra_auth_github', '~>0.8.2'
+gem 'sinatra_auth_github', '~>0.13.3'
 gem 'sprockets'
 gem 'sass',          '~>3.1'
 gem 'coffee-script'

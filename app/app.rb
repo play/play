@@ -40,7 +40,7 @@ module Play
                             :client_id => Play.config.client_id,
                             :failure_app => Octobouncer,
                             :organization => Play.config.gh_org,
-                            :github_scopes => 'user,offline_access'
+                            :scopes => 'user,offline_access'
                          }
 
     Pusher.app_id =  Play.config.pusher_app_id
