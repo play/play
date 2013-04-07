@@ -109,12 +109,9 @@ else
 fi
 
 # Install our system dependencies.
-if [ $(uname -s) = "Darwin" ]
+if [ -f "script/setup.$(uname -s)" ]
 then
-  . script/setup.osx
-elif [ $(uname -s) = "Linux" ]
-then
-  . script/setup.apt
+  . script/setup.$(uname -s)
 else
   fail 'platform not supported'
 fi

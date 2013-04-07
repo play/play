@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# This script plays traffic cop for our linux distributions.
+
+if test $(which apt-get)
+then
+  . script/linux/setup.apt
+else
+  fail 'Your platform is not supported.'
+fi
