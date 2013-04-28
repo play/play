@@ -22,7 +22,7 @@ else
 fi
 
 # Change from `thin server` whenever we figure out deployment
-if test "$(ps aux | grep "thin server" | grep -v grep)"
+if test "$(ps aux | grep thin | grep -v grep)"
 then
   echo "  [ ok ] web"
 else
