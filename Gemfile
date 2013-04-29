@@ -13,6 +13,7 @@ gem 'coffee-script'
 gem 'pusher'
 gem 'foreman'
 gem 'thin'
+gem 'json'
 
 if RUBY_PLATFORM.downcase.include?("darwin")
   gem 'rb-appscript'
