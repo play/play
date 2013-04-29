@@ -37,6 +37,9 @@ else
   success 'homebrew'
 fi
 
+# For those of us on Boxen and nonstandard homebrew locations
+bundle config build.taglib-ruby --with-opt-dir=$(brew --prefix) > /dev/null
+
 brew_install 'mysql'
 brew_install 'taglib'
 brew_install 'media-info'
