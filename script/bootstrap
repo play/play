@@ -75,8 +75,10 @@ else
   fi
 
   # Write out play.yml
+  socket=$BOXEN_MYSQL_SOCKET
   if ruby -r yaml -e "
     hash = YAML.load_file('config/play.yml.example')
+    hash['db']['socket'] = '$socket'
     hash['auth_token'] = '$auth_token'
     hash['github']['org'] = '$gh_org'
     hash['github']['client_id'] = '$client_id'
