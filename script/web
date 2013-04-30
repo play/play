@@ -11,7 +11,7 @@ fi
 
 case "$1" in
   start )
-    bundle exec thin --environment production $location --log /tmp/play/web.log --pid /tmp/play/web.pid start
+    bundle exec thin --environment production $location --log /tmp/play/web.log --pid /tmp/play/web.pid --daemonize start
     ;;
   stop )
     if [ -f /tmp/play/web.pid ]
