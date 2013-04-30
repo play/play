@@ -37,6 +37,14 @@ case "$1" in
     play_usage
     exit 0
     ;;
+  start)
+    ./script/music start &
+    ./script/web start &
+    ;;
+  stop)
+    ./script/music stop
+    ./script/web stop
+    ;;
   *)
     ./script/$1 $2
     ;;
