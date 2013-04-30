@@ -33,11 +33,11 @@ AVAILABLE COMMANDS:
 
 # Handle play commands.
 case "$1" in
-  help|--help|-h|'')
+  help|--help|-h)
     play_usage
     exit 0
     ;;
-  start)
+  start|'')
     ./script/music start &
     ./script/web start &
     ;;
