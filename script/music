@@ -1,11 +1,11 @@
 #!/bin/sh
 #
 # Manages the music daemon powering Play.
-set -x
+set -e
 
 case $1 in
 	start)
-		mpd config/mpd.conf
+		mpd config/mpd.conf > /dev/null 2>&1
 		exit 0
 		;;
 	stop)
