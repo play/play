@@ -1,10 +1,15 @@
 <div id="queue">
 
-	<div class="heading">
-		Track listings: <span class="title">{{#album}}{{name}}{{/album}}</span>
+	<div class="album">
+		<div class="sidebar">
+			<img src="/images/art/8e99c46be0930ed2e881ad8c600d909a9423feba.png" class="album-art">
+			<ul>
+				<li>Queue Album</li>
+				<li>Download Album</li>
+			</ul>
+		</div>
+		<div class="list">
+			<span class="title">{{#album}}{{name}}{{/album}}</span>
+		</div>
 	</div>
-
-	{{#songs}}
-	  {{>song}}
-	{{/songs}}
 </div>

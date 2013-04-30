@@ -17,6 +17,7 @@
 body {
 	font-size: 14px;
 	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+  background: #f9f9f9;
 }
 
 html {
@@ -304,6 +305,7 @@ section[role="nav"] {
         color: #333;
       }
     }
+
 		.details {
 			display: inline-block;
 			vertical-align: middle;
@@ -357,6 +359,50 @@ section[role="nav"] {
 			}
 		}
 	}
+
+  .album {
+    padding: 20px;
+
+    .sidebar {
+      width: 150px;
+      display: inline-block;
+      float: left;
+      margin-right: 20px;
+
+      ul {
+        width: 100%;
+
+        li {
+          color: #999;
+          width: 100%;
+          background-color: #f6f6f6;
+          @include background-image(linear-gradient(top, rgb(246, 246, 246), rgb(232, 232, 232)));
+          @include filter-gradient(rgb(246, 246, 246), rgb(232, 232, 232), vertical);
+          @include box-shadow(inset 0 1px 0 #fff, 0 1px 1px rgba(#000, .08), inset 0 0 2px rgba(#fff,.9));
+          border: 1px solid #bfbfbf;
+          display: inline-block;
+          padding: 10px;
+          @include border-radius(2px);
+          font-size: 12px;
+          text-align: center;
+          margin: 3px 0;
+        }
+      }
+
+      img {
+        width: 150px;
+        height: 150px;
+        border-radius: 2px;
+        border: 1px solid #e1e1e1;
+        margin-right: 20px;
+      }
+    }
+
+    .list {
+      display: inline-block;
+    }
+  }
+
 }
 
 @media all and (max-width: 500) {
