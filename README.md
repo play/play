@@ -23,3 +23,13 @@ Pause it with
 
 If you run into weird shit or anything confusing at all, file an issue. We're
 getting close to wanting to polish this off, so every little bit helps.
+
+## Development
+
+Hacking on this? Spin it up manually with:
+
+    script/music start
+    script/web start
+
+That'll make sure you don't have to reload your server each time, and it'll
+also show you logs in your console.

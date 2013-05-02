@@ -31,6 +31,8 @@ AVAILABLE COMMANDS:
   "
 }
 
+RACK_ENV=production
+
 # Handle play commands.
 case "$1" in
   help|--help|-h)

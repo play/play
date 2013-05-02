@@ -9,9 +9,19 @@ else
   location="--port 5050"
 fi
 
+# Run this in prod, or dev?
+#
+# Production runs as daemonized and doesn't reload classes.
+if [ -n "$RACK_ENV" ]; then
+  env="$RACK_ENV"
+  daemonize = '--daemonize'
+else
+  env="development"
+fi
+
 case "$1" in
   start )
-    bundle exec thin --environment production $location --log /tmp/play/web.log --pid /tmp/play/web.pid --daemonize start
+    bundle exec thin --environment $env $location --log /tmp/play/web.log --pid /tmp/play/web.pid $daemonized start
     ;;
   stop )
     if [ -f /tmp/play/web.pid ]

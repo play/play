@@ -10,8 +10,13 @@ module Play
     register Sinatra::Auth::Github
     register Sinatra::ActiveRecordExtension
 
+    configure :development do
+      register Sinatra::Reloader
+    end
+
     set :sessions, true
     set :session_secret, Play.config['auth_token']
+    set :logging, true
 
     dir = File.dirname(File.expand_path(__FILE__))
     public_dir = File.dirname(File.expand_path("#{dir}/../public"))
