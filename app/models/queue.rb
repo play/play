@@ -9,6 +9,7 @@ module Play
     def self.add(song,user)
       client.add(song.path)
       user.play!(song) if user
+      client.native :play if client.now_playing.nil?
       songs
     end
 
