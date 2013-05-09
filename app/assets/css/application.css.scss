@@ -250,18 +250,6 @@ section[role="nav"] {
 		vertical-align: middle;
 		@include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
 
-		&:hover {
-			background: rgba(#d830e2, .07);
-
-			.controls {
-				display: block;
-			}
-
-      .details {
-        height: 70px;
-      }
-    }
-
     .album-art {
       overflow: hidden;
       border-radius: 1px;
@@ -309,14 +297,6 @@ section[role="nav"] {
 		.details {
 			display: inline-block;
 			vertical-align: middle;
-			height: 46px;
-			-webkit-transition: all .3s ease;
-			-moz-transition: all .3s ease;
-			transition: all .3s ease;
-
-			&:hover {
-				height: 70px;
-			}
 		}
 
 		.duration {
@@ -328,7 +308,6 @@ section[role="nav"] {
 		}
 
 			.controls {
-				display: none;
 				margin-top: 10px;
 
 					a {
