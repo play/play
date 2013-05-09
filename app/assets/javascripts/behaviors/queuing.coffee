@@ -1,14 +1,15 @@
 $ ->
-  $('.controls .add').click ->
+  $('.controls .add').live 'click', (event) ->
     element = $(@)
     path = element.parents('.song').data('path')
 
     $.post '/queue',
       path: path
       (data) ->
-        element.text(data)
+        element.addClass('icon-remove-sign remove')
+        element.removeClass('icon-plus-sign-alt add')
 
-  $('.controls .remove').click ->
+  $('.controls .remove').live 'click', (event) ->
     element = $(@)
     path = element.parents('.song').data('path')
 
@@ -17,4 +18,5 @@ $ ->
       url:  '/queue',
       data: {path: path},
       success: (data) ->
-        element.text(data)
+        element.removeClass('icon-remove-sign remove')
+        element.addClass('icon-plus-sign-alt add')

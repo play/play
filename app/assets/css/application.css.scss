@@ -323,15 +323,18 @@ section[role="nav"] {
           margin-left: 10px;
         }
 
-        .unlike, .like {
+        .unlike, .like, .add, .remove {
           cursor: pointer;
           font-size: 16px;
+          -webkit-transition: all .2s ease;
+          -moz-transition: all .2s ease;
+          transition: all .2s ease;
         }
-        .unlike {
+        .unlike, .remove {
           color: $pink;
           &:hover { color: lighten($pink, 20%); }
         }
-        .like {
+        .like, .add {
           color: #ccc;
           &:hover { color: $pink; }
         }

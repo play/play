@@ -12,8 +12,7 @@
     </div>
 
     <div class="controls">
-      <a href="#" class="add">Add</a>
-      <a href="#" class="remove">Remove</a>
+      <%= partial :add, :locals => {:song => song} %>
       <a href="/download/<%= song.path %>">Download Song</a>
       <a href="/download/album/<%= song.path %>">Download Album</a>
       <%= partial :like, :locals => {:song => song} %>
