@@ -15,6 +15,9 @@ module Play
     # The String file path.
     attr_accessor :path
 
+    # The duration of the song in seconds.
+    attr_accessor :seconds
+
     # Create a new Song.
     #
     # path - The String path to the Song on disk.
@@ -34,6 +37,7 @@ module Play
           @artist = Artist.new(tag.artist)
           @album  = Album.new(tag.artist, tag.album)
           @title  = tag.title
+          @seconds = file.audio_properties.length
         end
         @path   = path
       end
@@ -76,13 +80,16 @@ module Play
       album ? album.name : ''
     end
 
-    # The duration of the song in seconds.
+    # The duration of the song.
     #
-    # Returns an Integer.
+    # Returns a String.
     def duration
-      string = `mediainfo "#{Play.music_path}/#{path}" -f | grep Duration | head -n 5 | tail -n 1`
-      array = string.split(':')
-      "#{array[2]}:#{array[3].split('.').first}" if array[3]
+      return unless seconds
+
+      m = seconds / 60
+      s = sprintf('%02d', (seconds % 60))
+
+      "#{m}:#{s}"
     end
 
     # Is this song currently queued up?

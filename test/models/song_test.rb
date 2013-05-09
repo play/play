@@ -54,7 +54,7 @@ context "Song" do
   end
 
   test "knows its duration" do
-    assert_equal '00:05', @song.duration
+    assert_equal '0:05', @song.duration
   end
 
   test "album name" do
