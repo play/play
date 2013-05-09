@@ -30,7 +30,7 @@ context "Site" do
     get "/artist/Justice/album/Cross"
 
     assert last_response.ok?
-    assert last_response.body.include?('Stress')
+    assert last_response.body.include?('Cross')
   end
 
   test "song page" do
