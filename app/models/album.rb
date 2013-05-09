@@ -15,6 +15,8 @@ module Play
     def initialize(artist_name,name)
       @artist = Artist.new(CGI.unescape(artist_name))
       @name   = CGI.unescape(name)
+    rescue NoMethodError => e
+      @name   = '(n/a)'
     end
 
     # Get all the songs for a particular artist/album combination.
