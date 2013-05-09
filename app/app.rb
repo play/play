@@ -52,6 +52,9 @@ module Play
     Play.client.native :repeat,  [true]
     Play.client.native :consume, [true]
 
+    # Scan for new songs just in case
+    Play.client.native :update
+
     not_found do
       erb :four_oh_four
     end
