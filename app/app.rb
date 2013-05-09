@@ -12,6 +12,7 @@ module Play
 
     configure :development do
       register Sinatra::Reloader
+      also_reload 'app/models/*'
     end
 
     set :sessions, true
