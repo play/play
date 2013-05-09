@@ -13,11 +13,11 @@ module Play
 
       halt 401 if !user
 
-      session[:user] = user
+      session[:user_id] = user.id
     end
 
     def current_user
-      session[:user]
+      @current_user ||= User.find(session[:user_id])
     end
   end
 end
