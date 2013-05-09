@@ -6,4 +6,5 @@ before_install:
   - sudo apt-get install -qq libtag1-dev mediainfo mpd mpc
 before_script:
   - mv test/play.yml config
+  - bundle exec rake db:migrate
   - mysql -e 'create database play_test;'
