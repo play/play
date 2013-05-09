@@ -14,4 +14,4 @@ before_script:
   - rm -rf /tmp/play-test
   - mkdir -p /tmp/play-test/.mpd
   - cp -R  test/music /tmp/play-test
-  - ./test/daemon/start.sh
+  - "sh test/daemon/start.sh"
