@@ -16,8 +16,7 @@
       <a href="#" class="remove">Remove</a>
       <a href="/download/<%= song.path %>">Download Song</a>
       <a href="/download/album/<%= song.path %>">Download Album</a>
-      <a href="#" class="like">Like</a>
-      <a href="#" class="unlike">Unlike</a>
+      <%= partial :like, :locals => {:song => song} %>
     </div>
   </div>
 </div>

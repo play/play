@@ -1,0 +1,5 @@
+<% if current_user.likes?(song) %>
+  <a href="#" class="unlike">Unlike</a>
+<% else %>
+  <a href="#" class="like">Like</a>
+<% end %>

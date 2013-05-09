@@ -103,7 +103,6 @@ context "Site" do
     user = User.where(:login => 'holman').first
 
     assert_equal 1, user.likes.count
-    assert_equal 1, user.likes.last.value
   end
 
   test "unlikes a song" do

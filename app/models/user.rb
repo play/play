@@ -39,13 +39,20 @@ module Play
       end
     end
 
+    # Does the current user like this song?
+    #
+    # Returns a Boolean.
+    def likes?(song)
+      likes.where(:song_path => song.path).any?
+    end
+
     # Like a Song.
     #
     # Returns nothing.
     def like(path)
       unlike(path)
 
-      like = likes.create(:song_path => path, :value => 1)
+      like = likes.create(:song_path => path)
     end
 
     # Unlike a Song. Basically clear out anything we know about this user and

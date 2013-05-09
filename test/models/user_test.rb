@@ -26,10 +26,10 @@ context "User" do
     assert @user.liked_songs.first.is_a?(Song)
   end
 
-  test "likes a song" do
+  test "can like a song" do
     @user.like('any/song.mp3')
 
-    assert_equal 1, @user.likes.last.value
+    assert_equal 1, @user.likes.count
   end
 
   test "clears likes" do
@@ -38,5 +38,14 @@ context "User" do
 
     @user.unlike('any/song.mp3')
     assert_equal 0, @user.likes.count
+  end
+
+  test "likes a particular song" do
+    song = Song.new('Justice/song')
+    @user.like(song.path)
+    assert @user.likes?(song)
+
+    song = Song.new('Justice/nope-song')
+    assert !@user.likes?(song)
   end
 end
