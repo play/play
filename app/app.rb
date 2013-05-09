@@ -150,10 +150,6 @@ module Play
       current_user.unlike(params[:path])
     end
 
-    delete "/like" do
-      current_user.dislike(params[:path])
-    end
-
     post '/upload' do
       params[:files].each do |file|
         tmpfile = file[:tempfile]

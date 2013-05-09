@@ -16,12 +16,3 @@ $ ->
       path: path
       (data) ->
         element.text('OK!')
-
-  $('.controls .dislike').click ->
-    element = $(@)
-    path = element.parents('.song').data('path')
-
-    $.delete '/like',
-      path: path
-      (data) ->
-        element.text('OK!')

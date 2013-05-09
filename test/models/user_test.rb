@@ -39,11 +39,4 @@ context "User" do
     @user.unlike('any/song.mp3')
     assert_equal 0, @user.likes.count
   end
-
-  test "dislikes a song" do
-    @user.dislike('any/song.mp3')
-
-    assert_equal 1, @user.likes.count
-    assert_equal -1, @user.likes.first.value
-  end
 end

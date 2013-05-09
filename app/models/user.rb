@@ -55,14 +55,5 @@ module Play
     def unlike(path)
       likes.where(:song_path => path).delete_all
     end
-
-    # Dislike a Song.
-    #
-    # Returns nothing.
-    def dislike(path)
-      unlike(path)
-
-      likes.create(:song_path => path, :value => -1)
-    end
   end
 end
