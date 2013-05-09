@@ -15,8 +15,8 @@
 }
 
 body {
-	font-size: 14px;
-	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 14px;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
   background: #f9f9f9;
 }
 
@@ -31,34 +31,34 @@ a {
 }
 
 #header {
-	background: #181818;
-	padding: 10px;
-	display: inline-block;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 10;
-	@include box-shadow(0 1px 2px rgba(0,0,0,.3));
+  background: #181818;
+  padding: 10px;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  @include box-shadow(0 1px 2px rgba(0,0,0,.3));
 
-	h1 {
-		display: inline-block;
-		float: left;
+  h1 {
+    display: inline-block;
+    float: left;
     margin-left: 10px;
-		height: 50px;
+    height: 50px;
     width: 140px;
-		text-indent: -9999px;
-		background: url("/app/assets/images/play-logo.png") no-repeat center center;
-		background-size: 140px 50px;
-	}
+    text-indent: -9999px;
+    background: url("/app/assets/images/play-logo.png") no-repeat center center;
+    background-size: 140px 50px;
+  }
 
-	#login {
+  #login {
 
-	}
+  }
 
-	.search {
-		border-radius: 3px;
-		display: inline-block;
+  .search {
+    border-radius: 3px;
+    display: inline-block;
     position: relative;
     margin-left: 5px;
 
@@ -100,7 +100,7 @@ a {
         border: 1px solid $pink;
       }
     }
-	}
+  }
 }
 
 section[role="nav"] {
@@ -223,9 +223,9 @@ section[role="nav"] {
 }
 
 #queue {
-	margin-top: 56px;
-	margin-left: 300px;
-	background: #f9f9f9;
+  margin-top: 56px;
+  margin-left: 300px;
+  background: #f9f9f9;
 
   .heading {
     padding: 20px;
@@ -241,13 +241,13 @@ section[role="nav"] {
     }
   }
 
-	.song {
-		padding: 20px;
-		display: block;
-		width: 100%;
-		clear: both;
-		vertical-align: middle;
-		@include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
+  .song {
+    padding: 20px;
+    display: block;
+    width: 100%;
+    clear: both;
+    vertical-align: middle;
+    @include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
 
     .album-art {
       overflow: hidden;
@@ -276,10 +276,10 @@ section[role="nav"] {
 
 
 
-		> a {
-			display: inline-block;
-			vertical-align: middle;
-		}
+    > a {
+      display: inline-block;
+      vertical-align: middle;
+    }
 
     .title {
         font-size: 24px;
@@ -293,54 +293,54 @@ section[role="nav"] {
       }
     }
 
-		.details {
-			display: inline-block;
-			vertical-align: middle;
-		}
+    .details {
+      display: inline-block;
+      vertical-align: middle;
+    }
 
-		.duration {
-			color: #959595;
-			font-weight: 300;
-			font-size: 16px;
-			line-height: 30px;
+    .duration {
+      color: #959595;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 30px;
       margin-top: 5px;
-			float: right;
-		}
+      float: right;
+    }
 
-			.controls {
-				margin-top: 10px;
+      .controls {
+        margin-top: 10px;
 
-					a {
-						font-size: 13px;
-						color: #afafaf;
+          a {
+            font-size: 13px;
+            color: #afafaf;
 
-						&:hover {
-							color: lighten(#cc33cc, 20%);
-						}
-					}
+            &:hover {
+              color: lighten(#cc33cc, 20%);
+            }
+          }
 
-					a + a {
-						margin-left: 10px;
-					}
-			}
+          a + a {
+            margin-left: 10px;
+          }
+      }
 
-		.meta {
+    .meta {
 
-			.artist {
-				display: inline-block;
+      .artist {
+        display: inline-block;
 
         &:hover .icon-user { color: $pink; }
-			}
+      }
 
       .album {
         &:hover .icon-music { color: $pink; }
       }
 
-			.betweener {
-				color: #959595;
-				padding: 0 5px;
-				display: inline-block;
-			}
+      .betweener {
+        color: #959595;
+        padding: 0 5px;
+        display: inline-block;
+      }
 
       .icon-user, .icon-music {
         margin-right: 7px;
@@ -349,8 +349,8 @@ section[role="nav"] {
         -moz-transition: all .2s ease;
         transition: all .2s ease;
       }
-		}
-	}
+    }
+  }
 
   .album {
     padding: 20px;
