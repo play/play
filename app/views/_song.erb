@@ -7,11 +7,11 @@
   </a>
   <div class="details">
     <span class="duration"> <%= song.duration %></span>
-    <h2 class="title"><a href="/artist/<%= song.artist_name %>/song/<%= song.title %>"><%= song.title %></a></h2>
+    <h2 class="title"><a href="<%= song.escaped_path %>"><%= song.title %></a></h2>
 
     <div class="meta">
-      <a href="/artist/<%= song.artist_name %>" class="artist"><span class="icon-user"></span><%= song.artist_name %></a>
-      <a href="/artist/<%= song.artist_name %>/album/<%= song.album_name %>" class="album"><span class="icon-music"></span><%= song.album_name %></a>
+      <a href="<%= song.escaped_artist_path %>" class="artist"><span class="icon-user"></span><%= song.artist_name %></a>
+      <a href="<%= song.escaped_album_path %>" class="album"><span class="icon-music"></span><%= song.album_name %></a>
     </div>
 
     <div class="controls">

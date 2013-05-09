@@ -13,8 +13,8 @@ module Play
     #
     # Returns nothing.
     def initialize(artist_name,name)
-      @artist = Artist.new(artist_name)
-      @name   = name
+      @artist = Artist.new(CGI.unescape(artist_name))
+      @name   = CGI.unescape(name)
     end
 
     # Get all the songs for a particular artist/album combination.

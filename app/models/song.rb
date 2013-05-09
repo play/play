@@ -25,7 +25,7 @@ module Play
     # Returns nothing.
     def initialize(path)
       path.chomp!
-      @path = path
+      @path = CGI.unescape(path)
 
       TagLib::FileRef.open(full_path) do |file|
         if tag = file.tag
@@ -72,6 +72,21 @@ module Play
     # Returns a String
     def album_name
       album ? album.name : ''
+    end
+
+    # The escaped artist path.
+    def escaped_artist_path
+      "/artist/#{CGI.escape(artist_name)}"
+    end
+
+    # The escaped album path.
+    def escaped_album_path
+      "#{escaped_artist_path}/album/#{CGI.escape(album_name)}"
+    end
+
+    # The escaped path for this song.
+    def escaped_path
+      "#{escaped_artist_path}/song/#{CGI.escape(title)}"
     end
 
     # The duration of the song.

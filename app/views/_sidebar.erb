@@ -11,7 +11,7 @@
     <div class="now-playing-meta">
       <h2 class="title" title="<%= song.title %>"><%= song.title %></h2>
       <p class="album-info">
-        <a href="/artist/<%= song.artist_name %>" class="artist"><%= song.artist_name %></a> - <a href="/artist/<%= song.artist_name %>/album/<%= song.album_name %>"><%= song.album_name %></a>
+        <a href="<%= song.escaped_artist_path %>" class="artist"><%= song.artist_name %></a> - <a href="<%= song.escaped_album_path %>"><%= song.album_name %></a>
       </p>
     </div>
     <hr>

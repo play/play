@@ -5,7 +5,7 @@ module Play
 
     # Create a new Artist.
     def initialize(name)
-      @name = name
+      @name = CGI.unescape(name)
     end
 
     # Show me all the artists in our library.
