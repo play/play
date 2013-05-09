@@ -28,11 +28,11 @@
     </span>
     <form class="search" action="/search">
       <a href="#" class="advanced-search"><span class="icon-cog"></span></a><div class="filter">
-      <span class="active">All</span>
+      <span class="active">Any</span>
       <span>Artist</span>
       <span>Album</span>
       <span>Song</span>
-    </div><input type="text" name="q" id="q" placeholder="<%= params[:q] %>"/>
+    </div><input type="text" name="q" id="q" placeholder="Search" value="<%= params[:q] %>"/>
       <input type="hidden" name="filter" id="filter" value="all" />
       <span class="icon-search"></span>
     </form>
