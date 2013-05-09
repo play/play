@@ -14,7 +14,7 @@ gem 'sinatra_auth_github'
 gem 'sinatra-contrib',             '~> 1.3.2'
 gem 'sprockets',                   '~> 2.5.0'
 gem 'sprockets-sass'
-gem 'taglib-ruby',                 '~> 0.5.2', :require => 'taglib'
+gem 'taglib-ruby',                 '~> 0.6.0', :require => 'taglib'
 
 group :development do
   gem 'shotgun'

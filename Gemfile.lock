@@ -91,7 +91,7 @@ GEM
     sprockets-sass (0.9.1)
       sprockets (~> 2.0)
       tilt (~> 1.1)
-    taglib-ruby (0.5.2)
+    taglib-ruby (0.6.0)
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -130,5 +130,5 @@ DEPENDENCIES
   sinatra_auth_github
   sprockets (~> 2.5.0)
   sprockets-sass
-  taglib-ruby (~> 0.5.2)
+  taglib-ruby (~> 0.6.0)
   thin
