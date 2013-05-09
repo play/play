@@ -1,18 +1,21 @@
 $ ->
-  $('.controls .like').click ->
+  $('.controls .like').live 'click', (event) ->
     element = $(@)
     path = element.parents('.song').data('path')
 
     $.post '/like',
       path: path
       (data) ->
-        element.text('OK!')
+        element.removeClass('icon-star-empty like')
+        element.addClass('icon-star unlike')
 
-  $('.controls .unlike').click ->
+  $('.controls .unlike').live 'click', (event) ->
     element = $(@)
     path = element.parents('.song').data('path')
 
-    $.put '/like',
-      path: path
-      (data) ->
-        element.text('OK!')
+    $.ajax '/like',
+      type: 'PUT'
+      data: { path: path }
+
+    element.removeClass('icon-star unlike')
+    element.addClass('icon-star-empty like')

@@ -310,18 +310,31 @@ section[role="nav"] {
       .controls {
         margin-top: 10px;
 
-          a {
-            font-size: 13px;
-            color: #afafaf;
+        a {
+          font-size: 13px;
+          color: #afafaf;
 
-            &:hover {
-              color: lighten(#cc33cc, 20%);
-            }
+          &:hover {
+            color: lighten(#cc33cc, 20%);
           }
+        }
 
-          a + a {
-            margin-left: 10px;
-          }
+        a + a {
+          margin-left: 10px;
+        }
+
+        .unlike, .like {
+          cursor: pointer;
+          font-size: 16px;
+        }
+        .unlike {
+          color: $pink;
+          &:hover { color: lighten($pink, 20%); }
+        }
+        .like {
+          color: #ccc;
+          &:hover { color: $pink; }
+        }
       }
 
     .meta {
