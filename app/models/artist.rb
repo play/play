@@ -24,7 +24,7 @@ module Play
     def songs
       client.search([:artist, name]).map do |path|
         Song.new(path)
-      end
+      end.reject{ |song| song.title.blank? }
     end
 
     # A simple String representation of this instance.
