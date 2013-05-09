@@ -120,6 +120,17 @@ section[role="nav"] {
   display: inline-block;
   z-index: 0;
   @include box-shadow( 1px 0 2px rgba(0,0,0, .3), inset -1px 0 0 rgba(#fff, .2));
+
+  .stream-controls {
+    .icon-headphones {
+      cursor: pointer;
+      position: absolute;
+      bottom: 100px;
+      left: 140px;
+      font-size: 30px;
+      color: $pink;
+    }
+  }
 }
 
 .now-playing {
