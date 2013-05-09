@@ -18,6 +18,10 @@ context "Song" do
     assert_equal 'Justice/Cross/Stress.mp3', @song.path
   end
 
+  test "has a full_path" do
+    assert_equal 'Justice/Cross/Stress.mp3', @song.path
+  end
+
   test "has an album" do
     assert_equal 'Cross', @song.album.name
   end

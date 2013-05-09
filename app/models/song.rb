@@ -25,12 +25,7 @@ module Play
     # Returns nothing.
     def initialize(path)
       path.chomp!
-
-      if path[0] == '/'
-        full_path = path
-      else
-        full_path = File.join(Play.music_path,path)
-      end
+      @path = path
 
       TagLib::FileRef.open(full_path) do |file|
         if tag = file.tag
@@ -39,7 +34,6 @@ module Play
           @title  = tag.title
           @seconds = file.audio_properties.length
         end
-        @path   = path
       end
     end
 
@@ -113,6 +107,14 @@ module Play
     # Returns String of the art file name.
     def art_file
       "#{Digest::SHA1.hexdigest("#{artist_name}/#{album_name}")}.png"
+    end
+
+    def full_path
+      if path[0] == '/'
+        path
+      else
+        File.join(Play.music_path,path)
+      end
     end
 
     # Cache a songs album art.
