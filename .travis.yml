@@ -11,3 +11,7 @@ before_script:
   - mv test/play.yml config
   - mysql -e 'create database play_test;'
   - bundle exec rake db:migrate
+  - rm -rf /tmp/play-test
+  - mkdir -p /tmp/play-test/.mpd
+  - cp -R  test/music /tmp/play-test
+  - ./test/daemon/start.sh
