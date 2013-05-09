@@ -48,4 +48,8 @@ context "User" do
     song = Song.new('Justice/nope-song')
     assert !@user.likes?(song)
   end
+
+  test "has a gravatar" do
+    assert_equal '54e4ab9ced3fd1f3f5b20ab2f8201b73', @user.gravatar_id
+  end
 end

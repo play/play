@@ -62,5 +62,13 @@ module Play
     def unlike(path)
       likes.where(:song_path => path).delete_all
     end
+
+    # Public: The MD5 hash of the user's email account. Used for showing their
+    # Gravatar.
+    #
+    # Returns the String MD5 hash.
+    def gravatar_id
+      Digest::MD5.hexdigest(email) if email
+    end
   end
 end

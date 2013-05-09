@@ -21,7 +21,10 @@
 
   <section role="nav">
     <span id="login">
-      <a href="/<%= current_user.login %>"><%= current_user.login %></a>
+      <a href="/<%= current_user.login %>">
+        <%= current_user.login %>
+        <img src="http://www.gravatar.com/avatar/<%= current_user.gravatar_id %>?s=50" />
+      </a>
     </span>
     <form class="search" action="/search">
       <a href="#" class="advanced-search"><span class="icon-cog"></span></a><input type="text" name="q" id="q" placeholder="Search"/>

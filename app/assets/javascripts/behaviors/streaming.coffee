@@ -1,4 +1,7 @@
 $ ->
+  # Fuck these Safari crashes
+  return false
+
   protocol = window.location.protocol
   hostname = window.location.hostname
   port     = 8000

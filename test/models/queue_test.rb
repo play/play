@@ -4,7 +4,7 @@ context "Queue" do
   setup do
     Play.client.clear
     @song = Song.new('Justice/Cross/Stress.mp3')
-    @user = User.create(:login => 'holman')
+    @user = User.create(:login => 'holman', :email => 'holman@example.com')
     Play::Queue.add(@song,@user)
   end
 
