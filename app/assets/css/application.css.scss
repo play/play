@@ -236,7 +236,6 @@ section[role="nav"] {
         font-size: 24px;
         display: block;
         line-height: 30px;
-        margin-right: 5px;
         font-weight: 400;
         color: #000;
     }
@@ -286,8 +285,8 @@ section[role="nav"] {
         font-size: 24px;
         display: block;
         line-height: 30px;
-        margin-right: 5px;
         font-weight: 400;
+        margin: 5px -2px;
 
       a {
         color: #333;
@@ -304,7 +303,8 @@ section[role="nav"] {
 			font-weight: 300;
 			font-size: 16px;
 			line-height: 30px;
-			display: inline;
+      margin-top: 5px;
+			float: right;
 		}
 
 			.controls {
@@ -329,13 +329,26 @@ section[role="nav"] {
 			.artist {
 				display: inline-block;
 
+        &:hover .icon-user { color: $pink; }
 			}
+
+      .album {
+        &:hover .icon-music { color: $pink; }
+      }
 
 			.betweener {
 				color: #959595;
 				padding: 0 5px;
 				display: inline-block;
 			}
+
+      .icon-user, .icon-music {
+        margin-right: 7px;
+        color: #ccc;
+        -webkit-transition: all .2s ease;
+        -moz-transition: all .2s ease;
+        transition: all .2s ease;
+      }
 		}
 	}
 

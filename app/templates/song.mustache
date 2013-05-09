@@ -3,10 +3,12 @@
     <img src="/images/art/{{art_file}}" width="100" height="100" />
   </a>
   <div class="details">
-    <h2 class="title"><a href="/artist/{{artist_name}}/song/{{title}}">{{title}}</a><span class="duration"> ({{duration}})</span></h2>
+    <span class="duration"> {{duration}}</span>
+    <h2 class="title"><a href="/artist/{{artist_name}}/song/{{title}}">{{title}}</a></h2>
 
     <div class="meta">
-      <a href="/artist/{{artist_name}}" class="artist">{{artist_name}}</a> - <a href="/artist/{{artist_name}}/album/{{album_name}}" class="album">{{album_name}}</a>
+      <a href="/artist/{{artist_name}}" class="artist"><span class="icon-user"></span>{{artist_name}}</a>
+      <a href="/artist/{{artist_name}}/album/{{album_name}}" class="album"><span class="icon-music"></span>{{album_name}}</a>
     </div>
 
     <div class="controls">
