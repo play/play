@@ -109,6 +109,9 @@ module Play
       "#{Digest::SHA1.hexdigest("#{artist_name}/#{album_name}")}.png"
     end
 
+    # The full absolute path to the song.
+    #
+    # Returns a String.
     def full_path
       if path[0] == '/'
         path
