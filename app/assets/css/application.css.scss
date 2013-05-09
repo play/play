@@ -325,6 +325,9 @@ section[role="nav"] {
 
       .controls {
         float: right;
+        span {
+          margin-left: 3px;
+        }
 
         a {
           font-size: 13px;
