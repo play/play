@@ -33,8 +33,8 @@
       <span <%= 'class="active"' if @filter == :artist %>>Artist</span>
       <span <%= 'class="active"' if @filter == :album %>>Album</span>
       <span <%= 'class="active"' if @filter == :title %>>Song</span>
-    </div><input type="text" name="q" id="q" placeholder="Search" value="<%= params[:q] %>"/>
-      <input type="hidden" name="filter" id="filter" value="all" />
+    </div><input type="search" results="10" autosave="Play" name="q" id="q" placeholder="Search" value="<%= params[:q] %>"/>
+      <input type="hidden" name="filter" id="filter" value="any" />
       <span class="icon-search"></span>
     </form>
   </section>
