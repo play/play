@@ -324,7 +324,7 @@ section[role="nav"] {
     }
 
       .controls {
-        margin-top: 10px;
+        float: right;
 
         a {
           font-size: 13px;
@@ -357,6 +357,7 @@ section[role="nav"] {
       }
 
     .meta {
+      float: left;
 
       .artist {
         display: inline-block;
