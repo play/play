@@ -6,9 +6,9 @@ module Play
     include Play::Helpers
     include Play::AuthenticationHelper
 
-    register Mustache::Sinatra
     register Sinatra::Auth::Github
     register Sinatra::ActiveRecordExtension
+    register Sinatra::Partial
 
     configure :development do
       register Sinatra::Reloader
@@ -18,16 +18,13 @@ module Play
     set :sessions, true
     set :session_secret, Play.config['auth_token']
     set :logging, true
+    set :partial_template_engine, :erb
+    set :partial_underscores, true
 
     dir = File.dirname(File.expand_path(__FILE__))
     public_dir = File.dirname(File.expand_path("#{dir}/../public"))
     set :public_folder, public_dir
     set :static, true
-    set :mustache, {
-      :namespace => Play,
-      :templates => "#{dir}/templates",
-      :views => "#{dir}/views"
-    }
     set :github_options, {
       :scopes    => "user",
       :secret    => Play.config['github']['secret'],
@@ -56,36 +53,36 @@ module Play
     Play.client.native :consume, [true]
 
     not_found do
-      mustache :four_oh_four
+      erb :four_oh_four
     end
 
     get "/" do
       @songs = Queue.songs
-      mustache :index
+      erb :index
     end
 
     get "/search" do
       @songs = Song.find([:any,params[:q]])
-      mustache :search
+      erb :search
     end
 
     get "/artist/:name" do
       @artist = Artist.new(params[:name])
       @songs  = @artist.songs
-      mustache :artist_profile
+      erb :artist_profile
     end
 
     get "/artist/:name/album/:title" do
       @artist = Artist.new(params[:name])
       @album  = Album.new(@artist.name, params[:title])
       @songs  = @album.songs
-      mustache :album_details
+      erb :album_details
     end
 
     get "/artist/:name/song/:title" do
       @artist = Artist.new(params[:name])
       @song  = @artist.songs.find{|song| song.title == params[:title]}
-      mustache :song_details
+      erb :song_details
     end
 
     get "/download/album/*" do
@@ -107,7 +104,7 @@ module Play
       not_found if !@user
 
       @songs = @user.plays
-      mustache :profile
+      erb :profile
     end
 
     get "/:login/likes" do
@@ -115,7 +112,7 @@ module Play
       not_found if !@user
 
       @songs = @user.liked_songs
-      mustache :profile
+      erb :profile
     end
 
     get "/images/art/:album_art_file" do

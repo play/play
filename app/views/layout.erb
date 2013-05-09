@@ -11,7 +11,9 @@
 </head>
 
 <body>
-  {{{not_running?}}}
+  <% if !Play.client.running? %>
+    <div>The music server isn't running. Spin it up with <code>script/music start</code>.</div>
+  <% end %>
 
   <a href="/">Play</a>
   <div id="header">
@@ -19,7 +21,7 @@
 
   <section role="nav">
     <span id="login">
-      <a href="/{{current_login}}">{{current_login}}</a>
+      <a href="/<%= current_user.login %>"><%= current_user.login %></a>
     </span>
     <form class="search" action="/search">
       <a href="#" class="advanced-search"><span class="icon-cog"></span></a><input type="text" name="q" id="q" placeholder="Search"/>
@@ -29,8 +31,8 @@
 
   </div><!-- end of header -->
 
-  {{>sidebar}}
+  <%= partial :sidebar %>
 
-  {{{yield}}}
+  <%= yield %>
 </body>
 </html>

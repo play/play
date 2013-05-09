@@ -16,8 +16,6 @@ require_relative 'models/song'
 require_relative 'models/song_play'
 require_relative 'models/user'
 
-require_relative 'views/layout'
-
 include Play::Helpers
 
 module Play

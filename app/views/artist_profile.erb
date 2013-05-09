@@ -1,0 +1,7 @@
+<div id="queue">
+  <div class="heading">
+    Songs and albums by: <span class="title"><%= @artist.name %></span>
+  </div>
+
+  <%= partial :song, :collection => @songs %>
+</div>

@@ -1,0 +1,12 @@
+<div id="queue">
+  <div class="heading">
+    Details for:
+    <span class="title"><%= @user.login %></span>
+    <ul>
+      <li><a href="/<%= @user.login %>">History</a></li>
+      <li><a href="/<%= @user.login %>/likes">Likes</a></li>
+    </ul>
+  </div>
+
+  <%= partial :song, :collection => @songs %>
+</div>
