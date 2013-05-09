@@ -131,8 +131,10 @@ module Play
       art_cache_path = "#{Play.album_art_cache_path}/#{art_file}"
 
       if !File.exists?(art_cache_path)
-        if !art.nil?
-          File.write(art_cache_path, art, mode: 'wb')
+        cached_art = art
+
+        if !cached_art.nil?
+          File.write(art_cache_path, cached_art, mode: 'wb')
           art_cache_path
         end
       end
