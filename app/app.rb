@@ -85,7 +85,7 @@ module Play
 
     get "/artist/:name/song/:title" do
       @artist = Artist.new(params[:name])
-      @song  = @artist.songs.find{|song| song.title == params[:title]}
+      @song  = @artist.songs.find{|song| song.title == CGI.unescape(params[:title])}
       erb :song_details
     end
 
