@@ -65,7 +65,7 @@ module Play
     end
 
     get "/search" do
-      @filter = params[:filter].to_sym || :any
+      @filter = (params[:filter] || :any).to_sym
       @songs = Song.find([@filter,params[:q]])
       erb :search
     end
