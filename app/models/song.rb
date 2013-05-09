@@ -50,7 +50,8 @@ module Play
     # Returns an Array of Songs. Maxes out at a hard fifty... deal with it.
     def self.find(options)
       results = client.search(options)[0..50]
-      results.map {|path| Song.new(path) }
+      results.map { |path| Song.new(path) }.
+        reject { |song| song.title.blank? }
     end
 
     # What's currently playing?
