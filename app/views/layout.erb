@@ -27,11 +27,12 @@
       </a>
     </span>
     <form class="search" action="/search">
-      <a href="#" class="advanced-search"><span class="icon-cog"></span></a><div class="filter">
-      <span class="active">Any</span>
-      <span>Artist</span>
-      <span>Album</span>
-      <span>Song</span>
+      <% style = @filter && @filter != :any ? 'display: inline;' : '' %>
+      <a href="#" class="advanced-search"><span class="icon-cog"></span></a><div class="filter" style="<%= style %>">
+      <span <%= 'class="active"' if @filter == :any || !@filter %>>Any</span>
+      <span <%= 'class="active"' if @filter == :artist %>>Artist</span>
+      <span <%= 'class="active"' if @filter == :album %>>Album</span>
+      <span <%= 'class="active"' if @filter == :title %>>Song</span>
     </div><input type="text" name="q" id="q" placeholder="Search" value="<%= params[:q] %>"/>
       <input type="hidden" name="filter" id="filter" value="all" />
       <span class="icon-search"></span>
