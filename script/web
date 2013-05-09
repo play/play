@@ -14,7 +14,7 @@ fi
 # Production runs as daemonized and doesn't reload classes.
 if [ -n "$RACK_ENV" ]; then
   env="$RACK_ENV"
-  daemonize = '--daemonize'
+  daemonized='--daemonize'
 else
   env="development"
 fi
