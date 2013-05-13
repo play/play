@@ -27,6 +27,23 @@ fail () {
   exit
 }
 
+# ruby
+RUBY_VERSION=`cat .ruby-version`
+RUBY_NO_DASH=`echo $RUBY_VERSION | sed 's/[-]//'`
+if [[ $(ruby -v) == *$RUBY_NO_DASH* ]]
+then
+  success 'ruby installed'
+else
+  # Install if on rbenv
+  if test $(which rbenv)
+  then
+    info "installing ruby"
+    rbenv install "$RUBY_VERSION" > /tmp/play-bootstrap
+  else
+    fail "$RUBY_VERSION not installed"
+  fi
+fi
+
 info 'configure play'
 if test -f "config/play.yml"
 then
