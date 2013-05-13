@@ -14,7 +14,7 @@ puts "Caching art for #{paths.count} songs..."
 
 count = 0
 paths.each do |path| 
-  result = Play::Song.new(path).cache_album_art
+  result = Play::Song.new(CGI.escape(path)).cache_album_art
   count += 1 if result
 end
 
