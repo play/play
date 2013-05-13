@@ -127,6 +127,10 @@ else
   fi
 fi
 
+info 'mpd directories'
+mkdir -p ~/.mpd
+success 'mpd directories'
+
 # Install our system dependencies.
 if [ $(uname -s) = "Darwin" ]
 then
