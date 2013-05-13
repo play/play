@@ -15,11 +15,7 @@ gem 'sinatra-partial'
 gem 'sprockets',                   '~> 2.5.0'
 gem 'sprockets-sass'
 gem 'taglib-ruby',                 '~> 0.6.0', :require => 'taglib'
-
-group :development do
-  gem 'shotgun'
-  gem 'thin'
-end
+gem 'thin',                        '~> 1.5.0'
 
 group :test do
   gem 'database_cleaner',          '~> 0.9.1'
