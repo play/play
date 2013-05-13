@@ -19,6 +19,8 @@ audio_output {
     mixer_type      "software"
 }
 
+bind_to_address  "0.0.0.0"
+
 # Files and directories #######################################################
 #
 # This setting controls the top directory which MPD will search to discover the
