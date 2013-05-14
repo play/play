@@ -82,7 +82,7 @@ module Play
 
     # The escaped album path.
     def escaped_album_path
-      "#{escaped_artist_path}/album/#{CGI.escape(album_name)}"
+      album_name ? "#{escaped_artist_path}/album/#{CGI.escape(album_name)}" : nil
     end
 
     # The escaped path for this song.
