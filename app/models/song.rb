@@ -25,7 +25,7 @@ module Play
     # Returns nothing.
     def initialize(path)
       path.chomp!
-      @path = CGI.unescape(path)
+      @path = path
 
       TagLib::FileRef.open(full_path) do |file|
         if tag = file.tag
