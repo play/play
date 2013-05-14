@@ -39,9 +39,6 @@ apt_install 'mysql-client'
 # taglib
 apt_install 'libtag1-dev'
 
-# media-info
-apt_install 'mediainfo'
-
 # mpd
 apt_install 'mpd'
 

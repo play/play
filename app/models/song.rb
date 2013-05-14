@@ -109,15 +109,6 @@ module Play
       Queue.songs.include?(self)
     end
 
-    # The album art.
-    #
-    # Returns a String of binary data.
-    def art
-      output = `mediainfo "#{Play.music_path}/#{path}" -f | grep Cover_Data`
-      data = output.split(':').last
-      data ? Base64.decode64(data.chomp) : nil
-    end
-
     # Get the file name for the songs cached album art image.
     #
     # Returns String of the art file name.
@@ -147,12 +138,8 @@ module Play
       art_cache_path = "#{Play.album_art_cache_path}/#{art_file}"
 
       if !File.exists?(art_cache_path)
-        cached_art = art
-
-        if !cached_art.nil?
-          File.write(art_cache_path, cached_art, mode: 'wb')
-          art_cache_path
-        end
+        `ffmpeg -i "#{full_path}" -an -vcodec copy #{art_cache_path} 2>&1`
+        art_cache_path
       end
     end
 
