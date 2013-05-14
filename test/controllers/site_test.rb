@@ -26,6 +26,13 @@ context "Site" do
     assert last_response.body.include?('Cross')
   end
 
+  test "artist page handles escapes" do
+    get "/artist/Jeff+Buckley"
+
+    assert last_response.ok?
+    assert last_response.body.include?("Jeff Buckley")
+  end
+
   test "album page" do
     get "/artist/Justice/album/Cross"
 
@@ -33,11 +40,25 @@ context "Site" do
     assert last_response.body.include?('Cross')
   end
 
+  test "album page handles escapes" do
+    get "/artist/Jeff+Buckley/album/Grace"
+
+    assert last_response.ok?
+    assert last_response.body.include?("Grace")
+  end
+
   test "song page" do
     get "/artist/Justice/song/Stress"
 
     assert last_response.ok?
     assert last_response.body.include?('Stress')
+  end
+
+  test "song page handles escapes" do
+    get "/artist/Jeff+Buckley/song/Lover%2C+You+Should%27ve+Come+Over"
+
+    assert last_response.ok?
+    assert last_response.body.include?("Lover, You Should've Come Over")
   end
 
   test "song download" do
