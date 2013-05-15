@@ -134,6 +134,7 @@ module Play
     post "/queue" do
       song = Song.new(params[:path])
       Queue.add(song,current_user)
+      Play.client.play
       'added!'
     end
 
