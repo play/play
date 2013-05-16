@@ -159,7 +159,7 @@ section[role="nav"] {
   bottom: 0;
   padding: 25px;
   display: inline-block;
-  z-index: 0;
+  z-index: 1;
   @include box-shadow( 1px 0 2px rgba(0,0,0, .3), inset -1px 0 0 rgba(#fff, .2));
 
   .stream-controls {
@@ -183,6 +183,7 @@ section[role="nav"] {
     display: block;
     position: relative;
     border: 1px solid rgba(0,0,0, 0.7);
+    @include box-shadow(0 1px 3px rgba(#000, .4));
 
     &:before {
         display:block;
@@ -190,9 +191,7 @@ section[role="nav"] {
         position:absolute;
         width:100%;
         height:100%;
-        -moz-box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.15);
-        -webkit-box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.15);
-        box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.15);
+        @include box-shadow(inset 0px 0px 0px 1px rgba(255,255,255,0.15));
     }
 
     img {
@@ -221,7 +220,7 @@ section[role="nav"] {
     h2 {
       font-weight: 300;
       font-size: 24px;
-      line-height: 30px;
+      line-height: 24px;
       color: #fff;
       margin: 15px 0 5px;
       width: 100%;
@@ -287,7 +286,7 @@ section[role="nav"] {
     .title {
         font-size: 24px;
         display: block;
-        line-height: 30px;
+        line-height: 24px;
         font-weight: 400;
         color: #000;
     }
@@ -301,6 +300,12 @@ section[role="nav"] {
     clear: both;
     vertical-align: middle;
     @include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
+    transition: background-color 0.5s ease;
+
+    &:hover {
+      background-color: #f7edf8;
+      @include box-shadow(inset 0 1px 0 #e1e1e1, inset 0 2px 0 #fdf3fd, 0 1px 0px #e1e1e1, 0 2px 0px #fff);
+    }
 
     .album-art {
       overflow: hidden;
@@ -322,15 +327,15 @@ section[role="nav"] {
 
       img {
             display: block;
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
           }
     }
 
     .album-download {
       position: absolute;
-      left: 100px;
-      top: 102px;
+      left: 80px;
+      top: 82px;
       color: #fff;
       text-shadow: 0 0 3px #000;
       -webkit-transition: all .2s ease;
@@ -351,7 +356,7 @@ section[role="nav"] {
     .title {
         font-size: 24px;
         display: block;
-        line-height: 30px;
+        line-height: 24px;
         font-weight: 400;
         margin: 5px -2px;
 
@@ -369,10 +374,9 @@ section[role="nav"] {
     .duration {
       color: #959595;
       font-weight: 300;
-      font-size: 16px;
-      line-height: 30px;
-      margin-top: 5px;
-      float: right;
+      font-size: 18px;
+      line-height: 24px;
+      margin-left: 10px;
     }
 
       .controls {
@@ -431,7 +435,7 @@ section[role="nav"] {
       }
 
       .icon-user, .icon-music {
-        margin-right: 7px;
+        margin-right: 6px;
         color: #ccc;
         -webkit-transition: all .2s ease;
         -moz-transition: all .2s ease;
@@ -441,7 +445,6 @@ section[role="nav"] {
   }
 
   .album {
-    padding: 20px;
 
     .sidebar {
       width: 150px;
