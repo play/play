@@ -500,6 +500,54 @@ section[role="nav"] {
   }
 
   .album {
+    padding: 20px;
+
+    .title {
+      display: block;
+      margin-top: 10px;
+      font-size: 24px;
+      line-height: 30px;
+    }
+
+    .listing {
+      margin-top: 20px;
+      margin-left: 170px;
+      list-style: decimal inside none;
+
+      .track-title {
+        display: inline-block;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 5px 0;
+      }
+
+      a {
+        color: #595959;
+        padding-left: 10px;
+
+        &:hover {
+          color: $pink;
+        }
+      }
+
+      li {
+        color: #595959;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 28px;
+        padding: 4px;
+        margin-top: 2px;
+        @include box-shadow(0 1px 0 rgba(#000, .1), 0 2px 0px rgba(#fff, 1));
+      }
+      .controls {
+        float: right;
+      }
+
+      .duration {
+        float: right;
+        margin-right: 20px;
+      }
+    }
 
     .sidebar {
       width: 150px;
@@ -530,7 +578,6 @@ section[role="nav"] {
       img {
         width: 150px;
         height: 150px;
-        border-radius: 2px;
         border: 1px solid #e1e1e1;
         margin-right: 20px;
       }

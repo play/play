@@ -7,8 +7,19 @@
         <li>Download Album</li>
       </ul>
     </div>
-    <div class="list">
+    <div>
       <span class="title"><%= @album.name %></span>
+      <span class="artist"><a href="#"><%= @artist.name %></a></span>
+        <ul class="listing">
+          <span class="track-title">Track Listings</span>
+          <% @album.songs.each do |song| %>
+            <li><a href="#"><%= song.title %></a>
+              <span class="duration"> <%= song.duration %></span>
+            </li>
+          <% end %>
+        </ul>
     </div>
+
+
   </div>
 </div>
