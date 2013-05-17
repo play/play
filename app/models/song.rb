@@ -150,5 +150,12 @@ module Play
       return false if other.class != self.class
       path == other.path
     end
+
+    # The people who like this song.
+    #
+    # Returns an Array of Users.
+    def likes
+      Like.where(:song_path => path)
+    end
   end
 end

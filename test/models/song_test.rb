@@ -80,4 +80,13 @@ context "Song" do
     client.add(@song.path)
     assert @song.queued?
   end
+
+  test "likes" do
+    song = Song.new('like/me')
+    assert_empty song.likes
+
+    Like.create(:user => User.new, :song_path => song.path)
+
+    assert_not_empty song.likes
+  end
 end
