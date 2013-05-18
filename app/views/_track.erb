@@ -8,6 +8,7 @@
       <a href="<%= track.escaped_album_path %>" class="album"><%= track.album_name %></a>
     </div>
   </div>
+
   <div class="controls">
     <%= partial :like, :locals => {:song => track} %>
     <%= partial :add, :locals => {:song => track} %>

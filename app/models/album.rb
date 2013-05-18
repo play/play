@@ -30,7 +30,7 @@ module Play
     end
 
     def art
-      songs.first.art_file
+      songs.first.art_file if songs.first
     end
 
     # The path to the zipfile.
