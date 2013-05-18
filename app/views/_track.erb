@@ -1,0 +1,16 @@
+<div class="song" data-path="<%= track.path %>">
+  <div class="details">
+    <h2 class="title"><a href="<%= track.escaped_path %>"><%= track.title %></a><span class="duration"> (<%= track.duration %>)</span></h2>
+
+    <div class="meta">
+      <a href="<%= track.escaped_artist_path %>" class="artist"><%= track.artist_name %></a>
+      <span class="betweener">-</span>
+      <a href="<%= track.escaped_album_path %>" class="album"><%= track.album_name %></a>
+    </div>
+  </div>
+  <div class="controls">
+    <%= partial :like, :locals => {:song => track} %>
+    <%= partial :add, :locals => {:song => track} %>
+    <a href="/download/<%= track.path %>"><span class="icon-cloud-download"></span></a>
+  </div>
+</div>
