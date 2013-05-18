@@ -1,5 +1,5 @@
 $ ->
-  $('.controls .like').live 'click', (event) ->
+  $('.song .like').live 'click', (event) ->
     element = $(@)
     path = element.parents('.song').data('path')
 
@@ -9,7 +9,7 @@ $ ->
         element.removeClass('icon-star-empty like')
         element.addClass('icon-star unlike')
 
-  $('.controls .unlike').live 'click', (event) ->
+  $('.song .unlike').live 'click', (event) ->
     element = $(@)
     path = element.parents('.song').data('path')
 
