@@ -7,6 +7,8 @@ module Play
 
     has_many :likes
 
+    after_create :generate_token
+
     # The songs this user has requested.
     #
     # Returns an Array of Songs.
@@ -69,6 +71,13 @@ module Play
     # Returns the String MD5 hash.
     def gravatar_id
       Digest::MD5.hexdigest(email) if email
+    end
+
+    # Public: Generates and saves a new authentication token for this user.
+    #
+    # Returns nothing.
+    def generate_token
+      update_attribute(:token, Digest::MD5.hexdigest(login + Time.now.to_i.to_s)[0..4])
     end
   end
 end
