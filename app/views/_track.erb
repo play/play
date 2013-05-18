@@ -1,9 +1,11 @@
 <div class="song" data-path="<%= track.path %>">
-  <h2 class="title"><a href="<%= track.escaped_path %>"><%= track.title %></a><span class="duration"> (<%= track.duration %>)</span></h2>
+  <a href="<%= track.escaped_path %>"><%= track.title %></a>
 
   <a href="<%= track.escaped_artist_path %>" class="artist"><%= track.artist_name %></a>
   <span class="betweener">-</span>
   <a href="<%= track.escaped_album_path %>" class="album"><%= track.album_name %></a>
+
+  <span class="duration"> (<%= track.duration %>)</span>
 
   <%= partial :like, :locals => {:song => track} %>
   <%= partial :add, :locals => {:song => track} %>
