@@ -10,7 +10,9 @@
   <script type="text/javascript" src="/assets/application.js"></script>
 </head>
 
-<body>
+<body
+  data-login="<%= current_user.login if current_user %>"
+  data-gravatar-id="<%= current_user.gravatar_id if current_user %>">
   <% if !Play.client.running? %>
     <div>The music server isn't running. Spin it up with <code>script/music start</code>.</div>
   <% end %>

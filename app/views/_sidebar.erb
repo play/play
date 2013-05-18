@@ -2,7 +2,7 @@
   song = Play::Song.now_playing
   return if !song
 %>
-<div id="sidebar" class="song" data-path="<%= song.path %>">
+<div id="sidebar">
   <div class="now-playing">
     <a href="/artist/<%= song.artist_name %>/album/<%= song.album_name %>" class="album-art">
       <img src="/images/art/<%= song.art_file %>" />
@@ -15,7 +15,7 @@
       </p>
     </div>
     <hr>
-    <ul class="now-playing-actions controls">
+    <ul class="now-playing-actions" data-path="<%= song.path %>">
       <li><%= partial 'like', :locals => { :song => song, :full => true } %></li>
       <li>
         <a href="/download/<%= song.path %>">
@@ -30,7 +30,7 @@
     <div class="fans">
       <ul>
       <% likes=song.likes.each do |like| %>
-        <li>
+        <li class="fan" data-login="<%= like.user.login %>">
           <a href="/<%= like.user.login %>">
             <img src="http://www.gravatar.com/avatar/<%= like.user.gravatar_id %>?s=50" alt="<%= like.user.login %>" />
           </a>
