@@ -6,7 +6,6 @@
     <span class="icon-cloud-download"></span>
   </a>
   <div class="details">
-
     <h2 class="title"><a href="<%= song.escaped_path %>"><%= song.title %></a><span class="duration"> (<%= song.duration %>)</span></h2>
 
     <div class="meta">
@@ -15,10 +14,9 @@
       <a href="<%= song.escaped_album_path %>" class="album"><%= song.album_name %></a>
     </div>
   </div>
-    <div class="controls">
-      <%= partial :like, :locals => {:song => song} %>
-      <%= partial :add, :locals => {:song => song} %>
-      <a href="/download/<%= song.path %>"><span class="icon-cloud-download"></span></a>
-    </div>
-
+  <div class="controls">
+    <%= partial :like, :locals => {:song => song} %>
+    <%= partial :add, :locals => {:song => song} %>
+    <a href="/download/<%= song.path %>"><span class="icon-cloud-download"></span></a>
+  </div>
 </div>

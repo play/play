@@ -293,11 +293,7 @@ section[role="nav"] {
 
     &:first-child { border-top: 0; }
     &:last-child { border-bottom: 0; }
-  }
 
-  .now-playing-action-icon { font-size: 15px; }
-
-  .now-playing-action {
     color: #999;
     font-size: 13px;
     padding: 8px;
@@ -306,19 +302,16 @@ section[role="nav"] {
     -moz-transition: all .2s ease;
     transition: all .2s ease;
 
+    a { color: #999; }
+    span { margin-right: 3px; }
 
     &:hover {
       text-decoration: none;
       background-color: #222;
+      cursor: pointer;
     }
 
     &:hover span { color: $pink; }
-
-    &:hover .icon-play-star:before,
-    &.selected .icon-play-star:before { content: "\f005"; }
-
-    &.selected:hover .icon-play-star:before,
-    .icon-play-star:before { content: "\f006"; }
   }
 }
 

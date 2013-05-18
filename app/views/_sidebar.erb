@@ -2,7 +2,7 @@
   song = Play::Song.now_playing
   return if !song
 %>
-<div id="sidebar">
+<div id="sidebar" class="song" data-path="<%= song.path %>">
   <div class="now-playing">
     <a href="/artist/<%= song.artist_name %>/album/<%= song.album_name %>" class="album-art">
       <img src="/images/art/<%= song.art_file %>" />
@@ -15,10 +15,13 @@
       </p>
     </div>
     <hr>
-    <ul class="now-playing-actions">
-      <!-- Todo: add a "is-selected" class to .icon-play-star if the item is starred-->
-      <li><a href="#" class="now-playing-action"><span class="now-playing-action-icon icon-play-star"></span> Star Song</a></li>
-      <li><a href="#" class="now-playing-action"><span class="now-playing-action-icon icon-cloud-download"></span> Download Song</a></li>
+    <ul class="now-playing-actions controls">
+      <li><%= partial 'like', :locals => { :song => song, :full => true } %></li>
+      <li>
+        <a href="/download/<%= song.path %>">
+          <span class="now-playing-action-icon icon-cloud-download"></span> Download Song
+        </a>
+      </li>
     </ul>
   </div>
 
