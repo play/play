@@ -41,8 +41,8 @@ case "$1" in
     ;;
   start|'')
     ./script/music start &
-    ./script/web start &
-    ./script/queue
+    ./script/queue &
+    ./script/web start
     ;;
   stop)
     ./script/music stop
