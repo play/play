@@ -72,7 +72,13 @@ module Play
 
     get "/artist/:name" do
       @artist = Artist.new(CGI.unescape(params[:name]))
-      @songs  = @artist.songs
+      @albums = @artist.albums
+      erb :artist_profile
+    end
+
+    get "/artist/:name/songs" do
+      @artist = Artist.new(CGI.unescape(params[:name]))
+      @songs = @artist.songs
       erb :artist_profile
     end
 

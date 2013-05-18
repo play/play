@@ -27,6 +27,13 @@ module Play
       end.reject{ |song| song.title.blank? }
     end
 
+    # All of the ALbums associated with this Artist.
+    #
+    # Returns an Array of Albums.
+    def albums
+      songs.map(&:album).uniq { |album| album.name }
+    end
+
     # A simple String representation of this instance.
     #
     # Returns a String.

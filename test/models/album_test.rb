@@ -27,4 +27,8 @@ context "Album" do
   test "has a zip path" do
     assert_equal '/tmp/play-zips/Justice - Cross.zip', @album.zip_path
   end
+
+  test "==" do
+    assert_equal Album.new('Justice', 'Cross'), Album.new('Justice', 'Cross')
+  end
 end

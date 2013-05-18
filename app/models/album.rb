@@ -29,6 +29,10 @@ module Play
       end
     end
 
+    def art
+      songs.first.art_file
+    end
+
     # The path to the zipfile.
     #
     # Returns a String.
@@ -53,6 +57,14 @@ module Play
       system 'zip', '-0rjq', zip_path, path
 
       zip_path
+    end
+
+    # Is this Album basically the same thing as another Album?
+    #
+    # Returns a Boolean.
+    def ==(other)
+      return false if other.class != self.class
+      name == other.name && artist.name == other.artist.name
     end
   end
 end

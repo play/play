@@ -2,5 +2,16 @@
   <div class="heading">
     Songs and albums by: <span class="title"><%= @artist.name %></span>
   </div>
-  <%= partial :song, :collection => @songs %>
+
+  <div class="tabs">
+    <a href="<%= request.fullpath %>">albums</a>
+    <a href="<%= request.fullpath %>/songs">songs</a>
+    <a href="<%= request.fullpath %>/about"></a>
+  </div>
+
+  <% if @albums %>
+    <%= partial :album, :collection => @albums %>
+  <% else %>
+    <%= partial :mini_song, :collection => @songs %>
+  <% end %>
 </div>
