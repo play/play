@@ -4,9 +4,9 @@
   </div>
 
   <div class="tabs">
-    <a href="<%= request.fullpath %>">albums</a>
-    <a href="<%= request.fullpath %>/songs">songs</a>
-    <a href="<%= request.fullpath %>/about"></a>
+    <a href="<%= @artist.escaped_path %>">albums</a>
+    <a href="<%= @artist.escaped_path %>/songs">songs</a>
+    <a href="<%= @artist.escaped_path %>/about"></a>
   </div>
 
   <% if @albums %>

@@ -34,6 +34,11 @@ module Play
       songs.map(&:album).uniq { |album| album.name }
     end
 
+    # The escaped artist path.
+    def escaped_path
+      "/artist/#{CGI.escape(name)}"
+    end
+
     # A simple String representation of this instance.
     #
     # Returns a String.

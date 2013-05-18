@@ -1,12 +1,10 @@
 <div class="song" data-path="<%= track.path %>">
-  <div class="details">
-    <h2 class="title"><a href="<%= track.escaped_path %>"><%= track.title %></a><span class="duration"> (<%= track.duration %>)</span></h2>
+  <h2 class="title"><a href="<%= track.escaped_path %>"><%= track.title %></a><span class="duration"> (<%= track.duration %>)</span></h2>
 
-    <div class="meta">
-      <a href="<%= track.escaped_artist_path %>" class="artist"><%= track.artist_name %></a>
-      <span class="betweener">-</span>
-      <a href="<%= track.escaped_album_path %>" class="album"><%= track.album_name %></a>
-    </div>
+  <div class="meta">
+    <a href="<%= track.escaped_artist_path %>" class="artist"><%= track.artist_name %></a>
+    <span class="betweener">-</span>
+    <a href="<%= track.escaped_album_path %>" class="album"><%= track.album_name %></a>
   </div>
 
   <div class="controls">
