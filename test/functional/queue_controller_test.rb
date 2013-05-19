@@ -10,5 +10,7 @@ class QueueControllerTest < ActionController::TestCase
     get :index
 
     assert_response :success
+    assert response.body.include?('Play')
+    assert response.body.include?('Search')
   end
 end

@@ -19,4 +19,12 @@ class ArtistsControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal 1, assigns(:songs).count
   end
+
+  test "artist page handles escapes" do
+    get :show, :name => "Jeff+Buckley"
+
+    assert_response :success
+    assert response.body.include?("Jeff Buckley")
+  end
+
 end

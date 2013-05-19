@@ -1,8 +1,4 @@
 Play::Application.routes.draw do
-  get "search/index"
-  get "queue/index"
-
-
   match "search" => 'songs#search'
   match "artists/:artist_name/songs/:title" => 'songs#show'
   match "artists/:artist_name/albums/:name" => 'albums#show'
