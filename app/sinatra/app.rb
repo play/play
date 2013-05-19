@@ -2,22 +2,6 @@ require 'fileutils'
 
 module Play
   class App < Sinatra::Base
-    # Include our Sinatra Helpers.
-    include Play::Helpers
-    include Play::AuthenticationHelper
-    include Play::EagerLoadHelper
-
-    register Sinatra::Auth::Github
-    register Sinatra::ActiveRecordExtension
-    register Sinatra::Partial
-
-    configure :development do
-      register Sinatra::Reloader
-      also_reload 'app/models/*'
-    end
-
-    set :sessions, true
-    set :session_secret, Play.config['auth_token']
     set :logging, true
     set :partial_template_engine, :erb
     set :partial_underscores, true
