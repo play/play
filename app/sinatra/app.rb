@@ -5,18 +5,6 @@ module Play
     db_name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
     set :database, Play.config['db'].merge('database' => db_name)
 
-    post "/queue" do
-      song = Song.new(params[:path])
-      Queue.add(song,current_user)
-      'added!'
-    end
-
-    delete "/queue" do
-      song = Song.new(params[:path])
-      Queue.remove(song,current_user)
-      'deleted!'
-    end
-
     post '/upload' do
       params[:files].each do |file|
         tmpfile = file[:tempfile]
