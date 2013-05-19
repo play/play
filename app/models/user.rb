@@ -10,11 +10,9 @@ class User < ActiveRecord::Base
   has_many :likes
 
   def self.find_for_github_oauth(auth, signed_in_resource=nil)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    user = User.where(:login => auth.info.nickname).first
     unless user
       user = User.create(:login    => auth.info.nickname,
-                         :provider => auth.provider,
-                         :uid      => auth.uid,
                          :email    => auth.info.email)
     end
     user

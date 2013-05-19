@@ -20,8 +20,6 @@
   <div id="header">
   <a href="/"><h1>Play</h1></a>
 
-  <%= link_to "Sign in with GitHub", user_omniauth_authorize_path(:github) %>
-
   <section role="nav">
     <span id="login">
       <a href="/<%= current_user.login %>">

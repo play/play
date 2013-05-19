@@ -1,4 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_filter :require_auth
+
   def github
     @user = User.find_for_github_oauth(request.env["omniauth.auth"], current_user)
 
@@ -7,7 +9,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, :kind => "GitHub") if is_navigational_format?
     else
       session["devise.github_data"] = request.env["omniauth.auth"]
-      redirect_to new_user_registration_url
+      redirect_to '/'
     end
   end
 end

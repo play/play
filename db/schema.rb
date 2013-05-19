@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519163348) do
+ActiveRecord::Schema.define(:version => 20130519155842) do
 
   create_table "likes", :force => true do |t|
     t.integer  "user_id"
@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(:version => 20130519163348) do
     t.string "login"
     t.string "email"
     t.string "token"
-    t.string "provider"
-    t.string "uid"
   end
 
 end
