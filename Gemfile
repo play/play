@@ -29,6 +29,10 @@ gem 'faye-websocket'
 gem 'taglib-ruby',                 '~> 0.6.0', :require => 'taglib'
 gem 'thin',                        '~> 1.5.0'
 
+group :test do
+  gem 'machinist'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

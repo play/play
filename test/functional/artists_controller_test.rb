@@ -1,9 +1,14 @@
 require 'test_helper'
 
 class ArtistsControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
+  setup do
+    @user = User.make!
+    sign_in @user
   end
 
+  test "gets songs" do
+    get :show, :name => 'Justice'
+
+    assert_response :success
+  end
 end

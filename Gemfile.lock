@@ -72,6 +72,7 @@ GEM
     json (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
+    machinist (2.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -159,6 +160,7 @@ DEPENDENCIES
   devise (~> 2.2.4)
   faye-websocket
   jquery-rails
+  machinist
   mysql2 (~> 0.3.11)
   omniauth
   omniauth-github
