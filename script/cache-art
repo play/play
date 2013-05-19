@@ -7,16 +7,16 @@
 # you add songs outside of Play, or if you run into anything fishy, feel free
 # to run this task multiple times- it won't hurt anything.
 
-require './app/play'
+require './config/environment'
 
 paths = Play.client.listall
 puts "Caching art for #{paths.count} songs..."
 
-FileUtils.mkdir_p 'public/art'
+FileUtils.mkdir_p 'public/images/art'
 
 count = 0
 paths.each do |path| 
-  result = Play::Song.new(path).cache_album_art
+  result = Song.new(path).cache_album_art
   count += 1 if result
 end
 
