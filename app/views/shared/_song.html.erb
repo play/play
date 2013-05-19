@@ -15,8 +15,8 @@
     </div>
   </div>
   <div class="controls">
-    <%= partial :like, :locals => {:song => song} %>
-    <%= partial :add, :locals => {:song => song} %>
+    <%= render :partial => 'shared/queue', :locals => {:song => song} %>
+    <%= render :partial => 'shared/queue', :locals => {:song => song} %>
     <a href="/download/<%= song.path %>"><span class="icon-cloud-download"></span></a>
   </div>
 </div>
