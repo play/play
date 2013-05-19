@@ -5,6 +5,7 @@ module Play
     # Include our Sinatra Helpers.
     include Play::Helpers
     include Play::AuthenticationHelper
+    include Play::EagerLoadHelper
 
     register Sinatra::Auth::Github
     register Sinatra::ActiveRecordExtension
@@ -39,18 +40,13 @@ module Play
                              request.path_info =~ /\/auth/ ||
                              request.path_info =~ /\/images/
 
-      if ENV['RACK_ENV']=='test' || session_not_required
-        @current_user_likes = []
-        return true
-      elsif current_user
-        @current_user_likes = current_user.likes
+      if ENV['RACK_ENV']=='test' || session_not_required || current_user
         return true
       else
         authenticate
       end
 
       @current_user = current_user
-      @current_user_likes = current_user.likes
     end
 
     # Set up mpd to natively consume songs

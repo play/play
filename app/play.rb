@@ -5,6 +5,7 @@ Bundler.setup(:default)
 Bundler.require(:default)
 
 require_relative 'helpers/authentication_helper'
+require_relative 'helpers/eager_load_helper'
 
 require_relative 'models/album'
 require_relative 'models/artist'

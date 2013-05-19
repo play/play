@@ -1,4 +1,4 @@
-<% if song.queued? %>
+<% if current_playlist.include?(song) %>
   <span class="icon-remove-sign remove"></span>
 <% else %>
   <span class="icon-plus-sign-alt add"></span>
