@@ -1,7 +1,9 @@
 Play::Application.routes.draw do
   get "search/index"
   get "queue/index"
-  match "artist/:name" => 'artist#index'
+  
+  match "artists/:name" => 'artists#show'
+  match "artists/:name/songs" => 'artists#songs'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

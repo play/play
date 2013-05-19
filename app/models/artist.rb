@@ -39,7 +39,7 @@ class Artist
 
   # The escaped artist path.
   def escaped_path
-    "/artist/#{CGI.escape(name)}"
+    "/artists/#{CGI.escape(name)}"
   end
 
   # A simple String representation of this instance.
