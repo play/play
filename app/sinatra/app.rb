@@ -60,11 +60,6 @@ module Play
       erb :four_oh_four
     end
 
-    get "/" do
-      @songs = Queue.songs
-      erb :index
-    end
-
     get "/search" do
       @filter = (params[:filter] || :any).to_sym
       @songs = Song.find([@filter,params[:q]])

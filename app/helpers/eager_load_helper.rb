@@ -4,6 +4,6 @@ module EagerLoadHelper
   end
 
   def current_playlist
-    @current_playlist ||= Queue.songs
+    @current_playlist ||= PlayQueue.songs
   end
 end
