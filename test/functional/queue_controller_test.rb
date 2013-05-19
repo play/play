@@ -1,9 +1,14 @@
 require 'test_helper'
 
 class QueueControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
+  setup do
+    @user = User.make!
+    sign_in @user
   end
 
+  test "shows the queue" do
+    get :index
+
+    assert_response :success
+  end
 end
