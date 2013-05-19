@@ -5,14 +5,6 @@ module Play
     db_name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
     set :database, Play.config['db'].merge('database' => db_name)
 
-    get "/download/album/*" do
-      song = Song.new(params[:splat].first)
-      path = File.expand_path('..', File.join(Play.music_path,song.path))
-      zipped = song.album.zipped(path)
-
-      send_file(zipped, :disposition => 'attachment')
-    end
-
     get "/download/*" do
       song = Song.new(params[:splat].first)
 

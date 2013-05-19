@@ -2,7 +2,7 @@
   <a href="/artist/<%= song.artist_name %>/album/<%= song.album_name %>" class="album-art">
     <img src="/images/art/<%= song.art_file %>" width="100" height="100" />
   </a>
-  <a href="/download/album/<%= song.path %>" class="album-download" title="Download this album">
+  <a href="/artists/<%= CGI.escape(song.artist_name) %>/albums/<%= CGI.escape(song.album_name) %>/download" class="album-download" title="Download this album">
     <span class="icon-cloud-download"></span>
   </a>
   <div class="details">

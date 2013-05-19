@@ -10,6 +10,8 @@ Play::Application.routes.draw do
   match "artists/:name/songs" => 'artists#songs'
   match "images/art/:id.png" => 'images#art'
 
+  match 'artists/:artist_name/albums/:name/download' => 'albums#download'
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # The priority is based upon order of creation:
