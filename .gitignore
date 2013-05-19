@@ -1,8 +1,7 @@
 .sass-cache
 config/play.yml
 config/mpd.conf
-public/art
-!public/art/.gitkeep
+public/images/art
 
 /.bundle
 /vendor/bundle
