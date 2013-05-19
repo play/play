@@ -1,12 +1,12 @@
 <div id="queue">
   <div class="heading">
     <span class="title"><%= @artist.name %></span>
-  </div>
 
-  <div class="tabs">
-    <a href="<%= @artist.escaped_path %>">albums</a>
-    <a href="<%= @artist.escaped_path %>/songs">songs</a>
-    <a href="<%= @artist.escaped_path %>/about"></a>
+    <div class="tabs">
+      <a class="<%= 'active' if !@songs %>" href="<%= @artist.escaped_path %>">Albums</a>
+      <a class="<%= 'active' if @songs %>" href="<%= @artist.escaped_path %>/songs">Songs</a>
+      <a href="<%= @artist.escaped_path %>/about">Biography</a>
+    </div>
   </div>
 
   <% if @albums %>

@@ -586,6 +586,18 @@ section[role="nav"] {
 
 }
 
+.tabs {
+  margin: 10px 0 -12px 0;
+
+  a {
+    margin-right: 10px;
+    padding: 5px;
+  }
+
+  a:first-child { margin-left: -5px; }
+  a.active { border-bottom: 1px solid $pink;}
+}
+
 .tracklist {
   margin: 0 25px;
   list-style-type: decimal;
