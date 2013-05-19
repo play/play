@@ -1,7 +1,7 @@
 $ ->
-  $('.song .like').live 'click', (event) ->
+  $('.track .like, .song .like').live 'click', (event) ->
     element = $(@)
-    path = element.parents('.song').data('path')
+    path = element.parents('.song, .track').data('path')
 
     $.post '/like',
       path: path
@@ -9,9 +9,9 @@ $ ->
         element.removeClass('icon-star-empty like')
         element.addClass('icon-star unlike')
 
-  $('.song .unlike').live 'click', (event) ->
+  $('.track .unlike, .song .unlike').live 'click', (event) ->
     element = $(@)
-    path = element.parents('.song').data('path')
+    path = element.parents('.song, .track').data('path')
 
     $.ajax '/like',
       type: 'PUT'

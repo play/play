@@ -1,7 +1,7 @@
 $ ->
-  $('.controls .add').live 'click', (event) ->
+  $('.track .add, .song .add').live 'click', (event) ->
     element = $(@)
-    path = element.parents('.song').data('path')
+    path = element.parents('.song, .track').data('path')
 
     $.post '/queue',
       path: path
@@ -9,9 +9,9 @@ $ ->
         element.addClass('icon-remove-sign remove')
         element.removeClass('icon-plus-sign-alt add')
 
-  $('.controls .remove').live 'click', (event) ->
+  $('.track .remove, .song .remove').live 'click', (event) ->
     element = $(@)
-    path = element.parents('.song').data('path')
+    path = element.parents('.song, .track').data('path')
 
     $.ajax
       type: 'DELETE',
