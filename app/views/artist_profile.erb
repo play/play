@@ -10,7 +10,9 @@
   </div>
 
   <% if @albums %>
-    <%= partial :album, :collection => @albums %>
+    <div class="album-list">
+      <%= partial :album, :collection => @albums %>
+    </div>
   <% else %>
     <table class="tracklist">
       <tr>

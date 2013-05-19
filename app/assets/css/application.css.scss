@@ -598,6 +598,24 @@ section[role="nav"] {
   a.active { border-bottom: 1px solid $pink;}
 }
 
+.album-list {
+  margin-top: 20px;
+
+  .album a {
+    display: inline;
+    padding: 0px 0 20px 20px;
+    float: left;
+  }
+
+  .name {
+    padding: 5px 0;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 .tracklist {
   margin: 15px 20px;
   list-style-type: decimal;
