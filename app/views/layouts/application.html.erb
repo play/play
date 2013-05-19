@@ -12,9 +12,9 @@
 <body
   data-login="<%= current_user.login if current_user %>"
   data-gravatar-id="<%= current_user.gravatar_id if current_user %>">
-  <%# if !Play.client.running? %>
+  <% if !Play.client.running? %>
     <div>The music server isn't running. Spin it up with <code>script/music start</code>.</div>
-  <%# end %>
+  <% end %>
 
   <a href="/">Play</a>
   <div id="header">
@@ -44,7 +44,7 @@
 
   </div><!-- end of header -->
 
-  <%#= partial :sidebar %>
+  <%= render :partial => 'shared/sidebar' %>
 
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>

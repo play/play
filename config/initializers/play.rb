@@ -1,24 +1,3 @@
-require 'rubygems'
-require 'bundler'
-
-Bundler.setup(:default)
-Bundler.require(:default)
-
-require_relative 'helpers/authentication_helper'
-require_relative 'helpers/eager_load_helper'
-
-require_relative 'models/album'
-require_relative 'models/artist'
-require_relative 'models/client'
-require_relative 'models/helpers'
-require_relative 'models/like'
-require_relative 'models/queue'
-require_relative 'models/song'
-require_relative 'models/song_play'
-require_relative 'models/user'
-
-include Play::Helpers
-
 module Play
   def self.client
     Client.new
@@ -50,5 +29,3 @@ module Play
     YAML::load(File.open('config/play.yml'))
   end
 end
-
-require_relative 'app'

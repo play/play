@@ -1,5 +1,5 @@
 <%
-  song = Play::Song.now_playing
+  song = Song.now_playing
   return if !song
 %>
 <div id="sidebar">
@@ -16,7 +16,7 @@
     </div>
     <hr>
     <ul class="now-playing-actions" data-path="<%= song.path %>">
-      <li><%= partial 'like', :locals => { :song => song, :full => true } %></li>
+      <li><%= render :partial => 'shared/like', :locals => { :song => song, :full => true } %></li>
       <li>
         <a href="/download/<%= song.path %>">
           <span class="now-playing-action-icon icon-cloud-download"></span> Download Song
