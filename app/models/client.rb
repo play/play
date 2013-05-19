@@ -44,7 +44,7 @@ module Play
       native :listall
     end
 
-    # Searches for a paricular match.
+    # Searches for a particular match. Fuzzy search.
     #
     # options - An Array of Symbols or Strings to pass on to mpc.
     #
@@ -52,6 +52,16 @@ module Play
     def search(options)
       options = [options] if !options.kind_of?(Array)
       native :search, options
+    end
+
+    # Finds a particular exact match.
+    #
+    # options - An Array of Symbols or Strings to pass on to mpc.
+    #
+    # Returns an Array of Strings.
+    def find(options)
+      options = [options] if !options.kind_of?(Array)
+      native :find, options
     end
 
     # Displays a playlist.
