@@ -5,14 +5,6 @@ module Play
     db_name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
     set :database, Play.config['db'].merge('database' => db_name)
 
-    get "/:login/likes" do
-      @user = User.find_by_login(params[:login])
-      not_found if !@user
-
-      @songs = @user.liked_songs
-      erb :profile
-    end
-
     post "/queue" do
       song = Song.new(params[:path])
       Queue.add(song,current_user)
@@ -23,14 +15,6 @@ module Play
       song = Song.new(params[:path])
       Queue.remove(song,current_user)
       'deleted!'
-    end
-
-    post "/like" do
-      current_user.like(params[:path])
-    end
-
-    put "/like" do
-      current_user.unlike(params[:path])
     end
 
     post '/upload' do
