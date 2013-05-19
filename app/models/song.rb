@@ -76,17 +76,17 @@ class Song
 
   # The escaped artist path.
   def escaped_artist_path
-    "/artist/#{CGI.escape(artist_name)}"
+    "/artists/#{CGI.escape(artist_name)}"
   end
 
   # The escaped album path.
   def escaped_album_path
-    album_name ? "#{escaped_artist_path}/album/#{CGI.escape(album_name)}" : nil
+    album_name ? "#{escaped_artist_path}/albums/#{CGI.escape(album_name)}" : nil
   end
 
   # The escaped path for this song.
   def escaped_path
-    "#{escaped_artist_path}/song/#{CGI.escape(title)}"
+    "#{escaped_artist_path}/songs/#{CGI.escape(title)}"
   end
 
   # The duration of the song.
