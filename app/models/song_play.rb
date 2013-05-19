@@ -1,5 +1,3 @@
-module Play
-  class SongPlay < ActiveRecord::Base
-    belongs_to :user
-  end
+class SongPlay < ActiveRecord::Base
+  belongs_to :user
 end

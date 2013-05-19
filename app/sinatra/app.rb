@@ -93,14 +93,6 @@
 #       send_file(File.join(Play.music_path,song.path), :disposition => 'attachment')
 #     end
 
-#     get "/:login" do
-#       @user = User.find_by_login(params[:login])
-#       not_found if !@user
-
-#       @songs = @user.plays
-#       erb :profile
-#     end
-
 #     get "/:login/likes" do
 #       @user = User.find_by_login(params[:login])
 #       not_found if !@user
