@@ -10,8 +10,8 @@
 </head>
 
 <body
-  data-login="<%#= current_user.login if current_user %>"
-  data-gravatar-id="<%#= current_user.gravatar_id if current_user %>">
+  data-login="<%= current_user.login if current_user %>"
+  data-gravatar-id="<%= current_user.gravatar_id if current_user %>">
   <%# if !Play.client.running? %>
     <div>The music server isn't running. Spin it up with <code>script/music start</code>.</div>
   <%# end %>
@@ -20,11 +20,13 @@
   <div id="header">
   <a href="/"><h1>Play</h1></a>
 
+  <%= link_to "Sign in with GitHub", user_omniauth_authorize_path(:github) %>
+
   <section role="nav">
     <span id="login">
-      <a href="/<%#= current_user.login %>">
-        <%#= current_user.login %>
-        <img src="http://www.gravatar.com/avatar/<%#= current_user.gravatar_id %>?s=50" />
+      <a href="/<%= current_user.login %>">
+        <%= current_user.login %>
+        <img src="http://www.gravatar.com/avatar/<%= current_user.gravatar_id %>?s=50" />
       </a>
     </span>
     <form class="search" action="/search">
@@ -43,6 +45,9 @@
   </div><!-- end of header -->
 
   <%#= partial :sidebar %>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 
   <%= yield %>
 </body>
