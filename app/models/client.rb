@@ -1,4 +1,3 @@
-
 # Client gives us a nice interface to `mpc`, and, through `mpc`, `mpd`.
 class Client
   # A native command to run on the `mpc` binary.

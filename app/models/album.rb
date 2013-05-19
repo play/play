@@ -28,6 +28,10 @@ class Album
     end
   end
 
+  def client
+    Play.client
+  end
+
   def art
     songs.first.art_file if songs.first
   end

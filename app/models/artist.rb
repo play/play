@@ -17,6 +17,10 @@ class Artist
     end
   end
 
+  def client
+    Play.client
+  end
+
   # All of the Songs associated with this Artist.
   #
   # Returns an Array of Songs.
