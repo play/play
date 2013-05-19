@@ -39,13 +39,17 @@ module Play
                              request.path_info =~ /\/auth/ ||
                              request.path_info =~ /\/images/
 
-      if ENV['RACK_ENV']=='test' || session_not_required || current_user
+      if ENV['RACK_ENV']=='test' || session_not_required
+        return true
+      elsif current_user
+        @current_user_likes = current_user.likes
         return true
       else
         authenticate
       end
 
       @current_user = current_user
+      @current_user_likes = current_user.likes
     end
 
     # Set up mpd to natively consume songs
