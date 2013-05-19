@@ -29,3 +29,10 @@ module Play
     YAML::load(File.open('config/play.yml'))
   end
 end
+
+# Set up mpd to natively consume songs
+Play.client.native :repeat,  [true]
+Play.client.native :consume, [true]
+
+# Scan for new songs just in case
+Play.client.native :update

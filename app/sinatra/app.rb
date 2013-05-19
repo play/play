@@ -2,43 +2,8 @@ require 'fileutils'
 
 module Play
   class App < Sinatra::Base
-    set :logging, true
-    set :partial_template_engine, :erb
-    set :partial_underscores, true
-
-    dir = File.dirname(File.expand_path(__FILE__))
-    public_dir = File.dirname(File.expand_path("#{dir}/../public"))
-    set :public_folder, public_dir
-    set :static, true
-    set :github_options, {
-      :scopes    => "user",
-      :secret    => Play.config['github']['secret'],
-      :client_id => Play.config['github']['client_id'],
-    }
-
     db_name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
     set :database, Play.config['db'].merge('database' => db_name)
-
-    before do
-      session_not_required = request.path_info =~ /\/login/ ||
-                             request.path_info =~ /\/auth/ ||
-                             request.path_info =~ /\/images/
-
-      if ENV['RACK_ENV']=='test' || session_not_required || current_user
-        return true
-      else
-        authenticate
-      end
-
-      @current_user = current_user
-    end
-
-    # Set up mpd to natively consume songs
-    Play.client.native :repeat,  [true]
-    Play.client.native :consume, [true]
-
-    # Scan for new songs just in case
-    Play.client.native :update
 
     get "/download/album/*" do
       song = Song.new(params[:splat].first)
