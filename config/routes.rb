@@ -11,6 +11,7 @@ Play::Application.routes.draw do
   match "images/art/:id.png" => 'images#art'
 
   match 'artists/:artist_name/albums/:name/download' => 'albums#download'
+  match 'songs/download/*path' => 'songs#download', :format => false
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

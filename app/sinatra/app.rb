@@ -5,12 +5,6 @@ module Play
     db_name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
     set :database, Play.config['db'].merge('database' => db_name)
 
-    get "/download/*" do
-      song = Song.new(params[:splat].first)
-
-      send_file(File.join(Play.music_path,song.path), :disposition => 'attachment')
-    end
-
     get "/:login/likes" do
       @user = User.find_by_login(params[:login])
       not_found if !@user

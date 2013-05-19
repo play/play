@@ -8,4 +8,9 @@ class SongsController < ApplicationController
     @filter = (params[:filter] || :any).to_sym
     @songs = Song.find([@filter,params[:q]])
   end
+
+  def download
+    song = Song.new(CGI.unescape(params[:path]))
+    send_file(File.join(Play.music_path,song.path), :disposition => 'attachment')
+  end
 end

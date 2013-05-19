@@ -17,6 +17,6 @@
   <div class="controls">
     <%= render :partial => 'shared/queue', :locals => {:song => song} %>
     <%= render :partial => 'shared/queue', :locals => {:song => song} %>
-    <a href="/download/<%= song.path %>"><span class="icon-cloud-download"></span></a>
+    <a href="/songs/download/<%= CGI.escape(song.path) %>"><span class="icon-cloud-download"></span></a>
   </div>
 </div>
