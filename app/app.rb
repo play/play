@@ -40,7 +40,7 @@ module Play
                              request.path_info =~ /\/images/
 
       if ENV['RACK_ENV']=='test' || session_not_required || current_user
-        true
+        return true
       else
         authenticate
       end
