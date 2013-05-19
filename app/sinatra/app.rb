@@ -56,16 +56,6 @@ module Play
     # Scan for new songs just in case
     Play.client.native :update
 
-    not_found do
-      erb :four_oh_four
-    end
-
-    get "/search" do
-      @filter = (params[:filter] || :any).to_sym
-      @songs = Song.find([@filter,params[:q]])
-      erb :search
-    end
-
     get "/download/album/*" do
       song = Song.new(params[:splat].first)
       path = File.expand_path('..', File.join(Play.music_path,song.path))

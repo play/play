@@ -36,6 +36,10 @@ class Song
     end
   end
 
+  def client
+    Play.client
+  end
+
   # Searches for matching Songs.
   #
   # options - An Array of mpc-friendly options to search on.
@@ -48,7 +52,7 @@ class Song
   #
   # Returns an Array of Songs. Maxes out at a hard fifty... deal with it.
   def self.find(options)
-    results = client.search(options)[0..50]
+    results = Play.client.search(options)[0..50]
     results.map { |path| Song.new(path) }.
       reject { |song| song.title.blank? }
   end
