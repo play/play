@@ -586,6 +586,54 @@ section[role="nav"] {
 
 }
 
+.tracklist {
+  margin: 0 25px;
+  list-style-type: decimal;
+  width: 700px;
+  color: #666;
+
+  tr {
+  }
+
+  th {
+    padding: 10px 0;
+    color: #333;
+    font-weight: bold;
+    border-bottom: 0;
+  }
+
+  td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+
+    &.number {
+      text-align: right;
+      width: 20px;
+    }
+
+    &.title { width: 250px; }
+    &.album { padding-left: 0; }
+    &.duration { width: 50px; }
+
+    &.like, &.queue, &.download {
+      color: #ccc;
+      font-size: 20px;
+      width: 20px;
+      padding: 5px;
+
+      a { color: #ccc; }
+    }
+
+    &.queue {
+      padding-right: 15px;
+    }
+  }
+
+  a {
+    color: #666;
+  }
+}
+
 @media all and (max-width: 500) {
 /* define mobile specific styles come here */
   header {

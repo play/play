@@ -1,6 +1,6 @@
 <div id="queue">
   <div class="heading">
-    Songs and albums by: <span class="title"><%= @artist.name %></span>
+    <span class="title"><%= @artist.name %></span>
   </div>
 
   <div class="tabs">
@@ -12,6 +12,12 @@
   <% if @albums %>
     <%= partial :album, :collection => @albums %>
   <% else %>
-    <%= partial :track, :collection => @songs %>
+    <table class="tracklist">
+      <tr>
+        <th colspan="2">Track</th>
+        <th colspan="5">Album</th>
+      </tr>
+      <%= partial :track, :collection => @songs %>
+    </table>
   <% end %>
 </div>

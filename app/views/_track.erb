@@ -1,13 +1,13 @@
-<div class="track" data-path="<%= track.path %>">
-  <a href="<%= track.escaped_path %>"><%= track.title %></a>
+<tr class="track" data-path="<%= track.path %>">
+  <td class="number"><%= @songs.index(track) + 1 %>.</td>
+  <td class="title"><a href="<%= track.escaped_path %>"><%= track.title %></a></td>
+  <td class="album"><a href="<%= track.escaped_album_path %>" class="album"><%= track.album_name %></a></td>
 
-  <a href="<%= track.escaped_artist_path %>" class="artist"><%= track.artist_name %></a>
-  <span class="betweener">-</span>
-  <a href="<%= track.escaped_album_path %>" class="album"><%= track.album_name %></a>
+  <td class="duration"><%= track.duration %></td>
+  <td class="download">
+    <a href="/download/<%= track.path %>"><span class="icon-cloud-download"></span></a>
+  </td>
 
-  <span class="duration"> (<%= track.duration %>)</span>
-
-  <%= partial :like, :locals => {:song => track} %>
-  <%= partial :add, :locals => {:song => track} %>
-  <a href="/download/<%= track.path %>"><span class="icon-cloud-download"></span></a>
-</div>
+  <td class="like"><%= partial :like, :locals => { :song => track } %></td>
+  <td class="queue"><%= partial :add, :locals => { :song => track } %></td>
+</tr>
