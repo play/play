@@ -66,12 +66,6 @@ module Play
       erb :search
     end
 
-    get "/artist/:name/song/:title" do
-      @artist = Artist.new(CGI.unescape(params[:name]))
-      @song  = @artist.songs.find{|song| song.title == CGI.unescape(params[:title])}
-      erb :song_details
-    end
-
     get "/download/album/*" do
       song = Song.new(params[:splat].first)
       path = File.expand_path('..', File.join(Play.music_path,song.path))
