@@ -4,7 +4,7 @@ class QueueController < ApplicationController
   end
 
   def create
-    song = Song.new(params[:path])
+    song = Song.new(params[:id])
     PlayQueue.add(song,current_user)
     render :text => 'added!'
   end

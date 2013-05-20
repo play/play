@@ -3,8 +3,8 @@ $ ->
     element = $(@)
     path = element.parents('.song, .track').data('path')
 
-    $.post '/like',
-      path: path
+    $.post '/likes',
+      id: path
       (data) ->
         element.removeClass('icon-star-empty like')
         element.addClass('icon-star unlike')
@@ -13,9 +13,9 @@ $ ->
     element = $(@)
     path = element.parents('.song, .track').data('path')
 
-    $.ajax '/like',
-      type: 'PUT'
-      data: { path: path }
+    $.ajax '/likes',
+      type: 'delete'
+      data: { id: path }
 
     element.removeClass('icon-star unlike')
     element.addClass('icon-star-empty like')
@@ -27,8 +27,8 @@ $ ->
     path    = element.parent().data('path')
 
     if span.hasClass('like')
-      $.post '/like',
-        path: path
+      $.post '/likes',
+        id: path
         (data) ->
           span.removeClass('icon-star-empty like')
           span.addClass('icon-star unlike')
@@ -39,9 +39,9 @@ $ ->
               <img src=\"http://www.gravatar.com/avatar/#{gravatar_id}?s=50\" />
             </a></li>")
     else
-      $.ajax '/like',
-        type: 'PUT'
-        data: { path: path }
+      $.ajax '/likes',
+        type: 'DELETE'
+        data: { id: path }
 
         span.addClass('icon-star-empty like')
         span.removeClass('icon-star unlike')

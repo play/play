@@ -10,10 +10,19 @@ Play::Application.routes.draw do
   match 'songs/download/*path' => 'songs#download', :format => false
 
   match ':login/likes' => 'likes#index'
+
   resources :likes do
   end
 
   resources :queue do
+  end
+
+  scope '/likes' do
+    delete ''          => 'likes#destroy'
+  end
+
+  scope '/queue' do
+    delete ''          => 'queue#destroy'
   end
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

@@ -15,7 +15,7 @@ class QueueControllerTest < ActionController::TestCase
   end
 
   test "add a song" do
-    post :create, :path => 'Justice/Cross/Stress.mp3'
+    post :create, :id => 'Justice/Cross/Stress.mp3'
 
     assert_response :success
     assert_equal 'added!', response.body
