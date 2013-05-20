@@ -37,4 +37,6 @@ Play::Application.configure do
 
   # Devise
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  config.middleware.use Rails::Rack::LogTailer
 end
