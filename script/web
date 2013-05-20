@@ -6,7 +6,7 @@
 if [ -n "$BOXEN_SOCKET_DIR" ]; then
   location="--socket $BOXEN_SOCKET_DIR/play"
 else
-  location="--port 5050"
+  location="--port 3030"
 fi
 
 # Run this in prod, or dev?
