@@ -1,7 +1,0 @@
-<% full = false unless full %>
-
-<% if current_user_likes.include?(song) %>
-  <span class="icon-star unlike"></span> <%= 'Unstar Song' if full %>
-<% else %>
-  <span class="icon-star-empty like"></span> <%= 'Star Song' if full %>
-<% end %>

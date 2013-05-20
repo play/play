@@ -3,9 +3,11 @@ $ ->
     element = $(@)
     path = element.parents('.song, .track').data('path')
 
-    $.post '/queue',
-      path: path
-      (data) ->
+    $.ajax
+      type: 'post',
+      url:  '/queue',
+      data: { id: path },
+      success: (data) ->
         element.addClass('icon-remove-sign remove')
         element.removeClass('icon-plus-sign-alt add')
 
@@ -14,9 +16,9 @@ $ ->
     path = element.parents('.song, .track').data('path')
 
     $.ajax
-      type: 'DELETE',
+      type: 'delete',
       url:  '/queue',
-      data: {path: path},
+      data: { id: path },
       success: (data) ->
         element.removeClass('icon-remove-sign remove')
         element.addClass('icon-plus-sign-alt add')

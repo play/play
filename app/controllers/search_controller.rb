@@ -1,0 +1,2 @@
+class SearchController < ApplicationController
+end

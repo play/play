@@ -4,14 +4,15 @@
 # we've already played from the playlist and adds interesting songs to the
 # queue so the music ain't ever stop.
 
-require './app/play'
+require './config/environment'
 
-$client = Play::Client.new
+$client = Client.new
 
 loop do
-  if Play::Queue.songs.size < 2
-    song = Play::Song.new($client.listall.sample)
-    Play::Queue.add(song,nil)
+  if PlayQueue.songs.size < 2
+    song = Song.new($client.listall.sample)
+    PlayQueue.add(song,nil)
+    $client.native(:clearerror)
   end
   sleep 1
 end
