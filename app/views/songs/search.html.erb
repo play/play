@@ -1,0 +1,7 @@
+<div id="queue">
+  <div class="heading">
+    Search results for: <span class="title"><%= params[:q] %></span>
+  </div>
+
+  <%= render :partial => 'shared/song', :collection => @songs %>
+</div>

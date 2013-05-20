@@ -1,40 +1,7 @@
-require 'rubygems'
-require 'rake'
-require 'yaml'
-require 'sinatra/activerecord/rake'
-require './app/play'
+#!/usr/bin/env rake
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
-$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/app')
+require File.expand_path('../config/application', __FILE__)
 
-task :default do
-  ENV['RACK_ENV'] = 'test'
-  Rake::Task['test'].invoke
-end
-
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/*_test.rb'
-  test.verbose = true
-end
-
-task :environment do
-  require 'lib/play'
-  require 'bundler/setup'
-end
-
-namespace :db do
-  # TODO: hook into config/database.yml
-  task :create do
-    name = (ENV['RACK_ENV'] == 'test' ? 'play_test' : 'play')
-
-    `mysql \
-      --user="root" \
-      --password="" \
-      --execute='CREATE DATABASE IF NOT EXISTS #{name} CHARACTER SET utf8 COLLATE utf8_unicode_ci;'`
-  end
-end
-
-Kernel.trap("EXIT") do
-  system './test/daemon/stop.sh'
-end if ENV['RACK_ENV'] == 'test'
+Play::Application.load_tasks

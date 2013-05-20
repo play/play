@@ -149,7 +149,7 @@ success 'bundler'
 
 # gems
 info 'gems'
-if bundle install --binstubs --path vendor/gems >> /tmp/play-bootstrap
+if bundle install --path vendor/gems >> /tmp/play-bootstrap
 then
   success 'gems'
 else

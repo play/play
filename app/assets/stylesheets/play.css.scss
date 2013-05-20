@@ -1,0 +1,669 @@
+@import "compass";
+@import "compass/css3/font-face";
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/css3/box-sizing";
+@import "vars";
+@import "media";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
+
+* {
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+body {
+  font-size: 14px;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+  background: #f9f9f9;
+}
+
+html {
+  margin: 0;
+  font-family: "Helvetica Neue","Helvetica", Arial, Sans Serif;
+}
+
+a {
+  color: $pink;
+  text-decoration: none;
+
+  &:hover {
+    color: lighten($pink, 20%);
+  }
+}
+
+#header {
+  background: #181818;
+  padding: 10px;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  @include box-shadow(0 1px 2px rgba(0,0,0,.3));
+
+  h1 {
+    display: inline-block;
+    float: left;
+    margin-left: 10px;
+    height: 50px;
+    width: 140px;
+    text-indent: -9999px;
+    background: url("/images/play-logo.png") no-repeat center center;
+    background-size: 140px 50px;
+  }
+
+  #login {
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: 1px solid #555;
+
+    img {
+      width: 25px;
+      vertical-align: top;
+      margin-top: 2px;
+      margin-left: 5px;
+      border-radius: 3px;
+    }
+  }
+
+  .search {
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+    margin-left: 5px;
+
+    .advanced-search {
+      display: inline-block;
+      background-color: #444;
+      border-radius: 30px 0 0 30px;
+      padding: 5px 5px 5px 8px;
+      border: 1px solid #000;
+      border-right: 0;
+      font-size: 16px;
+      color: #e8e8e8;
+
+      &:hover {
+        color: $pink;
+      }
+    }
+
+    .filter {
+      display: none;
+      font-size: 0;
+
+      span {
+        font-size: 12px;
+        color: #fff;
+        padding: 6px 10px 4px 10px;
+        background-color: #666;
+        cursor: pointer;
+
+        &.active {
+          background-color: #333;
+          color: $pink;
+        }
+
+        &:hover {
+          background-color: #333;
+        }
+      }
+    }
+
+    .icon-search {
+      color: #e8e8e8;
+      position: absolute;
+      top: 5px;
+      right: 12px;
+      font-size: 16px;
+    }
+
+    input[type="search"] {
+      -webkit-appearance: textfield;
+      -webkit-box-sizing:content-box;
+      display: inline-block;
+      font-size: 14px;
+      background-color: #303030;
+      border-radius: 0 30px 30px 0;
+      padding: 5px 32px 5px 8px;
+      border: 1px solid #000;
+      margin: 0;
+      color: #eee;
+      outline: none;
+
+      &:focus {
+        border: 1px solid $pink;
+      }
+    }
+
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+      display: none;
+    }
+  }
+}
+
+section[role="nav"] {
+  float: right;
+  margin-top: 10px;
+}
+
+#sidebar {
+  width: 300px;
+  height: 100%;
+  background: #212121;
+  position: fixed;
+  left: 0;
+  top: 65px;
+  bottom: 0;
+  padding: 25px;
+  display: inline-block;
+  z-index: 1;
+  @include box-shadow( 1px 0 2px rgba(0,0,0, .3), inset -1px 0 0 rgba(#fff, .2));
+
+  .stream-controls {
+    background: rgba(#181818, .98);
+    bottom: 0;
+    left: 0;
+    height: 100px;
+    width: 300px;
+    position: fixed;
+    z-index: 9998;
+    display: block;
+
+    .icon-headphones {
+      cursor: pointer;
+      position: absolute;
+      bottom: 30px;
+      left: 135px;
+      font-size: 30px;
+      color: $pink;
+    }
+  }
+}
+
+.now-playing {
+  text-shadow: 0 1px 1px rgba(#000, .8);
+
+  .album-art {
+    overflow: hidden;
+    border-radius: 2px;
+    display: block;
+    position: relative;
+    border: 1px solid rgba(0,0,0, 0.7);
+    @include box-shadow(0 1px 3px rgba(#000, .4));
+
+    &:before {
+        display:block;
+        content:'';
+        position:absolute;
+        width:100%;
+        height:100%;
+        @include box-shadow(inset 0px 0px 0px 1px rgba(255,255,255,0.15));
+    }
+
+    img {
+      width: 250px;
+      height: 250px;
+      display: block;
+    }
+  }
+
+  .album-info {
+    font-weight: 300;
+    font-size: 14px;
+    color: #666;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid #111;
+    border-bottom: 1px solid #363636;
+    margin: 15px 0;
+  }
+
+  .now-playing-meta {
+    padding: 0 8px;
+
+    h2 {
+      font-weight: 300;
+      font-size: 24px;
+      line-height: 24px;
+      color: #fff;
+      margin: 15px 0 5px;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+//
+
+.tune-fans {
+  margin-top: 40px;
+
+  h3 {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .fans {
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #1a1a1a;
+    border: 1px solid #000;
+    box-shadow: 0 1px 0 #383838;
+    border-radius: 3px;
+    width: 100%;
+    color: #666;
+    font-size: 12px;
+
+    ul {
+      li {
+        display: inline;
+
+        img {
+          margin: 1px;
+          width: 25px;
+          @include border-radius(1px);
+        }
+      }
+    }
+  }
+}
+
+// A list of iconned actions that appears in the Now Playing portion of the sidebar.
+.now-playing-actions {
+  background-color: #1a1a1a;
+  border: 1px solid #000;
+  box-shadow: 0 1px 0 #383838;
+  border-radius: 3px;
+
+  li {
+    border-top: 1px solid #282828;
+    border-bottom: 1px solid #000;
+
+    &:first-child { border-top: 0; }
+    &:last-child { border-bottom: 0; }
+
+    color: #999;
+    font-size: 13px;
+    padding: 8px;
+    display: block;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    transition: all .2s ease;
+
+    a { color: #999; }
+    span { margin-right: 3px; }
+
+    &:hover {
+      text-decoration: none;
+      background-color: #222;
+      cursor: pointer;
+    }
+
+    &:hover span { color: $pink; }
+  }
+}
+
+#queue {
+  margin-top: 56px;
+  margin-left: 300px;
+  background: #f9f9f9;
+
+  .heading {
+    padding: 20px;
+    @include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
+    color: #959595;
+
+    .title {
+        font-size: 24px;
+        display: block;
+        line-height: 24px;
+        font-weight: 400;
+        color: #000;
+    }
+  }
+
+  .song {
+    position: relative;
+    padding: 20px;
+    display: block;
+    width: 100%;
+    clear: both;
+    vertical-align: middle;
+    @include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
+    @include transition(background-color 0.5s ease);
+
+    &:hover {
+      background-color: #f7edf8;
+      @include box-shadow(inset 0 1px 0 #e1e1e1, inset 0 2px 0 #fdf3fd, 0 1px 0px #e1e1e1, 0 2px 0px #fff);
+
+      .controls {
+        display: inline-block;
+        float: right;
+      }
+    }
+
+    .album-art {
+      overflow: hidden;
+      border-radius: 1px;
+      position: relative;
+      border: 1px solid #e1e1e1;
+      margin-right: 20px;
+
+      &:before {
+          display:block;
+          content:'';
+          position:absolute;
+          width:100%;
+          height:100%;
+          -moz-box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.15);
+          -webkit-box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.15);
+          box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.15);
+      }
+
+      img {
+            display: block;
+            width: 80px;
+            height: 80px;
+          }
+    }
+
+    .album-download {
+      position: absolute;
+      left: 80px;
+      top: 82px;
+      color: #fff;
+      text-shadow: 0 0 3px #000;
+      -webkit-transition: all .2s ease;
+      -moz-transition: all .2s ease;
+      transition: all .2s ease;
+
+      &:hover {
+        color: $pink;
+      }
+    }
+
+
+    > a {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .title {
+        font-size: 24px;
+        display: block;
+        line-height: 24px;
+        font-weight: 400;
+        margin: 5px -2px;
+
+      a {
+        color: #333;
+      }
+    }
+
+    .details {
+      display: inline-block;
+      vertical-align: middle;
+      max-width: 500px;
+    }
+
+    .duration {
+      color: #959595;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 24px;
+      margin-left: 10px;
+    }
+
+      .controls {
+        padding: 8px;
+        height: 100%;
+        margin-top: 25px;
+        display: none;
+
+        span {
+          margin-left: 6px;
+        }
+
+        a {
+          font-size: 13px;
+          color: #afafaf;
+
+          &:hover {
+            color: lighten(#cc33cc, 20%);
+          }
+        }
+
+        a + a {
+          margin-left: 10px;
+        }
+
+        .unlike, .like, .add, .remove, .icon-cloud-download {
+          color: #ccc;
+          cursor: pointer;
+          font-size: 18px;
+          -webkit-transition: all .2s ease;
+          -moz-transition: all .2s ease;
+          transition: all .2s ease;
+        }
+        .unlike, .remove {
+          color: $pink;
+          &:hover { color: lighten($pink, 20%); }
+        }
+        .like, .add, .icon-cloud-download {
+          &:hover { color: $pink; }
+        }
+      }
+
+    .meta {
+      float: left;
+
+      .artist {
+        display: inline-block;
+
+        &:hover .icon-user { color: $pink; }
+      }
+
+      .album {
+        &:hover .icon-music { color: $pink; }
+      }
+
+      .betweener {
+        color: #959595;
+        padding: 0 5px;
+        display: inline-block;
+      }
+
+      .icon-user, .icon-music {
+        margin-right: 6px;
+        color: #ccc;
+        -webkit-transition: all .2s ease;
+        -moz-transition: all .2s ease;
+        transition: all .2s ease;
+      }
+    }
+  }
+
+  .album-details {
+    padding: 20px;
+
+    .title {
+      display: block;
+      margin-top: 10px;
+      font-size: 24px;
+      line-height: 30px;
+    }
+
+    .listing {
+      margin-top: 20px;
+      margin-left: 170px;
+      list-style: decimal inside none;
+
+      .track-title {
+        display: inline-block;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 5px 0;
+      }
+
+      a {
+        color: #595959;
+        padding-left: 10px;
+
+        &:hover {
+          color: $pink;
+        }
+      }
+
+      li {
+        color: #595959;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 28px;
+        padding: 4px;
+        margin-top: 2px;
+        @include box-shadow(0 1px 0 rgba(#000, .1), 0 2px 0px rgba(#fff, 1));
+      }
+      .controls {
+        float: right;
+      }
+
+      .duration {
+        float: right;
+        margin-right: 20px;
+      }
+    }
+
+    .sidebar {
+      width: 150px;
+      display: inline-block;
+      float: left;
+      margin-right: 20px;
+
+      ul {
+        width: 100%;
+
+        li {
+          color: #999;
+          width: 100%;
+          background-color: #f6f6f6;
+          @include background-image(linear-gradient(top, rgb(246, 246, 246), rgb(232, 232, 232)));
+          @include filter-gradient(rgb(246, 246, 246), rgb(232, 232, 232), vertical);
+          @include box-shadow(inset 0 1px 0 #fff, 0 1px 1px rgba(#000, .08), inset 0 0 2px rgba(#fff,.9));
+          border: 1px solid #bfbfbf;
+          display: inline-block;
+          padding: 10px;
+          @include border-radius(2px);
+          font-size: 12px;
+          text-align: center;
+          margin: 3px 0;
+        }
+      }
+
+      img {
+        width: 150px;
+        height: 150px;
+        border: 1px solid #e1e1e1;
+        margin-right: 20px;
+      }
+    }
+
+    .list {
+      display: inline-block;
+    }
+  }
+
+}
+
+.tabs {
+  margin: 10px 0 -12px 0;
+
+  a {
+    margin-right: 10px;
+    padding: 5px;
+  }
+
+  a:first-child { margin-left: -5px; }
+  a.active { border-bottom: 1px solid $pink;}
+}
+
+.album-list {
+  margin-top: 20px;
+
+  .album a {
+    display: inline;
+    padding: 0px 0 20px 20px;
+    float: left;
+  }
+
+  .name {
+    padding: 5px 0;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.tracklist {
+  margin: 15px 20px;
+  list-style-type: decimal;
+  width: 700px;
+  color: #666;
+
+  th {
+    padding: 10px 0;
+    color: #333;
+    font-weight: bold;
+    border-bottom: 0;
+  }
+
+  td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+
+    &.number {
+      text-align: right;
+      width: 20px;
+    }
+
+    &.title { width: 250px; }
+    &.album { padding-left: 0; }
+    &.duration { width: 50px; }
+
+    &.like, &.queue, &.download {
+      color: #ccc;
+      font-size: 20px;
+      width: 20px;
+      padding: 5px;
+
+      a { color: #ccc; }
+    }
+
+    &.queue {
+      padding-right: 15px;
+    }
+  }
+
+  a {
+    color: #666;
+  }
+}
+
+@media all and (max-width: 500) {
+/* define mobile specific styles come here */
+  header {
+    background-color: red !important;
+  }
+}

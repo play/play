@@ -1,8 +1,11 @@
-.bundle
 .sass-cache
-bin
 config/play.yml
 config/mpd.conf
-vendor
-public/art
-!public/art/.gitkeep
+public/images/art
+
+/.bundle
+/vendor/bundle
+/vendor/gems
+/log/*
+/tmp/*
+/db/*.sqlite3
