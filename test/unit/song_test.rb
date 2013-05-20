@@ -1,6 +1,6 @@
-require File.expand_path("../../helper", __FILE__)
+require 'test_helper'
 
-context "Song" do
+class SongTest < ActiveSupport::TestCase
   setup do
     @song = Song.new('Justice/Cross/Stress.mp3')
   end
@@ -74,10 +74,10 @@ context "Song" do
   end
 
   test "queued?" do
-    Play::Queue.clear
+    PlayQueue.clear
     assert !@song.queued?
 
-    client.add(@song.path)
+    Play.client.add(@song.path)
     assert @song.queued?
   end
 

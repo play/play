@@ -1,6 +1,6 @@
-require File.expand_path("../../helper", __FILE__)
+require 'test_helper'
 
-context "Artist" do
+class ArtistTest < ActiveSupport::TestCase
   setup do
     @artist = Artist.new('Justice')
   end

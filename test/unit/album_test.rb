@@ -1,6 +1,6 @@
-require File.expand_path("../../helper", __FILE__)
+require 'test_helper'
 
-context "Album" do
+class AlbumTest < ActiveSupport::TestCase
   setup do
     @album = Album.new('Justice', 'Cross')
   end

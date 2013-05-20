@@ -109,7 +109,7 @@ class Song
   #
   # Returns a Boolean.
   def queued?
-    Queue.songs.include?(self)
+    PlayQueue.songs.include?(self)
   end
 
   # Get the file name for the songs cached album art image.

@@ -17,6 +17,10 @@ class Artist
     end
   end
 
+  def self.client
+    Play.client
+  end
+
   def client
     Play.client
   end

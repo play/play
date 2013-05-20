@@ -1,9 +1,8 @@
-require File.expand_path("../../helper", __FILE__)
+require 'test_helper'
 
-context "User" do
+class UserTest < ActiveSupport::TestCase
   setup do
-    @user = User.find_by_login('holman')
-    @user.likes.delete_all
+    @user = User.make!(:email => 'holman@example.com')
   end
 
   test "has attributes" do
@@ -11,7 +10,7 @@ context "User" do
   end
 
   test "has plays" do
-    assert @user.plays.present?
+    assert_equal 0, @user.plays.count
   end
 
   test "plays a song" do
@@ -52,11 +51,4 @@ context "User" do
   test "has a gravatar" do
     assert_equal '54e4ab9ced3fd1f3f5b20ab2f8201b73', @user.gravatar_id
   end
-
-  test "generates a new token" do
-    old_token = @user.token
-    @user.generate_token
-    assert_not_equal old_token, @user.token
-  end
-
 end

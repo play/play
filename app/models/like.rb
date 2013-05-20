@@ -1,5 +1,5 @@
 class Like < ActiveRecord::Base
   belongs_to :user
 
-  attr_accessible :song_path
+  attr_accessible :song_path, :user
 end

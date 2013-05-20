@@ -10,6 +10,9 @@ system 'cp -R     test/music /tmp/play-test'
 system './test/daemon/start.sh'
 
 class ActiveSupport::TestCase
+end
+
+class ActionController::TestCase
   include Devise::TestHelpers
 end
 
