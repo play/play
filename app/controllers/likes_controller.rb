@@ -8,10 +8,12 @@ class LikesController < ApplicationController
   end
 
   def create
-    current_user.like(params[:path])
+    current_user.like(params[:id])
+    render :nothing => true
   end
 
   def destroy
-    current_user.unlike(params[:path])
+    current_user.unlike(params[:id])
+    render :nothing => true
   end
 end

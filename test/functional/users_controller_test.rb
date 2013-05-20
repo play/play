@@ -13,4 +13,11 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
     assert response.body.include?('holman')
   end
+
+  test "user page with an invalid user" do
+    get :show, :login => 'trolololol'
+
+    assert_response :not_found
+    assert response.body.include?("doesn't exist")
+  end
 end

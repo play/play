@@ -10,4 +10,8 @@ protected
       redirect_to user_omniauth_authorize_path(:github)
     end
   end
+
+  def render_404
+    render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
+  end
 end

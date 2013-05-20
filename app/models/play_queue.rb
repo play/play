@@ -44,6 +44,10 @@ class PlayQueue
     Client.new.clear
   end
 
+  def self.client
+    Play.client
+  end
+
   # List all of the songs in the Queue.
   #
   # Returns an Array of Songs.
