@@ -647,8 +647,10 @@ section[role="nav"] {
       font-size: 20px;
       width: 20px;
       padding: 5px;
+      cursor: pointer;
 
       a { color: #ccc; }
+      a:hover, span:hover { color: $pink; }
     }
 
     &.queue {
@@ -656,9 +658,8 @@ section[role="nav"] {
     }
   }
 
-  a {
-    color: #666;
-  }
+  a { color: #666; }
+  a:hover { color: $pink; }
 }
 
 @media all and (max-width: 500) {
