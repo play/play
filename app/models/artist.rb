@@ -29,7 +29,7 @@ class Artist
   #
   # Returns an Array of Songs.
   def songs
-    client.search([:artist, name]).map do |path|
+    client.find([:artist, name]).map do |path|
       Song.new(path)
     end.reject{ |song| song.title.blank? }
   end
