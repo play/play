@@ -4,7 +4,7 @@
       <img src="/images/art/<%= @album.art %>" class="album-art">
       <ul>
         <li>Queue Album</li>
-        <li>Download Album</li>
+        <li><a href="/artists/<%= CGI.escape(@album.artist.name) %>/albums/<%= CGI.escape(@album.name) %>/download">Download Album</a></li>
       </ul>
     </div>
     <div>
