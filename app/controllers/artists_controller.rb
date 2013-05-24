@@ -6,7 +6,7 @@ class ArtistsController < ApplicationController
 
   def songs
     @artist = Artist.new(CGI.unescape(params[:name]))
-    @songs = @artist.songs
+    @songs = @artist.songs.sort_by { |song| song.title }
     render :show
   end
 end
