@@ -7,7 +7,9 @@ Until we're further along, here's what you need to know:
     script/bootstrap
     script/play
 
-`script/play` will run two servers: `web` and `music`.
+`script/play` will run two servers: `web` and `music`. `script/bootstrap` should
+let you know if there was a problem setting things up, but if you run into
+trouble, look at the contents of `/tmp/play-bootstrap`.
 
 You can shut everything down with:
 
