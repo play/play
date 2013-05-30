@@ -25,6 +25,10 @@ Play::Application.routes.draw do
     delete ''          => 'queue#destroy'
   end
 
+  match '/auth/:provider/callback', to: 'sessions#create'
+  match '/auth/failure'         => 'sessions#failure'
+  match '/logout'               => 'sessions#logout'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
