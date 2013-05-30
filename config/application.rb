@@ -9,6 +9,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+require_relative '../app/api/api'
+
 module Play
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
