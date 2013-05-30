@@ -10,6 +10,8 @@ gem 'mysql2',     '~> 0.3.11'
 gem 'devise',     '~> 2.2.4'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'sinatra'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
