@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  devise :token_authenticatable, :rememberable, :omniauthable, :omniauth_providers => [:github]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :login, :email, :remember_me, :provider, :uid
