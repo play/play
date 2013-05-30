@@ -3,12 +3,20 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_auth
 
+  helper_method :current_user
+
+  def current_user
+    @current_user ||= User.find_by_login(session[:github_login])
+  end
+
 protected
 
+
   def require_auth
-#     if !user_signed_in?
-#       redirect_to user_omniauth_authorize_path(:github)
-#     end
+    if !current_user
+      session[:return_to] = request.url
+      redirect_to '/auth/github'
+    end
   end
 
   def render_404
