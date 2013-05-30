@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  devise :token_authenticatable, :rememberable, :omniauthable, :omniauth_providers => [:github]
-
   # Setup accessible (or protected) attributes for your model
   attr_accessible :login, :email, :remember_me, :provider, :uid
   validates_presence_of :login
@@ -9,21 +7,13 @@ class User < ActiveRecord::Base
   has_many :song_plays, :order => 'song_plays.created_at DESC'
   has_many :likes
 
-  def self.find_for_github_oauth(auth, signed_in_resource=nil)
+  def self.find_for_github_oauth(auth)
     user = User.where(:login => auth.info.nickname).first
     unless user
       user = User.create(:login    => auth.info.nickname,
                          :email    => auth.info.email)
     end
     user
-  end
-
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.github_data"] && session["devise.github_data"]["info"]["nickname"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
   end
 
   # The songs this user has requested.
