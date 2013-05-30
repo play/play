@@ -2,6 +2,7 @@
 config/play.yml
 config/mpd.conf
 public/images/art
+bin
 
 /.bundle
 /vendor/bundle
