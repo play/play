@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
 protected
 
   def require_auth
-    if !user_signed_in?
-      redirect_to user_omniauth_authorize_path(:github)
-    end
+#     if !user_signed_in?
+#       redirect_to user_omniauth_authorize_path(:github)
+#     end
   end
 
   def render_404
