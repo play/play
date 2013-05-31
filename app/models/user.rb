@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :song_plays, :order => 'song_plays.created_at DESC'
   has_many :likes
 
+  after_commit :generate_token, :on => :create
+
   def self.find_for_github_oauth(auth)
     user = User.where(:login => auth.info.nickname).first
     unless user
@@ -79,4 +81,12 @@ class User < ActiveRecord::Base
   def gravatar_id
     Digest::MD5.hexdigest(email) if email
   end
+
+  # Public: Generates and saves a new authentication token for this user.
+  #
+  # Returns nothing.
+  def generate_token
+    update_attribute(:token, Digest::MD5.hexdigest(login + Time.now.to_i.to_s)[0..4])
+  end
+
 end
