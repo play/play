@@ -32,6 +32,7 @@ gem 'thin',                        '~> 1.5.0'
 
 group :test do
   gem 'machinist'
+  gem 'rack-test'
 end
 
 # To use ActiveModel has_secure_password

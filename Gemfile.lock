@@ -160,6 +160,7 @@ DEPENDENCIES
   mysql2 (~> 0.3.11)
   omniauth
   omniauth-github
+  rack-test
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   sinatra
