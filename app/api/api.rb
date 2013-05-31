@@ -1,3 +1,8 @@
+require_relative './controls'
+require_relative './library'
+require_relative './queue'
+require_relative './users'
+
 module Play
   class Api < Sinatra::Base
 
