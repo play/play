@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
   #
   # Returns nothing.
   def generate_token
-    update_attribute(:token, Digest::MD5.hexdigest(login + Time.now.to_i.to_s)[0..4])
+    update_attribute(:token, Digest::MD5.hexdigest(login + Time.now.to_i.to_s + rand(999999).to_s)[0..4])
   end
 
 end
