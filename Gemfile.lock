@@ -147,6 +147,7 @@ GEM
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     websocket-driver (0.2.0)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -168,3 +169,4 @@ DEPENDENCIES
   taglib-ruby (~> 0.6.0)
   thin (~> 1.5.0)
   uglifier (>= 1.0.3)
+  yajl-ruby (~> 1.1.0)

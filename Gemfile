@@ -10,6 +10,7 @@ gem 'mysql2',     '~> 0.3.11'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'sinatra'
+gem "yajl-ruby", "~> 1.1.0"
 
 
 # Gems used only for assets and not required
