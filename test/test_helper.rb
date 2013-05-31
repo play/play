@@ -23,7 +23,7 @@ class ActionController::TestCase
 end
 
 def app
-  Play::App
+  Play::Application
 end
 
 module Play
