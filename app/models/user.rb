@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :song_plays, :order => 'song_plays.created_at DESC'
   has_many :likes
 
-  after_commit :generate_token, :on => :create
+  after_create :generate_token
 
   def self.find_for_github_oauth(auth)
     user = User.where(:login => auth.info.nickname).first
