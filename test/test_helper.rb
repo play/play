@@ -13,7 +13,9 @@ class ActiveSupport::TestCase
 end
 
 class ActionController::TestCase
-  include Devise::TestHelpers
+  def sign_in(user)
+    session[:github_login] = user.login
+  end
 end
 
 def app
