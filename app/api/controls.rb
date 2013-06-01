@@ -2,7 +2,7 @@ module Play
   class Api < Sinatra::Base
 
     get "/now_playing" do
-      song = Play::Song.now_playing
+      song = Song.now_playing
       JSON::dump({:now_playing => song.try(:to_hash)})
     end
 
