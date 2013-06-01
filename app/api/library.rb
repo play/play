@@ -3,25 +3,28 @@ module Play
     get "/search" do
     end
 
-    get "/artist/:name" do
+    get "/artists/:name" do
     end
 
-    get "/artist/:artist/album/:album" do
+    get "/artists/:name/albums" do
     end
 
-    get "/song/:id" do
+    get "/artists/:artist_name/albums/:name" do
     end
 
-    get "/song/:id/download" do
+    get "/artists/:artist_name/albums/:name/download" do
     end
 
-    get "/artist/:artist/album/:album/download" do
+    get "/songs/:id/download" do
     end
 
-    post "/like" do
+    get "/artists/:name/songs" do
     end
 
-    delete "/like" do
+    post "/likes" do
+    end
+
+    delete "/likes" do
     end
 
   end
