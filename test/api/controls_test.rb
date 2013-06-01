@@ -25,6 +25,10 @@ class ControlsTest < ActiveSupport::TestCase
       end
 
       test "when something is playing" do
+        @song = Song.new('Justice/Cross/Stress.mp3')
+        PlayQueue.add(@song,@user)
+        Play.client.play
+
         authorized_get '/api/now_playing', @user
         parsed_response = parse_response(last_response)
 
@@ -37,7 +41,7 @@ class ControlsTest < ActiveSupport::TestCase
         assert_equal 1, keys.size
         assert keys.include? 'now_playing'
 
-        assert_nil parsed_response['now_playing']
+        assert_song_representation parsed_response['now_playing']
       end
 
     end
