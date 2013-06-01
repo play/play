@@ -89,4 +89,17 @@ class SongTest < ActiveSupport::TestCase
 
     assert_not_empty song.likes
   end
+
+  test "to_hash" do
+    song = Song.new('like/me')
+    song_hash = song.to_hash
+
+    hash_keys = song_hash.keys
+    assert_equal 5, hash_keys.size
+    assert hash_keys.include?(:title)
+    assert hash_keys.include?(:artist)
+    assert hash_keys.include?(:album)
+    assert hash_keys.include?(:seconds)
+    assert hash_keys.include?(:path)
+  end
 end

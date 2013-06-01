@@ -160,4 +160,18 @@ class Song
   def likes
     Like.where(:song_path => path)
   end
+
+  # Hash representation of the song.
+  #
+  # Returns a Hash.
+
+  def to_hash
+    { :title => title,
+      :artist => artist_name,
+      :album => album_name,
+      :seconds => seconds,
+      :path => path
+    }
+  end
+
 end
