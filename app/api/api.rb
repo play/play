@@ -1,3 +1,5 @@
+require 'yajl'
+
 require_relative './controls'
 require_relative './library'
 require_relative './queue'
