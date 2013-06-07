@@ -74,8 +74,8 @@ else
   echo "    and set up your application. Unless you're using a different"
   echo "    hostname, you'll want to use values that look like:"
   echo ""
-  echo "      Main URL:     http://localhost:5050"
-  echo "      Callback URL: http://localhost:5050/auth/github/callback"
+  echo "      Main URL:     http://localhost:3030"
+  echo "      Callback URL: http://localhost:3030/auth/github/callback"
   echo ""
 
   user "What is your GitHub client ID? › "
