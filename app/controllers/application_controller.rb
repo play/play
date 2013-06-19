@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
 
 protected
 
-
+  # We require login to use Play. deal_with_it.gif.
+  #
+  # Redirects to the login page if the user isn't logged in.
   def auth_required
     if !current_user
       session[:return_to] = request.url
