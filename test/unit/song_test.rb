@@ -89,4 +89,13 @@ class SongTest < ActiveSupport::TestCase
 
     assert_not_empty song.likes
   end
+
+  test "song_plays" do
+    song = Song.new('like/me')
+    assert_empty song.song_plays
+
+    SongPlay.create(:user => User.new, :song_path => song.path)
+
+    assert_not_empty song.song_plays
+  end
 end

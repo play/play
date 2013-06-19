@@ -160,4 +160,12 @@ class Song
   def likes
     Like.where(:song_path => path)
   end
+
+  # The plays of this Song.
+  #
+  # Returns an Array of SongPlays.
+  def song_plays
+    SongPlay.where(:song_path => path)
+  end
+  alias :plays :song_plays
 end
