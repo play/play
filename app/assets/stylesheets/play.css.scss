@@ -3,6 +3,7 @@
 @import "compass/reset";
 @import "compass/css3";
 @import "compass/css3/box-sizing";
+@import "compass/css3/transition";
 @import "vars";
 @import "media";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
@@ -28,6 +29,7 @@ html {
 a {
   color: $pink;
   text-decoration: none;
+  @include transition(all .2s ease);
 
   &:hover {
     color: lighten($pink, 20%);
@@ -61,9 +63,6 @@ a {
     border-right: 1px solid #666;
     color: $pink;
     font-weight: 100;
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    transition: all .2s ease;
     cursor: pointer;
 
     &:hover {
@@ -82,9 +81,7 @@ a {
     font-weight: 100;
     padding: 10px 15px;
     border-right: 1px solid #666;
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    transition: all .2s ease;
+    @include transition(all .2s ease);
 
     img {
       width: 25px;
@@ -303,9 +300,7 @@ section[role="nav"] {
     font-size: 13px;
     padding: 8px;
     display: block;
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    transition: all .2s ease;
+    @include transition(all .2s ease);
 
     a { color: #999; }
     span { margin-right: 3px; }
@@ -405,9 +400,7 @@ section[role="nav"] {
       top: 82px;
       color: #fff;
       text-shadow: 0 0 3px #000;
-      -webkit-transition: all .2s ease;
-      -moz-transition: all .2s ease;
-      transition: all .2s ease;
+      @include transition(all .2s ease);
 
       &:hover {
         color: $pink;
@@ -473,9 +466,7 @@ section[role="nav"] {
           color: #ccc;
           cursor: pointer;
           font-size: 18px;
-          -webkit-transition: all .2s ease;
-          -moz-transition: all .2s ease;
-          transition: all .2s ease;
+          @include transition(all .2s ease);
         }
         .unlike, .remove {
           color: $pink;
@@ -508,9 +499,7 @@ section[role="nav"] {
       .icon-user, .icon-music {
         margin-right: 6px;
         color: #ccc;
-        -webkit-transition: all .2s ease;
-        -moz-transition: all .2s ease;
-        transition: all .2s ease;
+        @include transition(all .2s ease);
       }
     }
   }
