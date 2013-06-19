@@ -347,9 +347,11 @@ section[role="nav"] {
     }
   }
 
-  h2 {
-    font-size: 18px;
-    padding: 20px 0 10px 20px;
+  &.show_song {
+    h2 {
+      font-size: 18px;
+      padding: 20px 0 10px 20px;
+    }
   }
 
   .song {
