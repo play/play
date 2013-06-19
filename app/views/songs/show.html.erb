@@ -11,5 +11,9 @@
         <img src="http://www.gravatar.com/avatar/<%= like.user.gravatar_id %>?s=100" alt="<%= like.user.login %>" />
       </a>
     <% end %>
+
+    <% if @song.likes.empty? %>
+      <p>No one likes this song. It's probably a country music song or something.</p>
+    <% end %>
   </div>
 </div>
