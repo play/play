@@ -56,16 +56,41 @@ a {
     background-size: 140px 50px;
   }
 
+  .stream-controls {
+    padding: 10px;
+    border-right: 1px solid #666;
+    color: $pink;
+    font-weight: 100;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    transition: all .2s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: lighten($pink, 20%)
+    }
+
+    .icon-headphones {
+      font-size: 25px;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+
   #login {
     margin-right: 10px;
-    padding-right: 10px;
-    border-right: 1px solid #555;
+    font-weight: 100;
+    padding: 10px 15px;
+    border-right: 1px solid #666;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    transition: all .2s ease;
 
     img {
       width: 25px;
       vertical-align: top;
       margin-top: 2px;
-      margin-left: 5px;
+      margin-right: 5px;
       border-radius: 3px;
     }
   }
@@ -165,26 +190,6 @@ section[role="nav"] {
   display: inline-block;
   z-index: 1;
   @include box-shadow( 1px 0 2px rgba(0,0,0, .3), inset -1px 0 0 rgba(#fff, .2));
-
-  .stream-controls {
-    background: rgba(#181818, .98);
-    bottom: 0;
-    left: 0;
-    height: 100px;
-    width: 300px;
-    position: fixed;
-    z-index: 9998;
-    display: block;
-
-    .icon-headphones {
-      cursor: pointer;
-      position: absolute;
-      bottom: 30px;
-      left: 135px;
-      font-size: 30px;
-      color: $pink;
-    }
-  }
 }
 
 .now-playing {
