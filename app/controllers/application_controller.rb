@@ -22,12 +22,14 @@ protected
     end
   end
 
-  # If the music server isn't actually running, tell them.
+  # Checks to see if the music server is set up correctly.
   #
-  # Renders the music_missing action if mpd isn't running.
+  # Redirects to an appropriate error page if something is fubar.
   def music_required
     if !Play.client.running?
       return render :template => 'shared/no_music'
+    elsif PlayQueue.songs.empty?
+      return render :template => 'shared/nothing_queued'
     end
   end
 
