@@ -1,5 +1,5 @@
 <%
-  song = Song.now_playing
+  song = PlayQueue.songs.first
   return if !song
 %>
 <div id="sidebar">
