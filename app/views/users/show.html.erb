@@ -2,10 +2,10 @@
   <div class="heading">
     Details for:
     <span class="title"><%= @user.login %></span>
-    <ul>
-      <li><a href="/<%= @user.login %>">History</a></li>
-      <li><a href="/<%= @user.login %>/likes">Likes</a></li>
-    </ul>
+    <div class="tabs">
+      <a class="<%= 'active' if controller.controller_name != 'likes' %>" href="/<%= @user.login %>">History</a>
+      <a class="<%= 'active' if controller.controller_name == 'likes' %>" href="/<%= @user.login %>/likes">Likes</a>
+    </div>
   </div>
 
   <%= render :partial => 'shared/song', :collection => @songs %>
