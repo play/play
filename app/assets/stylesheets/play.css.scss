@@ -662,6 +662,30 @@ section[role="nav"] {
   a:hover { color: $pink; }
 }
 
+.no_music {
+  margin-top: 200px;
+  padding: 50px;
+  text-align: center;
+  font-weight: 100;
+
+  h1 {
+    font-size: 42px;
+  }
+  p {
+    margin-top: 15px;
+    font-size: 20px;
+  }
+  code {
+    background-color: #ccc;
+    padding: 0 5px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
+}
+
 @media all and (max-width: 500) {
 /* define mobile specific styles come here */
   header {

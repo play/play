@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :auth_required
+  before_filter :auth_required, :music_required
 
   helper_method :current_user
 
@@ -19,6 +19,15 @@ protected
     if !current_user
       session[:return_to] = request.url
       redirect_to '/auth/github'
+    end
+  end
+
+  # If the music server isn't actually running, tell them.
+  #
+  # Renders the music_missing action if mpd isn't running.
+  def music_required
+    if !Play.client.running?
+      return render :template => 'shared/no_music'
     end
   end
 
