@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :require_auth
+  before_filter :auth_required
 
   helper_method :current_user
 
@@ -9,10 +9,11 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_login(session[:github_login])
   end
 
+
 protected
 
 
-  def require_auth
+  def auth_required
     if !current_user
       session[:return_to] = request.url
       redirect_to '/auth/github'
