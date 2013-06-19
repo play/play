@@ -26,6 +26,8 @@ protected
   #
   # Redirects to an appropriate error page if something is fubar.
   def music_required
+    return if Rails.env.test?
+
     if !Play.client.running?
       return render :template => 'shared/no_music'
     elsif PlayQueue.songs.empty?
