@@ -10,6 +10,7 @@ gem 'sqlite3'
 gem 'taglib-ruby',      '~> 0.6.0', :require => 'taglib'
 gem 'thin',             '~> 1.5.0'
 gem 'turbolinks',       '~> 1.2.0'
+gem 'will_paginate',    '~> 3.0.4'
 
 group :assets do
   gem 'sass-rails',     '~> 3.2.3'

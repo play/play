@@ -4,4 +4,5 @@
   </div>
 
   <%= render :partial => 'shared/song', :collection => @songs %>
+  <%= will_paginate @songs, :inner_window => 2, :previous_label => '', :next_label => '' %>
 </div>

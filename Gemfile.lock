@@ -143,6 +143,7 @@ GEM
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     websocket-driver (0.2.0)
+    will_paginate (3.0.4)
 
 PLATFORMS
   ruby
@@ -163,3 +164,4 @@ DEPENDENCIES
   thin (~> 1.5.0)
   turbolinks (~> 1.2.0)
   uglifier (>= 1.0.3)
+  will_paginate (~> 3.0.4)

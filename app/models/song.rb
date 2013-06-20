@@ -42,7 +42,8 @@ class Song
 
   # Searches for matching Songs.
   #
-  # options - An Array of mpc-friendly options to search on.
+  # conditions - An Array of mpc-friendly options to search on.
+  # options    - A Hash of options, like `current_page`, for pagination.
   #
   # Examples
   #
@@ -50,11 +51,23 @@ class Song
   #   find(:title, 'Stress')
   #   find(:album, 'Cross')
   #
-  # Returns an Array of Songs. Maxes out at a hard fifty... deal with it.
-  def self.find(options)
-    results = Play.client.search(options)[0..50]
-    results.map { |path| Song.new(path) }.
-      reject { |song| song.title.blank? }
+  # Returns a WillPaginate::Collection of Songs.
+  def self.find(conditions, options={})
+    per_page     = 25
+    current_page = options[:current_page] || 1
+    index        = (current_page.to_i * per_page) - per_page
+
+    results = Play.client.search(conditions)
+    total_results = results.count
+    results = results[index..index+per_page-1]
+
+    WillPaginate::Collection.create(current_page, per_page, total_results) do |pager|
+      return pager.replace([]) if !results
+
+      results = results.map { |path| Song.new(path) }.
+        reject { |song| song.title.blank? }
+      pager.replace(results)
+    end
   end
 
   # What's currently playing?

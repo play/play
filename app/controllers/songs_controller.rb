@@ -25,7 +25,7 @@ class SongsController < ApplicationController
 
   def search
     @filter = (params[:filter] || :any).to_sym
-    @songs = Song.find([@filter,params[:q]])
+    @songs = Song.find([@filter,params[:q]], :current_page => params[:page])
   end
 
   def download

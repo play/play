@@ -709,6 +709,45 @@ section[role="nav"] {
   }
 }
 
+.pagination {
+  margin: 50px;
+  text-align: center;
+
+  a, em {
+    font-size: 16px;
+    font-weight: 100;
+    padding: 5px;
+  }
+
+  .disabled {
+    color: #ccc;
+    padding: 5px;
+  }
+
+  .previous_page, .next_page {
+    font-family: 'FontAwesome';
+  }
+
+  .previous_page:before {
+    content: "\F053";
+  }
+
+  .next_page:before {
+    content: '\F054';
+  }
+
+  em {
+    background-color: lighten($pink,40%);
+    color: darken($pink, 30%);
+    border-radius: 5px;
+  }
+
+  .gap {
+    color: #999;
+    font-weight: 100;
+  }
+}
+
 @media all and (max-width: 500) {
 /* define mobile specific styles come here */
   header {
