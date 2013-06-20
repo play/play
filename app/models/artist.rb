@@ -60,4 +60,8 @@ class Artist
     return false if other.class != self.class
     name == other.name
   end
+
+  def to_param
+    name
+  end
 end

@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   def show
-    @artist = Artist.new(CGI.unescape(params[:artist_name]))
-    @song   = @artist.songs.find{|song| song.title == CGI.unescape(params[:title])}
+    @artist = Artist.new(params[:artist_name])
+    @song   = @artist.songs.find{|song| song.title == params[:title]}
   end
 
   def create
@@ -29,7 +29,7 @@ class SongsController < ApplicationController
   end
 
   def download
-    song = Song.new(CGI.unescape(params[:path]))
+    song = Song.new(params[:path])
     send_file(File.join(Play.music_path,song.path), :disposition => 'attachment')
   end
 end

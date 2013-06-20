@@ -181,4 +181,8 @@ class Song
     SongPlay.where(:song_path => path)
   end
   alias :plays :song_plays
+
+  def to_param
+    title
+  end
 end

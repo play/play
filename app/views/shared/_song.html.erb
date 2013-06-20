@@ -6,12 +6,15 @@
     <span class="icon-cloud-download"></span>
   </a>
   <div class="details">
-    <h2 class="title"><a href="<%= song.escaped_path %>"><%= song.title %></a><span class="duration"> (<%= song.duration %>)</span></h2>
+    <h2 class="title">
+      <%= link_to song.title, song_path(song.artist, song) %>
+      <span class="duration"> (<%= song.duration %>)</span>
+    </h2>
 
     <div class="meta">
-      <a href="<%= song.escaped_artist_path %>" class="artist"><%= song.artist_name %></a>
+      <a href="<%= artist_path(song.artist) if song.artist %>" class="artist"><%= song.artist_name %></a>
       <span class="betweener">-</span>
-      <a href="<%= song.escaped_album_path %>" class="album"><%= song.album_name %></a>
+      <a href="<%= album_path(song.album) if song.album %>" class="album"><%= song.album_name %></a>
     </div>
   </div>
   <div class="controls">

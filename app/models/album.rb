@@ -69,4 +69,8 @@ class Album
     return false if other.class != self.class
     name == other.name && artist.name == other.artist.name
   end
+
+  def to_param
+    name
+  end
 end

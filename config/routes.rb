@@ -1,9 +1,9 @@
 Play::Application.routes.draw do
   match "search" => 'songs#search'
-  match "artists/:artist_name/songs/:title" => 'songs#show'
-  match "artists/:artist_name/albums/:name" => 'albums#show'
-  match "artists/:name" => 'artists#show'
-  match "artists/:name/songs" => 'artists#songs'
+  match "artists/:artist_name/songs/:title" => 'songs#show', :as => 'song'
+  match "artists/:artist_name/albums/:name" => 'albums#show', :as => 'album'
+  match "artists/:artist_name/songs" => 'artists#songs', :as => 'artist_songs'
+  match "artists/:artist_name" => 'artists#show', :as => 'artist'
   match "images/art/:id.png" => 'images#art'
 
   match 'artists/:artist_name/albums/:name/download' => 'albums#download'
