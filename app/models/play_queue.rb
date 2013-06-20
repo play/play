@@ -7,7 +7,12 @@ class PlayQueue
   # Returns the Queue.
   def self.add(song,user)
     client.add(song.path)
-    user.play!(song) if user
+
+    if user
+      user.play!(song)
+    else
+      SongPlay.create(:song_path => song.path, :user => nil)
+    end
     songs
   end
 
