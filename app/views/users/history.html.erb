@@ -1,0 +1,12 @@
+<div id="queue">
+  <div class="heading">
+    <span class="title"><%= @user.login %></span>
+    <div class="tabs">
+      <a class="<%= 'active' if controller.action_name == 'show' %>" href="/<%= @user.login %>">Profile</a>
+      <a class="<%= 'active' if controller.action_name == 'history' %>" href="/<%= @user.login %>/history">History</a>
+      <a class="<%= 'active' if controller.controller_name == 'likes' %>" href="/<%= @user.login %>/likes">Likes</a>
+    </div>
+  </div>
+
+  <%= render :partial => 'shared/song', :collection => @songs %>
+</div>

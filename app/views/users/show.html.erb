@@ -2,10 +2,34 @@
   <div class="heading">
     <span class="title"><%= @user.login %></span>
     <div class="tabs">
-      <a class="<%= 'active' if controller.controller_name != 'likes' %>" href="/<%= @user.login %>">History</a>
+      <a class="<%= 'active' if controller.action_name == 'show' %>" href="/<%= @user.login %>">Profile</a>
+      <a class="<%= 'active' if controller.action_name == 'history' %>" href="/<%= @user.login %>/history">History</a>
       <a class="<%= 'active' if controller.controller_name == 'likes' %>" href="/<%= @user.login %>/likes">Likes</a>
     </div>
   </div>
 
-  <%= render :partial => 'shared/song', :collection => @songs %>
+  <h4>Favorite Songs</h4>
+  <table class="tracklist">
+    <tr>
+      <th colspan="2">Track</th>
+      <th colspan="1">Album</th>
+      <th colspan="6">Plays</th>
+    </tr>
+    <% @plays.each do |play| %>
+      <% track = play.song %>
+        <tr class="track" data-path="<%= track.path %>">
+          <td class="number"><%= @plays.index(play) + 1 %>.</td>
+          <td class="title"><a href="<%= track.escaped_path %>"><%= track.title %></a></td>
+          <td class="album"><a href="<%= track.escaped_album_path %>" class="album"><%= track.album_name %></a></td>
+
+          <td class="duration"><%= play.playcount %></td>
+          <td class="download">
+            <a href="/download/<%= track.path %>"><span class="icon-cloud-download"></span></a>
+          </td>
+
+          <td class="like"><%= render :partial => 'shared/like', :locals => { :song => track } %></td>
+          <td class="queue"><%= render :partial => 'shared/queue', :locals => { :song => track } %></td>
+        </tr>
+    <% end %>
+  </table>
 </div>

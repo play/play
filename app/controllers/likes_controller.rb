@@ -4,7 +4,7 @@ class LikesController < ApplicationController
     not_found if !@user
 
     @songs = @user.liked_songs
-    render 'users/show'
+    render 'users/history'
   end
 
   def create

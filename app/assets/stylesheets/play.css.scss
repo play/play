@@ -320,6 +320,11 @@ section[role="nav"] {
   margin-left: 300px;
   background: #f9f9f9;
 
+  h4 {
+    margin: 30px 20px 0 20px;
+    font-size: 20px;
+    font-weight: 100;
+  }
   .heading {
     padding: 20px;
     @include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);

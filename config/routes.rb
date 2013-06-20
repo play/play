@@ -82,6 +82,7 @@ Play::Application.routes.draw do
   root :to => 'queue#index'
 
   match '/:login' => 'users#show'
+  match '/:login/history' => 'users#history'
 
   # See how all your routes lay out with "rake routes"
 
