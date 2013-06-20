@@ -1,6 +1,6 @@
 class AlbumsController < ApplicationController
   def show
-    @artist = Artist.new(params[:artist_name])
+    @artist = Artist.new(CGI.unescape(params[:artist_name]))
     @album  = Album.new(@artist.name, CGI.unescape(params[:name]))
     @songs  = @album.songs
   end

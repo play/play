@@ -50,7 +50,7 @@ class Album
     "#{artist.name} - #{name}.zip"
   end
 
-  # The path to the zipped file on-disk. Compresses this album if we haven't 
+  # The path to the zipped file on-disk. Compresses this album if we haven't
   # yet.
   #
   # Returns a String.
