@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_filter :require_auth, :only => [:create, :failure]
+  skip_before_filter :auth_required, :only => [:create, :failure, :logout]
 
   def create
     @user = User.find_for_github_oauth(request.env["omniauth.auth"])
