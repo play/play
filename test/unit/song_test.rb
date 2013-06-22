@@ -100,7 +100,6 @@ class SongTest < ActiveSupport::TestCase
   end
 
   test "to_param" do
-    song = Song.new('Space / Oddity')
-    assert_equal 'Space %2F Oddity', song.to_param
+    assert_equal 'Stress', @song.to_param
   end
 end
