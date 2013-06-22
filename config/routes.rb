@@ -6,8 +6,8 @@ Play::Application.routes.draw do
   match "artists/:artist_name" => 'artists#show', :as => 'artist'
   match "images/art/:id.png" => 'images#art'
 
-  match 'artists/:artist_name/albums/:name/download' => 'albums#download'
-  match 'songs/download/*path' => 'songs#download', :format => false
+  match 'artists/:artist_name/albums/:name/download' => 'albums#download', :as => 'album_download'
+  match 'songs/download/*path' => 'songs#download', :format => false, :as => 'song_download'
 
   match ':login/likes' => 'likes#index'
 

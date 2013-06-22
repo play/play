@@ -70,7 +70,10 @@ class Album
     name == other.name && artist.name == other.artist.name
   end
 
+  # The slug for this album. Escape forward slash manually here.
+  #
+  # Returns a String.
   def to_param
-    name
+    name.gsub('/','%2F')
   end
 end

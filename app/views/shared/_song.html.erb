@@ -1,10 +1,11 @@
 <div class="song" data-path="<%= song.path %>">
-  <a href="/artist/<%= song.artist_name %>/album/<%= song.album_name %>" class="album-art">
+  <%= link_to album_path(song.artist, song.album), :class => 'album-art' do %>
     <img src="/images/art/<%= song.art_file %>" width="100" height="100" />
-  </a>
-  <a href="/artists/<%= CGI.escape(song.artist_name) %>/albums/<%= CGI.escape(song.album_name) %>/download" class="album-download" title="Download this album">
+  <% end %>
+
+  <%= link_to album_download_path(song.artist.name, song.album), :class => "album-download", :title => "Download this album" do %>
     <span class="icon-cloud-download"></span>
-  </a>
+  <% end %>
   <div class="details">
     <h2 class="title">
       <%= link_to song.title, song_path(song.artist, song) %>
@@ -12,14 +13,16 @@
     </h2>
 
     <div class="meta">
-      <a href="<%= artist_path(song.artist) if song.artist %>" class="artist"><%= song.artist_name %></a>
+      <%= link_to(song.artist_name, artist_path(song.artist), :class => 'artist') %>
       <span class="betweener">-</span>
-      <a href="<%= album_path(song.album) if song.album %>" class="album"><%= song.album_name %></a>
+      <%= link_to(song.album_name, album_path(song.artist, song.album), :class => 'album') %>
     </div>
   </div>
   <div class="controls">
     <%= render :partial => 'shared/queue', :locals => {:song => song} %>
     <%= render :partial => 'shared/like', :locals => {:song => song} %>
-    <a href="/songs/download/<%= CGI.escape(song.path) %>"><span class="icon-cloud-download"></span></a>
+    <%= link_to song_download_path(song) do %>
+      <span class="icon-cloud-download"></span></a>
+    <% end %>
   </div>
 </div>

@@ -18,4 +18,9 @@ class ArtistTest < ActiveSupport::TestCase
   test "has songs" do
     assert_include @artist.songs, Song.new('Justice/Cross/Stress.mp3')
   end
+
+  test "to_param" do
+    artist = Artist.new('Count Basie / Duke Ellington')
+    assert_equal 'Count Basie %2F Duke Ellington', artist.to_param
+  end
 end
