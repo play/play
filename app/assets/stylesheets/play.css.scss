@@ -522,7 +522,7 @@ section[role="nav"] {
     .listing {
       margin-top: 20px;
       margin-left: 170px;
-      width: 550px;
+      width: 490px;
       list-style: decimal inside none;
 
       .track-title {
@@ -620,6 +620,34 @@ section[role="nav"] {
 
   a:first-child { margin-left: -5px; }
   a.active { border-bottom: 1px solid $pink;}
+}
+
+.artist-albums {
+  margin-top: 75px;
+  width: 660px;
+
+  .others {
+    font-size: 14px;
+    padding-bottom: 10px;
+    color: #999;
+    font-weight: 100;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  .album-list {
+    border-top: 1px solid #fff;
+    margin-top: 0;
+    padding-top: 20px;
+  }
+
+  .album-list .album a {
+    padding-left: 0;
+    padding-right: 20px;
+  }
+
+  .album-list .album:last-child .album-art {
+    padding-right: 0px;
+  }
 }
 
 .album-list {
