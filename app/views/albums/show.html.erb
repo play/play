@@ -3,7 +3,6 @@
     <div class="sidebar">
       <img src="/images/art/<%= @album.art %>" class="album-art">
       <ul>
-        <li>Queue Album</li>
         <li><%= link_to 'Download Album', album_download_path(@artist.name, @album) %></li>
       </ul>
     </div>
