@@ -6,8 +6,8 @@ class ArtistTest < ActiveSupport::TestCase
   end
 
   test "can show all artists" do
-    assert_include     Artist.all, @artist
-    assert_not_include Artist.all, Artist.new("Zach Holman's Fuzzy Bears of Detroit")
+    assert_includes     Artist.all, @artist
+    assert_not_includes Artist.all, Artist.new("Zach Holman's Fuzzy Bears of Detroit")
   end
 
   test "knows bout equivalence" do
@@ -16,7 +16,7 @@ class ArtistTest < ActiveSupport::TestCase
   end
 
   test "has songs" do
-    assert_include @artist.songs, Song.new('Justice/Cross/Stress.mp3')
+    assert_includes @artist.songs, Song.new('Justice/Cross/Stress.mp3')
   end
 
   test "to_param" do

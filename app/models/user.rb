@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates_presence_of :login
   validates_uniqueness_of :login
 
-  has_many :song_plays, :order => 'song_plays.created_at DESC'
+  has_many :song_plays, -> { order('song_plays.created_at DESC') }
   has_many :likes
 
   after_create :generate_token
