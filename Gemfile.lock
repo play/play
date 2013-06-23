@@ -153,6 +153,7 @@ DEPENDENCIES
   omniauth
   omniauth-github
   rails (= 4.0.0.rc2)
+  rake (~> 10.1.0)
   sass-rails (~> 4.0.0.rc1)
   sqlite3
   taglib-ruby (~> 0.6.0)
