@@ -13,7 +13,8 @@
         <ul class="listing">
           <span class="track-title">Track Listings</span>
           <% @album.songs.each do |song| %>
-            <li><a href="<%= song.escaped_path %>"><%= song.title %></a>
+            <li>
+              <%= link_to song.title, song_path(song.artist, song) %>
               <span class="duration"> <%= song.duration %></span>
             </li>
           <% end %>

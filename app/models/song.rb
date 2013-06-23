@@ -91,21 +91,6 @@ class Song
     album ? album.name : ''
   end
 
-  # The escaped artist path.
-  def escaped_artist_path
-    "/artists/#{CGI.escape(artist_name)}"
-  end
-
-  # The escaped album path.
-  def escaped_album_path
-    album_name ? "#{escaped_artist_path}/albums/#{CGI.escape(album_name)}" : nil
-  end
-
-  # The escaped path for this song.
-  def escaped_path
-    "#{escaped_artist_path}/songs/#{CGI.escape(title)}"
-  end
-
   # The duration of the song.
   #
   # Returns a String.
@@ -181,4 +166,11 @@ class Song
     SongPlay.where(:song_path => path)
   end
   alias :plays :song_plays
+
+  # The slug for this song. Escape forward slash manually here.
+  #
+  # Returns a String.
+  def to_param
+    title.gsub('/','%2F')
+  end
 end

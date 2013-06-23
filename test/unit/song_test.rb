@@ -98,4 +98,8 @@ class SongTest < ActiveSupport::TestCase
 
     assert_not_empty song.song_plays
   end
+
+  test "to_param" do
+    assert_equal 'Stress', @song.to_param
+  end
 end

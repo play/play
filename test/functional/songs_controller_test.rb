@@ -20,13 +20,6 @@ class SongsControllerTest < ActionController::TestCase
     assert response.body.include?('Stress')
   end
 
-  test "song page handles escapes" do
-    get :show, :artist_name => 'Jeff+Buckley', :title => 'Lover%2C+You+Should%27ve+Come+Over'
-
-    assert_response :success
-    assert response.body.include?("Lover, You Should&#x27;ve Come Over")
-  end
-
   test "song download" do
     get :download, :path => "Justice/Cross/Stress.mp3"
 
