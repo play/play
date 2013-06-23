@@ -10,6 +10,7 @@ system 'cp -R     test/music /tmp/play-test'
 system './test/daemon/start.sh'
 
 class ActiveSupport::TestCase
+  ActiveRecord::Migration.check_pending!
 end
 
 class ActionController::TestCase
