@@ -30,7 +30,7 @@ fail () {
 # ruby
 RUBY_VERSION=`cat .ruby-version`
 RUBY_NO_DASH=`echo $RUBY_VERSION | sed 's/[-]//'`
-if [[ $(ruby -v) == *$RUBY_NO_DASH* ]]
+if [[ $(ruby -v > /dev/null 2>&1) == *$RUBY_NO_DASH* ]]
 then
   success 'ruby installed'
 else
