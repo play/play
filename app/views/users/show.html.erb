@@ -19,8 +19,8 @@
       <% track = play.song %>
         <tr class="track" data-path="<%= track.path %>">
           <td class="number"><%= @plays.index(play) + 1 %>.</td>
-          <td class="title"><a href="<%= track.escaped_path %>"><%= track.title %></a></td>
-          <td class="album"><a href="<%= track.escaped_album_path %>" class="album"><%= track.album_name %></a></td>
+          <td class="title"><%= link_to track.title, song_path(track.artist, track) %></td>
+          <td class="album"><%= link_to track.album_name, album_path(track.artist, track.album), :class => "album" %></td>
 
           <td class="duration"><%= play.playcount %></td>
           <td class="download">
