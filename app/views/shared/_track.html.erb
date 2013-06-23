@@ -5,7 +5,9 @@
 
   <td class="duration"><%= track.duration %></td>
   <td class="download">
-    <a href="/download/<%= track.path %>"><span class="icon-cloud-download"></span></a>
+    <%= link_to song_download_path(track.path) do %>
+      <span class="icon-cloud-download"></span>
+    <% end %>
   </td>
 
   <td class="like"><%= render :partial => 'shared/like', :locals => { :song => track } %></td>
