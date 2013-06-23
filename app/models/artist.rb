@@ -41,11 +41,6 @@ class Artist
     songs.map(&:album).uniq { |album| album.name }
   end
 
-  # The escaped artist path.
-  def escaped_path
-    "/artists/#{CGI.escape(name)}"
-  end
-
   # A simple String representation of this instance.
   #
   # Returns a String.
@@ -59,5 +54,12 @@ class Artist
   def ==(other)
     return false if other.class != self.class
     name == other.name
+  end
+
+  # The slug for this artist. Escape forward slash manually here.
+  #
+  # Returns a String.
+  def to_param
+    name.gsub('/','%2F')
   end
 end

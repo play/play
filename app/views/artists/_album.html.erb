@@ -1,6 +1,6 @@
 <div class="album">
-  <a href="/artists/<%= album.artist.name %>/albums/<%= album.name %>" class="album-art">
+  <%= link_to album_path(album.artist, album.name), :class => 'album-art' do %>
     <img src="/images/art/<%= album.art %>" width="150" height="150" />
     <div class="name"><%= album.name %></div>
-  </a>
+  <% end %>
 </div>

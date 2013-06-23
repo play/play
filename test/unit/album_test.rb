@@ -31,4 +31,9 @@ class AlbumTest < ActiveSupport::TestCase
   test "==" do
     assert_equal Album.new('Justice', 'Cross'), Album.new('Justice', 'Cross')
   end
+
+  test "to_param" do
+    album = Album.new('Boys Noize', 'XTC / Ich R U Remixes - EP')
+    assert_equal 'XTC %2F Ich R U Remixes - EP', album.to_param
+  end
 end
