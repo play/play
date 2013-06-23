@@ -1,15 +1,15 @@
 Play::Application.routes.draw do
-  match "search" => 'songs#search'
-  match "artists/:artist_name/songs/:title" => 'songs#show', :as => 'song'
-  match "artists/:artist_name/albums/:name" => 'albums#show', :as => 'album'
-  match "artists/:artist_name/songs" => 'artists#songs', :as => 'artist_songs'
-  match "artists/:artist_name" => 'artists#show', :as => 'artist'
-  match "images/art/:id.png" => 'images#art'
+  get "search" => 'songs#search'
+  get "artists/:artist_name/songs/:title" => 'songs#show', :as => 'song'
+  get "artists/:artist_name/albums/:name" => 'albums#show', :as => 'album'
+  get "artists/:artist_name/songs" => 'artists#songs', :as => 'artist_songs'
+  get "artists/:artist_name" => 'artists#show', :as => 'artist'
+  get "images/art/:id.png" => 'images#art'
 
-  match 'artists/:artist_name/albums/:name/download' => 'albums#download', :as => 'album_download'
-  match 'songs/download/*path' => 'songs#download', :format => false, :as => 'song_download'
+  get 'artists/:artist_name/albums/:name/download' => 'albums#download', :as => 'album_download'
+  get 'songs/download/*path' => 'songs#download', :format => false, :as => 'song_download'
 
-  match ':login/likes' => 'likes#index'
+  get ':login/likes' => 'likes#index'
 
   resources :likes do
   end
@@ -25,9 +25,9 @@ Play::Application.routes.draw do
     delete ''          => 'queue#destroy'
   end
 
-  match '/auth/:provider/callback', to: 'sessions#create'
-  match '/auth/failure'         => 'sessions#failure'
-  match '/logout'               => 'sessions#logout'
+  get '/auth/:provider/callback', to: 'sessions#create'
+  get '/auth/failure'         => 'sessions#failure'
+  get '/logout'               => 'sessions#logout'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -81,8 +81,8 @@ Play::Application.routes.draw do
   # root :to => 'welcome#index'
   root :to => 'queue#index'
 
-  match '/:login' => 'users#show'
-  match '/:login/history' => 'users#history'
+  get '/:login' => 'users#show'
+  get '/:login/history' => 'users#history'
 
   # See how all your routes lay out with "rake routes"
 
