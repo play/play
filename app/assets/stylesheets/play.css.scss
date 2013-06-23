@@ -777,6 +777,16 @@ section[role="nav"] {
   }
 }
 
+.upload-preview {
+  position: absolute;
+  top: 56px;
+  padding-left: 300px;
+  width: 100%;
+  height: 25px;
+  background-color: $pink;
+  display: none;
+}
+
 @media all and (max-width: 500) {
 /* define mobile specific styles come here */
   header {
