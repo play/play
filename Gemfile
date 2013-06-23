@@ -16,7 +16,8 @@ gem 'will_paginate',    '~> 3.0.4'
 group :assets do
   gem 'sass-rails',     '~> 4.0.0.rc1'
   gem 'coffee-rails',   '~> 4.0.0'
-  gem 'compass-rails'
+  # lol what the fuck is compass doing
+  gem "compass-rails", github: "milgner/compass-rails", branch: "rails4"
   gem 'uglifier',       '>= 1.3.0'
 end
 

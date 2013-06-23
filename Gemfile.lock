@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/milgner/compass-rails.git
+  revision: 1749c06f15dc4b058427e7969810457213647fb8
+  branch: rails4
+  specs:
+    compass-rails (1.0.3)
+      compass (>= 0.12.2, < 0.14)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -40,8 +48,6 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
-    compass-rails (1.0.3)
-      compass (>= 0.12.2, < 0.14)
     daemons (1.1.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
@@ -145,7 +151,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
-  compass-rails
+  compass-rails!
   faye-websocket
   jquery-rails
   machinist
