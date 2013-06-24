@@ -14,8 +14,11 @@
 
     <div class="meta">
       <%= link_to(song.artist_name, artist_path(song.artist), :class => 'artist') %>
-      <span class="betweener">-</span>
-      <%= link_to(song.album_name, album_path(song.artist, song.album), :class => 'album') %>
+
+      <% if song.album_name.present? %>
+        <span class="betweener">-</span>
+        <%= link_to(song.album_name, album_path(song.artist, song.album), :class => 'album') %>
+      <% end %>
     </div>
   </div>
   <div class="controls">
