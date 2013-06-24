@@ -8,6 +8,7 @@ Play::Application.routes.draw do
 
   get 'artists/:artist_name/albums/:name/download' => 'albums#download', :as => 'album_download'
   get 'songs/download/*path' => 'songs#download', :format => false, :as => 'song_download'
+  post 'songs' => 'songs#create'
 
   get ':login/likes' => 'likes#index'
 
