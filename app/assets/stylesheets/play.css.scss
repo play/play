@@ -37,7 +37,7 @@ a {
 }
 
 #header {
-  background: #181818;
+  background-color: #181818;
   padding: 10px;
   display: inline-block;
   position: fixed;
@@ -60,7 +60,6 @@ a {
 
   .stream-controls {
     padding: 10px;
-    border-right: 1px solid #666;
     color: $pink;
     font-weight: 100;
     cursor: pointer;
@@ -70,7 +69,7 @@ a {
     }
 
     .icon-headphones {
-      font-size: 25px;
+      font-size: 20px;
       vertical-align: middle;
       margin-right: 5px;
     }
@@ -80,13 +79,12 @@ a {
     margin-right: 10px;
     font-weight: 100;
     padding: 10px 15px;
-    border-right: 1px solid #666;
     @include transition(all .2s ease);
 
     img {
-      width: 25px;
+      width: 20px;
       vertical-align: top;
-      margin-top: 2px;
+      margin-top: 5px;
       margin-right: 5px;
       border-radius: 3px;
     }
@@ -96,7 +94,6 @@ a {
     border-radius: 3px;
     display: inline-block;
     position: relative;
-    margin-left: 5px;
 
     .advanced-search {
       display: inline-block;
@@ -774,6 +771,71 @@ section[role="nav"] {
   .gap {
     color: #999;
     font-weight: 100;
+  }
+}
+
+.upload-preview {
+  display: none;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 600px;
+  height: 70px;
+  z-index: 10;
+  background-color: #181818;
+  color: $pink;
+
+  .current-filename {
+    text-align: right;
+    font-weight: 100;
+    padding: 18px 25px 7px 0;
+    font-size: 12px;
+  }
+  .dz-filename, .dz-size, .dz-details img, .dz-success-mark, .dz-error-mark, .dz-error-message {
+    display: none;
+  }
+  .dz-totalprogress {
+    padding: 2px;
+    background-color: #000;
+    border-radius: 10px;
+    margin-bottom: 1px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.42), 0 1px 1px rgba(255,255,255,.13);
+    float: right;
+    width: 250px;
+    margin-right: 15px;
+
+    .dz-upload {
+      background-color: $pink;
+      background-image: -webkit-linear-gradient(left, darken($pink, 20%), lighten($pink, 10%));
+      display: block;
+      border-radius: 10px;
+      height: 8px;
+      width: 0;
+      @include transition(all .2s ease);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.42), 0 1px 1px rgba(255,255,255,.13);
+    }
+  }
+}
+
+.drop-overlay {
+  display: none;
+  background-color: rgba(0,0,0,.9);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 40px;
+  padding-top: 18%;
+  font-weight: 100;
+  font-style: italic;
+
+  .icon-cloud-upload {
+    display: block;
+    font-size: 200px;
   }
 }
 

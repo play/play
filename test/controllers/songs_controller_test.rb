@@ -26,4 +26,15 @@ class SongsControllerTest < ActionController::TestCase
     assert_response :success
     assert response.headers['Content-Disposition'].include?('Stress.mp3')
   end
+
+  test "song upload" do
+    path = 'test/music/Justice/Cross/Stress.mp3'
+    file = ActionDispatch::Http::UploadedFile.new(
+      :tempfile => File.new(Rails.root.join(path)),
+      :filename => 'Stress.mp3'
+    )
+    post :create, :file => file
+
+    assert_response 200
+  end
 end
