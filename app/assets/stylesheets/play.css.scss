@@ -817,6 +817,28 @@ section[role="nav"] {
   }
 }
 
+.drop-overlay {
+  display: none;
+  background-color: rgba(0,0,0,.9);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 40px;
+  padding-top: 18%;
+  font-weight: 100;
+  font-style: italic;
+
+  .icon-cloud-upload {
+    display: block;
+    font-size: 200px;
+  }
+}
+
 @media all and (max-width: 500) {
 /* define mobile specific styles come here */
   header {
