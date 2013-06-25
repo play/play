@@ -9,27 +9,33 @@
   </div>
 
   <h4>Favorite Songs</h4>
-  <table class="tracklist">
-    <tr>
-      <th colspan="2">Track</th>
-      <th colspan="1">Album</th>
-      <th colspan="6">Plays</th>
-    </tr>
-    <% @plays.each do |play| %>
-      <% track = play.song %>
-        <tr class="track" data-path="<%= track.path %>">
-          <td class="number"><%= @plays.index(play) + 1 %>.</td>
-          <td class="title"><%= link_to track.title, song_path(track.artist, track) %></td>
-          <td class="album"><%= link_to track.album_name, album_path(track.artist, track.album), :class => "album" %></td>
+  <% if @plays.present? %>
+    <table class="tracklist">
+      <tr>
+        <th colspan="2">Track</th>
+        <th colspan="1">Album</th>
+        <th colspan="6">Plays</th>
+      </tr>
+      <% @plays.each do |play| %>
+        <% track = play.song %>
+          <tr class="track" data-path="<%= track.path %>">
+            <td class="number"><%= @plays.index(play) + 1 %>.</td>
+            <td class="title"><%= link_to track.title, song_path(track.artist, track) %></td>
+            <td class="album"><%= link_to track.album_name, album_path(track.artist, track.album), :class => "album" %></td>
 
-          <td class="duration"><%= play.playcount %></td>
-          <td class="download">
-            <a href="/download/<%= track.path %>"><span class="icon-cloud-download"></span></a>
-          </td>
+            <td class="duration"><%= play.playcount %></td>
+            <td class="download">
+              <a href="/download/<%= track.path %>"><span class="icon-cloud-download"></span></a>
+            </td>
 
-          <td class="like"><%= render :partial => 'shared/like', :locals => { :song => track } %></td>
-          <td class="queue"><%= render :partial => 'shared/queue', :locals => { :song => track } %></td>
-        </tr>
-    <% end %>
-  </table>
+            <td class="like"><%= render :partial => 'shared/like', :locals => { :song => track } %></td>
+            <td class="queue"><%= render :partial => 'shared/queue', :locals => { :song => track } %></td>
+          </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <div class="heading">
+      <p><%= @user.login %> doesn't have any favorite songs yet. What a killjoy.</p>
+    </div>
+  <% end %>
 </div>
