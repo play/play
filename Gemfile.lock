@@ -55,9 +55,6 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
-    faye-websocket (0.6.1)
-      eventmachine (>= 0.12.0)
-      websocket-driver (>= 0.2.0)
     fssm (0.2.10)
     hashie (2.0.5)
     hike (1.2.3)
@@ -145,7 +142,6 @@ GEM
     uglifier (2.1.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    websocket-driver (0.2.0)
     will_paginate (3.0.4)
 
 PLATFORMS
@@ -154,7 +150,6 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
   compass-rails!
-  faye-websocket
   jquery-rails
   machinist
   mysql2 (~> 0.3.11)
