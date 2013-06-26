@@ -42,5 +42,21 @@ bundle config build.taglib-ruby --with-opt-dir=$(brew --prefix) > /dev/null
 
 brew_install 'mysql'
 brew_install 'taglib'
-brew_install 'mpd'
+
+# Manually load our own homebrew formula until #19368 lands.
+#
+# We'll still want `--with-lame` selected for streaming capability.
+info 'mpd'
+if brew_installed 'mpd'
+then
+  success 'mpd'
+else
+  if brew install https://gist.github.com/holman/5871518/raw/c016e621f56083ae72c165c97ecf45928fa3e7a3/mpd.rb --with-lame >> /tmp/play-bootstrap
+  then
+    success 'mpd'
+  else
+    fail 'mpd'
+  fi
+fi
+
 brew_install 'mpc'
