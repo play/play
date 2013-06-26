@@ -192,10 +192,9 @@ class Song
   # Returns a Hash.
   def to_hash
     { :title => title,
-      :artist => artist_name,
-      :album => album_name,
+      :album => album.to_hash,
       :seconds => seconds,
-      :path => path
+      :slug => to_param
     }
   end
 end
