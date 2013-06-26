@@ -25,8 +25,6 @@ class Song
   #
   # Returns nothing.
   def initialize(options={})
-    raise if options.is_a?(String)
-
     self.path = options[:path] if options[:path]
   end
 
