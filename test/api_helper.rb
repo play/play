@@ -1,4 +1,3 @@
-
 Play.config['auth_token'] = '123456789'
 
 def authorized_rack_env_for(user)
