@@ -1,11 +1,13 @@
 <tr class="track" data-path="<%= track.path %>">
   <td class="number"><%= @songs.index(track) + 1 %>.</td>
-  <td class="title"><a href="<%= track.escaped_path %>"><%= track.title %></a></td>
-  <td class="album"><a href="<%= track.escaped_album_path %>" class="album"><%= track.album_name %></a></td>
+  <td class="title"><%= link_to track.title, song_path(track.artist, track) %></td>
+  <td class="album"><a href="<%= album_path(track.artist.name, track.album.name) if track.album.name %>" class="album"><%= track.album_name %></a></td>
 
   <td class="duration"><%= track.duration %></td>
   <td class="download">
-    <a href="/download/<%= track.path %>"><span class="icon-cloud-download"></span></a>
+    <%= link_to song_download_path(track.path) do %>
+      <span class="icon-cloud-download"></span>
+    <% end %>
   </td>
 
   <td class="like"><%= render :partial => 'shared/like', :locals => { :song => track } %></td>

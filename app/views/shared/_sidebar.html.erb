@@ -1,26 +1,27 @@
 <%
-  song = Song.now_playing
+  song = PlayQueue.songs.first
   return if !song
 %>
 <div id="sidebar">
   <div class="now-playing">
-    <a href="/artist/<%= song.artist_name %>/album/<%= song.album_name %>" class="album-art">
+    <%= link_to album_path(song.artist, song.album), :class => 'album-art' do %>
       <img src="/images/art/<%= song.art_file %>" />
-    </a>
+    <% end %>
 
     <div class="now-playing-meta">
       <h2 class="title" title="<%= song.title %>"><%= song.title %></h2>
       <p class="album-info">
-        <a href="<%= song.escaped_artist_path %>" class="artist"><%= song.artist_name %></a> - <a href="<%= song.escaped_album_path %>"><%= song.album_name %></a>
+        <%= link_to song.artist_name, artist_path(song.artist), :class => 'artist' %> -
+        <%= link_to song.album_name, album_path(song.artist, song.album) %>
       </p>
     </div>
     <hr>
     <ul class="now-playing-actions" data-path="<%= song.path %>">
       <li><%= render :partial => 'shared/like', :locals => { :song => song, :full => true } %></li>
       <li>
-        <a href="/download/<%= song.path %>">
+        <%= link_to song_download_path(song) do %>
           <span class="now-playing-action-icon icon-cloud-download"></span> Download Song
-        </a>
+        <% end %>
       </li>
     </ul>
   </div>
@@ -42,9 +43,5 @@
       <% end %>
       </ul>
     </div>
-  </div>
-
-  <div class="stream-controls">
-    <span class="icon-headphones"></span>
   </div>
 </div>

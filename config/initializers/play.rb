@@ -12,8 +12,7 @@ module Play
   # Returns a String.
   def self.music_path
     config = File.read('config/mpd.conf')
-    config.match(/music_directory\s+"(.+)"/)
-    $1
+    config.scan(/^(?<!#)\s*music_directory\s+"([^"]*)"$/).last.first
   end
 
   # Directory where cached album art images will be stored.

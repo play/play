@@ -20,17 +20,21 @@ class SongsControllerTest < ActionController::TestCase
     assert response.body.include?('Stress')
   end
 
-  test "song page handles escapes" do
-    get :show, :artist_name => 'Jeff+Buckley', :title => 'Lover%2C+You+Should%27ve+Come+Over'
-
-    assert_response :success
-    assert response.body.include?("Lover, You Should&#x27;ve Come Over")
-  end
-
   test "song download" do
     get :download, :path => "Justice/Cross/Stress.mp3"
 
     assert_response :success
     assert response.headers['Content-Disposition'].include?('Stress.mp3')
+  end
+
+  test "song upload" do
+    path = 'test/music/Justice/Cross/Stress.mp3'
+    file = ActionDispatch::Http::UploadedFile.new(
+      :tempfile => File.new(Rails.root.join(path)),
+      :filename => 'Stress.mp3'
+    )
+    post :create, :file => file
+
+    assert_response 200
   end
 end

@@ -50,7 +50,7 @@ class Album
     "#{artist.name} - #{name}.zip"
   end
 
-  # The path to the zipped file on-disk. Compresses this album if we haven't 
+  # The path to the zipped file on-disk. Compresses this album if we haven't
   # yet.
   #
   # Returns a String.
@@ -68,5 +68,12 @@ class Album
   def ==(other)
     return false if other.class != self.class
     name == other.name && artist.name == other.artist.name
+  end
+
+  # The slug for this album. Escape forward slash manually here.
+  #
+  # Returns a String.
+  def to_param
+    name ? name.gsub('/','%2F') : ''
   end
 end

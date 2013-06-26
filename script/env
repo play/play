@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+#
+# Runs environment checks to see if we need to re-bootstrap or if we're cool.
+
+require 'fileutils'
+require 'digest/md5'
+
+def checksum
+  md5 = Digest::MD5.new
+  md5 << File.read('.ruby-version')
+  md5 << File.read('Gemfile.lock')
+  md5 << File.read('script/bootstrap')
+  md5 << File.read('script/setup.osx')
+  md5 << File.read('script/setup.apt')
+  md5.hexdigest
+end
+installed = File.read('.bundle/checksum').strip rescue nil
+
+if checksum == installed && system('bundle check 1>/dev/null 2>&1')
+  puts "Play's environment is up-to-date."
+else
+  puts "Your environment is out-of-date; running bootstrap."
+  system('script/bootstrap')
+end
+
+# write the checksum file now that our work is done here
+File.open('.bundle/checksum', 'wb') { |fd| fd.puts(checksum) }

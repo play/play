@@ -35,9 +35,15 @@ $ ->
 
           login = $('body').data('login')
           gravatar_id = $('body').data('gravatar-id')
-          $(".fans ul").append("<li class=\"fan\" data-login=\"#{login}\"><a href=\"/#{login}\">
+
+          string = "<li class=\"fan\" data-login=\"#{login}\"><a href=\"/#{login}\">
               <img src=\"http://www.gravatar.com/avatar/#{gravatar_id}?s=50\" />
-            </a></li>")
+            </a></li>"
+
+          if $('.fans img').length == 0
+            $(".fans ul").html(string)
+          else
+            $(".fans ul").append(string)
     else
       $.ajax '/likes',
         type: 'DELETE'
@@ -48,3 +54,6 @@ $ ->
 
         login = $('body').data('login')
         $(".fan[data-login=#{login}]").remove()
+
+        if $('.fans img').length == 0
+          $('.fans').html('No one likes this. Yet.')

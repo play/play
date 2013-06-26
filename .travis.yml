@@ -1,9 +1,6 @@
 language: ruby
 rvm:
-  - 1.9.3
-notifications:
-  email:
-    - zach@zachholman.com
+  - 2.0.0
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq libtag1-dev mpd mpc ffmpeg

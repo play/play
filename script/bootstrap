@@ -30,7 +30,7 @@ fail () {
 # ruby
 RUBY_VERSION=`cat .ruby-version`
 RUBY_NO_DASH=`echo $RUBY_VERSION | sed 's/[-]//'`
-if [[ $(ruby -v) == *$RUBY_NO_DASH* ]]
+if [[ $(ruby -v 2>&1) == *$RUBY_NO_DASH* ]]
 then
   success 'ruby installed'
 else
@@ -39,6 +39,7 @@ else
   then
     info "installing ruby"
     rbenv install "$RUBY_VERSION" > /tmp/play-bootstrap
+    success 'ruby installed'
   else
     fail "$RUBY_VERSION not installed"
   fi
@@ -74,8 +75,8 @@ else
   echo "    and set up your application. Unless you're using a different"
   echo "    hostname, you'll want to use values that look like:"
   echo ""
-  echo "      Main URL:     http://localhost:5050"
-  echo "      Callback URL: http://localhost:5050/auth/github/callback"
+  echo "      Main URL:     http://localhost:3030"
+  echo "      Callback URL: http://localhost:3030/auth/github/callback"
   echo ""
 
   user "What is your GitHub client ID? › "
@@ -149,7 +150,7 @@ success 'bundler'
 
 # gems
 info 'gems'
-if bundle install --path vendor/gems >> /tmp/play-bootstrap
+if bundle install --binstubs --path vendor/gems >> /tmp/play-bootstrap
 then
   success 'gems'
 else

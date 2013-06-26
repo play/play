@@ -14,11 +14,14 @@ system 'cp -R     test/music /tmp/play-test'
 system './test/daemon/start.sh'
 
 class ActiveSupport::TestCase
+  ActiveRecord::Migration.check_pending!
+
   setup do
     User.destroy_all
     Like.destroy_all
   end
 end
+
 class ActionController::TestCase
   def sign_in(user)
     session[:github_login] = user.login

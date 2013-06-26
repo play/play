@@ -1,3 +1,19 @@
-<div id="queue">
-  <%= @song.title %>
+<div id="queue" class="show_song">
+  <div class="heading">
+    <span class="plays"><%= pluralize(number_with_delimiter(@song.plays.count), 'play') %></span>
+    <span class="title"><%= @song.title %></span>
+  </div>
+
+  <h2>Fans</h2>
+  <div class="fans">
+    <% @song.likes.each do |like| %>
+      <a href="/<%= like.user.login %>">
+        <img src="http://www.gravatar.com/avatar/<%= like.user.gravatar_id %>?s=100" alt="<%= like.user.login %>" />
+      </a>
+    <% end %>
+
+    <% if @song.likes.empty? %>
+      <p>No one likes this song. It's probably a country music song or something.</p>
+    <% end %>
+  </div>
 </div>

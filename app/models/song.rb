@@ -42,7 +42,8 @@ class Song
 
   # Searches for matching Songs.
   #
-  # options - An Array of mpc-friendly options to search on.
+  # conditions - An Array of mpc-friendly options to search on.
+  # options    - A Hash of options, like `current_page`, for pagination.
   #
   # Examples
   #
@@ -50,11 +51,23 @@ class Song
   #   find(:title, 'Stress')
   #   find(:album, 'Cross')
   #
-  # Returns an Array of Songs. Maxes out at a hard fifty... deal with it.
-  def self.find(options)
-    results = Play.client.search(options)[0..50]
-    results.map { |path| Song.new(path) }.
-      reject { |song| song.title.blank? }
+  # Returns a WillPaginate::Collection of Songs.
+  def self.find(conditions, options={})
+    per_page     = 25
+    current_page = options[:current_page] || 1
+    index        = (current_page.to_i * per_page) - per_page
+
+    results = Play.client.search(conditions)
+    total_results = results.count
+    results = results[index..index+per_page-1]
+
+    WillPaginate::Collection.create(current_page, per_page, total_results) do |pager|
+      return pager.replace([]) if !results
+
+      results = results.map { |path| Song.new(path) }.
+        reject { |song| song.title.blank? }
+      pager.replace(results)
+    end
   end
 
   # What's currently playing?
@@ -76,21 +89,6 @@ class Song
   # Returns a String
   def album_name
     album ? album.name : ''
-  end
-
-  # The escaped artist path.
-  def escaped_artist_path
-    "/artists/#{CGI.escape(artist_name)}"
-  end
-
-  # The escaped album path.
-  def escaped_album_path
-    album_name ? "#{escaped_artist_path}/albums/#{CGI.escape(album_name)}" : nil
-  end
-
-  # The escaped path for this song.
-  def escaped_path
-    "#{escaped_artist_path}/songs/#{CGI.escape(title)}"
   end
 
   # The duration of the song.
@@ -161,10 +159,24 @@ class Song
     Like.where(:song_path => path)
   end
 
+  # The plays of this Song.
+  #
+  # Returns an Array of SongPlays.
+  def song_plays
+    SongPlay.where(:song_path => path)
+  end
+  alias :plays :song_plays
+
+  # The slug for this song. Escape forward slash manually here.
+  #
+  # Returns a String.
+  def to_param
+    title.gsub('/','%2F')
+  end
+
   # Hash representation of the song.
   #
   # Returns a Hash.
-
   def to_hash
     { :title => title,
       :artist => artist_name,
@@ -173,5 +185,4 @@ class Song
       :path => path
     }
   end
-
 end

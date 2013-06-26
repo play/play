@@ -3,21 +3,28 @@
     <div class="sidebar">
       <img src="/images/art/<%= @album.art %>" class="album-art">
       <ul>
-        <li>Queue Album</li>
-        <li><a href="/artists/<%= CGI.escape(@album.artist.name) %>/albums/<%= CGI.escape(@album.name) %>/download">Download Album</a></li>
+        <li><%= link_to 'Download Album', album_download_path(@artist.name, @album) %></li>
       </ul>
     </div>
     <div>
       <span class="title"><%= @album.name %></span>
-      <span class="artist"><a href="#"><%= @artist.name %></a></span>
+      <span class="artist"><%= link_to @artist.name, artist_path(@artist) %></span>
         <ul class="listing">
           <span class="track-title">Track Listings</span>
           <% @album.songs.each do |song| %>
-            <li><a href="#"><%= song.title %></a>
+            <li>
+              <%= link_to song.title, song_path(song.artist, song) %>
               <span class="duration"> <%= song.duration %></span>
             </li>
           <% end %>
         </ul>
+    </div>
+
+    <div class="artist-albums">
+      <div class="others">Other albums by <%= link_to @artist.name, artist_path(@artist) %></div>
+      <div class="album-list">
+        <%= render :partial => 'artists/album', :collection => @artist.albums.sample(4) %>
+      </div>
     </div>
   </div>
 </div>
