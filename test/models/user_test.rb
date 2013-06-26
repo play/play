@@ -14,7 +14,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "plays a song" do
-    @user.play!(Song.new('Justice'))
+    @user.play!(Song.make)
     assert !@user.plays.empty?
   end
 
@@ -40,11 +40,11 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "likes a particular song" do
-    song = Song.new('Justice/song')
+    song = Song.make
     @user.like(song.path)
     assert @user.likes?(song)
 
-    song = Song.new('Justice/nope-song')
+    song = Song.make(:path => 'something/else')
     assert !@user.likes?(song)
   end
 

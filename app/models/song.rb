@@ -2,6 +2,8 @@ require "base64"
 require "digest"
 
 class Song
+  extend Machinist::Machinable if Rails.env.test?
+
   # The title of the Song.
   attr_accessor :title
 
@@ -12,7 +14,7 @@ class Song
   attr_accessor :album
 
   # The String file path.
-  attr_accessor :path
+  attr_reader :path
 
   # The duration of the song in seconds.
   attr_accessor :seconds
@@ -22,18 +24,31 @@ class Song
   # path - The String path to the Song on disk.
   #
   # Returns nothing.
-  def initialize(path)
-    path.chomp!
-    @path = path
+  def initialize(options={})
+    raise if options.is_a?(String)
+
+    self.path = options[:path] if options[:path]
+  end
+
+  # Sets the path for this Song. Once the path is set, go in and read the file
+  # from disk and intialize those values in-memory.
+  #
+  # path - The String path on disk of the music file.
+  #
+  # Returns the path.
+  def path=(path)
+    @path = path.chomp
 
     TagLib::FileRef.open(full_path) do |file|
       if tag = file.tag
-        @artist = Artist.new(tag.artist)
-        @album  = Album.new(tag.artist, tag.album)
-        @title  = tag.title
+        @artist  = Artist.new(tag.artist)
+        @album   = Album.new(tag.artist, tag.album)
+        @title   = tag.title
         @seconds = file.audio_properties.length
       end
     end
+
+    @path
   end
 
   def client
@@ -64,7 +79,7 @@ class Song
     WillPaginate::Collection.create(current_page, per_page, total_results) do |pager|
       return pager.replace([]) if !results
 
-      results = results.map { |path| Song.new(path) }.
+      results = results.map { |path| Song.new(:path => path) }.
         reject { |song| song.title.blank? }
       pager.replace(results)
     end
@@ -74,7 +89,7 @@ class Song
   #
   # Returns a Song.
   def self.now_playing
-    new(Play.client.now_playing) if Play.client.now_playing
+    new(:path => Play.client.now_playing) if Play.client.now_playing
   end
 
   # The name of the artist of this song.

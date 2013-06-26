@@ -38,7 +38,7 @@ class PlayQueue
   # Returns the current Song.
   def self.now_playing
     if path = client.now_playing
-      Song.new(path)
+      Song.new(:path => path)
     end
   end
 
@@ -59,7 +59,7 @@ class PlayQueue
   def self.songs
     results = Play.client.playlist
     results.map do |path|
-      Song.new(path)
+      Song.new(:path => path)
     end
   end
 end

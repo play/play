@@ -4,13 +4,13 @@ class QueueController < ApplicationController
   end
 
   def create
-    song = Song.new(params[:id])
+    song = Song.new(:path => params[:id])
     PlayQueue.add(song,current_user)
     render :text => 'added!'
   end
 
   def destroy
-    song = Song.new(params[:id])
+    song = Song.new(:path => params[:id])
     PlayQueue.remove(song,current_user)
     render :text => 'deleted!'
   end

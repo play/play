@@ -16,7 +16,7 @@ class ArtistTest < ActiveSupport::TestCase
   end
 
   test "has songs" do
-    assert_includes @artist.songs, Song.new('Justice/Cross/Stress.mp3')
+    assert_includes @artist.songs, Song.make
   end
 
   test "to_param" do

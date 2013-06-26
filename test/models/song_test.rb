@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SongTest < ActiveSupport::TestCase
   setup do
-    @song = Song.new('Justice/Cross/Stress.mp3')
+    @song = Song.make
   end
 
   test "belongs to an artist" do
@@ -27,7 +27,7 @@ class SongTest < ActiveSupport::TestCase
   end
 
   test "knows equivalence" do
-    assert_equal Song.new('Justice/Cross/Stress.mp3'), @song
+    assert_equal Song.new(:path => 'Justice/Cross/Stress.mp3'), @song
   end
 
   test "finds a song by any" do
@@ -50,23 +50,15 @@ class SongTest < ActiveSupport::TestCase
   end
 
   test "artist name" do
-    assert_equal '', Song.new('').artist_name
-  end
-
-  test "artist name without artist" do
-    assert_equal '', Song.new('').album_name
-  end
-
-  test "knows its duration" do
-    assert_equal '0:05', @song.duration
+    assert_equal 'Justice', @song.artist_name
   end
 
   test "album name" do
     assert_equal 'Cross', @song.album_name
   end
 
-  test "album name without album" do
-    assert_equal '', Song.new('').album_name
+  test "knows its duration" do
+    assert_equal '0:05', @song.duration
   end
 
   test "album art_file" do
@@ -82,21 +74,19 @@ class SongTest < ActiveSupport::TestCase
   end
 
   test "likes" do
-    song = Song.new('like/me')
-    assert_empty song.likes
+    assert_empty @song.likes
 
-    Like.create(:user => User.new, :song_path => song.path)
+    Like.create(:user => User.new, :song_path => @song.path)
 
-    assert_not_empty song.likes
+    assert_not_empty @song.likes
   end
 
   test "song_plays" do
-    song = Song.new('like/me')
-    assert_empty song.song_plays
+    assert_empty @song.song_plays
 
-    SongPlay.create(:user => User.new, :song_path => song.path)
+    SongPlay.create(:user => User.new, :song_path => @song.path)
 
-    assert_not_empty song.song_plays
+    assert_not_empty @song.song_plays
   end
 
   test "to_param" do

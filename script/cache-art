@@ -15,8 +15,8 @@ puts "Caching art for #{paths.count} songs..."
 FileUtils.mkdir_p 'public/images/art'
 
 count = 0
-paths.each do |path| 
-  result = Song.new(path).cache_album_art
+paths.each do |path|
+  result = Song.new(:path => path).cache_album_art
   count += 1 if result
 end
 

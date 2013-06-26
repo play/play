@@ -24,7 +24,7 @@ class Album
   def songs
     results = client.search([:artist, artist.name, :album, name])
     results.map do |path|
-      Song.new(path)
+      Song.new(:path => path)
     end
   end
 

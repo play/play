@@ -30,7 +30,7 @@ class Artist
   # Returns an Array of Songs.
   def songs
     client.find([:artist, name]).map do |path|
-      Song.new(path)
+      Song.new(:path => path)
     end.reject{ |song| song.title.blank? }
   end
 

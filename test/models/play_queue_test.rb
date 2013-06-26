@@ -3,8 +3,8 @@ require 'test_helper'
 class PlayQueueTest < ActiveSupport::TestCase
   setup do
     Play.client.clear
-    @song = Song.new('Justice/Cross/Stress.mp3')
-    @user = User.create(:login => 'holman', :email => 'holman@example.com')
+    @song = Song.make
+    @user = User.make
     PlayQueue.add(@song,@user)
   end
 
