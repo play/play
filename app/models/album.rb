@@ -1,4 +1,6 @@
 class Album
+  extend Machinist::Machinable if Rails.env.test?
+
   # The name of the Album.
   attr_accessor :name
 
@@ -7,15 +9,12 @@ class Album
 
   # Create a new Album.
   #
-  # artist_name - The String name of the Artist.
-  # name - The String name of the Album.
+  # options - The Hash of options.
   #
   # Returns nothing.
-  def initialize(artist_name,name)
-    @artist = Artist.new(artist_name)
-    @name   = name
-  rescue NoMethodError => e
-    @name   = '(n/a)'
+  def initialize(options={})
+    @artist = options[:artist]
+    @name   = options[:name]
   end
 
   # Get all the songs for a particular artist/album combination.
@@ -24,7 +23,7 @@ class Album
   def songs
     results = client.search([:artist, artist.name, :album, name])
     results.map do |path|
-      Song.new(path)
+      Song.new(:path => path)
     end
   end
 

@@ -23,8 +23,8 @@ class QueueControllerTest < ActionController::TestCase
 
   test "delete a song" do
     PlayQueue.clear
-    song = Song.new('Justice/Cross/Stress.mp3')
-    user = User.new(:login => 'holman')
+    song = Song.make
+    user = User.make
 
     PlayQueue.add(song,user)
     delete :destroy, :id => song.path

@@ -13,7 +13,7 @@ $client = Client.new
 
 loop do
   if PlayQueue.songs.size < 2
-    song = Song.new($client.listall.sample)
+    song = Song.new(:path => $client.listall.sample)
     PlayQueue.add(song,nil)
     $client.native(:clearerror)
   end

@@ -1,10 +1,16 @@
 class Artist
+  extend Machinist::Machinable if Rails.env.test?
+
   # The name of the Artist.
   attr_accessor :name
 
   # Create a new Artist.
-  def initialize(name)
-    @name = name
+  #
+  # options - A Hash of options.
+  #
+  # Returns nothing.
+  def initialize(options={})
+    @name = options[:name]
   end
 
   # Show me all the artists in our library.
@@ -13,7 +19,7 @@ class Artist
   def self.all
     artists = client.list(:artist)
     artists.sort.map do |name|
-      Artist.new(name.chomp)
+      Artist.new(:name => name.chomp)
     end
   end
 
@@ -30,7 +36,7 @@ class Artist
   # Returns an Array of Songs.
   def songs
     client.find([:artist, name]).map do |path|
-      Song.new(path)
+      Song.new(:path => path)
     end.reject{ |song| song.title.blank? }
   end
 

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   setup do
-    @user = User.make!(:email => 'holman@example.com')
+    @user = User.make!
   end
 
   test "has attributes" do
@@ -14,7 +14,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "plays a song" do
-    @user.play!(Song.new('Justice'))
+    @user.play!(Song.make)
     assert !@user.plays.empty?
   end
 
@@ -40,16 +40,16 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "likes a particular song" do
-    song = Song.new('Justice/song')
+    song = Song.make
     @user.like(song.path)
     assert @user.likes?(song)
 
-    song = Song.new('Justice/nope-song')
+    song = Song.make(:path => 'something/else')
     assert !@user.likes?(song)
   end
 
   test "has a gravatar" do
-    assert_equal '54e4ab9ced3fd1f3f5b20ab2f8201b73', @user.gravatar_id
+    assert_equal '5658ffccee7f0ebfda2b226238b1eb6e', @user.gravatar_id
   end
 
   test "generates a new token" do
