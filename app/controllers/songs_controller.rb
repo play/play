@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   def show
-    @artist = Artist.new(params[:artist_name])
+    @artist = Artist.new(:name => params[:artist_name])
     @song   = @artist.songs.find{|song| song.title == params[:title]}
   end
 

@@ -6,7 +6,7 @@ class SongTest < ActiveSupport::TestCase
   end
 
   test "belongs to an artist" do
-    artist = Artist.new('Justice')
+    artist = Artist.make
     assert_equal artist, @song.artist
   end
 
@@ -84,7 +84,7 @@ class SongTest < ActiveSupport::TestCase
   test "song_plays" do
     assert_empty @song.song_plays
 
-    SongPlay.create(:user => User.new, :song_path => @song.path)
+    SongPlay.make! :song_path => @song.path
 
     assert_not_empty @song.song_plays
   end

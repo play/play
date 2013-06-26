@@ -6,7 +6,7 @@ class AlbumTest < ActiveSupport::TestCase
   end
 
   test "belongs to an artist" do
-    artist = Artist.new('Justice')
+    artist = Artist.make(:name => 'Justice')
     assert_equal artist, @album.artist
   end
 

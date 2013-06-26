@@ -41,7 +41,7 @@ class Song
 
     TagLib::FileRef.open(full_path) do |file|
       if tag = file.tag
-        @artist  = Artist.new(tag.artist)
+        @artist  = Artist.new(:name => tag.artist)
         @album   = Album.new(tag.artist, tag.album)
         @title   = tag.title
         @seconds = file.audio_properties.length

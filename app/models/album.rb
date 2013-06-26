@@ -12,7 +12,7 @@ class Album
   #
   # Returns nothing.
   def initialize(artist_name,name)
-    @artist = Artist.new(artist_name)
+    @artist = Artist.new(:name => artist_name)
     @name   = name
   rescue NoMethodError => e
     @name   = '(n/a)'
