@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AlbumTest < ActiveSupport::TestCase
   setup do
-    @album = Album.new('Justice', 'Cross')
+    @album = Album.make
   end
 
   test "belongs to an artist" do
@@ -29,11 +29,13 @@ class AlbumTest < ActiveSupport::TestCase
   end
 
   test "==" do
-    assert_equal Album.new('Justice', 'Cross'), Album.new('Justice', 'Cross')
+    assert_equal Album.new(:name => 'Cross', :artist => @album.artist),
+                 Album.new(:name => 'Cross', :artist => @album.artist)
   end
 
   test "to_param" do
-    album = Album.new('Boys Noize', 'XTC / Ich R U Remixes - EP')
+    artist = Artist.new(:name => 'Boys Noize')
+    album  = Album.new(:artist => artist, :name => 'XTC / Ich R U Remixes - EP')
     assert_equal 'XTC %2F Ich R U Remixes - EP', album.to_param
   end
 end

@@ -1,5 +1,10 @@
 require 'machinist/active_record'
 
+Album.blueprint do
+  name   { 'Cross' }
+  artist { Artist.new(:name => 'Justice') }
+end
+
 Artist.blueprint do
   name { 'Justice' }
 end
