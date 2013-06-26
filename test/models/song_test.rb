@@ -94,7 +94,7 @@ class SongTest < ActiveSupport::TestCase
   end
 
   test "to_hash" do
-    song = Song.new('like/me')
+    song = Song.make
     song_hash = song.to_hash
 
     hash_keys = song_hash.keys
