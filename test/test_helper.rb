@@ -4,8 +4,6 @@ require 'rails/test_help'
 require File.expand_path(File.dirname(__FILE__) + '/blueprints')
 require File.expand_path("../api_helper", __FILE__)
 
-include Rack::Test::Methods
-
 # Set up our test mpd instance and its "music"
 system 'rm -rf   /tmp/play-test'
 system 'mkdir -p /tmp/play-test/.mpd'
@@ -13,6 +11,8 @@ system 'cp -R     test/music /tmp/play-test'
 system './test/daemon/start.sh'
 
 class ActiveSupport::TestCase
+  include Rack::Test::Methods
+
   ActiveRecord::Migration.check_pending!
 end
 
