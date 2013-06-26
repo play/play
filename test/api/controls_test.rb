@@ -25,7 +25,7 @@ class ControlsTest < ActiveSupport::TestCase
       end
 
       test "when something is playing" do
-        @song = Song.new('Justice/Cross/Stress.mp3')
+        @song = Song.make
         PlayQueue.add(@song,@user)
         Play.client.play
 
