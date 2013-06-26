@@ -41,4 +41,25 @@ def assert_song_representation(object)
   assert keys.include? 'album'
   assert keys.include? 'seconds'
   assert keys.include? 'slug'
+
+  assert_album_representation object['album']
+end
+
+def assert_album_representation(object)
+  keys = object.keys
+
+  assert_equal 3, keys.size
+  assert keys.include? 'name'
+  assert keys.include? 'artist'
+  assert keys.include? 'slug'
+
+  assert_artist_representation object['artist']
+end
+
+def assert_artist_representation(object)
+  keys = object.keys
+
+  assert_equal 2, keys.size
+  assert keys.include? 'name'
+  assert keys.include? 'slug'
 end
