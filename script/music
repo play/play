@@ -3,9 +3,6 @@
 # Manages the music daemon powering Play.
 set -e
 
-# Check dependencies
-./script/env
-
 case $1 in
 	start)
 		mpd config/mpd.conf > /dev/null 2>&1
