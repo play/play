@@ -1,5 +1,4 @@
-ENV["RAILS_ENV"] = "test"
-ENV["RACK_ENV"] = "test"
+ENV["RAILS_ENV"] = ENV["RACK_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require File.expand_path(File.dirname(__FILE__) + '/blueprints')
