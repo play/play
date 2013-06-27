@@ -152,8 +152,20 @@ class Song
     art_cache_path = "#{Play.album_art_cache_path}/#{art_file}"
 
     if !File.exists?(art_cache_path)
-      `ffmpeg -i "#{full_path}" -an -vcodec copy #{art_cache_path} 2>&1`
-      art_cache_path
+      if data = album_art_data
+        File.open(art_cache_path, 'wb') { |file| file.write(data) }
+        art_cache_path
+      end
+    end
+  end
+
+  def album_art_data
+    extension = File.extname(path)
+
+    if extension == '.m4a'
+      art = TagLib::MP4::File.new(full_path).tag.item_list_map['covr'].try(:to_cover_art_list).try(:first).try(:data)
+    elsif extension == '.mp3'
+      frame = TagLib::MPEG::File.new(full_path).id3v2_tag.frame_list('APIC').first.try(:picture)
     end
   end
 
