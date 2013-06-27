@@ -24,8 +24,3 @@ end
 group :test do
   gem 'machinist'
 end
-
-group :import do
-  gem 'redis'
-  gem 'rb-appscript'
-end
