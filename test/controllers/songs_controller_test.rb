@@ -7,10 +7,16 @@ class SongsControllerTest < ActionController::TestCase
   end
 
   test "search" do
-    get :search, :q => 'Justice'
+    get :search, :q => 'stress'
 
     assert_response :success
     assert response.body.include?('Stress')
+  end
+
+  test "search artist redirect" do
+    get :search, :q => 'justice'
+
+    assert_redirected_to artist_path('Justice')
   end
 
   test "song page" do

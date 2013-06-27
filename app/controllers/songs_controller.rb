@@ -23,6 +23,10 @@ class SongsController < ApplicationController
   end
 
   def search
+    if artist = Play.client.list(:artist).select { |s| s.chomp.casecmp(params[:q]) == 0 }.first
+      return redirect_to(artist_path(artist.chomp))
+    end
+
     @filter = (params[:filter] || :any).to_sym
     @songs = Song.find([@filter,params[:q]], :current_page => params[:page])
   end
