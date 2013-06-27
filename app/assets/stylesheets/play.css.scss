@@ -322,6 +322,15 @@ section[role="nav"] {
     font-size: 20px;
     font-weight: 100;
   }
+
+  .icon-star-empty {
+    cursor: pointer;
+  }
+  .icon-star.unlike {
+    cursor: pointer;
+    color: $pink;
+  }
+
   .heading {
     padding: 20px;
     @include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
@@ -339,8 +348,7 @@ section[role="nav"] {
       float: right;
       font-weight: 100;
       color: #999;
-      margin-top: 6px;
-      font-size: 20px;
+      font-size: 24px;
     }
   }
 
@@ -349,6 +357,16 @@ section[role="nav"] {
       font-size: 18px;
       padding: 20px 0 10px 20px;
     }
+  }
+
+  .play-stats {
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #efefef;
+    font-size: 20px;
+    font-weight: 100;
+    color: #999;
   }
 
   .song {

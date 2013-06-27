@@ -1,6 +1,8 @@
 <div id="queue" class="show_song">
   <div class="heading">
-    <span class="plays"><%= pluralize(number_with_delimiter(@song.plays.count), 'play') %></span>
+    <span class="plays track" data-path="<%= @song.path %>">
+      <%= render :partial => 'shared/like', :locals => { :song => @song } %>
+    </span>
     <span class="title"><%= @song.title %></span>
   </div>
 
@@ -15,5 +17,9 @@
     <% if @song.likes.empty? %>
       <p>No one likes this song. It's probably a country music song or something.</p>
     <% end %>
+  </div>
+
+  <div class="play-stats">
+    <%= pluralize(number_with_delimiter(@song.plays.count), 'play') %>
   </div>
 </div>
