@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+#
+# Dump all of the data from Play v2 to a JSON file.
+
+begin
+  require 'rubygems'
+  require 'redis'
+  require 'appscript'
+rescue LoadError => e
+  puts ""
+  puts "  redis or rb-appscript not found. Please install the gems with:"
+  puts "    gem install redis rb-appscript"
+  exit(1)
+end
+
+redis = Redis.connect(:url => 'redis://127.0.0.1', :thread_safe => true)
+
+# Users
+logins = redis.smembers("play:users")
+
+users = logins.map do |login|
+  {
+    :login => login,
+    :email => redis.get("play:users:#{login}:email"),
+    :token => redis.get("play:users:#{login}:token"),
+    :stars => redis.smembers("play:users:#{login}:stars")
+  }
+end
+
+# Play History
+ids = redis.lrange("play:histories:ids", 0, -1)
+
+plays = ids.map do |id|
+  song_id = id[0..-11]
+  date    = Time.at(id[16..25].to_i)
+  record  = Appscript.app('iTunes').playlists['Library'].get.tracks[Appscript.its.persistent_ID.eq(song_id)].get[0]
+
+  if record && record.location
+    {
+      :song_id      => song_id,
+      :path         => record.location.get.to_s,
+      :date         => date,
+      :requested_by => redis.get("play:histories:ids:#{id}:user")
+    }
+  end
+end.compact
+
+File.open('v2.json', 'w') do |file|
+  json = { :users => users, :plays => plays }
+  file.write(json)
+end
