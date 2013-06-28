@@ -1,5 +1,15 @@
 # play
 
+## Install
+
+There are a lot of moving parts in Play. We've built a bootstrap script to help
+cut down the amount of things you'll have to do to get Play up and running.
+
+For **OS X**, you'll need to first install Apple's [Command Line Tools](https://developer.apple.com/downloads/index.action?=command%20line%20tools)
+so you can get software compiled on your Mac.
+
+
+
 ### the dirty harry developer's guide to a still beta v3 of play
 
 Until we're further along, here's what you need to know:
