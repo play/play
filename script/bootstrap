@@ -27,24 +27,6 @@ fail () {
   exit
 }
 
-# ruby
-RUBY_VERSION=`cat .ruby-version`
-RUBY_NO_DASH=`echo $RUBY_VERSION | sed 's/[-]//'`
-if [[ $(ruby -v 2>&1) == *$RUBY_NO_DASH* ]]
-then
-  success 'ruby installed'
-else
-  # Install if on rbenv
-  if test $(which rbenv)
-  then
-    info "installing ruby"
-    rbenv install "$RUBY_VERSION" > /tmp/play-bootstrap 2>&1
-    success 'ruby installed'
-  else
-    fail "$RUBY_VERSION not installed"
-  fi
-fi
-
 info 'configure play'
 if test -f "config/play.yml"
 then
@@ -131,6 +113,24 @@ fi
 info 'mpd directories'
 mkdir -p ~/.mpd
 success 'mpd directories'
+
+# ruby
+RUBY_VERSION=`cat .ruby-version`
+RUBY_NO_DASH=`echo $RUBY_VERSION | sed 's/[-]//'`
+if [[ $(ruby -v 2>&1) == *$RUBY_NO_DASH* ]]
+then
+  success 'ruby installed'
+else
+  # Install if on rbenv
+  if test $(which rbenv)
+  then
+    info "installing ruby"
+    rbenv install "$RUBY_VERSION" > /tmp/play-bootstrap 2>&1
+    success 'ruby installed'
+  else
+    fail "$RUBY_VERSION not installed"
+  fi
+fi
 
 # bundler
 info 'bundler'
