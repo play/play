@@ -19,6 +19,10 @@ redis = Redis.connect(:url => 'redis://127.0.0.1', :thread_safe => true)
 logins = redis.smembers("play:users")
 
 users = logins.map do |login|
+  likes = redis.smembers("play:users:#{login}:stars").map do |like|
+    Appscript.app('iTunes').playlists['Library'].get.tracks[Appscript.its.persistent_ID.eq(song_id)].get[0]
+  end
+
   {
     :login => login,
     :email => redis.get("play:users:#{login}:email"),
