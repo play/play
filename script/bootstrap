@@ -137,6 +137,12 @@ info 'bundler'
 gem install bundler > /tmp/play-bootstrap
 success 'bundler'
 
+# Rehash shims on rbenv if they're using it.
+if test $(which rbenv)
+then
+  rbenv rehash
+fi
+
 # Install our system dependencies.
 if [ $(uname -s) = "Darwin" ]
 then
