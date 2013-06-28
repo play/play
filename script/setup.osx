@@ -37,6 +37,11 @@ else
   success 'homebrew'
 fi
 
+# bundler
+info 'bundler'
+gem install bundler > /tmp/play-bootstrap
+success 'bundler'
+
 # For those of us on Boxen and nonstandard homebrew locations
 bundle config build.taglib-ruby --with-opt-dir=$(brew --prefix) > /dev/null
 

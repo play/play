@@ -143,11 +143,6 @@ else
   fail 'platform not supported'
 fi
 
-# bundler
-info 'bundler'
-gem install bundler > /tmp/play-bootstrap
-success 'bundler'
-
 # gems
 info 'gems'
 if bundle install --binstubs --path vendor/gems >> /tmp/play-bootstrap
