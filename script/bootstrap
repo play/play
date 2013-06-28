@@ -132,6 +132,11 @@ info 'mpd directories'
 mkdir -p ~/.mpd
 success 'mpd directories'
 
+# bundler
+info 'bundler'
+gem install bundler > /tmp/play-bootstrap
+success 'bundler'
+
 # Install our system dependencies.
 if [ $(uname -s) = "Darwin" ]
 then

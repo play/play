@@ -31,11 +31,6 @@ apt_install() {
   fi
 }
 
-# bundler
-info 'bundler'
-gem install bundler > /tmp/play-bootstrap
-success 'bundler'
-
 # mysql
 apt_install 'mysql-server'
 apt_install 'libmysqlclient-dev'
