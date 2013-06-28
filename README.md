@@ -3,11 +3,26 @@
 ## Install
 
 There are a lot of moving parts in Play. We've built a bootstrap script to help
-cut down the amount of things you'll have to do to get Play up and running.
+cut down the amount of things you'll have to do to get Play up and running. The
+instructions below are platform-specific and assume an install on top of a brand
+new, fresh-out-of-the-box machine.
+
+###
 
 For **OS X**, you'll need to first install Apple's [Command Line Tools](https://developer.apple.com/downloads/index.action?=command%20line%20tools)
 so you can get software compiled on your Mac.
 
+Once that's done, **install Homebrew**:
+
+    ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+
+With Homebrew installed, install Git:
+
+    git clone https://github.com/play/play && cd play
+
+And now you can start the bootstrap process:
+
+    script/bootstrap
 
 
 ### the dirty harry developer's guide to a still beta v3 of play
