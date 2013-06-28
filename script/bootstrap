@@ -38,7 +38,7 @@ else
   if test $(which rbenv)
   then
     info "installing ruby"
-    rbenv install "$RUBY_VERSION" > /tmp/play-bootstrap
+    rbenv install "$RUBY_VERSION" > /tmp/play-bootstrap 2>&1
     success 'ruby installed'
   else
     fail "$RUBY_VERSION not installed"
