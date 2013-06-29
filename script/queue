@@ -4,9 +4,6 @@
 # we've already played from the playlist and adds interesting songs to the
 # queue so the music ain't ever stop.
 
-# Check dependencies
-system("./script/env")
-
 require './config/environment'
 
 $client = Client.new
