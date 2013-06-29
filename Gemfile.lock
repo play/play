@@ -123,6 +123,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    sqlite3 (1.3.7)
     taglib-ruby (0.6.0)
     thin (1.5.1)
       daemons (>= 1.0.9)
@@ -158,6 +159,7 @@ DEPENDENCIES
   rails (= 4.0.0)
   rake (~> 10.1.0)
   sass-rails (~> 4.0.0)
+  sqlite3
   taglib-ruby (~> 0.6.0)
   thin (~> 1.5.0)
   turbolinks (~> 1.2.0)
