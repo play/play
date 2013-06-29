@@ -41,6 +41,18 @@ fi
 bundle config build.taglib-ruby --with-opt-dir=$(brew --prefix) > /dev/null
 
 brew_install 'mysql'
+
+# Load up MySQL and run it on startup
+if ! [ -f ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist ]
+then
+  if [ -f `brew --prefix mysql`/*.plist ]
+  then
+    mkdir -p ~/Library/LaunchAgents
+    ln -sfv `brew --prefix mysql`/*.plist ~/Library/LaunchAgents > /dev/null
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist > /dev/null
+  fi
+fi
+
 brew_install 'taglib'
 
 # Manually load our own homebrew formula until #19368 lands.
