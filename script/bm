@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+require 'benchmark'
+require './config/environment'
+
+$client = Client.new
+
+Benchmark.bm(21) do |b|
+  b.report("PlayQueue.now_playing") do
+    1_000.times { PlayQueue.now_playing }
+  end
+
+  b.report("Song.find") do
+    1_000.times { Song.find([:title, 'Stress']) }
+  end
+
+  b.report("Artist.all") do
+    1_000.times { Artist.all }
+  end
+end
