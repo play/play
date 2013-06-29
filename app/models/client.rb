@@ -32,8 +32,10 @@ class Client
   #
   # Returns an Array of Strings.
   def list(options)
-    options = [options] if !options.kind_of?(Array)
-    native :list, options
+    ActiveSupport::Notifications.instrument("list.mpd", :options => options) do
+      options = [options] if !options.kind_of?(Array)
+      native :list, options
+    end
   end
 
   # List all the music in the music directory
@@ -49,8 +51,10 @@ class Client
   #
   # Returns an Array of Strings.
   def search(options)
-    options = [options] if !options.kind_of?(Array)
-    native :search, options
+    ActiveSupport::Notifications.instrument("search.mpd", :options => options) do
+      options = [options] if !options.kind_of?(Array)
+      native :search, options
+    end
   end
 
   # Finds a particular exact match.
@@ -59,15 +63,19 @@ class Client
   #
   # Returns an Array of Strings.
   def find(options)
-    options = [options] if !options.kind_of?(Array)
-    native :find, options
+    ActiveSupport::Notifications.instrument("find.mpd", :options => options) do
+      options = [options] if !options.kind_of?(Array)
+      native :find, options
+    end
   end
 
   # Displays a playlist.
   #
   # Returns an Array of Strings.
   def playlist
-    native :playlist, ["-f","%file%"]
+    ActiveSupport::Notifications.instrument("playlist.mpd") do
+      native :playlist, ["-f","%file%"]
+    end
   end
 
   # Clears a playlist.
@@ -81,7 +89,9 @@ class Client
   #
   # Returns the path to the current song.
   def now_playing
-    (native :current, ["-f","%file%"]).first
+    ActiveSupport::Notifications.instrument("now_playing.mpd") do
+      (native :current, ["-f","%file%"]).first
+    end
   end
 
   # Adds a file to a playlist
