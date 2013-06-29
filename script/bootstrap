@@ -134,8 +134,14 @@ fi
 
 # bundler
 info 'bundler'
-gem install bundler > /tmp/play-bootstrap
-success 'bundler'
+if gem list | grep bundler > /dev/null
+then
+  success 'bundler'
+else
+  gem install bundler > /tmp/play-bootstrap
+  success 'bundler'
+fi
+
 
 # Rehash shims on rbenv if they're using it.
 if test $(which rbenv)
@@ -156,7 +162,7 @@ fi
 
 # gems
 info 'gems'
-if bundle install --binstubs --path vendor/gems >> /tmp/play-bootstrap
+if bundle install --binstubs --path vendor/gems >> /tmp/play-bootstrap 2>&1
 then
   success 'gems'
 else
