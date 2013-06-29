@@ -59,8 +59,7 @@ getting close to wanting to polish this off, so every little bit helps.
 
 Hacking on this? Spin it up manually with:
 
-    script/music start
-    script/web start
+    RAILS_ENV=development script/play start
 
 That'll make sure you don't have to reload your server each time, and it'll
 also show you logs in your console.

@@ -31,7 +31,8 @@ AVAILABLE COMMANDS:
   "
 }
 
-export RACK_ENV=production
+export RAILS_ENV=${1-production}
+export RACK_ENV=$RAILS_ENV
 
 # Handle play commands.
 case "$1" in

@@ -2,20 +2,17 @@
 #
 # Start the web server
 
-# Check dependencies
-./script/env
-
 # Keep things nice for those on Boxen
 if [ -n "$BOXEN_SOCKET_DIR" ]; then
-  location="--socket $BOXEN_SOCKET_DIR/play"
+  location="--socket=$BOXEN_SOCKET_DIR/play"
 else
-  location="--port 3030"
+  location="--port=3030"
 fi
 
 # Run this in prod, or dev?
 #
 # Production runs as daemonized and doesn't reload classes.
-if [ -n "$RAILS_ENV" ]; then
+if [ "$RAILS_ENV" == "" ]; then
   env="$RAILS_ENV"
   daemonized='--daemonize'
 else
