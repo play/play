@@ -21,7 +21,7 @@ fi
 
 case "$1" in
   start )
-    bundle exec thin --environment $env $location --log /tmp/play/web.log --pid /tmp/play/web.pid $daemonized start
+    bundle exec unicorn -c config/unicorn.rb
     ;;
   stop )
     if [ -f /tmp/play/web.pid ]
