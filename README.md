@@ -18,6 +18,10 @@ Once that's done, **install Homebrew**:
 
 With Homebrew installed, install Git:
 
+    brew install git
+
+Then clone the project:
+
     git clone https://github.com/play/play && cd play
 
 And now you can start the bootstrap process:
