@@ -93,7 +93,7 @@ module MpdInstrumentation
     module ClassMethods
       def log_process_action(payload)
         messages, mpd_runtime = super, payload[:mpd_runtime]
-        messages << ("Mpd: %.1fms" % mpd_runtime.to_f) if mpd_runtime
+        messages << ("MPD: %.1fms" % mpd_runtime.to_f) if mpd_runtime
         messages
       end
     end
