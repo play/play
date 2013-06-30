@@ -109,6 +109,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.11.0)
     rake (10.1.0)
+    ruby-mpd (0.2.4)
     sass (3.2.9)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -158,6 +159,7 @@ DEPENDENCIES
   protected_attributes (~> 1.0.1)
   rails (= 4.0.0)
   rake (~> 10.1.0)
+  ruby-mpd (~> 0.2.4)
   sass-rails (~> 4.0.0)
   sqlite3
   taglib-ruby (~> 0.6.0)

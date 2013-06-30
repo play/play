@@ -21,14 +21,13 @@ class Album
   #
   # Returns an Array of Songs.
   def songs
-    results = client.search([:artist, artist.name, :album, name])
-    results.map do |path|
-      Song.new(:path => path)
+    results = ActiveSupport::Notifications.instrument("find.mpd", :options => [:artist, artist.name, :album, name]) do
+      results = Play.mpd.send_command(:find, :artist, artist.name, :album, name)
     end
-  end
 
-  def client
-    Play.client
+    results.map do |result|
+      Song.new(:path => result[:file])
+    end
   end
 
   def art

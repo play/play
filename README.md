@@ -44,14 +44,6 @@ You can shut everything down with:
 
     script/play stop
 
-Want to actually listen to music? For now, run this:
-
-    mpc play
-
-Pause it with
-
-    mpc pause
-
 If you run into weird shit or anything confusing at all, file an issue. We're
 getting close to wanting to polish this off, so every little bit helps.
 
