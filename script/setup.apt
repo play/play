@@ -42,8 +42,5 @@ apt_install 'libtag1-dev'
 # mpd
 apt_install 'mpd'
 
-# mpc
-apt_install 'mpc'
-
 # execjs requires a javascript runtime, nodejs is the easiest for us to install on the fly.
 apt_install 'nodejs'

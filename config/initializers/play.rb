@@ -1,6 +1,20 @@
 module Play
-  def self.client
-    Client.new
+  # Our connection to MPD.
+  #
+  # Returns an instance of MPD.
+  def self.mpd
+    return @connection if @connection
+
+    @connection = MPD.new 'localhost', port
+    @connection.connect
+    @connection
+  end
+
+  # The port to hit MPD on.
+  #
+  # Returns an Integer.
+  def self.port
+    6600
   end
 
   # mpd only really knows about the relative path to songs:
@@ -30,8 +44,8 @@ module Play
 end
 
 # Set up mpd to natively consume songs
-Play.client.native :repeat,  [true]
-Play.client.native :consume, [true]
+# Play.client.native :repeat,  [true]
+# Play.client.native :consume, [true]
 
 # Scan for new songs just in case
-Play.client.native :update
+# Play.client.native :update
