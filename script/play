@@ -41,6 +41,8 @@ case "$1" in
     exit 0
     ;;
   start|'')
+    ./script/bootstrap
+
     ./script/music start &
     ./script/queue &
     if [ "$RAILS_ENV" == "production" ]
