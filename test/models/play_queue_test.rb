@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PlayQueueTest < ActiveSupport::TestCase
   setup do
-    Play.client.clear
+    Play.mpd.clear
     @song = Song.make
     @user = User.make
     PlayQueue.add(@song,@user)
@@ -15,7 +15,7 @@ class PlayQueueTest < ActiveSupport::TestCase
   end
 
   test "can get the current song" do
-    Play.client.play
+    Play.mpd.play
     song = PlayQueue.now_playing
     assert_equal @song.title, song.title
   end
@@ -33,7 +33,7 @@ class PlayQueueTest < ActiveSupport::TestCase
   end
 
   test "adds a song without a user" do
-    Play.client.clear
+    Play.mpd.clear
     PlayQueue.add(@song,nil)
 
     assert_equal 1, PlayQueue.songs.size
