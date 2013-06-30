@@ -70,5 +70,3 @@ else
     fail 'mpd'
   fi
 fi
-
-brew_install 'mpc'

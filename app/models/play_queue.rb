@@ -6,7 +6,7 @@ class PlayQueue
   #
   # Returns the Queue.
   def self.add(song,user)
-    client.add(song.path)
+    Play.mpd.add(song.path)
 
     if user
       user.play!(song)
@@ -25,10 +25,10 @@ class PlayQueue
   def self.remove(song,user)
     positions = []
     songs.each_with_index do |queued_song, i|
-      positions << (i+1) if song.path == queued_song.path
+      positions << (i) if song.path == queued_song.path
     end
 
-    positions.each { |position| client.remove(position) }
+    positions.each { |position| Play.mpd.delete(position) }
 
     songs
   end
@@ -37,8 +37,8 @@ class PlayQueue
   #
   # Returns the current Song.
   def self.now_playing
-    if path = client.now_playing
-      Song.new(:path => path)
+    if record = Play.mpd.queue.first
+      Song.new(:path => record.file)
     end
   end
 
@@ -46,20 +46,16 @@ class PlayQueue
   #
   # Returns nothing.
   def self.clear
-    Client.new.clear
-  end
-
-  def self.client
-    Play.client
+    Play.mpd.clear
   end
 
   # List all of the songs in the Queue.
   #
   # Returns an Array of Songs.
   def self.songs
-    results = Play.client.playlist
-    results.map do |path|
-      Song.new(:path => path)
+    results = Play.mpd.queue
+    results.map do |result|
+      Song.new(:path => result.file)
     end
   end
 end
