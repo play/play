@@ -44,8 +44,8 @@ class Artist
   # Returns an Array of Albums.
   def albums
     Play.mpd.albums(name).map do |album_name|
-      Album.new(:artist => self, :name => album_name)
-    end
+      Album.new(:artist => self, :name => album_name) if !album_name.blank?
+    end.compact
   end
 
   # A simple String representation of this instance.
