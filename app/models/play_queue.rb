@@ -53,7 +53,10 @@ class PlayQueue
   #
   # Returns an Array of Songs.
   def self.songs
-    results = Play.mpd.queue
+    results = ActiveSupport::Notifications.instrument("queue.mpd") do
+      Play.mpd.queue
+    end
+
     results.map do |result|
       Song.new(:path => result.file)
     end

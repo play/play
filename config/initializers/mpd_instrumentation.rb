@@ -66,6 +66,16 @@ module MpdInstrumentation
       debug "  #{color(name, YELLOW, true)}"
     end
 
+    def queue(event)
+      return unless logger.debug?
+      return if $PROGRAM_NAME =~ /queue/
+
+      name = '%s (%.1fms)' % ["MPD Queue", event.duration]
+
+      self.class.runtime += event.duration
+      debug "  #{color(name, YELLOW, true)}"
+    end
+
     def self.runtime=(value)
       Thread.current["mpd_runtime"] = value
     end
