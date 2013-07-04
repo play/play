@@ -1,3 +1,7 @@
+<%
+  other_albums = @artist.albums
+  other_albums.delete(@album)
+%>
 <div id="queue">
   <div class="album-details">
     <div class="sidebar">
@@ -23,7 +27,7 @@
     <div class="artist-albums">
       <div class="others">Other albums by <%= link_to @artist.name, artist_path(@artist) %></div>
       <div class="album-list">
-        <%= render :partial => 'artists/album', :collection => @artist.albums.sample(4) %>
+        <%= render :partial => 'artists/album', :collection => other_albums.sample(4) %>
       </div>
     </div>
   </div>
