@@ -3,8 +3,6 @@
 # Bootstraps your world. Checks to see if dependencies are met, and then
 # installs them if they aren't.
 
-set -e
-
 echo ''
 echo '' > /tmp/play-bootstrap
 
@@ -26,24 +24,6 @@ fail () {
   echo 'See /tmp/play-bootstrap for more information.'
   exit
 }
-
-# ruby
-RUBY_VERSION=`cat .ruby-version`
-RUBY_NO_DASH=`echo $RUBY_VERSION | sed 's/[-]//'`
-if [[ $(ruby -v 2>&1) == *$RUBY_NO_DASH* ]]
-then
-  success 'ruby installed'
-else
-  # Install if on rbenv
-  if test $(which rbenv)
-  then
-    info "installing ruby"
-    rbenv install "$RUBY_VERSION" > /tmp/play-bootstrap
-    success 'ruby installed'
-  else
-    fail "$RUBY_VERSION not installed"
-  fi
-fi
 
 info 'configure play'
 if test -f "config/play.yml"
@@ -132,6 +112,41 @@ info 'mpd directories'
 mkdir -p ~/.mpd
 success 'mpd directories'
 
+# ruby
+RUBY_VERSION=`cat .ruby-version`
+RUBY_NO_DASH=`echo $RUBY_VERSION | sed 's/[-]//'`
+if [[ $(ruby -v 2>&1) == *$RUBY_NO_DASH* ]]
+then
+  success 'ruby installed'
+else
+  # Install if on rbenv
+  if test $(which rbenv)
+  then
+    info "installing ruby"
+    rbenv install "$RUBY_VERSION" > /tmp/play-bootstrap 2>&1
+    success 'ruby installed'
+  else
+    fail "$RUBY_VERSION not installed"
+  fi
+fi
+
+# bundler
+info 'bundler'
+if gem list | grep bundler > /dev/null
+then
+  success 'bundler'
+else
+  gem install bundler > /tmp/play-bootstrap
+  success 'bundler'
+fi
+
+
+# Rehash shims on rbenv if they're using it.
+if test $(which rbenv)
+then
+  rbenv rehash
+fi
+
 # Install our system dependencies.
 if [ $(uname -s) = "Darwin" ]
 then
@@ -143,14 +158,9 @@ else
   fail 'platform not supported'
 fi
 
-# bundler
-info 'bundler'
-gem install bundler > /tmp/play-bootstrap
-success 'bundler'
-
 # gems
 info 'gems'
-if bundle install --binstubs --path vendor/gems >> /tmp/play-bootstrap
+if bundle install --binstubs --path vendor/gems >> /tmp/play-bootstrap 2>&1
 then
   success 'gems'
 else
@@ -184,6 +194,10 @@ then
 else
   fail 'problem migrating data'
 fi
+
+info 'starting music server'
+script/music start
+success 'music server up'
 
 info 'caching album art'
 if script/cache-art >> /tmp/play-bootstrap 2>&1

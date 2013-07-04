@@ -30,5 +30,8 @@ Play::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+  # Don't log sprockets
+  config.assets.debug = false
+
   config.middleware.use Rails::Rack::LogTailer
 end

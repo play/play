@@ -31,7 +31,8 @@ AVAILABLE COMMANDS:
   "
 }
 
-export RACK_ENV=production
+export RAILS_ENV=${RAILS_ENV-production}
+export RACK_ENV=$RAILS_ENV
 
 # Handle play commands.
 case "$1" in
@@ -40,13 +41,21 @@ case "$1" in
     exit 0
     ;;
   start|'')
+    ./script/bootstrap
+
     ./script/music start &
     ./script/queue &
-    ./script/web start
+    if [ "$RAILS_ENV" == "production" ]
+    then
+      ./script/web start &
+    else
+      ./script/web start
+    fi
     ;;
   stop)
     ./script/music stop
     ./script/web stop
+    pkill -f "script/queue"
     ;;
   *)
     ./script/$1 $2
