@@ -1,3 +1,6 @@
+require "base64"
+require "digest"
+
 class Album
   extend Machinist::Machinable if Rails.env.test?
 
@@ -31,7 +34,7 @@ class Album
   end
 
   def art
-    songs.first.art_file if songs.first
+    "#{Digest::SHA1.hexdigest("#{artist.name}/#{name}")}.png"
   end
 
   # The path to the zipfile.
