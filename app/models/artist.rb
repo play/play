@@ -39,11 +39,13 @@ class Artist
     end.reject{ |song| song.title.blank? }
   end
 
-  # All of the ALbums associated with this Artist.
+  # All of the Albums associated with this Artist.
   #
   # Returns an Array of Albums.
   def albums
-    songs.map(&:album).uniq { |album| album.name }.select { |album| album.name.present? }
+    Play.mpd.albums(name).map do |album_name|
+      Album.new(:artist => self, :name => album_name)
+    end
   end
 
   # A simple String representation of this instance.
