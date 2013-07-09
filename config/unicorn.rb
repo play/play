@@ -24,7 +24,7 @@ end
 pid "#{root}/tmp/pids/unicorn.pid"
 
 if rack_env != 'development'
-  listen "#{root}/tmp/sockets/unicorn.sock", :backlog => 2048
+  listen "127.0.0.1:3030"
 else
   # Keep things nice for those on Boxen
   if ENV["BOXEN_SOCKET_DIR"]
