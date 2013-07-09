@@ -7,10 +7,6 @@ case "$1" in
     bundle exec unicorn -c config/unicorn.rb
     ;;
   stop )
-    if [ -f /tmp/play/web.pid ]
-    then
-      kill `cat /tmp/play/web.pid`
-      rm -rf /tmp/play/web.pid
-    fi
+    pkill unicorn
     ;;
 esac
