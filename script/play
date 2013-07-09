@@ -41,7 +41,7 @@ case "$1" in
     exit 0
     ;;
   start|'')
-    ./script/bootstrap
+    ./script/env
 
     ./script/music start &
     ./script/queue &
