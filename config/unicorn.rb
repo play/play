@@ -5,7 +5,7 @@ if File.exist?("/tmp/play/web.log")
   stdout_path "/tmp/play/web.log"
 end
 
-rack_env = ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'production'
+rack_env = ENV['RAILS_ENV'] || 'production'
 root =
   if ENV['RACK_ROOT']
     ENV['RACK_ROOT']
