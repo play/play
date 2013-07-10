@@ -16,6 +16,9 @@
 # write something to help you out!)
 set -e
 
+# Cleanly shut everything down if we ctrl+c out.
+trap "./script/play stop" INT
+
 # Put homebrew in your $PATH if brew executable is found
 if [ -f /usr/local/bin/brew ]; then
   export PATH=/usr/local/bin:$PATH
