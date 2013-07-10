@@ -3,8 +3,8 @@ module Play
     module JsonDelivery
 
       # Internal: Helper to deliver JSON.
-      def deliver_json(status, object)
-        render :json => object.to_hash, :status => status
+      def deliver_json(status, payload)
+        render :json => payload, :status => status
       end
 
     end
