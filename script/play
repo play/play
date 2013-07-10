@@ -44,6 +44,14 @@ AVAILABLE COMMANDS:
 export RAILS_ENV=${RAILS_ENV-production}
 export RACK_ENV=$RAILS_ENV
 
+debug_log() {
+  if [ "$DEBUG" == "1" ]; then
+    echo $1
+  fi
+}
+
+debug_log "RAILS_ENV is $RAILS_ENV"
+
 # Handle play commands.
 case "$1" in
   help|--help|-h)
@@ -51,16 +59,17 @@ case "$1" in
     exit 0
     ;;
   start|'')
+    debug_log "Executing /script/env"
     ./script/env
 
-    ./script/music start &
-    ./script/queue &
-    if [ "$RAILS_ENV" == "production" ]
-    then
-      ./script/web start &
-    else
-      ./script/web start
-    fi
+    nohup ./script/music start > log/play-starting.log &
+    debug_log "Done executing /script/music"
+    nohup ./script/queue > log/play-starting.log &
+    debug_log "Done executing /script/queue"
+    debug_log "Foregrounding script/web"
+    nohup ./script/web start > log/play-starting.log &
+    debug_log "Leftover jobs: $(jobs)"
+    exit 0
     ;;
   stop)
     ./script/music stop

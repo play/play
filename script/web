@@ -4,9 +4,10 @@
 
 case "$1" in
   start )
-    bundle exec unicorn -c config/unicorn.rb
+    bundle exec unicorn -D -c config/unicorn.rb
     ;;
   stop )
     pkill unicorn
+    rm -f tmp/pids/unicorn.pid
     ;;
 esac
