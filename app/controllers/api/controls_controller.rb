@@ -6,18 +6,18 @@ class Api::ControlsController < Api::BaseController
   end
 
   def play
-    Play.client.play
+    Play.mpd.play
     deliver_json(200, {:message => 'ok'})
   end
 
   def pause
-    Play.client.pause
+    Play.mpd.pause
     deliver_json(200, {:message => 'ok'})
   end
 
   def next
-    Play.client.next
     JSON::dump(200, {:message => 'ok'})
+    Play.mpd.next
   end
 
 end
