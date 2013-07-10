@@ -13,7 +13,6 @@ gem 'taglib-ruby',      '~> 0.6.0', :require => 'taglib'
 gem 'turbolinks',       '~> 1.2.0'
 gem 'unicorn',          '~> 4.6.3'
 gem 'will_paginate',    '~> 3.0.4'
-gem 'yajl-ruby',        '~> 1.1.0'
 
 group :assets do
   gem 'sass-rails',     '~> 4.0.0'
