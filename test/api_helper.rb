@@ -30,7 +30,7 @@ def assert_json(response)
 end
 
 def parse_response(response)
-  Yajl::load(response.body)
+  JSON::parse(response.body)
 end
 
 def assert_song_representation(object)
