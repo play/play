@@ -44,8 +44,8 @@ module Play
 end
 
 # Set up mpd to natively consume songs
-# Play.client.native :repeat,  [true]
-# Play.client.native :consume, [true]
+Play.mpd.repeat  = true
+Play.mpd.consume = true
 
 # Scan for new songs just in case
-# Play.client.native :update
+Play.mpd.update
