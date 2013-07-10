@@ -4,7 +4,12 @@
 
 case "$1" in
   start )
-    bundle exec unicorn -D -c config/unicorn.rb
+    if [ "$RAILS_ENV" == "production" ]
+    then
+      bundle exec unicorn -D -c config/unicorn.rb
+    else
+      bundle exec unicorn -c config/unicorn.rb
+    fi
     ;;
   stop )
     pkill unicorn
