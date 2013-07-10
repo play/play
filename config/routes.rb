@@ -45,6 +45,15 @@ Play::Application.routes.draw do
       post '/next', :as => 'next'
     end
 
+    controller :queue do
+      scope '/queue', :as => 'queue' do
+        get '/', :to => 'queue', :as => 'list'
+        post '/add', :to => 'add', :as => 'add'
+        post '/remove', :to => 'remove', :as => 'remove'
+        post '/clear', :to => 'clear', :as => 'clear'
+      end
+    end
+
     get "/" => "base#test"
   end
 
