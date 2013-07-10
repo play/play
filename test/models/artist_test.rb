@@ -23,4 +23,15 @@ class ArtistTest < ActiveSupport::TestCase
     artist = Artist.make(:name => 'Count Basie / Duke Ellington')
     assert_equal 'Count Basie %2F Duke Ellington', artist.to_param
   end
+
+  test "to_hash" do
+    artist = Artist.make
+    artist_hash = artist.to_hash
+
+    hash_keys = artist_hash.keys
+    assert_equal 2, hash_keys.size
+    assert hash_keys.include?(:name)
+    assert hash_keys.include?(:slug)
+  end
+
 end

@@ -38,4 +38,16 @@ class AlbumTest < ActiveSupport::TestCase
     album  = Album.new(:artist => artist, :name => 'XTC / Ich R U Remixes - EP')
     assert_equal 'XTC %2F Ich R U Remixes - EP', album.to_param
   end
+
+  test "to_hash" do
+    album = Album.make
+    album_hash = album.to_hash
+
+    hash_keys = album_hash.keys
+    assert_equal 3, hash_keys.size
+    assert hash_keys.include?(:name)
+    assert hash_keys.include?(:artist)
+    assert hash_keys.include?(:slug)
+  end
+
 end

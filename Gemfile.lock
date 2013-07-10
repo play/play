@@ -157,6 +157,7 @@ DEPENDENCIES
   omniauth
   omniauth-github
   protected_attributes (~> 1.0.1)
+  rack-test
   rails (= 4.0.0)
   rake (~> 10.1.0)
   ruby-mpd (~> 0.2.4)

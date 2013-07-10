@@ -69,4 +69,14 @@ class Artist
   def to_param
     name.gsub('/','%2F')
   end
+
+  # Hash representation of the artist.
+  #
+  # Returns a Hash.
+  def to_hash
+    { :name => name,
+      :slug => to_param
+    }
+  end
+
 end

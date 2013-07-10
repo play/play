@@ -92,4 +92,16 @@ class SongTest < ActiveSupport::TestCase
   test "to_param" do
     assert_equal 'Stress', @song.to_param
   end
+
+  test "to_hash" do
+    song = Song.make
+    song_hash = song.to_hash
+
+    hash_keys = song_hash.keys
+    assert_equal 4, hash_keys.size
+    assert hash_keys.include?(:title)
+    assert hash_keys.include?(:album)
+    assert hash_keys.include?(:seconds)
+    assert hash_keys.include?(:slug)
+  end
 end

@@ -1,4 +1,5 @@
 Play::Application.routes.draw do
+
   get "search" => 'songs#search'
   get "artists/:artist_name/songs/:title" => 'songs#show', :as => 'song'
   get "artists/:artist_name/albums/:name" => 'albums#show', :as => 'album'
@@ -29,6 +30,44 @@ Play::Application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure'         => 'sessions#failure'
   get '/logout'               => 'sessions#logout'
+
+  # API Routes
+  namespace :api do
+    # users
+    get "/users" => 'users#index', :as => 'users'
+    get "/users/:login" => 'users#show', :as => 'user'
+    get "/users/:login/likes" => 'users#likes', :as => 'likes_user'
+
+    # artists
+    get "/artists" => 'artists#index', :as => 'artists'
+    get "/artist/:artist_name" => 'artists#show', :as => 'artist'
+
+    # albums
+    get "/artists/:artist_name/albums" => 'albums#index', :as => 'artist_albums'
+    get "/artists/:artist_name/albums/:album_name" => 'albums#show', :as => 'artist_album'
+    get "/artists/:artist_name/albums/:album_name/download" => 'albums#download', :as => 'download_artist_album'
+
+    # songs
+    get "/songs/:song_name" => 'songs#show', :as => 'song'
+    get "/songs/:song_name/download" => 'songs#download', :as => 'download_song'
+    put "/songs/:song_name/like" => 'songs#like', :as => 'like_song'
+    put "/songs/:song_name/unlike" => 'songs#unlike', :as => 'unlike_song'
+
+    # controls
+    get "/now_playing" => 'controls#now_playing', :as => 'now_playing'
+    post "/play" => 'controls#play', :as => 'play'
+    post "/pause" => 'controls#pause', :as => 'pause'
+    post "/next" => 'controls#next', :as => 'next'
+
+    # queue
+    get "/queue" => 'queue#list', :as => 'queue'
+    post "/queue/add" => 'queue#add', :as => 'add_queue'
+    post "/queue/remove" => 'queue#remove', :as => 'remove_queue'
+    post "/queue/clear" => 'queue#clear', :as => 'clear_queue'
+
+    get "/" => "base#test"
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
