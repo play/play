@@ -16,6 +16,11 @@
 # write something to help you out!)
 set -e
 
+# Put homebrew in your $PATH if brew executable is found
+if [ -d /usr/local/bin/brew ]; then
+  export PATH=/usr/local/bin:$PATH
+fi
+
 # Usage is grepped out of this file (i.e. The Tomayko Method).
 #/ usage: play [help|--help|-h] [command ...]
 play_usage() {
