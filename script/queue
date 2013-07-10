@@ -10,7 +10,7 @@ loop do
   if PlayQueue.songs.size < 2
     song = Song.new(:path => Play.mpd.files[:file].sample)
     PlayQueue.add(song, nil)
-    Play.mpd.native(:clearerror)
+    Play.mpd.clearerror
   end
   sleep 1
 end
