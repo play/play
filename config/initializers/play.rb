@@ -49,3 +49,6 @@ Play.mpd.consume = true
 
 # Scan for new songs just in case
 Play.mpd.update
+
+# Play the tunes
+Play.mpd.play
