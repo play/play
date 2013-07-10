@@ -26,7 +26,7 @@ def unauthorized_get(uri, opts={})
 end
 
 def assert_json(response)
-  assert_equal 'application/json;charset=utf-8', response.headers["Content-Type"]
+  assert_equal 'application/json; charset=utf-8', response.headers["Content-Type"]
 end
 
 def parse_response(response)
