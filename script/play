@@ -72,7 +72,7 @@ case "$1" in
     exit 0
     ;;
   stop)
-    ./script/music stop
+    #./script/music stop
     ./script/web stop
     pkill -f "script/queue"
     ;;
