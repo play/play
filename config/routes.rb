@@ -34,6 +34,10 @@ Play::Application.routes.draw do
 
   # API Routes
   namespace :api do
+    resources :users, :only => [:index, :show] do
+      get :likes, :on => :member
+    end
+
     get "/" => "base#test"
   end
 
