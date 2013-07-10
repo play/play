@@ -38,6 +38,11 @@ Play::Application.routes.draw do
       get :likes, :on => :member
     end
 
+    get '/now_playing' => 'controls#now_playing'
+    put '/play' => 'controls#play'
+    put '/pause' => 'controls#pause'
+    put '/next' => 'controls#next'
+
     get "/" => "base#test"
   end
 
