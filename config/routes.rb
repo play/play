@@ -1,5 +1,4 @@
 Play::Application.routes.draw do
-  mount Play::Api => '/api'
 
   get "search" => 'songs#search'
   get "artists/:artist_name/songs/:title" => 'songs#show', :as => 'song'
