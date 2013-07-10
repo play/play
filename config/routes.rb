@@ -38,6 +38,22 @@ Play::Application.routes.draw do
     get "/users" => 'users#index', :as => 'users'
     get "/users/:login" => 'users#show', :as => 'user'
     get "/users/:login/likes" => 'users#likes', :as => 'likes_user'
+
+    # artists
+    get "/artists" => 'artists#index', :as => 'artists'
+    get "/artist/:artist_name" => 'artists#show', :as => 'artist'
+
+    # albums
+    get "/artists/:artist_name/albums" => 'albums#index', :as => 'artist_albums'
+    get "/artists/:artist_name/albums/:album_name" => 'albums#show', :as => 'artist_album'
+    get "/artists/:artist_name/albums/:album_name/download" => 'albums#download', :as => 'download_artist_album'
+
+    # songs
+    get "/songs/:song_name" => 'songs#show', :as => 'song'
+    get "/songs/:song_name/download" => 'songs#download', :as => 'download_song'
+    put "/songs/:song_name/like" => 'songs#like', :as => 'like_song'
+    put "/songs/:song_name/unlike" => 'songs#unlike', :as => 'unlike_song'
+
     # controls
     get "/now_playing" => 'controls#now_playing', :as => 'now_playing'
     post "/play" => 'controls#play', :as => 'play'
