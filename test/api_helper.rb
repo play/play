@@ -1,7 +1,7 @@
 Play.config['auth_token'] = '123456789'
 
 def authorized_rack_env_for(user)
-  {"HTTP_AUTHENTICATION" => user.token}
+  {"HTTP_AUTHORIZATION" => user.token}
 end
 
 def authorized_get(uri, user, opts={})
@@ -21,7 +21,7 @@ def authorized_delete(uri, user, opts={})
 end
 
 def unauthorized_get(uri, opts={})
-  rack_env = {"HTTP_AUTHENTICATION" => "xxxxxxxxxxxxxxxxxx"}
+  rack_env = {"HTTP_AUTHORIZATION" => "xxxxxxxxxxxxxxxxxx"}
   get uri, opts, rack_env
 end
 
