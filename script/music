@@ -1,10 +1,6 @@
 #!/bin/sh
 #
 # Manages the music daemon powering Play.
-set -e
-
-# Check dependencies
-./script/env
 
 case $1 in
 	start)
@@ -12,7 +8,7 @@ case $1 in
 		exit 0
 		;;
 	stop)
-		mpd config/mpd.conf --kill
+		mpd config/mpd.conf --kill > /dev/null 2>&1
 		exit 0
 		;;
 esac

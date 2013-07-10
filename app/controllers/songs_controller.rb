@@ -23,8 +23,12 @@ class SongsController < ApplicationController
   end
 
   def search
+    if record = Play.mpd.search(:artist, params[:q], :case_sensitive => false).first
+      return redirect_to(artist_path(record.artist))
+    end
+
     @filter = (params[:filter] || :any).to_sym
-    @songs = Song.find([@filter,params[:q]], :current_page => params[:page])
+    @songs = Song.find([@filter, params[:q]], :current_page => params[:page])
   end
 
   def download

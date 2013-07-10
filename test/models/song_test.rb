@@ -69,7 +69,7 @@ class SongTest < ActiveSupport::TestCase
     PlayQueue.clear
     assert !@song.queued?
 
-    Play.client.add(@song.path)
+    Play.mpd.add(@song.path)
     assert @song.queued?
   end
 

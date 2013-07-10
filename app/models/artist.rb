@@ -17,34 +17,35 @@ class Artist
   #
   # Returns an Array of Strings.
   def self.all
-    artists = client.list(:artist)
-    artists.sort.map do |name|
-      Artist.new(:name => name.chomp)
+    artists = ActiveSupport::Notifications.instrument("list.mpd", :options => [:list, :artist]) do
+      Play.mpd.list(:artist)
     end
-  end
 
-  def self.client
-    Play.client
-  end
-
-  def client
-    Play.client
+    artists.sort.map do |name|
+      Artist.new(:name => name)
+    end
   end
 
   # All of the Songs associated with this Artist.
   #
   # Returns an Array of Songs.
   def songs
-    client.find([:artist, name]).map do |path|
-      Song.new(:path => path)
+    records = ActiveSupport::Notifications.instrument("search.mpd", :options => [:artist, :name]) do
+      records = Play.mpd.songs_by_artist(name)
+    end
+
+    records.map do |record|
+      Song.new(:path => record.file)
     end.reject{ |song| song.title.blank? }
   end
 
-  # All of the ALbums associated with this Artist.
+  # All of the Albums associated with this Artist.
   #
   # Returns an Array of Albums.
   def albums
-    songs.map(&:album).uniq { |album| album.name }
+    Play.mpd.albums(name).map do |album_name|
+      Album.new(:artist => self, :name => album_name) if !album_name.blank?
+    end.compact
   end
 
   # A simple String representation of this instance.

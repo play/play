@@ -16,6 +16,16 @@
 # write something to help you out!)
 set -e
 
+# Put homebrew in your $PATH if brew executable is found
+if [ -f /usr/local/bin/brew ]; then
+  export PATH=/usr/local/bin:$PATH
+fi
+
+# Put rbenv in your $PATH if the default path is found
+if [ -d ~/.rbenv/shims ]; then
+  export PATH=~/.rbenv/shims:$PATH
+fi
+
 # Usage is grepped out of this file (i.e. The Tomayko Method).
 #/ usage: play [help|--help|-h] [command ...]
 play_usage() {
@@ -31,7 +41,16 @@ AVAILABLE COMMANDS:
   "
 }
 
-export RACK_ENV=production
+export RAILS_ENV=${RAILS_ENV-production}
+export RACK_ENV=$RAILS_ENV
+
+debug_log() {
+  if [ "$DEBUG" == "1" ]; then
+    echo $1
+  fi
+}
+
+debug_log "RAILS_ENV is $RAILS_ENV"
 
 # Handle play commands.
 case "$1" in
@@ -40,13 +59,22 @@ case "$1" in
     exit 0
     ;;
   start|'')
-    ./script/music start &
-    ./script/queue &
-    ./script/web start
+    debug_log "Executing /script/env"
+    ./script/env
+
+    nohup ./script/music start > log/play-starting.log &
+    debug_log "Done executing /script/music"
+    nohup ./script/queue > log/play-starting.log &
+    debug_log "Done executing /script/queue"
+    debug_log "Foregrounding script/web"
+    nohup ./script/web start > log/play-starting.log &
+    debug_log "Leftover jobs: $(jobs)"
+    exit 0
     ;;
   stop)
-    ./script/music stop
+    #./script/music stop
     ./script/web stop
+    pkill -f "script/queue"
     ;;
   *)
     ./script/$1 $2

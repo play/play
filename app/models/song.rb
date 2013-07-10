@@ -49,13 +49,9 @@ class Song
     @path
   end
 
-  def client
-    Play.client
-  end
-
   # Searches for matching Songs.
   #
-  # conditions - An Array of mpc-friendly options to search on.
+  # conditions - An Array of options to search on.
   # options    - A Hash of options, like `current_page`, for pagination.
   #
   # Examples
@@ -70,14 +66,17 @@ class Song
     current_page = options[:current_page] || 1
     index        = (current_page.to_i * per_page) - per_page
 
-    results = Play.client.search(conditions)
+    results = ActiveSupport::Notifications.instrument("search.mpd", :options => options) do
+      Play.mpd.search(conditions.first, conditions.second, :case_sensitive => false)
+    end
+
     total_results = results.count
     results = results[index..index+per_page-1]
 
     WillPaginate::Collection.create(current_page, per_page, total_results) do |pager|
       return pager.replace([]) if !results
 
-      results = results.map { |path| Song.new(:path => path) }.
+      results = results.map { |result| Song.new(:path => result.file) }.
         reject { |song| song.title.blank? }
       pager.replace(results)
     end
@@ -87,7 +86,8 @@ class Song
   #
   # Returns a Song.
   def self.now_playing
-    new(:path => Play.client.now_playing) if Play.client.now_playing
+    path = Play.mpd.current_song.try(:file)
+    new(:path => path) if path
   end
 
   # The name of the artist of this song.
@@ -152,8 +152,20 @@ class Song
     art_cache_path = "#{Play.album_art_cache_path}/#{art_file}"
 
     if !File.exists?(art_cache_path)
-      `ffmpeg -i "#{full_path}" -an -vcodec copy #{art_cache_path} 2>&1`
-      art_cache_path
+      if data = album_art_data
+        File.open(art_cache_path, 'wb') { |file| file.write(data) }
+        art_cache_path
+      end
+    end
+  end
+
+  def album_art_data
+    extension = File.extname(path)
+
+    if extension == '.m4a'
+      art = TagLib::MP4::File.new(full_path).tag.item_list_map['covr'].try(:to_cover_art_list).try(:first).try(:data)
+    elsif extension == '.mp3'
+      frame = TagLib::MPEG::File.new(full_path).id3v2_tag.frame_list('APIC').first.try(:picture)
     end
   end
 

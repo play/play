@@ -9,8 +9,9 @@
 
 require './config/environment'
 
-paths = Play.client.listall
-puts "Caching art for #{paths.count} songs..."
+paths  = Play.mpd.files[:file]
+albums = Play.mpd.list(:album)
+puts "Caching art for #{albums.count} albums..."
 
 FileUtils.mkdir_p 'public/images/art'
 
@@ -20,4 +21,4 @@ paths.each do |path|
   count += 1 if result
 end
 
-puts "Done! #{count} songs updated."
+puts "Done! #{count} albums updated."
