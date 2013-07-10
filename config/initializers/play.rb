@@ -43,12 +43,14 @@ module Play
   end
 end
 
-# Set up mpd to natively consume songs
-Play.mpd.repeat  = true
-Play.mpd.consume = true
+if !Rails.env.test?
+  # Set up mpd to natively consume songs
+  Play.mpd.repeat  = true
+  Play.mpd.consume = true
 
-# Scan for new songs just in case
-Play.mpd.update
+  # Scan for new songs just in case
+  Play.mpd.update
 
-# Play the tunes
-Play.mpd.play
+  # Play the tunes
+  Play.mpd.play
+end
