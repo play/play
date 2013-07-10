@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_filter :auth_required, :only => [:create, :failure, :logout]
+  skip_before_filter :auth_required, :only => [:create, :logout]
 
   def create
     auth = request.env['omniauth.auth']
@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
       orgs   = client.organizations(auth.info.nickname).map(&:login)
 
       if !orgs.include?(org)
-        return render :action => :failure
+        flash[:error] = "You don't seem to be in correct GitHub Organization. Bummer!"
+        return render(:template => 'shared/error')
       end
     end
 
@@ -24,11 +25,8 @@ class SessionsController < ApplicationController
       redirect_to url and return
     end
 
-    render :action => :failure
-  end
-
-  def failure
-    render :layout => false
+    flash[:error] = "There was a problem logging you in. Don't ask me what it was."
+    return render(:template => 'shared/error')
   end
 
   def logout
@@ -36,5 +34,4 @@ class SessionsController < ApplicationController
     session.delete(:github_login)
     redirect_to '/'
   end
-
 end
