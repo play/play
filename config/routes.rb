@@ -32,6 +32,12 @@ Play::Application.routes.draw do
   get '/auth/failure'         => 'sessions#failure'
   get '/logout'               => 'sessions#logout'
 
+  # API Routes
+  namespace :api do
+    get "/" => "base#test"
+  end
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
