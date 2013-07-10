@@ -34,25 +34,21 @@ Play::Application.routes.draw do
 
   # API Routes
   namespace :api do
-    resources :users, :only => [:index, :show] do
-      get :likes, :on => :member
-    end
+    # users
+    get "/users" => 'users#index', :as => 'users'
+    get "/users/:login" => 'users#show', :as => 'user'
+    get "/users/:login/likes" => 'users#likes', :as => 'likes_user'
+    # controls
+    get "/now_playing" => 'controls#now_playing', :as => 'now_playing'
+    post "/play" => 'controls#play', :as => 'play'
+    post "/pause" => 'controls#pause', :as => 'pause'
+    post "/next" => 'controls#next', :as => 'next'
 
-    controller :controls do
-      get '/now_playing', :as => 'now_playing'
-      post '/play', :as => 'play'
-      post '/pause', :as => 'pause'
-      post '/next', :as => 'next'
-    end
-
-    controller :queue do
-      scope '/queue', :as => 'queue' do
-        get '/', :to => 'queue', :as => 'list'
-        post '/add', :to => 'add', :as => 'add'
-        post '/remove', :to => 'remove', :as => 'remove'
-        post '/clear', :to => 'clear', :as => 'clear'
-      end
-    end
+    # queue
+    get "/queue" => 'queue#list', :as => 'queue'
+    post "/queue/add" => 'queue#add', :as => 'add_queue'
+    post "/queue/remove" => 'queue#remove', :as => 'remove_queue'
+    post "/queue/clear" => 'queue#clear', :as => 'clear_queue'
 
     get "/" => "base#test"
   end
