@@ -2,7 +2,19 @@ class SessionsController < ApplicationController
   skip_before_filter :auth_required, :only => [:create, :failure, :logout]
 
   def create
-    @user = User.find_for_github_oauth(request.env["omniauth.auth"])
+    auth = request.env['omniauth.auth']
+    org = Play.config['github']['org']
+
+    if org.present?
+      client = Octokit::Client.new(:login => auth.info.nickname, :token => auth.token)
+      orgs   = client.organizations(auth.info.nickname).map(&:login)
+
+      if !orgs.include?(org)
+        return render :action => :failure
+      end
+    end
+
+    @user = User.find_for_github_oauth(auth)
 
     if @user.persisted?
       session[:github_login] = @user.login
