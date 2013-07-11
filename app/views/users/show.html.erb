@@ -30,12 +30,12 @@
             <td class="album"><%= link_to track.album_name, album_path(track.artist, track.album), :class => "album" %></td>
 
             <td class="duration"><%= play.playcount %></td>
+            <td class="queue"><%= render :partial => 'shared/queue', :locals => { :song => track } %></td>
+            <td class="like"><%= render :partial => 'shared/like', :locals => { :song => track } %></td>
             <td class="download">
               <a href="/download/<%= track.path %>"><span class="icon-cloud-download"></span></a>
             </td>
 
-            <td class="like"><%= render :partial => 'shared/like', :locals => { :song => track } %></td>
-            <td class="queue"><%= render :partial => 'shared/queue', :locals => { :song => track } %></td>
           </tr>
       <% end %>
     </table>
