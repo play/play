@@ -613,8 +613,21 @@ section[role="nav"] {
           padding: 10px;
           @include border-radius(2px);
           font-size: 12px;
-          text-align: center;
           margin: 3px 0;
+
+          &:hover a, &:hover span { color: $pink; }
+          a {
+            color: #777;
+            text-shadow: 1px 1px 0 #fff;
+          }
+
+          span {
+            float: left;
+            margin-right: 5px;
+            font-size: 14px;
+            text-align: left;
+            color: #999;
+          }
         }
       }
 
