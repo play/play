@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class UsersTest < ActiveSupport::TestCase
+class ArtistsTest < ActiveSupport::TestCase
 
-  context "Users" do
+  context "Artists" do
     setup do
       @authorized_user = User.make!(:login => 'tater')
     end
