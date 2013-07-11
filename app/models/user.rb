@@ -89,4 +89,13 @@ class User < ActiveRecord::Base
     update_attribute(:token, Digest::MD5.hexdigest(login + Time.now.to_i.to_s + rand(999999).to_s)[0..4])
   end
 
+  # Hash representation of the user.
+  #
+  # Returns a Hash.
+  def to_hash
+    { :login => login,
+      :slug => login
+    }
+  end
+
 end

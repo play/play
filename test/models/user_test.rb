@@ -70,4 +70,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not_equal old_token, @user.token
   end
 
+  test "to_hash" do
+    user_hash = @user.to_hash
+
+    hash_keys = user_hash.keys
+    assert_equal 2, hash_keys.size
+    assert hash_keys.include?(:login)
+    assert hash_keys.include?(:slug)
+  end
+
 end
