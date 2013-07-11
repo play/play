@@ -857,6 +857,15 @@ section[role="nav"] {
   }
 }
 
+.pull-right{
+  float: right;
+}
+
+.pull-left{
+  float: left;
+}
+
+
 @media all and (max-width: 500) {
 /* define mobile specific styles come here */
   header {
