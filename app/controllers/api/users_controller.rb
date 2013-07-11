@@ -1,15 +1,22 @@
 class Api::UsersController < Api::BaseController
 
   def index
-    deliver_json(200, {})
+    users = User.all
+    deliver_json(200, {:users => users.collect(&:to_hash)})
   end
 
   def show
-    deliver_json(200, {})
+    user = User.find_by_login(params[:login])
+    deliver_json(200, user.to_hash)
   end
 
   def likes
-    deliver_json(200, {})
+    current_page = params[:page] || 1
+
+    user = User.find_by_login(params[:login])
+    likes = user.liked_songs(current_page)
+
+    deliver_json(200, {:songs => likes.collect(&:to_hash), :total_entries => user.likes.count})
   end
 
 end

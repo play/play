@@ -63,3 +63,11 @@ def assert_artist_representation(object)
   assert keys.include? 'name'
   assert keys.include? 'slug'
 end
+
+def assert_user_representation(object)
+  keys = object.keys
+
+  assert_equal 2, keys.size
+  assert keys.include? 'login'
+  assert keys.include? 'slug'
+end
