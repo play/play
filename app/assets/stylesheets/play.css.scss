@@ -566,6 +566,11 @@ section[role="nav"] {
         .controls {
           display: inline-block;
           float: right;
+          font-size: 16px;
+          color: #888;
+
+          a { color: #888; }
+          a:hover { color: $pink; }
 
           .icon-plus-sign-alt, .icon-remove-sign{
             cursor: pointer;
