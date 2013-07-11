@@ -25,6 +25,18 @@ class UserTest < ActiveSupport::TestCase
     assert @user.liked_songs.first.is_a?(Song)
   end
 
+  test "liked songs can paginate" do
+    @user.like('Justice/Cross/Stress.mp3')
+    @user.like('Justice/Cross/Yes.mp3')
+    @user.like('Justice/Cross/No.mp3')
+
+    songs = @user.liked_songs(1, 2)
+    assert_equal 2, songs.size
+
+    songs = @user.liked_songs(2, 2)
+    assert_equal 1, songs.size
+  end
+
   test "can like a song" do
     @user.like('any/song.mp3')
 
