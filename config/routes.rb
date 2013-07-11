@@ -40,7 +40,7 @@ Play::Application.routes.draw do
 
     # artists
     get "/artists" => 'artists#index', :as => 'artists'
-    get "/artist/:artist_name" => 'artists#show', :as => 'artist'
+    get "/artists/:artist_name" => 'artists#show', :as => 'artist'
 
     # albums
     get "/artists/:artist_name/albums" => 'albums#index', :as => 'artist_albums'
