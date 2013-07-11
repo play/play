@@ -6,7 +6,7 @@ $ ->
     $.ajax
       type: 'post',
       url:  '/queue',
-      data: { id: path },
+      data: { type: 'song', id: path },
       success: (data) ->
         element.addClass('icon-remove-sign remove')
         element.removeClass('icon-plus-sign-alt add')
