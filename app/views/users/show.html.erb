@@ -8,6 +8,12 @@
     </div>
   </div>
 
+  <% if @user == current_user %>
+  <div id="name">
+    <h4>Your Auth Token: <strong><%= @user.token %></strong></h4>
+  </div>
+  <% end %>
+
   <h4>Favorite Songs</h4>
   <% if @plays.present? %>
     <table class="tracklist">
