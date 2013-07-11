@@ -4,7 +4,6 @@ class QueueController < ApplicationController
   end
 
   def create
-
     case params[:type]
     when /song/
       song = Song.new(:path => params[:id])
