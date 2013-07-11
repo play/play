@@ -24,9 +24,18 @@
       <span class="artist"><%= link_to @artist.name, artist_path(@artist) %></span>
         <ul class="listing">
           <% @album.songs.each do |song| %>
-            <li>
-              <%= link_to song.title, song_path(song.artist, song) %>
-              <span class="duration"> <%= song.duration %></span>
+            <li class='track' data-path="<%= song.path %>">
+              <%= link_to song.title, song_path(song.artist, song), :class => 'track-title' %>
+
+              <div class="controls">
+                <%= render :partial => 'shared/queue', :locals => {:song => song} %>
+                <%= render :partial => 'shared/like', :locals => {:song => song} %>
+                <%= link_to song_download_path(song.path) do %>
+                <span class="icon-cloud-download"></span>
+                <% end %>
+              </div>
+
+              <span class="duration pull-right"> <%= song.duration %></span>
             </li>
           <% end %>
         </ul>
