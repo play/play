@@ -1,4 +1,5 @@
 <%
+  return if !Play.mpd
   song = PlayQueue.songs.first
   return if !song || !flash[:error].blank?
 %>
