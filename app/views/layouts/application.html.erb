@@ -19,29 +19,31 @@
   <a href="/"><h1>Play</h1></a>
 
   <section role="nav">
-    <span class="stream-controls">
-      <span class="icon-headphones"></span>
-      listen
-    </span>
+    <% if current_user %>
+      <span class="stream-controls">
+        <span class="icon-headphones"></span>
+        listen
+      </span>
 
-    <span id="login">
-      <a href="/<%= current_user.login %>">
-        <img src="http://www.gravatar.com/avatar/<%= current_user.gravatar_id %>?s=50" />
-        <%= current_user.login %>
-      </a>
-    </span>
+      <span id="login">
+        <a href="/<%= current_user.login %>">
+          <img src="http://www.gravatar.com/avatar/<%= current_user.gravatar_id %>?s=50" />
+          <%= current_user.login %>
+        </a>
+      </span>
 
-    <form class="search" action="/search">
-      <% style = @filter && @filter != :any ? 'display: inline;' : '' %>
-      <a href="#" class="advanced-search"><span class="icon-cog"></span></a><div class="filter" style="<%= style %>">
-      <span <%= raw 'class="active"' if @filter == :any || !@filter %>>Any</span>
-      <span <%= raw 'class="active"' if @filter == :artist %>>Artist</span>
-      <span <%= raw 'class="active"' if @filter == :album %>>Album</span>
-      <span <%= raw 'class="active"' if @filter == :title %>>Song</span>
-    </div><input type="search" results="10" autosave="Play" name="q" id="q" placeholder="Search" value="<%= params[:q] %>"/>
-      <input type="hidden" name="filter" id="filter" value="any" />
-      <span class="icon-search"></span>
-    </form>
+      <form class="search" action="/search">
+        <% style = @filter && @filter != :any ? 'display: inline;' : '' %>
+        <a href="#" class="advanced-search"><span class="icon-cog"></span></a><div class="filter" style="<%= style %>">
+        <span <%= raw 'class="active"' if @filter == :any || !@filter %>>Any</span>
+        <span <%= raw 'class="active"' if @filter == :artist %>>Artist</span>
+        <span <%= raw 'class="active"' if @filter == :album %>>Album</span>
+        <span <%= raw 'class="active"' if @filter == :title %>>Song</span>
+      </div><input type="search" results="10" autosave="Play" name="q" id="q" placeholder="Search" value="<%= params[:q] %>"/>
+        <input type="hidden" name="filter" id="filter" value="any" />
+        <span class="icon-search"></span>
+      </form>
+    <% end %>
   </section>
 
   </div><!-- end of header -->

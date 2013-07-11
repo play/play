@@ -16,6 +16,9 @@
 # write something to help you out!)
 set -e
 
+# Cleanly shut everything down if we ctrl+c out.
+trap "./script/play stop" INT
+
 # Put homebrew in your $PATH if brew executable is found
 if [ -f /usr/local/bin/brew ]; then
   export PATH=/usr/local/bin:$PATH
@@ -41,7 +44,14 @@ AVAILABLE COMMANDS:
   "
 }
 
-export RAILS_ENV=${RAILS_ENV-production}
+# Override RAILS_ENV if we have `env` set in config/play.yml
+local_env=$(ruby -ryaml -e 'puts YAML.load(File.read("config/play.yml"))["env"]')
+
+if test -n "$local_env"; then
+  export RAILS_ENV=$local_env
+else
+  export RAILS_ENV=${RAILS_ENV-production}
+fi
 export RACK_ENV=$RAILS_ENV
 
 debug_log() {
@@ -66,8 +76,15 @@ case "$1" in
     debug_log "Done executing /script/music"
     nohup ./script/queue > log/play-starting.log &
     debug_log "Done executing /script/queue"
+
     debug_log "Foregrounding script/web"
-    nohup ./script/web start > log/play-starting.log &
+    if [ "$RAILS_ENV" == "production" ]
+    then
+      nohup ./script/web start > log/play-starting.log &
+    else
+      ./script/web start
+    fi
+
     debug_log "Leftover jobs: $(jobs)"
     exit 0
     ;;

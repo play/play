@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'jquery-rails'
 gem 'mysql2',           '~> 0.3.11'
+gem 'octokit',          '~> 1.25.0'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'protected_attributes', '~> 1.0.1'
