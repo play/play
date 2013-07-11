@@ -3,8 +3,8 @@
   other_albums.delete(@album)
 %>
 <div id="queue">
-  <div class="album-details album" data-artist="<%= @album.artist.name %>" data-name="<%= @album.name %>">
-    <div class="sidebar">
+  <div class="album-details">
+    <div class="sidebar" class="album" data-artist="<%= @album.artist.name %>" data-name="<%= @album.name %>">
       <img src="/images/art/<%= @album.art %>" class="album-art">
       <ul>
         <li>
