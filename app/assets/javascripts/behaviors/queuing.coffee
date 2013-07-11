@@ -34,5 +34,6 @@ $ ->
       data: { type: 'album', artist: artist, name: name },
       success: (data) ->
         element.html('Added! Good pick!')
+        $('.track .icon-plus-sign-alt.add, .song .icon-plus-sign-alt.add').removeClass('icon-plus-sign-alt add').addClass('icon-remove-sign remove')
 
     return false
