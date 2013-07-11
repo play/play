@@ -3,11 +3,20 @@
   other_albums.delete(@album)
 %>
 <div id="queue">
-  <div class="album-details">
+  <div class="album-details album" data-artist="<%= @album.artist.name %>" data-name="<%= @album.name %>">
     <div class="sidebar">
       <img src="/images/art/<%= @album.art %>" class="album-art">
       <ul>
-        <li><%= link_to 'Download Album', album_download_path(@artist.name, @album) %></li>
+        <li>
+          <%= link_to '#', :class => 'add' do %>
+            <span class="icon-plus-sign-alt add"></span> Add to Queue
+          <% end %>
+        </li>
+        <li>
+          <%= link_to album_download_path(@artist.name, @album) do %>
+            <span class="icon-cloud-download"></span> Download Album
+          <% end %>
+        </li>
       </ul>
     </div>
     <div>
