@@ -48,10 +48,10 @@ Play::Application.routes.draw do
     get "/artists/:artist_name/albums/:album_name/download" => 'albums#download', :as => 'download_artist_album'
 
     # songs
-    get "/songs/:song_name" => 'songs#show', :as => 'song'
-    get "/songs/:song_name/download" => 'songs#download', :as => 'download_song'
-    put "/songs/:song_name/like" => 'songs#like', :as => 'like_song'
-    put "/songs/:song_name/unlike" => 'songs#unlike', :as => 'unlike_song'
+    get "/artists/:artist_name/songs/:song_name" => 'songs#show', :as => 'song'
+    get "/artists/:artist_name/songs/:song_name/download" => 'songs#download', :as => 'download_song'
+    put "/artists/:artist_name/songs/:song_name/like" => 'songs#like', :as => 'like_song'
+    put "/artists/:artist_name/songs/:song_name/unlike" => 'songs#unlike', :as => 'unlike_song'
 
     # controls
     post "/play" => 'controls#play', :as => 'play'
