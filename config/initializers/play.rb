@@ -3,11 +3,13 @@ module Play
   #
   # Returns an instance of MPD.
   def self.mpd
-    return @connection if @connection
+    return @connection if @connection && @connection.connected?
 
     @connection = MPD.new 'localhost', port
     @connection.connect
     @connection
+  rescue Errno::ECONNREFUSED
+    nil
   end
 
   # The port to hit MPD on.
