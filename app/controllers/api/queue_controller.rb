@@ -6,6 +6,7 @@ class Api::QueueController < Api::BaseController
   end
 
   def list
+    deliver_json(200, {:songs => PlayQueue.songs.collect(&:to_hash)})
   end
 
   def add
