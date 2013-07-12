@@ -54,12 +54,12 @@ Play::Application.routes.draw do
     put "/songs/:song_name/unlike" => 'songs#unlike', :as => 'unlike_song'
 
     # controls
-    get "/now_playing" => 'controls#now_playing', :as => 'now_playing'
     post "/play" => 'controls#play', :as => 'play'
     post "/pause" => 'controls#pause', :as => 'pause'
     post "/next" => 'controls#next', :as => 'next'
 
     # queue
+    get "/now_playing" => 'queue#now_playing', :as => 'now_playing'
     get "/queue" => 'queue#list', :as => 'queue'
     post "/queue/add" => 'queue#add', :as => 'add_queue'
     post "/queue/remove" => 'queue#remove', :as => 'remove_queue'
