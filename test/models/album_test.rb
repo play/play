@@ -44,10 +44,11 @@ class AlbumTest < ActiveSupport::TestCase
     album_hash = album.to_hash
 
     hash_keys = album_hash.keys
-    assert_equal 5, hash_keys.size
+    assert_equal 6, hash_keys.size
     assert hash_keys.include?(:name)
     assert hash_keys.include?(:artist_name)
     assert hash_keys.include?(:artist_slug)
+    assert hash_keys.include?(:art_path)
     assert hash_keys.include?(:slug)
     assert hash_keys.include?(:songs)
   end

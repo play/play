@@ -98,12 +98,13 @@ class SongTest < ActiveSupport::TestCase
     song_hash = song.to_hash
 
     hash_keys = song_hash.keys
-    assert_equal 7, hash_keys.size
+    assert_equal 8, hash_keys.size
     assert hash_keys.include?(:title)
     assert hash_keys.include?(:album_name)
     assert hash_keys.include?(:album_slug)
     assert hash_keys.include?(:artist_name)
     assert hash_keys.include?(:artist_slug)
+    assert hash_keys.include?(:album_art_path)
     assert hash_keys.include?(:seconds)
     assert hash_keys.include?(:slug)
   end

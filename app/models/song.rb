@@ -208,6 +208,7 @@ class Song
       :album_slug => album.to_param,
       :artist_name => artist.name,
       :artist_slug => artist.to_param,
+      :album_art_path => "/images/art/#{album.art}",
       :seconds => seconds,
       :slug => to_param
     }

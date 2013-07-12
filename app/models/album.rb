@@ -85,6 +85,7 @@ class Album
     { :name => name,
       :artist_name => artist.name,
       :artist_slug => artist.to_param,
+      :art_path => "/images/art/#{art}",
       :slug => to_param,
       :songs => songs.collect(&:to_hash)
     }
