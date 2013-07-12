@@ -6,7 +6,7 @@ class Api::ControlsController < Api::BaseController
   end
 
   def pause
-    Play.mpd.pause
+    Play.mpd.pause = true
     deliver_json(200, {:message => 'ok'})
   end
 
