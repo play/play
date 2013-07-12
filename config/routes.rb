@@ -65,6 +65,9 @@ Play::Application.routes.draw do
     post "/queue/remove" => 'queue#remove', :as => 'remove_queue'
     post "/queue/clear" => 'queue#clear', :as => 'clear_queue'
 
+    # system
+    get "/stream" => 'system#stream', :as => 'stream'
+
     get "/" => "base#test"
   end
 
