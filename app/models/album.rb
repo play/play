@@ -83,7 +83,8 @@ class Album
   # Returns a Hash.
   def to_hash
     { :name => name,
-      :artist => artist.to_hash,
+      :artist_name => artist.name,
+      :artist_slug => artist.to_param,
       :slug => to_param
     }
   end
