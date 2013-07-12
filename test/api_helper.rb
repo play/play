@@ -49,12 +49,10 @@ end
 def assert_album_representation(object)
   keys = object.keys
 
-  puts object.inspect
-
   assert_equal 4, keys.size
   assert keys.include? 'name'
   assert keys.include? 'artist_name'
-  assert.keys.include? 'artist_slug'
+  assert keys.include? 'artist_slug'
   assert keys.include? 'slug'
 end
 
