@@ -6,6 +6,11 @@
 echo ''
 echo '' > /tmp/play-bootstrap
 
+# Set db vars.
+[ $MYSQL_USER ] && db_user=$MYSQL_USER || db_user='root'
+[ $MYSQL_PASSWORD ] && db_password=$MYSQL_PASSWORD || db_password=''
+
+
 info () {
   printf "  [ \033[00;34m..\033[0m ] $1"
 }
@@ -76,6 +81,8 @@ else
   socket=$BOXEN_MYSQL_SOCKET
   if ruby -r yaml -e "
     hash = YAML.load_file('config/play.yml.example')
+    hash['db']['username'] = '$db_user'
+    hash['db']['password'] = '$db_password'
     hash['db']['socket'] = '$socket' == '' ? '/tmp/mysql.sock' : '$socket'
     hash['auth_token'] = '$auth_token'
     hash['github']['org'] = '$gh_org'
@@ -171,14 +178,11 @@ fi
 # tell them to do it manually.
 info 'setting up mysql'
 
-[ $MYSQL_USER ] && user=$MYSQL_USER || user='root'
-[ $MYSQL_PASSWORD ] && password=$MYSQL_PASSWORD || password=''
-
-if mysql -u $user --password="$password" -e 'USE play' >> /tmp/play-bootstrap 2>&1
+if mysql -u $db_user --password="$db_password" -e 'USE play' >> /tmp/play-bootstrap 2>&1
 then
   success 'mysql database ready'
 else
-  if mysql -u $user --password="$password" -e 'CREATE DATABASE IF NOT EXISTS play CHARACTER SET utf8 COLLATE utf8_unicode_ci;' >> /tmp/play-bootstrap 2>&1
+  if mysql -u $db_user --password="$db_password" -e 'CREATE DATABASE IF NOT EXISTS play CHARACTER SET utf8 COLLATE utf8_unicode_ci;' >> /tmp/play-bootstrap 2>&1
   then
     success 'created mysql database'
   else
@@ -193,6 +197,14 @@ then
   success 'data migrated'
 else
   fail 'problem migrating data'
+fi
+
+info 'asset precompile'
+if bundle exec rake assets:precompile >> /tmp/play-bootstrap 2>&1
+then
+  success 'assets precompiled'
+else
+  fail 'problem compiling assets'
 fi
 
 info 'starting music server'
