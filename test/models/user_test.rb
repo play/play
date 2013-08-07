@@ -25,6 +25,18 @@ class UserTest < ActiveSupport::TestCase
     assert @user.liked_songs.first.is_a?(Song)
   end
 
+  test "liked songs can paginate" do
+    @user.like('Justice/Cross/Stress.mp3')
+    @user.like('Justice/Cross/Yes.mp3')
+    @user.like('Justice/Cross/No.mp3')
+
+    songs = @user.liked_songs(1, 2)
+    assert_equal 2, songs.size
+
+    songs = @user.liked_songs(2, 2)
+    assert_equal 1, songs.size
+  end
+
   test "can like a song" do
     @user.like('any/song.mp3')
 
@@ -56,6 +68,15 @@ class UserTest < ActiveSupport::TestCase
     old_token = @user.token
     @user.generate_token
     assert_not_equal old_token, @user.token
+  end
+
+  test "to_hash" do
+    user_hash = @user.to_hash
+
+    hash_keys = user_hash.keys
+    assert_equal 2, hash_keys.size
+    assert hash_keys.include?(:login)
+    assert hash_keys.include?(:slug)
   end
 
 end

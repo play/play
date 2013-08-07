@@ -24,12 +24,14 @@ class Album
   #
   # Returns an Array of Songs.
   def songs
-    results = ActiveSupport::Notifications.instrument("find.mpd", :options => [:artist, artist.name, :album, name]) do
-      results = Play.mpd.send_command(:find, :artist, artist.name, :album, name)
-    end
+    @songs ||= begin
+      results = ActiveSupport::Notifications.instrument("find.mpd", :options => [:artist, artist.name, :album, name]) do
+        results = Play.mpd.send_command(:find, :artist, artist.name, :album, name)
+      end
 
-    results.map do |result|
-      Song.new(:path => result[:file])
+      results.map do |result|
+        Song.new(:path => result[:file])
+      end
     end
   end
 
@@ -77,4 +79,18 @@ class Album
   def to_param
     name ? name.gsub('/','%2F') : ''
   end
+
+  # Hash representation of the album.
+  #
+  # Returns a Hash.
+  def to_hash
+    { :name => name,
+      :artist_name => artist.name,
+      :artist_slug => artist.to_param,
+      :art_path => "/images/art/#{art}",
+      :slug => to_param,
+      :songs => songs.collect(&:to_hash)
+    }
+  end
+
 end

@@ -19,6 +19,9 @@ class Song
   # The duration of the song in seconds.
   attr_accessor :seconds
 
+  # Placeholder for setting if the song is liked by the current user.
+  attr_accessor :liked
+
   # Create a new Song.
   #
   # path - The String path to the Song on disk.
@@ -197,5 +200,22 @@ class Song
   # Returns a String.
   def to_param
     title.gsub('/','%2F')
+  end
+
+  # Hash representation of the song.
+  #
+  # Returns a Hash.
+  def to_hash
+    { :title => title,
+      :album_name => album.name,
+      :album_slug => album.to_param,
+      :artist_name => artist.name,
+      :artist_slug => artist.to_param,
+      :album_art_path => "/images/art/#{album.art}",
+      :seconds => seconds,
+      :liked => liked || false,
+      :queued => queued?,
+      :slug => to_param
+    }
   end
 end

@@ -25,4 +25,5 @@ end
 
 group :test do
   gem 'machinist'
+  gem 'rack-test'
 end
