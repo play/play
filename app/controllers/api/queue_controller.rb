@@ -2,11 +2,11 @@ class Api::QueueController < Api::BaseController
 
   def now_playing
     song = PlayQueue.now_playing
-    deliver_json(200, {:now_playing => song.try(:to_hash)})
+    deliver_json(200, {:now_playing => song_response(song, current_user)})
   end
 
   def list
-    deliver_json(200, {:songs => PlayQueue.songs.collect(&:to_hash)})
+    deliver_json(200, songs_response(PlayQueue.songs, current_user))
   end
 
   def add
@@ -21,7 +21,7 @@ class Api::QueueController < Api::BaseController
       album.songs.each{|song| PlayQueue.add(song, current_user)}
     end
 
-    deliver_json(200, {:songs => PlayQueue.songs.collect(&:to_hash)})
+    deliver_json(200, songs_response(PlayQueue.songs, current_user))
   end
 
   def remove
@@ -29,13 +29,13 @@ class Api::QueueController < Api::BaseController
     song = artist.songs.find{|song| song.title == params[:song_name]}
     PlayQueue.remove(song,current_user)
 
-    deliver_json(200, {:songs => PlayQueue.songs.collect(&:to_hash)})
+    deliver_json(200, songs_response(PlayQueue.songs, current_user))
   end
 
   def clear
     Play.mpd.clear
 
-    deliver_json(200, {:songs => PlayQueue.songs.collect(&:to_hash)})
+    deliver_json(200, songs_response(PlayQueue.songs, current_user))
   end
 
 

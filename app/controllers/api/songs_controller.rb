@@ -2,7 +2,7 @@ class Api::SongsController < Api::BaseController
   before_filter :find_song
 
   def show
-    deliver_json(200, @song.to_hash)
+    deliver_json(200, song_response(@song, current_user))
   end
 
   def download
@@ -12,13 +12,13 @@ class Api::SongsController < Api::BaseController
   def like
     current_user.like(@song.path)
 
-    deliver_json(200, @song.to_hash)
+    deliver_json(200, song_response(@song, current_user))
   end
 
   def unlike
     current_user.unlike(@song.path)
 
-    deliver_json(200, @song.to_hash)
+    deliver_json(200, song_response(@song, current_user))
   end
 
   private

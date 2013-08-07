@@ -6,7 +6,7 @@ class Api::ArtistsController < Api::BaseController
 
   def show
     artist = Artist.new(:name => params[:artist_name])
-    deliver_json(200, artist.to_hash)
+    deliver_json(200, artist_response(artist, current_user))
   end
 
 end

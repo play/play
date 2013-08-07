@@ -16,7 +16,7 @@ class Api::UsersController < Api::BaseController
     user = User.find_by_login(params[:login])
     likes = user.liked_songs(current_page)
 
-    deliver_json(200, {:songs => likes.collect(&:to_hash), :total_entries => user.likes.count})
+    deliver_json(200, songs_response(likes, current_user).merge(:total_entries => user.likes.count))
   end
 
 end

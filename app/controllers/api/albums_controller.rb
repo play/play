@@ -3,14 +3,14 @@ class Api::AlbumsController < Api::BaseController
   def index
     artist = Artist.new(:name => params[:artist_name])
 
-    deliver_json(200, {:albums => artist.albums.collect(&:to_hash)})
+    deliver_json(200, albums_response(artist.albums, current_user))
   end
 
   def show
     artist = Artist.new(:name => params[:artist_name])
     album = Album.new(:artist => artist, :name => params[:album_name])
 
-    deliver_json(200, album.to_hash)
+    deliver_json(200, album_response(album, current_user))
   end
 
   def download
