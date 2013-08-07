@@ -19,6 +19,9 @@ class Song
   # The duration of the song in seconds.
   attr_accessor :seconds
 
+  # Placeholder for setting if the song is liked by the current user.
+  attr_accessor :liked
+
   # Create a new Song.
   #
   # path - The String path to the Song on disk.
@@ -210,6 +213,7 @@ class Song
       :artist_slug => artist.to_param,
       :album_art_path => "/images/art/#{album.art}",
       :seconds => seconds,
+      :liked => liked || false,
       :slug => to_param
     }
   end
