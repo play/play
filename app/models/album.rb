@@ -24,12 +24,14 @@ class Album
   #
   # Returns an Array of Songs.
   def songs
-    results = ActiveSupport::Notifications.instrument("find.mpd", :options => [:artist, artist.name, :album, name]) do
-      results = Play.mpd.send_command(:find, :artist, artist.name, :album, name)
-    end
+    @songs ||= begin
+      results = ActiveSupport::Notifications.instrument("find.mpd", :options => [:artist, artist.name, :album, name]) do
+        results = Play.mpd.send_command(:find, :artist, artist.name, :album, name)
+      end
 
-    results.map do |result|
-      Song.new(:path => result[:file])
+      results.map do |result|
+        Song.new(:path => result[:file])
+      end
     end
   end
 
