@@ -3,6 +3,7 @@ require "active_record/validations"
 class Api::BaseController < ActionController::Base
   include Play::Api::ErrorDelivery
   include Play::Api::JsonDelivery
+  include Play::Api::ApiResponse
 
   before_filter :authentication_required
 
