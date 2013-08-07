@@ -214,6 +214,7 @@ class Song
       :album_art_path => "/images/art/#{album.art}",
       :seconds => seconds,
       :liked => liked || false,
+      :queued => queued?,
       :slug => to_param
     }
   end
