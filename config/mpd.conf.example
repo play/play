@@ -10,7 +10,7 @@ audio_output {
   encoder          "lame"
   port             "8000"
   bitrate          "320"
-  mount            "/listen"
+  mount            "/"
   format           "44100:16:1"
   password         ""
   bind_to_address  "0.0.0.0"
