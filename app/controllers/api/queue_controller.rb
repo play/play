@@ -20,7 +20,7 @@ class Api::QueueController < Api::BaseController
     case params[:type]
     when /song/
       artist = Artist.new(:name => params[:artist_name])
-      song = artist.songs.find{|song| song.title == params[:song_name]}
+      song = artist.songs.find{|song| song.title.downcase == params[:song_name].downcase}
       PlayQueue.add(song,current_user)
     when /album/
       artist = Artist.new(:name => params[:artist_name])
