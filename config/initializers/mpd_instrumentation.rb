@@ -5,8 +5,8 @@ module MpdInstrumentation
 
       name     = '%s (%.1fms)' % ["MPD Search", event.duration]
       options  = event.payload[:options]
-      keys     = options.select{|i| options.index(i).even? }
-      values   = options.select{|i| options.index(i).odd? }
+      keys     = options.select{|i| options.key(i).even? }
+      values   = options.select{|i| options.key(i).odd? }
 
       combined = keys.zip(values)
       combined = combined.map {|array| array.join(': ') }.join(', ')
@@ -20,8 +20,8 @@ module MpdInstrumentation
 
       name     = '%s (%.1fms)' % ["MPD Find", event.duration]
       options  = event.payload[:options]
-      keys     = options.select{|i| options.index(i).even? }
-      values   = options.select{|i| options.index(i).odd? }
+      keys     = options.select{|i| options.key(i).even? }
+      values   = options.select{|i| options.key(i).odd? }
 
       combined = keys.zip(values)
       combined = combined.map {|array| array.join(': ') }.join(', ')
@@ -46,8 +46,8 @@ module MpdInstrumentation
 
       name     = '%s (%.1fms)' % ["MPD List", event.duration]
       options  = event.payload[:options]
-      keys     = options.select{|i| options.index(i).even? }
-      values   = options.select{|i| options.index(i).odd? }
+      keys     = options.select{|i| options.key(i).even? }
+      values   = options.select{|i| options.key(i).odd? }
 
       combined = keys.zip(values)
       combined = combined.map {|array| array.join(': ') }.join(', ')
