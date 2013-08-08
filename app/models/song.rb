@@ -166,9 +166,10 @@ class Song
     extension = File.extname(path)
 
     if extension == '.m4a'
-      art = TagLib::MP4::File.new(full_path).tag.item_list_map['covr'].try(:to_cover_art_list).try(:first).try(:data)
+      TagLib::MP4::File.new(full_path).tag.item_list_map['covr'].try(:to_cover_art_list).try(:first).try(:data)
     elsif extension == '.mp3'
-      frame = TagLib::MPEG::File.new(full_path).id3v2_tag.frame_list('APIC').first.try(:picture)
+      tag = TagLib::MPEG::File.new(full_path).id3v2_tag
+      tag.frame_list('APIC').first.try(:picture) if tag
     end
   end
 
