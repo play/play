@@ -9,7 +9,7 @@ module Play
     @connection.connect
     @connection
   rescue Errno::ECONNREFUSED
-    nil
+    puts "Can't hit the music server. Make sure it's running."
   end
 
   # The port to hit MPD on.
@@ -45,7 +45,7 @@ module Play
   end
 end
 
-if !Rails.env.test?
+if !Rails.env.test? && Play.mpd
   # Set up mpd to natively consume songs
   Play.mpd.repeat  = true
   Play.mpd.consume = true
