@@ -217,6 +217,7 @@ class Song
       :seconds => seconds,
       :liked => liked || false,
       :queued => queued?,
+      :path => path,
       :slug => to_param
     }
   end
