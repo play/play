@@ -38,5 +38,14 @@ class Api::QueueController < Api::BaseController
     deliver_json(200, songs_response(PlayQueue.songs, current_user))
   end
 
+  def stars
+    songs = current_user.likes.limit(3).order('rand()').collect(&:song)
+    songs.each do |song|
+      PlayQueue.add(song,current_user)
+    end
+
+    deliver_json(200, songs_response(songs, current_user))
+  end
+
 
 end
