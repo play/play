@@ -60,7 +60,8 @@ Play::Application.routes.draw do
     post "/next" => 'controls#next', :as => 'next'
 
     # queue
-    get "/now_playing" => 'queue#now_playing', :as => 'now_playing'
+    get  "/now_playing" => 'queue#now_playing', :as => 'now_playing'
+    post "/now_playing" => 'queue#like_now_playing', :as => 'like_now_playing'
     get "/queue" => 'queue#list', :as => 'queue'
     post "/queue/add" => 'queue#add', :as => 'add_queue'
     post "/queue/remove" => 'queue#remove', :as => 'remove_queue'

@@ -5,6 +5,13 @@ class Api::QueueController < Api::BaseController
     deliver_json(200, {:now_playing => song_response(song, current_user)})
   end
 
+  def like_now_playing
+    song = PlayQueue.now_playing
+    current_user.like(song.path)
+
+    deliver_json(200, {:now_playing => song_response(song, current_user)})
+  end
+
   def list
     deliver_json(200, songs_response(PlayQueue.songs, current_user))
   end
