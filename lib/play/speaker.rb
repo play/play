@@ -19,7 +19,7 @@ module Play
     #
     # Returns a Hash.
     def status
-      JSON.parse(request('/status'))
+      request('/status')
     end
 
     # Returns the current volume
@@ -82,7 +82,7 @@ module Play
       command = 'curl --insecure --silent '
       command << %{-d "#{params.to_query}"} if method =~ /POST/i
       command << %{ "#{url}"}
-      `#{command}`
+      JSON.parse(`#{command}`)
     end
 
   end
