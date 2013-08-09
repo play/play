@@ -35,6 +35,13 @@ module Play
   def self.music_path
     'test/music'
   end
+
+  class Speaker
+    def request(path, method='GET', params={})
+      {:now_playing => nil, :volume => 85}
+    end
+  end
+
 end
 
 ##
