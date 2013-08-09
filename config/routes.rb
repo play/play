@@ -2,6 +2,7 @@ Play::Application.routes.draw do
 
   get "account" => 'account#show'
   get "search" => 'songs#search'
+  get "now-playing" => 'queue#now_playing'
   get "artists/:artist_name/songs/:title" => 'songs#show', :as => 'song'
   get "artists/:artist_name/albums/:name" => 'albums#show', :as => 'album'
   get "artists/:artist_name/songs" => 'artists#songs', :as => 'artist_songs'

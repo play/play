@@ -22,4 +22,10 @@ class QueueController < ApplicationController
     PlayQueue.remove(song,current_user)
     render :text => 'deleted!'
   end
+
+  def now_playing
+    @songs = PlayQueue.songs
+    render :layout => 'now_playing'
+  end
+
 end

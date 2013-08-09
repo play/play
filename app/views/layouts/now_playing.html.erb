@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Now Playing</title>
+  <%= stylesheet_link_tag    "application", :media => "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+</head>
+
+<body
+  data-login="<%= current_user.login if current_user %>"
+  data-gravatar-id="<%= current_user.gravatar_id if current_user %>">
+
+  <%= yield %>
+
+</body>
+</html>
