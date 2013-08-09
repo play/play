@@ -4,15 +4,12 @@ decoder {
 }
 
 audio_output {
-  type             "shout"
+  type             "httpd"
   name             "Play Stream"
-  host             "localhost"
   encoder          "lame"
   port             "8000"
   bitrate          "320"
-  mount            "/"
   format           "44100:16:1"
-  password         ""
   bind_to_address  "0.0.0.0"
 }
 
