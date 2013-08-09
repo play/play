@@ -98,7 +98,7 @@ class SongTest < ActiveSupport::TestCase
     song_hash = song.to_hash
 
     hash_keys = song_hash.keys
-    assert_equal 10, hash_keys.size
+    assert_equal 11, hash_keys.size
     assert hash_keys.include?(:title)
     assert hash_keys.include?(:album_name)
     assert hash_keys.include?(:album_slug)
@@ -109,5 +109,6 @@ class SongTest < ActiveSupport::TestCase
     assert hash_keys.include?(:liked)
     assert hash_keys.include?(:queued)
     assert hash_keys.include?(:slug)
+    assert hash_keys.include?(:path)
   end
 end

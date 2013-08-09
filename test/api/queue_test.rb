@@ -30,7 +30,7 @@ class QueueTest < ActiveSupport::TestCase
     end
 
     test "POST /queue/add" do
-      authorized_post '/api/queue/add', @authorized_user, {:artist_name => @song.artist.to_param, :song_name => @song.to_param}
+      authorized_post '/api/queue/add', @authorized_user, {:artist_name => @song.artist.to_param, :song_name => @song.to_param, :type => 'song'}
       parsed_response = parse_response(last_response)
 
       assert last_response.ok?
