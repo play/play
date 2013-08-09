@@ -37,7 +37,7 @@ $ ->
           gravatar_id = $('body').data('gravatar-id')
 
           string = "<li class=\"fan\" data-login=\"#{login}\"><a href=\"/#{login}\">
-              <img src=\"http://www.gravatar.com/avatar/#{gravatar_id}?s=50\" />
+              <img src=\"//www.gravatar.com/avatar/#{gravatar_id}?s=50\" />
             </a></li>"
 
           if $('.fans img').length == 0
