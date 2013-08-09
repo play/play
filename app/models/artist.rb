@@ -67,7 +67,7 @@ class Artist
   #
   # Returns a String.
   def to_param
-    name.gsub('/','%2F')
+    name ? name.gsub('/','%2F') : ''
   end
 
   # Hash representation of the artist.
