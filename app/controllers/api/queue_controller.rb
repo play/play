@@ -31,8 +31,9 @@ class Api::QueueController < Api::BaseController
       songs = artist.songs.sample(3)
       songs.each{|song| PlayQueue.add(song, current_user)}
     when /album/
-      artist = Artist.new(:name => params[:artist_name])
-      album  = Album.new(:artist => artist, :name => params[:album_name])
+      artist_name = Play.mpd.search(:artist, params[:artist_name], :case_sensitive => false).first.try(:artist)
+      artist = Artist.new(:name => artist_name)
+      album  = artist.albums.select { |album| album.name.downcase == params[:album_name].downcase }.first
       album.songs.each{|song| PlayQueue.add(song, current_user)}
       songs = album.songs
     end
