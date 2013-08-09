@@ -34,7 +34,7 @@
       <% likes=song.likes.each do |like| %>
         <li class="fan" data-login="<%= like.user.login %>">
           <a href="/<%= like.user.login %>">
-            <img src="http://www.gravatar.com/avatar/<%= like.user.gravatar_id %>?s=50" alt="<%= like.user.login %>" />
+            <img src="//www.gravatar.com/avatar/<%= like.user.gravatar_id %>?s=50" alt="<%= like.user.login %>" />
           </a>
         </li>
       <% end %>
