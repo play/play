@@ -4,10 +4,10 @@ module Play
   class Speaker
     attr_reader :name, :host, :port
 
-    def initialize(dnssd_reply)
-      @name = dnssd_reply.name
-      @host = dnssd_reply.target
-      @port = dnssd_reply.port
+    def initialize(name, target, port)
+      @name = name
+      @host = target
+      @port = port
     end
 
     # Returns a hash representing the status of the speaker.
