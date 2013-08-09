@@ -26,6 +26,14 @@ module Play
         {:albums => albums.collect{|a| album_response(a, user)}}
       end
 
+      def speaker_response(speaker)
+        speaker.to_hash
+      end
+
+      def speakers_response(speakers)
+        {:speakers => speakers.collect{|s| speaker_response(s)}}
+      end
+
     end
   end
 end
