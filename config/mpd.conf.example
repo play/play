@@ -8,7 +8,7 @@ audio_output {
   name             "Play Stream"
   encoder          "lame"
   port             "8000"
-  bitrate          "320"
+  bitrate          "128"
   format           "44100:16:1"
   bind_to_address  "0.0.0.0"
 }
