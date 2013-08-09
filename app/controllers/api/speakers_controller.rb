@@ -24,7 +24,10 @@ class Api::SpeakersController < Api::BaseController
   private
 
   def find_speaker
-    @speaker = Play.speakers.detect{|s| s.slug == params[:speaker_name]} if params[:speaker_name]
+    if params[:speaker_name]
+      @speaker = Play.speakers.detect{|s| s.slug == params[:speaker_name]}
+      deliver_error(404, "That speaker can not be found.") unless @speaker
+    end
   end
 
 end
