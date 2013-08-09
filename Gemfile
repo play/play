@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'jquery-rails'
-gem "dnssd",            '~> 2.0'
+gem "dnssd",            '~> 1.4'
 gem 'mysql2',           '~> 0.3.11'
 gem 'octokit',          '~> 1.25.0'
 gem 'omniauth'
