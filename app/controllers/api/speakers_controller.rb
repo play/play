@@ -7,18 +7,18 @@ class Api::SpeakersController < Api::BaseController
   end
 
   def update_volume
-    @speaker.set_volume(params[:level]) if @speaker
-    deliver_json(200, {:message => 'ok'})
+    @speaker.set_volume(params[:level])
+    deliver_json(200, speaker_response(@speaker))
   end
 
   def mute
-    @speaker.mute if @speaker
-    deliver_json(200, {:message => 'ok'})
+    @speaker.mute
+    deliver_json(200, speaker_response(@speaker))
   end
 
   def unmute
-    @speaker.unmute if @speaker
-    deliver_json(200, {:message => 'ok'})
+    @speaker.unmute
+    deliver_json(200, speaker_response(@speaker))
   end
 
   private
