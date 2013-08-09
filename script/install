@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+# Install our system dependencies.
+if [ $(uname -s) = "Darwin" ]
+then
+  ./script/env
+  bundle exec rake install
+else
+  echo 'Sorry, installation only works on OS X right now'
+fi
