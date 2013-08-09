@@ -20,14 +20,14 @@
 
   <section role="nav">
     <% if current_user %>
-      <span class="stream-controls">
+      <span class="stream-controls" style="display: none">
         <span class="icon-headphones"></span>
         listen
       </span>
 
       <span id="login">
         <a href="/account">
-          <img src="http://www.gravatar.com/avatar/<%= current_user.gravatar_id %>?s=50" />
+          <img src="//www.gravatar.com/avatar/<%= current_user.gravatar_id %>?s=50" />
           <%= current_user.login %>
         </a>
       </span>
