@@ -186,7 +186,7 @@ class Song
   #
   # Returns an Array of Users.
   def likes
-    Like.where(:song_path => path)
+    Like.where(:song_path => path).group(:user_id)
   end
 
   # The plays of this Song.
