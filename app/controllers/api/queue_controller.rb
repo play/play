@@ -17,18 +17,27 @@ class Api::QueueController < Api::BaseController
   end
 
   def add
+    songs = []
+
     case params[:type]
     when /song/
       artist = Artist.new(:name => params[:artist_name])
       song = artist.songs.find{|song| song.title.downcase == params[:song_name].downcase}
+      return deliver_json(404, "Can't find song") if !song
       PlayQueue.add(song,current_user)
+      songs = [song]
+    when /artist/
+      artist = Artist.new(:name => params[:artist_name])
+      songs = artist.songs.sample(3)
+      songs.each{|song| PlayQueue.add(song, current_user)}
     when /album/
       artist = Artist.new(:name => params[:artist_name])
       album  = Album.new(:artist => artist, :name => params[:album_name])
       album.songs.each{|song| PlayQueue.add(song, current_user)}
+      songs = album.songs
     end
 
-    deliver_json(200, songs_response(PlayQueue.songs, current_user))
+    deliver_json(200, songs_response(songs, current_user))
   end
 
   def remove
