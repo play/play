@@ -81,3 +81,14 @@ def assert_user_representation(object)
   assert keys.include? 'login'
   assert keys.include? 'slug'
 end
+
+def assert_speaker_representation(object)
+  keys = object.keys
+
+  assert_equal 5, keys.size
+  assert keys.include? 'name'
+  assert keys.include? 'host'
+  assert keys.include? 'port'
+  assert keys.include? 'volume'
+  assert keys.include? 'slug'
+end
