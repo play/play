@@ -23,9 +23,9 @@ Thread.new do
 
        lock.synchronize do
          if service.flags.add?
-           Play.speakers[r.target] = r
+           Play.speakers << Play::Speaker.new(r) unless Play.speakers.collect(&:host).include?(r.target)
          else
-           Play.speakers.delete(r.target)
+           Play.speakers.delete_if{|s| s.host == r.target}
          end
        end
 
