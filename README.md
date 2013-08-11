@@ -1,4 +1,4 @@
-# Play
+# Play [![Build Status](https://travis-ci.org/play/play.png?branch=master)](https://travis-ci.org/play/play)
 
 Play is an employee-powered iTunes-based client-driven distributed music server
 for your office. Also it can prepare your taxes.
