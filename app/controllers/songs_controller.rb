@@ -19,6 +19,9 @@ class SongsController < ApplicationController
     FileUtils.mkdir_p(path)
     File.rename song.path, File.join(path, File.basename(song.path))
 
+    # Update the index
+    Play.mpd.update
+
     render :text => 'Uploaded!'
   end
 
