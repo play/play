@@ -23,8 +23,8 @@ class SongsController < ApplicationController
   end
 
   def search
-    if record = Play.mpd.search(:artist, params[:q], :case_sensitive => false).first
-      return redirect_to(artist_path(record.artist))
+    if record = Play.mpd.send_command(:find, :artist, params[:q]).first
+      return redirect_to(artist_path(record[:artist]))
     end
 
     @filter = (params[:filter] || :any).to_sym
