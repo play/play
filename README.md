@@ -1,4 +1,4 @@
-# play [![Build Status](https://travis-ci.org/play/play.png?branch=v3)](https://travis-ci.org/play/play)
+# play
 
 ## Install
 
