@@ -3,7 +3,6 @@ config/play.yml
 config/mpd.conf
 public/images/art
 public/assets
-bin
 
 /.bundle
 /vendor/bundle
