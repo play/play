@@ -557,7 +557,12 @@ section[role="nav"] {
         a.track-title {
           color: #595959;
           padding-left: 10px;
-
+          // truncated text for long track-titles
+          text-overflow: ellipsis;
+          display: inline-block;
+          width: 72%;
+          white-space: nowrap;
+          overflow: hidden;
           &:hover {
             color: $pink;
           }
