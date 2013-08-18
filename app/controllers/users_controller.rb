@@ -3,11 +3,7 @@ class UsersController < ApplicationController
     @user = User.find_by_login(params[:login])
     return render_404 if !@user
 
-    @plays = SongPlay.where(:user_id => @user.id).
-              group(:song_path).
-              select("song_plays.*, count(song_path) AS playcount").
-              order("playcount DESC").
-              limit(10)
+    @plays = @user.favorite_songs
   end
 
   def history
