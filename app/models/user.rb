@@ -41,6 +41,17 @@ class User < ActiveRecord::Base
     play(song).save
   end
 
+  # Our top 10 played songs
+  #
+  # Returns an Array of Songs.
+  def favorite_songs
+    SongPlay.where(:user_id => id).
+      group(:song_path).
+      select("song_plays.*, count(song_path) AS playcount").
+      order("playcount DESC").
+      limit(10)
+  end
+
   # All of the liked Songs.
   #
   # Returns an Array of Songs.
