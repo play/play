@@ -57,6 +57,8 @@ GEM
       multipart-post (~> 1.1)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
+    font-awesome-rails (3.2.1.3)
+      railties (>= 3.2, < 5.0)
     fssm (0.2.10)
     hashie (2.0.5)
     hike (1.2.3)
@@ -164,6 +166,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   compass-rails!
   dnssd (~> 1.4)
+  font-awesome-rails (~> 3.2.1.3)
   jquery-rails
   machinist
   mysql2 (~> 0.3.11)
