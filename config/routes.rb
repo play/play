@@ -1,6 +1,7 @@
 Play::Application.routes.draw do
 
   get "account" => 'account#show'
+  get "account/token" => 'account#token'
   get "search" => 'songs#search'
   get "artists/:artist_name/songs/:title" => 'songs#show', :as => 'song'
   get "artists/:artist_name/albums/:name" => 'albums#show', :as => 'album'
