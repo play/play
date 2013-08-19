@@ -42,5 +42,8 @@ $ ->
         message.text('Good pick!')
         icon.removeClass('icon-spinner').removeClass('icon-spin').addClass('icon-check-sign')
         $('.track .icon-plus-sign-alt.add, .song .icon-plus-sign-alt.add').removeClass('icon-plus-sign-alt add').addClass('icon-remove-sign remove')
+      error: (xhr, ajaxOptions, thrownError) ->
+        message.text('Failed :(')
+        icon.removeClass('icon-spinner').removeClass('icon-spin').addClass('icon-exclamation-sign')
 
     return false
