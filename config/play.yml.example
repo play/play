@@ -1,5 +1,6 @@
 ---
 auth_token:
+stream_url:
 db:
   adapter: mysql2
   username: root
