@@ -72,7 +72,7 @@ module.exports = (robot) ->
   # VOLUME
   #
 
-  robot.respond /(.*) volume\??$/i, (message) ->
+  robot.respond /volume on (.*)/i, (message) ->
     message.finish()
     speaker = message.match[1]
     authedRequest message, "/speakers", 'get', {}, (err, res, body) ->
@@ -81,7 +81,7 @@ module.exports = (robot) ->
       volume = speakers[0]['volume']
       message.send("Yo :#{message.message.user.name}:, the volume is #{volume} :mega:")
 
-  robot.respond /(.*) volume (.*)/i, (message) ->
+  robot.respond /volume (.*) (.*)/i, (message) ->
     speaker = "play-#{message.match[1]}"
     volume  = message.match[2]
 
