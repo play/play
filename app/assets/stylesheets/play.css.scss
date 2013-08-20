@@ -596,11 +596,7 @@ section[role="nav"] {
         .duration {
           margin-right: 20px;
         }
-
-
-
       }
-
     }
 
     .sidebar {
@@ -635,9 +631,13 @@ section[role="nav"] {
           span {
             float: left;
             margin-right: 5px;
-            font-size: 14px;
+            font-size: 12px;
             text-align: left;
             color: #999;
+          }
+
+          .icon {
+            width: 14px;
           }
         }
       }
