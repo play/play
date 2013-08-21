@@ -19,12 +19,15 @@ class SongsController < ApplicationController
     FileUtils.mkdir_p(path)
     File.rename song.path, File.join(path, File.basename(song.path))
 
+    # Update the index
+    Play.mpd.update
+
     render :text => 'Uploaded!'
   end
 
   def search
-    if record = Play.mpd.search(:artist, params[:q], :case_sensitive => false).first
-      return redirect_to(artist_path(record.artist))
+    if record = Play.mpd.send_command(:find, :artist, params[:q]).first
+      return redirect_to(artist_path(record[:artist]))
     end
 
     @filter = (params[:filter] || :any).to_sym

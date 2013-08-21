@@ -14,7 +14,7 @@ class SongsControllerTest < ActionController::TestCase
   end
 
   test "search artist redirect" do
-    get :search, :q => 'justice'
+    get :search, :q => 'Justice'
 
     assert_redirected_to artist_path('Justice')
   end

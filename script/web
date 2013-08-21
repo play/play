@@ -2,32 +2,17 @@
 #
 # Start the web server
 
-# Keep things nice for those on Boxen
-if [ -n "$BOXEN_SOCKET_DIR" ]; then
-  location="--socket=$BOXEN_SOCKET_DIR/play"
-else
-  location="--port=3030"
-fi
-
-# Run this in prod, or dev?
-#
-# Production runs as daemonized and doesn't reload classes.
-if [ "$RAILS_ENV" == "" ]; then
-  env="$RAILS_ENV"
-  daemonized='--daemonize'
-else
-  env="development"
-fi
-
 case "$1" in
   start )
-    bundle exec unicorn -c config/unicorn.rb
+    if [ "$RAILS_ENV" == "production" ]
+    then
+      bundle exec unicorn -D -c config/unicorn.rb
+    else
+      bundle exec unicorn -c config/unicorn.rb
+    fi
     ;;
   stop )
-    if [ -f /tmp/play/web.pid ]
-    then
-      kill `cat /tmp/play/web.pid`
-      rm -rf /tmp/play/web.pid
-    fi
+    pkill unicorn
+    rm -f tmp/pids/unicorn.pid
     ;;
 esac

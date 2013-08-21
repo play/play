@@ -19,6 +19,9 @@ class Song
   # The duration of the song in seconds.
   attr_accessor :seconds
 
+  # Placeholder for setting if the song is liked by the current user.
+  attr_accessor :liked
+
   # Create a new Song.
   #
   # path - The String path to the Song on disk.
@@ -66,7 +69,7 @@ class Song
     current_page = options[:current_page] || 1
     index        = (current_page.to_i * per_page) - per_page
 
-    results = ActiveSupport::Notifications.instrument("search.mpd", :options => options) do
+    results = ActiveSupport::Notifications.instrument("search.mpd") do
       Play.mpd.search(conditions.first, conditions.second, :case_sensitive => false)
     end
 
@@ -163,9 +166,11 @@ class Song
     extension = File.extname(path)
 
     if extension == '.m4a'
-      art = TagLib::MP4::File.new(full_path).tag.item_list_map['covr'].try(:to_cover_art_list).try(:first).try(:data)
+      tag = TagLib::MP4::File.new(full_path).tag
+      tag.item_list_map['covr'].try(:to_cover_art_list).try(:first).try(:data) if tag
     elsif extension == '.mp3'
-      frame = TagLib::MPEG::File.new(full_path).id3v2_tag.frame_list('APIC').first.try(:picture)
+      tag = TagLib::MPEG::File.new(full_path).id3v2_tag
+      tag.frame_list('APIC').first.try(:picture) if tag
     end
   end
 
@@ -181,7 +186,7 @@ class Song
   #
   # Returns an Array of Users.
   def likes
-    Like.where(:song_path => path)
+    Like.where(:song_path => path).group(:user_id)
   end
 
   # The plays of this Song.
@@ -196,6 +201,24 @@ class Song
   #
   # Returns a String.
   def to_param
-    title.gsub('/','%2F')
+    title ? title.gsub('/','%2F') : ''
+  end
+
+  # Hash representation of the song.
+  #
+  # Returns a Hash.
+  def to_hash
+    { :title => title,
+      :album_name => album.name,
+      :album_slug => album.to_param,
+      :artist_name => artist.name,
+      :artist_slug => artist.to_param,
+      :album_art_path => "/images/art/#{album.art}",
+      :seconds => seconds,
+      :liked => liked || false,
+      :queued => queued?,
+      :path => path,
+      :slug => to_param
+    }
   end
 end

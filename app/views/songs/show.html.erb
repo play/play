@@ -10,7 +10,7 @@
   <div class="fans">
     <% @song.likes.each do |like| %>
       <a href="/<%= like.user.login %>">
-        <img src="http://www.gravatar.com/avatar/<%= like.user.gravatar_id %>?s=100" alt="<%= like.user.login %>" />
+        <img src="//www.gravatar.com/avatar/<%= like.user.gravatar_id %>?s=100" alt="<%= like.user.login %>" />
       </a>
     <% end %>
 

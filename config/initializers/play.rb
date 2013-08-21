@@ -3,11 +3,13 @@ module Play
   #
   # Returns an instance of MPD.
   def self.mpd
-    return @connection if @connection
+    return @connection if @connection && @connection.connected?
 
     @connection = MPD.new 'localhost', port
     @connection.connect
     @connection
+  rescue Errno::ECONNREFUSED
+    puts "Can't hit the music server. Make sure it's running."
   end
 
   # The port to hit MPD on.
@@ -43,9 +45,14 @@ module Play
   end
 end
 
-# Set up mpd to natively consume songs
-# Play.client.native :repeat,  [true]
-# Play.client.native :consume, [true]
+if !Rails.env.test? && Play.mpd
+  # Set up mpd to natively consume songs
+  Play.mpd.repeat  = true
+  Play.mpd.consume = true
 
-# Scan for new songs just in case
-# Play.client.native :update
+  # Scan for new songs just in case
+  Play.mpd.update
+
+  # Play the tunes
+  Play.mpd.play
+end

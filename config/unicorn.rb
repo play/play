@@ -5,7 +5,7 @@ if File.exist?("/tmp/play/web.log")
   stdout_path "/tmp/play/web.log"
 end
 
-rack_env = ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'production'
+rack_env = ENV['RAILS_ENV'] || 'production'
 root =
   if ENV['RACK_ROOT']
     ENV['RACK_ROOT']
@@ -24,7 +24,7 @@ end
 pid "#{root}/tmp/pids/unicorn.pid"
 
 if rack_env != 'development'
-  listen "#{root}/tmp/sockets/unicorn.sock", :backlog => 2048
+  listen "3030"
 else
   # Keep things nice for those on Boxen
   if ENV["BOXEN_SOCKET_DIR"]

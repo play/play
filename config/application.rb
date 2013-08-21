@@ -64,3 +64,5 @@ module Play
     end
   end
 end
+
+require "play"

@@ -6,13 +6,11 @@
 
 require './config/environment'
 
-$client = Client.new
-
 loop do
   if PlayQueue.songs.size < 2
-    song = Song.new(:path => $client.listall.sample)
-    PlayQueue.add(song,nil)
-    $client.native(:clearerror)
+    song = Song.new(:path => Play.mpd.files[:file].sample)
+    PlayQueue.add(song, nil)
+    Play.mpd.clearerror
   end
   sleep 1
 end

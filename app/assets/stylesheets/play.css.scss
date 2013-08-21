@@ -6,7 +6,7 @@
 @import "compass/css3/transition";
 @import "vars";
 @import "media";
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300');
 
 
 * {
@@ -217,6 +217,7 @@ section[role="nav"] {
     font-weight: 300;
     font-size: 14px;
     color: #666;
+    line-height: 20px;
   }
 
   hr {
@@ -540,23 +541,7 @@ section[role="nav"] {
       width: 490px;
       list-style: decimal inside none;
 
-      .track-title {
-        display: inline-block;
-        font-size: 16px;
-        font-weight: bold;
-        margin: 5px 0;
-      }
-
-      a {
-        color: #595959;
-        padding-left: 10px;
-
-        &:hover {
-          color: $pink;
-        }
-      }
-
-      li {
+      .track{
         color: #595959;
         font-weight: normal;
         font-size: 13px;
@@ -564,14 +549,53 @@ section[role="nav"] {
         padding: 4px;
         margin-top: 2px;
         @include box-shadow(0 1px 0 rgba(#000, .1), 0 2px 0px rgba(#fff, 1));
-      }
-      .controls {
-        float: right;
-      }
 
-      .duration {
-        float: right;
-        margin-right: 20px;
+        a{
+          @include transition(all 0 ease);
+        }
+
+        a.track-title {
+          color: #595959;
+          padding-left: 10px;
+          // truncated text for long track-titles
+          text-overflow: ellipsis;
+          display: inline-block;
+          width: 72%;
+          white-space: nowrap;
+          overflow: hidden;
+          &:hover {
+            color: $pink;
+          }
+
+        }
+
+        .controls {
+          display: inline-block;
+          float: right;
+          font-size: 16px;
+          color: #888;
+
+          a { color: #888; }
+          a:hover { color: $pink; }
+
+          .icon-plus-sign-alt, .icon-remove-sign{
+            cursor: pointer;
+          }
+
+          .icon-star-empty:hover, .icon-remove-sign:hover, .icon-plus-sign-alt:hover {
+            color: $pink;
+          }
+
+
+        }
+
+        &:hover {
+          background-color: #f7edf8;
+        }
+
+        .duration {
+          margin-right: 20px;
+        }
       }
     }
 
@@ -596,8 +620,25 @@ section[role="nav"] {
           padding: 10px;
           @include border-radius(2px);
           font-size: 12px;
-          text-align: center;
           margin: 3px 0;
+
+          &:hover a, &:hover span { color: $pink; }
+          a {
+            color: #777;
+            text-shadow: 1px 1px 0 #fff;
+          }
+
+          span {
+            float: left;
+            margin-right: 5px;
+            font-size: 12px;
+            text-align: left;
+            color: #999;
+          }
+
+          .icon {
+            width: 14px;
+          }
         }
       }
 
@@ -720,7 +761,7 @@ section[role="nav"] {
       a:hover, span:hover { color: $pink; }
     }
 
-    &.queue {
+    &.download {
       padding-right: 15px;
     }
   }
@@ -856,6 +897,15 @@ section[role="nav"] {
     font-size: 200px;
   }
 }
+
+.pull-right{
+  float: right;
+}
+
+.pull-left{
+  float: left;
+}
+
 
 @media all and (max-width: 500) {
 /* define mobile specific styles come here */

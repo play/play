@@ -1,8 +1,21 @@
 class SessionsController < ApplicationController
-  skip_before_filter :auth_required, :only => [:create, :failure, :logout]
+  skip_before_filter :auth_required, :only => [:create, :logout]
 
   def create
-    @user = User.find_for_github_oauth(request.env["omniauth.auth"])
+    auth = request.env['omniauth.auth']
+    org = Play.config['github']['org']
+
+    if org.present?
+      client = Octokit::Client.new(:login => auth.info.nickname, :token => auth.token)
+      orgs   = client.organizations(auth.info.nickname).map(&:login)
+
+      if !orgs.include?(org)
+        flash[:error] = "You don't seem to be in correct GitHub Organization. Bummer!"
+        return render(:template => 'shared/error')
+      end
+    end
+
+    @user = User.find_for_github_oauth(auth)
 
     if @user.persisted?
       session[:github_login] = @user.login
@@ -12,11 +25,8 @@ class SessionsController < ApplicationController
       redirect_to url and return
     end
 
-    render :action => :failure
-  end
-
-  def failure
-    render :layout => false
+    flash[:error] = "There was a problem logging you in. Don't ask me what it was."
+    return render(:template => 'shared/error')
   end
 
   def logout
@@ -24,5 +34,4 @@ class SessionsController < ApplicationController
     session.delete(:github_login)
     redirect_to '/'
   end
-
 end

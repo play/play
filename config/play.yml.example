@@ -1,4 +1,6 @@
+---
 auth_token:
+stream_url:
 db:
   adapter: mysql2
   username: root
@@ -7,5 +9,5 @@ db:
   reconnect: true
 github:
   org:
-  client_id: 
+  client_id:
   secret:

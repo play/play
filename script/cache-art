@@ -9,14 +9,14 @@
 
 require './config/environment'
 
-paths  = Play.mpd.songs.map(&:file)
+paths  = Play.mpd.files[:file]
 albums = Play.mpd.list(:album)
 puts "Caching art for #{albums.count} albums..."
 
 FileUtils.mkdir_p 'public/images/art'
 
 count = 0
-paths.each do |path|
+Array(paths).each do |path|
   result = Song.new(:path => path).cache_album_art
   count += 1 if result
 end

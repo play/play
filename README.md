@@ -55,3 +55,7 @@ Hacking on this? Spin it up manually with:
 
 That'll make sure you don't have to reload your server each time, and it'll
 also show you logs in your console.
+
+Don't want to type `RAILS_ENV` every time? Add a line to `config/play.yml`:
+
+    env: development

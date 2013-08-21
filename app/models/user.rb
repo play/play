@@ -41,11 +41,22 @@ class User < ActiveRecord::Base
     play(song).save
   end
 
+  # Our top 10 played songs
+  #
+  # Returns an Array of Songs.
+  def favorite_songs
+    SongPlay.where(:user_id => id).
+      group(:song_path).
+      select("song_plays.*, count(song_path) AS playcount").
+      order("playcount DESC").
+      limit(10)
+  end
+
   # All of the liked Songs.
   #
   # Returns an Array of Songs.
-  def liked_songs
-    likes.map do |like|
+  def liked_songs(page=1, per_page=20)
+    likes.paginate(:page => page, :per_page => per_page).order('created_at desc').map do |like|
       Song.new(:path => like.song_path)
     end
   end
@@ -87,6 +98,15 @@ class User < ActiveRecord::Base
   # Returns nothing.
   def generate_token
     update_attribute(:token, Digest::MD5.hexdigest(login + Time.now.to_i.to_s + rand(999999).to_s)[0..4])
+  end
+
+  # Hash representation of the user.
+  #
+  # Returns a Hash.
+  def to_hash
+    { :login => login,
+      :slug => login
+    }
   end
 
 end

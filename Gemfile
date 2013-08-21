@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'jquery-rails'
+gem "dnssd",            '~> 1.4'
+gem 'font-awesome-rails', '~> 3.2.1.3'
 gem 'mysql2',           '~> 0.3.11'
+gem 'octokit',          '~> 1.25.0'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'protected_attributes', '~> 1.0.1'
@@ -24,4 +27,5 @@ end
 
 group :test do
   gem 'machinist'
+  gem 'rack-test'
 end
