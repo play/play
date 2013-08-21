@@ -201,7 +201,7 @@ class Song
   #
   # Returns a String.
   def to_param
-    title.gsub('/','%2F')
+    title ? title.gsub('/','%2F') : ''
   end
 
   # Hash representation of the song.

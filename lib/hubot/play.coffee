@@ -72,41 +72,25 @@ module.exports = (robot) ->
   # VOLUME
   #
 
-  robot.respond /volume\?/i, (message) ->
-    message.send("no you don't need volume control it's fineeeee")
-    # message.finish()
-    # authedRequest message, '/system-volume', 'get', {}, (err, res, body) ->
-    #   message.send("Yo :#{message.message.user.name}:, the volume is #{body} :mega:")
+  robot.respond /volume on (.*)/i, (message) ->
+    message.finish()
+    speaker = message.match[1]
+    authedRequest message, "/speakers", 'get', {}, (err, res, body) ->
+      json = JSON.parse(body)['speakers']
+      speakers = json.filter (x) -> x['name'] == "play-#{speaker}"
+      volume = speakers[0]['volume']
+      message.send("Yo :#{message.message.user.name}:, the volume is #{volume} :mega:")
 
-  robot.respond /volume ([+-])?(.*)/i, (message) ->
-    message.send("no you don't need volume control it's fineeeee")
-    # if message.match[1]
-    #   multiplier = if message.match[1][0] == '+' then 1 else -1
-    #
-    #   authedRequest message, '/system-volume', 'get', {}, (err, res, body) ->
-    #     newVolume = parseInt(body) + parseInt(message.match[2]) * multiplier
-    #
-    #     params = {volume: newVolume}
-    #     authedRequest message, '/system-volume', 'put', params, (err, res, body) ->
-    #       message.send("Bumped the volume to #{body}, :#{message.message.user.name}:")
-    # else
-    #   params = {volume: message.match[2]}
-    #   authedRequest message, '/system-volume', 'put', params, (err, res, body) ->
-    #     message.send("Bumped the volume to #{body}, :#{message.message.user.name}:")
+  robot.respond /volume (.*) (.*)/i, (message) ->
+    speaker = "play-#{message.match[1]}"
+    volume  = message.match[2]
 
-  robot.respond /pause|(pause play)|(play pause)/i, (message) ->
-    message.send("no you don't need volume control it's fineeeee")
-    # message.finish()
-    # params = {volume: 0}
-    # authedRequest message, '/system-volume', 'put', params, (err, res, body) ->
-    #   message.send("The office is now quiet. (But the stream lives on!)")
-
-  robot.respond /(unpause play)|(play unpause)/i, (message) ->
-    message.send("no you don't need volume control it's fineeeee")
-    # message.finish()
-    # params = {volume: 50}
-    # authedRequest message, '/system-volume', 'put', params, (err, res, body) ->
-    #   message.send("The office is now rockin' at half-volume.")
+    params = { speaker_name: speaker, level: volume }
+    authedRequest message, "/speakers/#{speaker}/volume", 'post', params, (err, res, body) ->
+      if msg=JSON.parse(body)['message']
+        message.send(msg)
+      else
+        message.send("Bumped the volume to #{JSON.parse(body)['volume']}")
 
 
   #
@@ -146,8 +130,8 @@ module.exports = (robot) ->
   #
 
   robot.respond /play (.*) by (.*)/i, (message) ->
-    if message.match[1].search(/$artist/) ||
-       message.match[1].search(/$album/)
+    if message.match[1].search(/artist/) != -1 ||
+       message.match[1].search(/album/) != -1
       return
 
     params = { type: 'song', song_name: message.match[1], artist_name: message.match[2] }
