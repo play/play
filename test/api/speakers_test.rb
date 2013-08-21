@@ -70,6 +70,17 @@ class SpeakersTest < ActiveSupport::TestCase
     end
 
 
+    test "POST /speakers/:speaker_name/reset" do
+      authorized_post '/api/speakers/floor-2-speaker/reset', @authorized_user
+      parsed_response = parse_response(last_response)
+
+      assert last_response.ok?
+      assert_json last_response
+      assert_equal Hash, parsed_response.class
+
+      assert_speaker_representation parsed_response
+    end
+
 
   end
 end
