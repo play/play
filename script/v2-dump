@@ -20,14 +20,15 @@ logins = redis.smembers("play:users")
 
 users = logins.map do |login|
   likes = redis.smembers("play:users:#{login}:stars").map do |like|
-    Appscript.app('iTunes').playlists['Library'].get.tracks[Appscript.its.persistent_ID.eq(song_id)].get[0]
+    record = Appscript.app('iTunes').playlists['Library'].get.tracks[Appscript.its.persistent_ID.eq(like)].get[0]
+    record.location.get.to_s if record
   end
 
   {
     :login => login,
     :email => redis.get("play:users:#{login}:email"),
     :token => redis.get("play:users:#{login}:token"),
-    :stars => redis.smembers("play:users:#{login}:stars")
+    :stars => likes.compact
   }
 end
 
