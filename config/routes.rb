@@ -65,6 +65,7 @@ Play::Application.routes.draw do
     post "/speakers/:speaker_name/volume" => 'speakers#update_volume', :as => 'update_volume_speaker'
     post "/speakers/:speaker_name/mute" => 'speakers#mute', :as => 'mute_speaker'
     post "/speakers/:speaker_name/unmute" => 'speakers#unmute', :as => 'unmute_speaker'
+    post "/speakers/:speaker_name/reset" => 'speakers#reset', :as => 'reset_speaker'
 
     # queue
     get  "/now_playing" => 'queue#now_playing', :as => 'now_playing'

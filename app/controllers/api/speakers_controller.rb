@@ -21,6 +21,11 @@ class Api::SpeakersController < Api::BaseController
     deliver_json(200, speaker_response(@speaker))
   end
 
+  def reset
+    @speaker.reset
+    deliver_json(200, speaker_response(@speaker))
+  end
+
   private
 
   def find_speaker

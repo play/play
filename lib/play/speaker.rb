@@ -52,6 +52,15 @@ module Play
       request('/unmute', 'POST')
     end
 
+    # Resets the speaker
+    #
+    # Stops the speaker and restarts the stream.
+    #
+    # Returns nothing.
+    def reset
+      request('/reset', 'POST')
+    end
+
     # Returns the identifier of the speaker.
     #
     # Returns a String.
