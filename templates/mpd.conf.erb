@@ -6,9 +6,9 @@ decoder {
 
 audio_output {
   type             "httpd"
-  name             <%= channel_name %>
+  name             "<%= channel_name %>"
   encoder          "lame"
-  port             "<%= mpd_port %>"
+  port             "<%= httpd_port %>"
   bitrate          "<%= stream_bitrate %>"
   format           "44100:16:1"
   bind_to_address  "0.0.0.0"
@@ -32,7 +32,7 @@ bind_to_address  "0.0.0.0"
 # be disabled and audio files will only be accepted over ipc socket (using
 # file:// protocol) or streaming files over an accepted protocol.
 #
-music_directory    <%= music_path %>
+music_directory    "<%= music_path %>"
 #
 # This setting sets the MPD internal playlist directory. The purpose of this
 # directory is storage for playlists created by MPD. The server will use
