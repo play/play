@@ -4,7 +4,7 @@ class Channel < ActiveRecord::Base
   has_many :users
 
   before_save :set_ports
-  after_save :write_config, :restart
+  after_save :restart
 
   # ActiveRecord callbacks
   # ----------------------
