@@ -36,15 +36,17 @@ class Channel < ActiveRecord::Base
   end
   
   def start
-    mpd.start
+    write_config
+    `mpd #{config_path} > /dev/null 2>&1`
   end
 
   def stop
-    mpd.stop
+    `mpd #{config_path} --kill > /dev/null 2>&1`
   end
 
   def restart
-    mpd.restart
+    stop
+    start
   end
 
   # MPD
