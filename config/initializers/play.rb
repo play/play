@@ -28,7 +28,7 @@ module Play
   #
   # Returns a Hash.
   def self.config
-    YAML::load(File.open('config/play.yml'))
+    @config ||= YAML::load(File.open('config/play.yml'))
   end
 end
 
