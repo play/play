@@ -26,7 +26,7 @@ class Channel < ActiveRecord::Base
 
   def write_config(record)
     unless record.config_path
-      "#{RAILS_ROOT}/tmp/mpd-#{record.id}/mpd.conf"
+      record.config_path = "#{RAILS_ROOT}/tmp/mpd-#{record.id}/mpd.conf"
       record.save
     end
   end
