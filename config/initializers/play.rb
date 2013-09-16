@@ -5,18 +5,11 @@ module Play
   def self.mpd
     return @connection if @connection && @connection.connected?
 
-    @connection = MPD.new 'localhost', port
+    @connection = MPD.new('localhost', Channel.first.mpd_port || 6600)
     @connection.connect
     @connection
   rescue Errno::ECONNREFUSED
     puts "Can't hit the music server. Make sure it's running."
-  end
-
-  # The port to hit MPD on.
-  #
-  # Returns an Integer.
-  def self.port
-    6600
   end
 
   # mpd only really knows about the relative path to songs:
