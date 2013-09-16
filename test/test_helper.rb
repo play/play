@@ -29,7 +29,12 @@ end
 module Play
   # Test mpd runs on a different port (6611 instead of 6600).
   def self.test_channel!
-    Channel.where(:mpd_port => 6611).first_or_create
+    return @channel if @channel
+    @channel = Channel.where(:mpd_port => 6611).first_or_create
+    # when configs are dynamic this will not be necessary
+    connection = MPD.new('localhost', 6611)
+    @channel.instance_variable_set("@connection", connection)
+    @channel
   end
 
   def self.mpd
