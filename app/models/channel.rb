@@ -28,13 +28,6 @@ class Channel < ActiveRecord::Base
     end
   end
 
-  def write_config
-    unless self.config_path
-      self.config_path = "#{RAILS_ROOT}/tmp/mpd-#{self.id}/mpd.conf"
-      self.save
-    end
-  end
-  
   def start
     write_config
     `mpd #{config_path} > /dev/null 2>&1`
