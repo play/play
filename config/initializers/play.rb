@@ -3,7 +3,7 @@ module Play
   #
   # Returns an instance of MPD.
   def self.mpd
-    Channel.first && Channel.first.mpd
+    @mpd ||= Channel.first && Channel.first.mpd
   end
 
   # mpd only really knows about the relative path to songs:
