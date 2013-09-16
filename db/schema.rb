@@ -25,15 +25,15 @@ ActiveRecord::Schema.define(version: 20130916180928) do
   create_table "likes", force: true do |t|
     t.integer  "user_id"
     t.string   "song_path"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "song_plays", force: true do |t|
     t.integer  "user_id"
     t.string   "song_path"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

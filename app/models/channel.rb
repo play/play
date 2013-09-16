@@ -4,7 +4,7 @@ class Channel < ActiveRecord::Base
   has_many :users
 
   before_save :set_ports
-  after_save :write_config, :restart_mpd
+  after_save :write_config, :restart
 
   # ActiveRecord callbacks
   # ----------------------
@@ -33,6 +33,18 @@ class Channel < ActiveRecord::Base
       self.config_path = "#{RAILS_ROOT}/tmp/mpd-#{self.id}/mpd.conf"
       self.save
     end
+  end
+  
+  def start
+    mpd.start
+  end
+
+  def stop
+    mpd.stop
+  end
+
+  def restart
+    mpd.restart
   end
 
   # MPD
