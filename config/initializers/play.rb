@@ -3,6 +3,7 @@ module Play
   #
   # Returns an instance of MPD.
   def self.mpd
+    return nil if !defined?(Channel)
     return @connection if @connection && @connection.connected?
 
     @connection = MPD.new('localhost', Channel.first.mpd_port || 6600)
