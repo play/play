@@ -36,11 +36,7 @@ module Play
   end
 
   def self.mpd
-    return @connection if @connection && @connection.connected?
-
-    @connection = MPD.new('localhost', self.test_channel!.mpd_port)
-    @connection.connect
-    @connection
+    self.test_channel!.mpd
   end
 
   def self.music_path

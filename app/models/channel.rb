@@ -4,7 +4,9 @@ class Channel < ActiveRecord::Base
   before_save :set_ports
   after_save :write_config, :restart_mpd
 
-  # Hooks
+  # ActiveRecord callbacks
+  # ----------------------
+
   def set_ports
     # This is slow but that's OK, how often are you going to create channels?
     unless self.mpd_port
@@ -31,15 +33,17 @@ class Channel < ActiveRecord::Base
     end
   end
 
-  def restart_mpd
-  end
+  # MPD
+  # ---
 
-  def start
-    # start this channel's mpd instance
-  end
+  def mpd
+    return @connection if @connection && @connection.connected?
 
-  def stop
-    # shut down this channel's mpd instance
-  end
+    @connection = MPD.new('localhost', mpd_port)
+    @connection.connect
+    @connection
 
+  rescue Errno::ECONNREFUSED
+    puts "Can't hit the music server. Make sure it's running."
+  end
 end
