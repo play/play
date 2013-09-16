@@ -6,7 +6,7 @@ module Play
     return nil if !defined?(Channel)
     return @connection if @connection && @connection.connected?
 
-    @connection = MPD.new('localhost', Channel.first.mpd_port || 6600)
+    @connection = MPD.new('localhost', Channel.first ? Channel.first.mpd_port : 6600)
     @connection.connect
     @connection
   rescue Errno::ECONNREFUSED

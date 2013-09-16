@@ -28,8 +28,19 @@ end
 
 module Play
   # Test mpd runs on a different port (6611 instead of 6600).
-  def self.port
-    '6611'
+  def self.test_channel!
+    Channel.where(
+      :mpd_port => 6611,
+      :config_path => File.join(File.dirname(__FILE__), 'daemon/mpd.conf'),
+    ).first_or_create
+  end
+
+  def self.mpd
+    return @connection if @connection && @connection.connected?
+
+    @connection = MPD.new('localhost', self.test_channel!.mpd_port)
+    @connection.connect
+    @connection
   end
 
   def self.music_path

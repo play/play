@@ -199,6 +199,19 @@ else
   fail 'problem migrating data'
 fi
 
+info 'initial channel creation'
+if bundle exec rake db:channels_exist
+then
+  success 'already exists'
+else
+  if bundle exec rake db:create_initial_channel
+  then
+    success 'created initial channel'
+  else
+    fail 'could not create channel'
+  fi
+fi
+
 info 'asset compliation'
 if bundle exec rake assets:precompile >> /tmp/play-bootstrap 2>&1
 then
