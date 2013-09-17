@@ -32,7 +32,7 @@ protected
   def music_required
     return if Rails.env.test?
 
-    if !Play.mpd
+    if !current_mpd
       return render :template => 'shared/no_music'
     elsif PlayQueue.songs.empty?
       return render :template => 'shared/nothing_queued'
