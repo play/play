@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_login(session[:github_login])
   end
 
+  def current_mpd
+    channel = session[:channel_id] ? Channel.find(session[:channel_id]) : nil
+    channel ? channel.mpd : Play.mpd
+  end
 
 protected
 

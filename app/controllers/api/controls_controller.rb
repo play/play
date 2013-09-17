@@ -1,17 +1,17 @@
 class Api::ControlsController < Api::BaseController
 
   def play
-    Play.mpd.play
+    channel.mpd.play
     deliver_json(200, {:message => 'ok'})
   end
 
   def pause
-    Play.mpd.pause = true
+    channel.mpd.pause = true
     deliver_json(200, {:message => 'ok'})
   end
 
   def next
-    Play.mpd.next
+    channel.mpd.next
     deliver_json(200, {:message => 'ok'})
   end
 

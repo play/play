@@ -31,7 +31,7 @@ class Api::QueueController < Api::BaseController
       songs = artist.songs.sample(3)
       songs.each{|song| PlayQueue.add(song, current_user)}
     when /album/
-      artist_name = Play.mpd.search(:artist, params[:artist_name], :case_sensitive => false).first.try(:artist)
+      artist_name = channel.mpd.search(:artist, params[:artist_name], :case_sensitive => false).first.try(:artist)
       artist = Artist.new(:name => artist_name)
       album  = artist.albums.select { |album| album.name.downcase == params[:album_name].downcase }.first
       album.songs.each{|song| PlayQueue.add(song, current_user)}
@@ -50,7 +50,7 @@ class Api::QueueController < Api::BaseController
   end
 
   def clear
-    Play.mpd.clear
+    channel.mpd.clear
 
     deliver_json(200, songs_response(PlayQueue.songs, current_user))
   end
