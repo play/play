@@ -26,6 +26,12 @@ def app
   Play::Application
 end
 
+class Channel
+  def config_directory
+    File.join(Rails.root, 'test', 'tmp', 'mpds', "channel-#{id}")
+  end
+end
+
 module Play
   # Test mpd runs on a different port (6611 instead of 6600).
   def self.test_channel!

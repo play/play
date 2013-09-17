@@ -3,6 +3,7 @@ class Channel < ActiveRecord::Base
 
   has_many :users
 
+  validates_uniqueness_of :name, :on => :create, :message => "must be unique"
   validates_uniqueness_of :httpd_port, :on => :create, :message => "must be unique"
   validates_uniqueness_of :mpd_port, :on => :create, :message => "must be unique"
 
