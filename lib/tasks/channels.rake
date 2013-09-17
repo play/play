@@ -1,7 +1,7 @@
 namespace :db do
   desc "Check if we have channels"
   task :channels_exist => [:environment] do
-    Channel.count > 0
+    Channel.count > 0 || exit(1)
   end
 
   desc "Create an initial channel"
