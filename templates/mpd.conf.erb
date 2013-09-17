@@ -17,7 +17,7 @@ audio_output {
 <% if system_audio %>
 audio_output {
     type            "osx"
-    name            "Play"
+    name            "<%= channel_name %> (built-in output)"
     mixer_type      "software"
 }
 <% end %>
@@ -47,7 +47,7 @@ music_directory    "<%= music_path %>"
 # MPD to accept files over ipc socket (using file:// protocol) or streaming
 # files over an accepted protocol.
 #
-db_file			"<%= mpd_config_root_path %>/database"
+db_file			"<%= global_mpd_path %>/database"
 #
 # These settings are the locations for the daemon log files for the daemon.
 # These logs are great for troubleshooting, depending on your log_level
@@ -74,7 +74,7 @@ state_file			"<%= channel_config_root_path %>/state"
 # The location of the sticker database.  This is a database which
 # manages dynamic information attached to songs.
 #
-sticker_file			"<%= mpd_config_root_path %>/sticker.sql"
+sticker_file			"<%= global_mpd_path %>/sticker.sql"
 #
 ###############################################################################
 

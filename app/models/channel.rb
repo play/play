@@ -77,7 +77,7 @@ class Channel < ActiveRecord::Base
   #
   # Returns String.
   def config_directory
-    File.join(Rails.root, 'tmp', "channel-#{id}")
+    File.join(Rails.root, 'tmp', 'mpds', "channel-#{id}")
   end
 
   # Returns the path to the config file for this channel's MPD.
@@ -101,6 +101,8 @@ class Channel < ActiveRecord::Base
                           :system_audio => Play.config['mpd']['system_audio'],
                           :mpd_config_directory => config_directory,
                           :channel_config_directory => config_directory,
+                          :channel_config_root_path => Rails.root + 'tmp',
+                          :global_mpd_path => File.expand_path('~/.mpd'),
                           )
 
     template = open(template_path, 'r') {|f| f.read}

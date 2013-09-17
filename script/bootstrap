@@ -206,10 +206,6 @@ else
   fail 'problem compiling assets'
 fi
 
-info 'starting music server'
-script/music start
-success 'music server up'
-
 info 'caching album art'
 if script/cache-art >> /tmp/play-bootstrap 2>&1
 then

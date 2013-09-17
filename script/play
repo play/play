@@ -72,8 +72,8 @@ case "$1" in
     debug_log "Executing /script/env"
     ./script/env
 
-    nohup ./script/music start > log/play-starting.log &
-    debug_log "Done executing /script/music"
+    rake channels:start
+
     nohup ./script/queue > log/play-starting.log &
     debug_log "Done executing /script/queue"
 
@@ -89,7 +89,7 @@ case "$1" in
     exit 0
     ;;
   stop)
-    #./script/music stop
+    rake channels:stop
     ./script/web stop
     pkill -f "script/queue"
     ;;
