@@ -77,6 +77,9 @@ else
     auth_token=$(date | md5sum)
   fi
 
+  user "What is the full, absolute path to your music? › "
+  read path
+
   # Write out play.yml
   socket=$BOXEN_MYSQL_SOCKET
   if ruby -r yaml -e "
@@ -88,30 +91,13 @@ else
     hash['github']['org'] = '$gh_org'
     hash['github']['client_id'] = '$client_id'
     hash['github']['secret'] = '$secret'
+    hash['mpd']['music_path'] = '$path'
     File.open('config/play.yml', 'w') {|f| f.write(hash.to_yaml) }
   " >> /tmp/play-bootstrap
   then
     success 'play config loaded'
   else
     fail 'configuring play'
-  fi
-fi
-
-info 'configure mpd'
-if test -f "config/mpd.conf"
-then
-  success 'mpd config loaded'
-else
-  user "What is the full, absolute path to your music? › "
-  read path
-
-  # Write out mpd.conf
-  config_file=$(cat config/mpd.conf.example)
-  if printf "music_directory \"%s\"\n\n%s" "$path" "$config_file" > config/mpd.conf 2> /tmp/play-bootstrap
-  then
-    success 'mpd config loaded'
-  else
-    fail 'configuring mpd'
   fi
 fi
 

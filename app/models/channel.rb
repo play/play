@@ -54,12 +54,12 @@ class Channel < ActiveRecord::Base
     puts "Can't hit the music server. Make sure it's running."
   end
 
-  def config_root_path
-    File.join(Play.config['mpd']['config_root_path'], "channel-#{id}")
+  def config_directory
+    File.join(Rails.root, 'tmp', "channel-#{id}")
   end
 
   def config_path
-    File.join(config_root_path, 'mpd.conf')
+    File.join(config_directory, 'mpd.conf')
   end
 
   def write_config
@@ -71,14 +71,14 @@ class Channel < ActiveRecord::Base
                           :music_path => Play.config['mpd']['music_path'],
                           :stream_bitrate => Play.config['mpd']['stream_bitrate'],
                           :system_audio => Play.config['mpd']['system_audio'],
-                          :mpd_config_root_path => Play.config['mpd']['config_root_path'],
-                          :channel_config_root_path => config_root_path
+                          :mpd_config_directory => config_directory,
+                          :channel_config_directory => config_directory,
                           )
 
     template = open(template_path, 'r') {|f| f.read}
 
     # ensure path exists
-    FileUtils.mkdir_p(config_root_path)
+    FileUtils.mkdir_p(config_directory)
 
     File.open(config_path, 'w') {|f| f.write(ERB.new(template).result(opts.instance_eval {binding})) }
   end

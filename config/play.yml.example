@@ -13,6 +13,5 @@ github:
   secret:
 mpd:
   system_audio: true
-  config_root_path:
   music_path:
-  stream_bitrate:
+  stream_bitrate: 256
