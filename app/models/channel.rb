@@ -9,11 +9,50 @@ class Channel < ActiveRecord::Base
   before_save :set_ports
   after_save :restart
 
-  # ActiveRecord callbacks
-  # ----------------------
 
+  # Starts the mpd server for this channel.
+  #
+  # This first writes out a fresh mpd.conf for the mpd process and then starts
+  # it up.
+  #
+  # Returns nothing.
+  def start
+    write_config
+    `mpd #{config_path} > /dev/null 2>&1`
+  end
+
+  # Stops the mpd server for this channel.
+  #
+  # Returns nothing.
+  def stop
+    `mpd #{config_path} --kill > /dev/null 2>&1`
+  end
+
+  # Restarts the mpd server for this channel.
+  #
+  # Returns nothing.
+  def restart
+    stop
+    start
+  end
+
+  # Returns an MPD client attached to the mpd process for this channel.
+  #
+  # Returns an MPD client object.
+  def mpd
+    return @connection if @connection && @connection.connected?
+
+    @connection = MPD.new('localhost', mpd_port)
+    @connection.connect
+    @connection
+  rescue Errno::ECONNREFUSED
+    puts "Can't hit the music server. Make sure it's running."
+  end
+
+  # Sets the ports that the MPD for this channel will run on.
+  #
+  # Returns nothing.
   def set_ports
-    # This is slow but that's OK, how often are you going to create channels?
     unless self.mpd_port
       mpd_port = 6600 + Channel.count
       while Channel.where(:mpd_port => mpd_port).count > 0 do
@@ -31,40 +70,26 @@ class Channel < ActiveRecord::Base
     end
   end
 
-  def start
-    write_config
-    `mpd #{config_path} > /dev/null 2>&1`
-  end
-
-  def stop
-    `mpd #{config_path} --kill > /dev/null 2>&1`
-  end
-
-  def restart
-    stop
-    start
-  end
-
-  # MPD
-  # ---
-  def mpd
-    return @connection if @connection && @connection.connected?
-
-    @connection = MPD.new('localhost', mpd_port)
-    @connection.connect
-    @connection
-  rescue Errno::ECONNREFUSED
-    puts "Can't hit the music server. Make sure it's running."
-  end
-
+  # Returns the path to the config directory for this channel.
+  #
+  # This is the directory that will hold things like the mpd's log, pid, and
+  # config file.
+  #
+  # Returns String.
   def config_directory
     File.join(Rails.root, 'tmp', "channel-#{id}")
   end
 
+  # Returns the path to the config file for this channel's MPD.
+  #
+  # Returns String.
   def config_path
     File.join(config_directory, 'mpd.conf')
   end
 
+  # Writes out the mpd.conf config file for this channel's MPD.
+  #
+  # Returns nothing.
   def write_config
     template_path = File.join(Rails.root, 'templates', 'mpd.conf.erb')
 
@@ -80,9 +105,7 @@ class Channel < ActiveRecord::Base
 
     template = open(template_path, 'r') {|f| f.read}
 
-    # ensure path exists
     FileUtils.mkdir_p(config_directory)
-
     File.open(config_path, 'w') {|f| f.write(ERB.new(template).result(opts.instance_eval {binding})) }
   end
 
