@@ -9,7 +9,6 @@ module Play
   #
   # Returns an instance of MPD.
   def self.mpd
-    return nil if !defined?(Channel)
     channel = Channel.first
     @mpd ||= channel && channel.mpd
   end
