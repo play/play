@@ -5,5 +5,6 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq libtag1-dev mpd ffmpeg libavahi-compat-libdnssd-dev avahi-discover avahi-utils
 before_script:
+  - mv test/play.yml config
   - mysql -e 'create database play_test;'
   - bundle exec rake db:migrate
