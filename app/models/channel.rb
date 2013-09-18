@@ -28,7 +28,7 @@ class Channel < ActiveRecord::Base
   #
   # Returns nothing.
   def stop
-    `mpd #{config_path} --kill > /dev/null 2>&1`
+    `mpd '#{config_path}' --kill > /dev/null 2>&1`
   end
 
   # Restarts the mpd server for this channel.
