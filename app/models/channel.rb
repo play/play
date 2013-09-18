@@ -48,7 +48,8 @@ class Channel < ActiveRecord::Base
     @connection = MPD.new('localhost', mpd_port)
     @connection.connect
     @connection
-
+  rescue Errno::ECONNRESET
+    start
   rescue Errno::ECONNREFUSED
     start
   end
