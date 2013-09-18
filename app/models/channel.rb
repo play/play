@@ -123,13 +123,6 @@ class Channel < ActiveRecord::Base
     end
   end
 
-
-
-
-
-
-
-
   # Sets the ports that the MPD for this channel will run on.
   #
   # Returns nothing.
