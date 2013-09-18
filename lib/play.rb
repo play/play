@@ -24,6 +24,9 @@ module Play
     Play.config['mpd']['music_path']
   end
 
+  # Directory where MPD config things will be stored, library database, etc.
+  def self.global_mpd_config_path
+    File.expand_path('~/.mpd')
   end
 
   # Directory where cached album art images will be stored.
@@ -70,6 +73,15 @@ module Play
   def self.stop_servers
     Channel.all.each do |channel|
       channel.stop
+    end
+  end
+
+  # Clears the queues of all Channels.
+  #
+  # Returns nothing.
+  def self.clear_queues
+    Channel.all.each do |channel|
+      channel.clear
     end
   end
 
