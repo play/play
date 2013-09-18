@@ -9,6 +9,7 @@ class Channel < ActiveRecord::Base
 
   before_save :set_ports
   after_save :restart
+  before_destroy :stop
 
 
   # Starts the mpd server for this channel.
