@@ -85,4 +85,9 @@ module Play
     end
   end
 
+  #
+  def self.queued?(song)
+    Channel.all.collect(&:queue).flatten.include?(song)
+  end
+
 end
