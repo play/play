@@ -66,7 +66,7 @@ class SongTest < ActiveSupport::TestCase
   end
 
   test "queued?" do
-    PlayQueue.clear
+    Play.clear_queues
     assert !@song.queued?
 
     Play.mpd.add(@song.path)

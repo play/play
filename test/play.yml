@@ -3,10 +3,13 @@ auth_token: an-token
 db:
   adapter: mysql2
   username: root
-  password: 
+  password:
   database: play_test
   reconnect: true
 github:
   org: play
   client_id: an-client-id
   secret: an-secret
+mpd:
+  system_audio: false
+  stream_bitrate: 256

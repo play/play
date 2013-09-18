@@ -7,8 +7,8 @@ class QueueTest < ActiveSupport::TestCase
       @song = Song.make
       @authorized_user = User.make!(:login => 'tater')
 
-      PlayQueue.add(@song,@user)
-      Play.mpd.play
+      Play.default_channel.add(@song,@user)
+      Play.default_channel.mpd.play
     end
 
     test "GET /queue" do
@@ -47,7 +47,7 @@ class QueueTest < ActiveSupport::TestCase
     end
 
     test "POST /queue/remove" do
-      PlayQueue.add(Song.new(:path => %{Jeff Buckley/Grace/Lover, You Should've Come Over.mp3}),@user)
+      Play.default_channel.add(Song.new(:path => %{Jeff Buckley/Grace/Lover, You Should've Come Over.mp3}),@user)
 
       authorized_post '/api/queue/remove', @authorized_user, {:artist_name => @song.artist.to_param, :song_name => @song.to_param}
       parsed_response = parse_response(last_response)

@@ -9,24 +9,26 @@ class Channel < ActiveRecord::Base
 
   before_save :set_ports
   after_save :restart
+  before_destroy :stop
 
 
   # Starts the mpd server for this channel.
   #
   # This first writes out a fresh mpd.conf for the mpd process and then starts
-  # it up.
+  # it up, and then connects to the MPD.
   #
-  # Returns nothing.
+  # Returns an MPD client.
   def start
     write_config
-    `mpd #{config_path} > /dev/null 2>&1`
+    `mpd '#{config_path}' > /dev/null 2>&1`
+    connect
   end
 
   # Stops the mpd server for this channel.
   #
   # Returns nothing.
   def stop
-    `mpd #{config_path} --kill > /dev/null 2>&1`
+    `mpd '#{config_path}' --kill > /dev/null 2>&1`
   end
 
   # Restarts the mpd server for this channel.
@@ -37,17 +39,88 @@ class Channel < ActiveRecord::Base
     start
   end
 
-  # Returns an MPD client attached to the mpd process for this channel.
+  # Creates and returns an MPD client to the MPD instance for this Channel.
   #
   # Returns an MPD client object.
-  def mpd
+  def connect
     return @connection if @connection && @connection.connected?
 
     @connection = MPD.new('localhost', mpd_port)
     @connection.connect
     @connection
+
   rescue Errno::ECONNREFUSED
-    puts "Can't hit the music server. Make sure it's running."
+    start
+  end
+
+  # Returns an MPD client attached to the mpd process for this channel.
+  #
+  # Returns an MPD client object.
+  def mpd
+    connect
+  end
+
+  # Add a song to the end of the Channel's queue.
+  #
+  # song - The Song instance to add to the Channel's queue.
+  # user - The User that requested this song (can be nil if auto-played).
+  #
+  # Returns the Queue.
+  def add(song,user)
+    mpd.add(song.path)
+
+    if user
+      user.play!(song)
+    else
+      SongPlay.create(:song_path => song.path, :user => nil)
+    end
+    queue
+  end
+
+  # Finds all the songs in the Channel's queue that we're looking for and removes
+  # them.
+  #
+  # song - The Song instance to remove from the Channel's queue.
+  #
+  # Returns the queue.
+  def remove(song,user)
+    positions = []
+    queue.each_with_index do |queued_song, i|
+      positions << (i) if song.path == queued_song.path
+    end
+
+    positions.each { |position| mpd.delete(position) }
+
+    queue
+  end
+
+  # Get the current playing song.
+  #
+  # Returns the current Song.
+  def now_playing
+    if record = mpd.queue.first
+      Song.new(:path => record.file)
+    end
+  end
+
+  # Clears the Channel's queue.
+  #
+  # Returns nothing.
+  def clear
+    mpd.clear
+  end
+
+  # List all of the songs in the Channel's queue.
+  #
+  # Returns an Array of Songs.
+  def queue
+    results = ActiveSupport::Notifications.instrument("queue.mpd") do
+      mpd.queue
+    end
+
+    results.map do |result|
+      Song.new(:path => result.file)
+    end
   end
 
   # Sets the ports that the MPD for this channel will run on.
@@ -78,7 +151,7 @@ class Channel < ActiveRecord::Base
   #
   # Returns String.
   def config_directory
-    File.join(Rails.root, 'tmp', 'mpds', "channel-#{id}")
+    File.join(Rails.root, 'tmp', 'channels', "channel-#{id}")
   end
 
   # Returns the path to the config file for this channel's MPD.
@@ -97,13 +170,11 @@ class Channel < ActiveRecord::Base
     opts = OpenStruct.new(:channel_name => name,
                           :httpd_port => httpd_port,
                           :mpd_port => mpd_port,
-                          :music_path => Play.config['mpd']['music_path'],
+                          :music_path => Play.music_path,
                           :stream_bitrate => Play.config['mpd']['stream_bitrate'],
                           :system_audio => Play.config['mpd']['system_audio'],
-                          :mpd_config_directory => config_directory,
                           :channel_config_directory => config_directory,
-                          :channel_config_root_path => Rails.root + 'tmp',
-                          :global_mpd_path => File.expand_path('~/.mpd'),
+                          :global_mpd_path => Play.global_mpd_config_path,
                           )
 
     template = open(template_path, 'r') {|f| f.read}

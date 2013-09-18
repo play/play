@@ -15,33 +15,32 @@ class QueueControllerTest < ActionController::TestCase
   end
 
   test "add a song" do
-    PlayQueue.clear
+    Play.default_channel.clear
     post :create, :type => 'song', :id => 'Justice/Cross/Stress.mp3'
 
     assert_response :success
     assert_equal 'added!', response.body
-    PlayQueue.songs.include?(Song.make)
+    Play.default_channel.queue.include?(Song.make)
   end
 
   test "add an album" do
-    PlayQueue.clear
+    Play.default_channel.clear
     post :create, :type => 'album', :artist => 'Justice', :name => 'Cross'
 
     assert_response :success
     assert_equal 'added!', response.body
-    PlayQueue.songs.include?(Song.make)
   end
 
   test "delete a song" do
-    PlayQueue.clear
+    Play.default_channel.clear
     song = Song.make
     user = User.make
 
-    PlayQueue.add(song,user)
+    Play.default_channel.add(song,user)
     delete :destroy, :id => song.path
 
     assert_response :success
     assert_equal 'deleted!', response.body
-    assert_equal 0, PlayQueue.songs.size
+    assert_equal 0, Play.default_channel.queue.size
   end
 end

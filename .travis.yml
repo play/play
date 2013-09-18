@@ -8,3 +8,4 @@ before_script:
   - mv test/play.yml config
   - mysql -e 'create database play_test;'
   - bundle exec rake db:migrate
+script: "script/test"

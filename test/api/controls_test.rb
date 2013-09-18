@@ -26,8 +26,8 @@ class ControlsTest < ActiveSupport::TestCase
 
       test "when something is playing" do
         @song = Song.make
-        PlayQueue.add(@song,@user)
-        Play.mpd.play
+        Play.default_channel.add(@song,@user)
+        Play.default_channel.mpd.play
 
         authorized_get '/api/now_playing', @user
         parsed_response = parse_response(last_response)
