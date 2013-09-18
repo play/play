@@ -28,14 +28,13 @@ protected
 
   # Checks to see if the music server is set up correctly.
   #
-  # Redirects to an appropriate error page if something is fubar.
+  # Sets a flag for the layout to render an appropriate error message.
   def music_required
     return if Rails.env.test?
-
     if !current_mpd
-      return render :template => 'shared/no_music'
+      @no_music = true
     elsif PlayQueue.songs.empty?
-      return render :template => 'shared/nothing_queued'
+      @nothing_queued = true
     end
   end
 
