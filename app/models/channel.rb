@@ -60,7 +60,75 @@ class Channel < ActiveRecord::Base
     connect
   end
 
+  # Add a song to the end of the Channel's queue.
+  #
+  # song - The Song instance to add to the Channel's queue.
+  # user - The User that requested this song (can be nil if auto-played).
+  #
+  # Returns the Queue.
+  def add(song,user)
+    mpd.add(song.path)
+
+    if user
+      user.play!(song)
+    else
+      SongPlay.create(:song_path => song.path, :user => nil)
+    end
+    queue
   end
+
+  # Finds all the songs in the Channel's queue that we're looking for and removes
+  # them.
+  #
+  # song - The Song instance to remove from the Channel's queue.
+  #
+  # Returns the queue.
+  def remove(song,user)
+    positions = []
+    queue.each_with_index do |queued_song, i|
+      positions << (i) if song.path == queued_song.path
+    end
+
+    positions.each { |position| mpd.delete(position) }
+
+    queue
+  end
+
+  # Get the current playing song.
+  #
+  # Returns the current Song.
+  def now_playing
+    if record = mpd.queue.first
+      Song.new(:path => record.file)
+    end
+  end
+
+  # Clears the Channel's queue.
+  #
+  # Returns nothing.
+  def clear
+    mpd.clear
+  end
+
+  # List all of the songs in the Channel's queue.
+  #
+  # Returns an Array of Songs.
+  def queue
+    results = ActiveSupport::Notifications.instrument("queue.mpd") do
+      mpd.queue
+    end
+
+    results.map do |result|
+      Song.new(:path => result.file)
+    end
+  end
+
+
+
+
+
+
+
 
   # Sets the ports that the MPD for this channel will run on.
   #

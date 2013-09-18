@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ChannelTest < ActiveSupport::TestCase
-  
+
   context "when creating" do
     setup do
       @channel = Channel.create(:name => 'Floor 2', :color => 'red')
@@ -34,4 +34,52 @@ class ChannelTest < ActiveSupport::TestCase
       assert File.exists?(@channel.config_path)
     end
   end
+
+  context "queue management" do
+    setup do
+      @channel = Channel.make
+      @channel.mpd.clear
+      @song = Song.make
+      @user = User.make
+      @channel.add(@song,@user)
+    end
+
+    test "has songs" do
+      song = @channel.queue.first
+      assert_equal 1, @channel.queue.size
+      assert_equal 'Stress', song.title
+    end
+
+    test "can get the current song" do
+      @channel.mpd.play
+      song = @channel.now_playing
+      assert_equal @song.title, song.title
+    end
+
+    test "clears the queue" do
+      assert_equal 1, @channel.queue.size
+      @channel.clear
+      assert_equal 0, @channel.queue.size
+    end
+
+    test "adds a song" do
+      # setup() handles adding
+
+      assert_equal 1, @channel.queue.size
+    end
+
+    test "adds a song without a user" do
+      @channel.mpd.clear
+      @channel.add(@song,nil)
+
+      assert_equal 1, @channel.queue.size
+    end
+
+    test "removes a song" do
+      @channel.remove(@song,@user)
+
+      assert_equal 0, @channel.queue.size
+    end
+  end
+
 end
