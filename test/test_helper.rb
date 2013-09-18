@@ -44,7 +44,7 @@ module Play
     File.join(TEST_CONFIG_ROOT, 'mpd')
   end
 
-  def config
+  def self.config
     {'mpd' => { 'system_audio' => false,
                 'stream_bitrate' => '256',
                 'music_path' => music_path}
