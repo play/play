@@ -67,7 +67,7 @@ class Api::ChannelsController < Api::BaseController
   end
 
   def clear
-    channel.mpd.clear
+    @channel.mpd.clear
 
     deliver_json(200, songs_response(@channel.queue, current_user))
   end
