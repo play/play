@@ -40,11 +40,6 @@ class Api::BaseController < ActionController::Base
     head :unauthorized
   end
 
-  # Private: Scopes requests to correct channel
-  def channel
-    @channel ||= params[:channel_id] ? Channel.find(params[:channel_id]) : Channel.first
-  end
-
   # Private: Finds user based on request headers
   def find_user
     token = request.headers['Authorization'] || params[:token] || ""
