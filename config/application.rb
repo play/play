@@ -64,7 +64,10 @@ module Play
     end
 
     config.after_initialize do
-      Channel.create(:name => 'Play') unless Channel.first
+      if defined?(Channel) && !Channel.first
+        Channel.create(:name => 'Play')
+      end
+
     end
 
   end
