@@ -62,6 +62,14 @@ module Play
     config.generators do |g|
       g.fixture_replacement :machinist
     end
+
+    config.after_initialize do
+      if defined?(Channel) && !Channel.first
+        Channel.create(:name => 'Play')
+      end
+
+    end
+
   end
 end
 

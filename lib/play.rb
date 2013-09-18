@@ -9,8 +9,11 @@ module Play
   #
   # Returns an instance of MPD.
   def self.mpd
-    channel = Channel.first
-    @mpd ||= channel && channel.mpd
+    @mpd ||= default_channel.mpd
+  end
+
+  def self.default_channel
+    @default_channel ||= Channel.first
   end
 
   # mpd only really knows about the relative path to songs:
@@ -21,8 +24,12 @@ module Play
   #
   # Returns a String.
   def self.music_path
-    config = File.read('config/mpd.conf')
-    config.scan(/^(?<!#)\s*music_directory\s+"([^"]*)"$/).last.first
+    Play.config['mpd']['music_path']
+  end
+
+  # Directory where MPD config things will be stored, library database, etc.
+  def self.global_mpd_config_path
+    File.expand_path('~/.mpd')
   end
 
   # Directory where cached album art images will be stored.
@@ -70,6 +77,20 @@ module Play
     Channel.all.each do |channel|
       channel.stop
     end
+  end
+
+  # Clears the queues of all Channels.
+  #
+  # Returns nothing.
+  def self.clear_queues
+    Channel.all.each do |channel|
+      channel.clear
+    end
+  end
+
+  #
+  def self.queued?(song)
+    Channel.all.collect(&:queue).flatten.include?(song)
   end
 
 end

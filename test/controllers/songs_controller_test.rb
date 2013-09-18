@@ -34,7 +34,7 @@ class SongsControllerTest < ActionController::TestCase
   end
 
   test "song upload" do
-    path = 'test/music/Justice/Cross/Stress.mp3'
+    path = "#{TEST_CONFIG_ROOT}/music/Justice/Cross/Stress.mp3"
     file = ActionDispatch::Http::UploadedFile.new(
       :tempfile => File.new(Rails.root.join(path)),
       :filename => 'Stress.mp3'
