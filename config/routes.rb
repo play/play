@@ -55,10 +55,17 @@ Play::Application.routes.draw do
     put "/artists/:artist_name/songs/:song_name/like" => 'songs#like', :as => 'like_song'
     put "/artists/:artist_name/songs/:song_name/unlike" => 'songs#unlike', :as => 'unlike_song'
 
-    # controls
-    post "/play" => 'controls#play', :as => 'play'
-    post "/pause" => 'controls#pause', :as => 'pause'
-    post "/next" => 'controls#next', :as => 'next'
+    # channels
+    get  "/channels/:channel_id/now_playing" => 'channels#now_playing', :as => 'now_playing'
+    post "/channels/:channel_id/now_playing" => 'channels#like_now_playing', :as => 'like_now_playing'
+    post "/channels/:channel_id/play" => 'channels#play', :as => 'play'
+    post "/channels/:channel_id/pause" => 'channels#pause', :as => 'pause'
+    post "/channels/:channel_id/next" => 'channels#next', :as => 'next'
+    get  "/channels/:channel_id/queue" => 'channels#list', :as => 'queue'
+    post "/channels/:channel_id/add" => 'channels#add', :as => 'add_queue'
+    post "/channels/:channel_id/remove" => 'channels#remove', :as => 'remove_queue'
+    post "/channels/:channel_id/clear" => 'channels#clear', :as => 'clear_queue'
+    post "/channels/:channel_id/stars" => 'channels#stars'
 
     # speakers
     get "/speakers" => 'speakers#index', :as => 'speakers'
@@ -66,15 +73,6 @@ Play::Application.routes.draw do
     post "/speakers/:speaker_name/mute" => 'speakers#mute', :as => 'mute_speaker'
     post "/speakers/:speaker_name/unmute" => 'speakers#unmute', :as => 'unmute_speaker'
     post "/speakers/:speaker_name/reset" => 'speakers#reset', :as => 'reset_speaker'
-
-    # queue
-    get  "/now_playing" => 'queue#now_playing', :as => 'now_playing'
-    post "/now_playing" => 'queue#like_now_playing', :as => 'like_now_playing'
-    get  "/queue" => 'queue#list', :as => 'queue'
-    post "/queue/add" => 'queue#add', :as => 'add_queue'
-    post "/queue/remove" => 'queue#remove', :as => 'remove_queue'
-    post "/queue/clear" => 'queue#clear', :as => 'clear_queue'
-    post "/queue/stars" => 'queue#stars'
 
     # system
     get "/stream" => 'system#stream', :as => 'stream'

@@ -23,7 +23,7 @@ User.blueprint do
 end
 
 Channel.blueprint do
-  id { 1 }
+  id { 20 }
   name { 'Floor 3' }
   mpd_port { '6620' }
   httpd_port { '8020' }
