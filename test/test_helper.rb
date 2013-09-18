@@ -44,14 +44,6 @@ module Play
     File.join(TEST_CONFIG_ROOT, 'mpd')
   end
 
-  def self.config
-    {'mpd' => { 'system_audio' => false,
-                'stream_bitrate' => '256',
-                'music_path' => music_path}
-    }
-  end
-
-
   class Speaker
     def request(path, method='GET', params={})
       {:now_playing => nil, :volume => 85}
