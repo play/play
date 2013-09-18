@@ -25,7 +25,7 @@ end
 Channel.blueprint do
   id { 1 }
   name { 'Floor 3' }
-  mpd_port { '6600' }
-  httpd_port { '8000' }
+  mpd_port { '6620' }
+  httpd_port { '8020' }
   color { 'red' }
 end
