@@ -52,6 +52,11 @@ module Play
 
 end
 
+# ensure we have a channel created
+if defined?(Channel) && !Channel.first
+  Channel.create(:name => 'Play')
+end
+
 ##
 # test/spec/mini 5
 # http://gist.github.com/307649
