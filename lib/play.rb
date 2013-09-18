@@ -93,4 +93,8 @@ module Play
     Channel.all.collect(&:queue).flatten.include?(song)
   end
 
+  # def self.search(type, query, options={})
+  #   mpd.search(type, query, options)
+  # end
+
 end
