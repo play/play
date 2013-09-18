@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_mpd
-    channel = session[:channel_id] ? Channel.find(session[:channel_id]) : nil
-    channel ? channel.mpd : Play.mpd
+    channel = session[:channel_id] ? Channel.find(session[:channel_id]) : Play.default_channel
+    channel.mpd
   end
 
 protected
