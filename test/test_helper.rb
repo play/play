@@ -4,11 +4,13 @@ require 'rails/test_help'
 require File.expand_path(File.dirname(__FILE__) + '/blueprints')
 require File.expand_path("../api_helper", __FILE__)
 
-# Set up our test mpd instance and its "music"
-system 'rm -rf   /tmp/play-test'
-system 'mkdir -p /tmp/play-test/.mpd'
-system 'cp -R     test/music /tmp/play-test'
-system './test/daemon/start.sh'
+TEST_CONFIG_ROOT = File.join(Rails.root, 'test', 'tmp', 'play-test')
+
+# Set up our test mpd environment
+system "rm -rf   '#{TEST_CONFIG_ROOT}'"
+system "mkdir -p '#{TEST_CONFIG_ROOT}'"
+system "mkdir -p '#{TEST_CONFIG_ROOT + '/mpd'}'"
+system "cp -R     test/music '#{File.join(TEST_CONFIG_ROOT, 'music')}'"
 
 class ActiveSupport::TestCase
   include Rack::Test::Methods
@@ -28,27 +30,22 @@ end
 
 class Channel
   def config_directory
-    File.join(Rails.root, 'test', 'tmp', 'mpds', "channel-#{id}")
+    File.join(Rails.root, 'test', 'tmp', 'play-test', 'channels', "channel-#{id}")
   end
 end
 
 module Play
-  # Test mpd runs on a different port (6611 instead of 6600).
-  def self.test_channel!
-    return @channel if @channel
-    @channel = Channel.where(:mpd_port => 6611).first_or_create
-    # when configs are dynamic this will not be necessary
-    connection = MPD.new('localhost', 6611)
-    @channel.instance_variable_set("@connection", connection)
-    @channel
-  end
 
   def self.mpd
-    self.test_channel!.mpd
+    Channel.first.mpd
   end
 
   def self.music_path
-    'test/music'
+    File.join(TEST_CONFIG_ROOT, 'music')
+  end
+
+  def self.global_mpd_config_path
+    File.join(TEST_CONFIG_ROOT, 'mpd')
   end
 
   class Speaker
@@ -75,7 +72,8 @@ def context(*args, &block)
     def self.context(*args, &block) instance_eval(&block) end
     def self.setup(&block)
       # Clear out the entire queue during each `setup` block.
-      PlayQueue.clear
+      Play.clear_queues
+      Play.stop_servers
 
       define_method(:setup) { self.class.setups.each { |s| instance_eval(&s) } }
       setups << block
