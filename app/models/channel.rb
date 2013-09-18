@@ -90,7 +90,7 @@ class Channel < ActiveRecord::Base
   #
   # Returns String.
   def config_directory
-    File.join(Rails.root, 'tmp', 'mpds', "channel-#{id}")
+    File.join(Rails.root, 'tmp', 'channels', "channel-#{id}")
   end
 
   # Returns the path to the config file for this channel's MPD.
@@ -109,13 +109,11 @@ class Channel < ActiveRecord::Base
     opts = OpenStruct.new(:channel_name => name,
                           :httpd_port => httpd_port,
                           :mpd_port => mpd_port,
-                          :music_path => Play.config['mpd']['music_path'],
+                          :music_path => Play.music_path,
                           :stream_bitrate => Play.config['mpd']['stream_bitrate'],
                           :system_audio => Play.config['mpd']['system_audio'],
-                          :mpd_config_directory => config_directory,
                           :channel_config_directory => config_directory,
-                          :channel_config_root_path => Rails.root + 'tmp',
-                          :global_mpd_path => File.expand_path('~/.mpd'),
+                          :global_mpd_path => Play.global_mpd_config_path,
                           )
 
     template = open(template_path, 'r') {|f| f.read}
