@@ -36,10 +36,6 @@ end
 
 module Play
 
-  def self.mpd
-    Channel.first.mpd
-  end
-
   def self.music_path
     File.join(TEST_CONFIG_ROOT, 'music')
   end
