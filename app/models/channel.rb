@@ -15,12 +15,13 @@ class Channel < ActiveRecord::Base
   # Starts the mpd server for this channel.
   #
   # This first writes out a fresh mpd.conf for the mpd process and then starts
-  # it up.
+  # it up, and then connects to the MPD.
   #
-  # Returns nothing.
+  # Returns an MPD client.
   def start
     write_config
-    `mpd #{config_path} > /dev/null 2>&1`
+    `mpd '#{config_path}' > /dev/null 2>&1`
+    connect
   end
 
   # Stops the mpd server for this channel.
@@ -38,17 +39,27 @@ class Channel < ActiveRecord::Base
     start
   end
 
-  # Returns an MPD client attached to the mpd process for this channel.
+  # Creates and returns an MPD client to the MPD instance for this Channel.
   #
   # Returns an MPD client object.
-  def mpd
+  def connect
     return @connection if @connection && @connection.connected?
 
     @connection = MPD.new('localhost', mpd_port)
     @connection.connect
     @connection
+
   rescue Errno::ECONNREFUSED
-    puts "Can't hit the music server. Make sure it's running."
+    start
+  end
+
+  # Returns an MPD client attached to the mpd process for this channel.
+  #
+  # Returns an MPD client object.
+  def mpd
+    connect
+  end
+
   end
 
   # Sets the ports that the MPD for this channel will run on.
