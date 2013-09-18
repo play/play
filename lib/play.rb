@@ -9,8 +9,11 @@ module Play
   #
   # Returns an instance of MPD.
   def self.mpd
-    return nil if !defined?(Channel)
-    @mpd ||= Channel.first && Channel.first.mpd
+    @mpd ||= default_channel.mpd
+  end
+
+  def self.default_channel
+    @default_channel ||= Channel.first
   end
 
   # mpd only really knows about the relative path to songs:
