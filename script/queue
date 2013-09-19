@@ -7,10 +7,12 @@
 require './config/environment'
 
 loop do
-  if Play.default_channel.queue.size < 2
-    song = Song.new(:path => Play.library.files[:file].sample)
-    Play.default_channel.add(song, nil)
-    Play.library.clearerror
+  Channel.all.each do |channel|
+    if channel.queue.size < 2
+      song = Song.new(:path => Play.library.files[:file].sample)
+      channel.add(song, nil)
+      Play.library.clearerror
+    end
   end
   sleep 1
 end
