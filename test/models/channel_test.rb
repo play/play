@@ -82,4 +82,16 @@ class ChannelTest < ActiveSupport::TestCase
     end
   end
 
+  test "to_hash" do
+    channel = Channel.make
+    channel_hash = channel.to_hash
+
+    hash_keys = channel_hash.keys
+    assert_equal 4, hash_keys.size
+    assert hash_keys.include?(:name)
+    assert hash_keys.include?(:color)
+    assert hash_keys.include?(:now_playing)
+    assert hash_keys.include?(:slug)
+  end
+
 end
