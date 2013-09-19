@@ -15,6 +15,13 @@ Play::Application.routes.draw do
 
   get ':login/likes' => 'likes#index'
 
+  resources :channels do
+    member do
+      post :add
+      delete :remove
+    end
+  end
+
   resources :likes do
   end
 
