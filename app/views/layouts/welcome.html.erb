@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" />
+  <title>Play</title>
+
+  <%= stylesheet_link_tag    "application", :media => "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body
+  data-login="<%= current_user.login if current_user %>"
+  data-gravatar-id="<%= current_user.gravatar_id if current_user %>">
+
+  <a href="/">Play</a>
+  <div id="header">
+  <a href="/"><h1>Play</h1></a>
+
+  </div><!-- end of header -->
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  <%= yield %>
+
+  <div class="drop-overlay">
+    <span class="icon-cloud-upload"></span>
+    I want you to drop your music right here.
+  </div>
+
+  <div class="upload-preview">
+    <div class="current-filename">
+      &nbsp;
+    </div>
+    <div class="dz-totalprogress">
+      <span class="dz-upload"></span>
+    </div>
+  </div>
+</body>
+</html>

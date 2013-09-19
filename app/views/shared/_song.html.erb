@@ -1,4 +1,4 @@
-<div class="song" data-path="<%= song.path %>">
+<div class="song" data-path="<%= song.path %>" data-channel="<%= current_channel.id %>">
   <%= link_to album_path(song.artist, song.album), :class => 'album-art' do %>
     <img src="/images/art/<%= song.art_file %>" width="100" height="100" />
   <% end %>

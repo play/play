@@ -19,6 +19,9 @@
   <a href="/"><h1>Play</h1></a>
 
   <section role="nav">
+    <span class="channel-name">
+      <h2><%= link_to(current_channel.name, channel_path(current_channel)) %></h2>
+    </span>
     <% if current_user %>
       <span class="stream-controls" style="display: none">
         <span class="icon-headphones"></span>
