@@ -1,7 +1,8 @@
 class SongPlay < ActiveRecord::Base
   belongs_to :user
+  belongs_to :channel
 
-  attr_accessible :song_path, :user
+  attr_accessible :song_path, :user, :channel
 
   # The song for this play.
   #

@@ -2,6 +2,8 @@ class Channel < ActiveRecord::Base
   attr_accessible :mpd_port, :httpd_port, :color, :name
 
   has_many :users
+  has_many :song_plays, -> {order(:created_at => :asc) }
+
 
   validates_uniqueness_of :name, :on => :create, :message => "must be unique"
   validates_uniqueness_of :httpd_port, :on => :create, :message => "must be unique"
