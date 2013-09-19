@@ -21,7 +21,22 @@ class Channel < ActiveRecord::Base
   def start
     write_config
     `mpd '#{config_path}' > /dev/null 2>&1`
+
     connect
+
+    if !Rails.env.test? && mpd
+
+      # Set up mpd to natively consume songs
+      mpd.repeat  = true
+      mpd.consume = true
+
+      # Scan for new songs just in case
+      mpd.update
+
+      # Play the tunes
+      mpd.play
+    end
+
   end
 
   # Stops the mpd server for this channel.
