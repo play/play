@@ -6,15 +6,35 @@
 
 require './config/environment'
 
+tracked_channels = []
+
 loop do
-  Channel.all.each do |channel|
+  all_channels = Channel.all
+
+  # Check to see if any of the channels we're tracking have been removed.
+  # If so, remove them from the ones we're tracking.
+  tracked_channels.each do |channel|
+    tracked_channels.delete(channel) unless all_channels.include?(channel)
+  end
+
+  # Check to see if any new channels have been added.
+  # If so, add them to the channels that we're tracking.
+  all_channels.each do |channel|
+    tracked_channels << channel unless tracked_channels.include?(channel)
+  end
+
+  # Loop through all the currently tracked channels to see if we need to bump
+  # the queue.
+  tracked_channels.each do |channel|
     if channel.queue.size < 2
 
       if channel.song_plays.manually_queued.count > 50
         # this channel has some history, queue from the past
+        puts "Auto-queuing a previously queued song to this channel: #{channel.name}"
         song = channel.song_plays.manually_queued.sample.song
       else
         # this is new, queue from the library
+        puts "Auto-queuing a song from the library to the channel: #{channel.name}"
         song = Song.new(:path => Play.library.files[:file].sample)
       end
 
