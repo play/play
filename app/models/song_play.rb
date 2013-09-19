@@ -4,8 +4,8 @@ class SongPlay < ActiveRecord::Base
 
   attr_accessible :song_path, :user, :channel
 
-  scope :auto_queued, where(:user_id => nil)
-  scope :manually_queued, where('user_id is not null')
+  scope :auto_queued, -> { where(:user_id => nil) }
+  scope :manually_queued, -> { where('user_id is not null') }
 
   # The song for this play.
   #
