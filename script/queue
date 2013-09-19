@@ -12,7 +12,7 @@ loop do
 
       if channel.song_plays.manually_queued.count > 50
         # this channel has some history, queue from the past
-        song = channel.song_plays.sample.song
+        song = channel.song_plays.manually_queued.sample.song
       else
         # this is new, queue from the library
         song = Song.new(:path => Play.library.files[:file].sample)
