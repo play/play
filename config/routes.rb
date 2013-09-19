@@ -25,9 +25,6 @@ Play::Application.routes.draw do
   resources :likes do
   end
 
-  resources :queue do
-  end
-
   scope '/likes' do
     delete ''          => 'likes#destroy'
   end
