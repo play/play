@@ -9,9 +9,8 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_login(session[:github_login])
   end
 
-  def current_mpd
-    channel = session[:channel_id] ? Channel.find(session[:channel_id]) : Play.default_channel
-    channel.mpd
+  def channel
+    session[:channel_id] ? Channel.find(session[:channel_id]) : Play.default_channel
   end
 
 protected
@@ -31,7 +30,7 @@ protected
   # Sets a flag for the layout to render an appropriate error message.
   def music_required
     return if Rails.env.test?
-    if !current_mpd
+    if !channel.mpd
       @no_music = true
     elsif PlayQueue.songs.empty?
       @nothing_queued = true

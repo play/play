@@ -20,13 +20,13 @@ class SongsController < ApplicationController
     File.rename song.path, File.join(path, File.basename(song.path))
 
     # Update the index
-    current_mpd.update
+    channel.mpd.update
 
     render :text => 'Uploaded!'
   end
 
   def search
-    if record = current_mpd.send_command(:find, :artist, params[:q]).first
+    if record = channel.mpd.send_command(:find, :artist, params[:q]).first
       return redirect_to(artist_path(record[:artist]))
     end
 
