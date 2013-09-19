@@ -27,20 +27,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  # This user has played a song.
-  #
-  # Returns the new SongPlay.
-  def play(song)
-    SongPlay.new(:song_path => song.path, :user => self)
-  end
-
-  # Plays a song and saves it.
-  #
-  # Returns whether it was saved.
-  def play!(song)
-    play(song).save
-  end
-
   # Our top 10 played songs
   #
   # Returns an Array of Songs.
