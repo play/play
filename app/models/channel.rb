@@ -85,14 +85,11 @@ class Channel < ActiveRecord::Base
   # user - The User that requested this song (can be nil if auto-played).
   #
   # Returns the Queue.
-  def add(song,user)
+  def add(song,user=nil)
     mpd.add(song.path)
 
-    if user
-      user.play!(song)
-    else
-      SongPlay.create(:song_path => song.path, :user => nil)
-    end
+    SongPlay.create(:song_path => song.path, :user => user, :channel => self)
+
     queue
   end
 

@@ -66,6 +66,7 @@ class ChannelTest < ActiveSupport::TestCase
       # setup() handles adding
 
       assert_equal 1, @channel.queue.size
+      assert_equal 1, @channel.song_plays.size
     end
 
     test "adds a song without a user" do
@@ -73,6 +74,7 @@ class ChannelTest < ActiveSupport::TestCase
       @channel.add(@song,nil)
 
       assert_equal 1, @channel.queue.size
+      assert_equal 2, @channel.song_plays.size
     end
 
     test "removes a song" do
