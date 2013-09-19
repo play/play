@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130916180928) do
+ActiveRecord::Schema.define(version: 20130919140811) do
 
   create_table "channels", force: true do |t|
     t.string   "name"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20130916180928) do
     t.string   "song_path"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "channel_id"
   end
 
   create_table "users", force: true do |t|
