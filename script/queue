@@ -8,9 +8,9 @@ require './config/environment'
 
 loop do
   if Play.default_channel.queue.size < 2
-    song = Song.new(:path => Play.mpd.files[:file].sample)
+    song = Song.new(:path => Play.library.files[:file].sample)
     Play.default_channel.add(song, nil)
-    Play.mpd.clearerror
+    Play.library.clearerror
   end
   sleep 1
 end
