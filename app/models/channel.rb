@@ -184,4 +184,15 @@ class Channel < ActiveRecord::Base
     File.open(config_path, 'w') {|f| f.write(ERB.new(template).result(opts.instance_eval {binding})) }
   end
 
+  # Hash representation of the Channel.
+  #
+  # Returns a Hash.
+  def to_hash
+    { :name => name,
+      :color => color,
+      :now_playing => nil,
+      :slug => id
+    }
+  end
+
 end

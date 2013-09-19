@@ -63,16 +63,18 @@ Play::Application.routes.draw do
     put "/artists/:artist_name/songs/:song_name/unlike" => 'songs#unlike', :as => 'unlike_song'
 
     # channels
-    get  "/channels/:channel_id/now_playing" => 'channels#now_playing', :as => 'now_playing'
-    post "/channels/:channel_id/now_playing" => 'channels#like_now_playing', :as => 'like_now_playing'
-    post "/channels/:channel_id/play" => 'channels#play', :as => 'play'
-    post "/channels/:channel_id/pause" => 'channels#pause', :as => 'pause'
-    post "/channels/:channel_id/next" => 'channels#next', :as => 'next'
-    get  "/channels/:channel_id/queue" => 'channels#list', :as => 'queue'
-    post "/channels/:channel_id/add" => 'channels#add', :as => 'add_queue'
-    post "/channels/:channel_id/remove" => 'channels#remove', :as => 'remove_queue'
-    post "/channels/:channel_id/clear" => 'channels#clear', :as => 'clear_queue'
-    post "/channels/:channel_id/stars" => 'channels#stars'
+    resources :channels do
+      get  "/now_playing" => 'channels#now_playing', :as => 'now_playing'
+      post "/now_playing" => 'channels#like_now_playing', :as => 'like_now_playing'
+      post "/play" => 'channels#play', :as => 'play'
+      post "/pause" => 'channels#pause', :as => 'pause'
+      post "/next" => 'channels#next', :as => 'next'
+      get  "/queue" => 'channels#list', :as => 'queue'
+      post "/add" => 'channels#add', :as => 'add_queue'
+      post "/remove" => 'channels#remove', :as => 'remove_queue'
+      post "/clear" => 'channels#clear', :as => 'clear_queue'
+      post "/stars" => 'channels#stars'
+    end
 
     # speakers
     get "/speakers" => 'speakers#index', :as => 'speakers'
