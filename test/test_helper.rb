@@ -44,6 +44,15 @@ module Play
     File.join(TEST_CONFIG_ROOT, 'mpd')
   end
 
+  def self.config
+    @config ||= begin
+      config = YAML::load(File.open('config/play.yml'))
+      config['mpd']['system_audio'] = false
+      config
+    end
+  end
+
+
   class Speaker
     def request(path, method='GET', params={})
       {:now_playing => nil, :volume => 85}
