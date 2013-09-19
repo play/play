@@ -148,7 +148,7 @@ class ChannelsTest < ActiveSupport::TestCase
       assert_song_representation parsed_response['songs'].first
     end
 
-    test "POST /queue/add" do
+    test "POST /add" do
       authorized_post "/api/channels/#{@channel.id}/add", @authorized_user, {:artist_name => @song.artist.to_param, :song_name => @song.to_param, :type => 'song'}
       parsed_response = parse_response(last_response)
 
@@ -165,7 +165,7 @@ class ChannelsTest < ActiveSupport::TestCase
       assert_song_representation parsed_response['songs'].first
     end
 
-    test "POST /queue/remove" do
+    test "POST /remove" do
       @channel.add(Song.new(:path => %{Jeff Buckley/Grace/Lover, You Should've Come Over.mp3}),@user)
 
       authorized_post "/api/channels/#{@channel.id}/remove", @authorized_user, {:artist_name => @song.artist.to_param, :song_name => @song.to_param}
@@ -184,7 +184,7 @@ class ChannelsTest < ActiveSupport::TestCase
       assert_song_representation parsed_response['songs'].first
     end
 
-    test "POST /queue/clear" do
+    test "POST /clear" do
       authorized_post "/api/channels/#{@channel.id}/clear", @authorized_user
       parsed_response = parse_response(last_response)
 
