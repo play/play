@@ -23,11 +23,11 @@
     </div>
     <div>
       <span class="title"><%= @album.name %></span>
-      <span class="artist"><%= link_to @artist.name, artist_path(@artist) %></span>
+      <span class="artist"><%= link_to @artist.name, channel_artist_path(@channel.id, @artist) %></span>
         <ul class="listing">
           <% @album.songs.each do |song| %>
             <li class='track' data-path="<%= song.path %>">
-              <%= link_to song.title, song_path(song.artist, song), :class => 'track-title' %>
+              <%= link_to song.title, channel_song_path(@channel.id, song.artist, song), :class => 'track-title' %>
 
               <div class="controls">
                 <%= render :partial => 'shared/queue', :locals => {:song => song} %>
@@ -44,7 +44,7 @@
     </div>
 
     <div class="artist-albums">
-      <div class="others">Other albums by <%= link_to @artist.name, artist_path(@artist) %></div>
+      <div class="others">Other albums by <%= link_to @artist.name, channel_artist_path(@channel.id, @artist) %></div>
       <div class="album-list">
         <%= render :partial => 'artists/album', :collection => other_albums.sample(4) %>
       </div>

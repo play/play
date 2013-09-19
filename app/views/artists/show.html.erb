@@ -3,7 +3,7 @@
     <span class="title"><%= @artist.name %></span>
 
     <div class="tabs">
-      <a class="<%= 'active' if !@songs %>" href="<%= artist_path(@artist) %>">Albums</a>
+      <a class="<%= 'active' if !@songs %>" href="<%= channel_artist_path(@channel.id, @artist) %>">Albums</a>
       <a class="<%= 'active' if @songs %>" href="<%= artist_songs_path(@artist) %>">Songs</a>
     </div>
   </div>

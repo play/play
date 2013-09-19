@@ -9,11 +9,18 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_login(session[:github_login])
   end
 
+  # This is only used in the music_required thing below, TODO take it out
   def channel
     session[:channel_id] ? Channel.find(session[:channel_id]) : Play.default_channel
   end
 
 protected
+
+  # Everything that interacts with a queue is scoped to a channel
+  def find_channel
+    @channel = Channel.find(params[:channel_id])
+  end
+
 
   # We require login to use Play. deal_with_it.gif.
   #
