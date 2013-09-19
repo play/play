@@ -37,6 +37,11 @@ module Play
     'public/images/art'
   end
 
+  # Returns boolean for if MPD should support system audio.
+  def self.system_audio
+    Play.config['mpd']['system_audio']
+  end
+
   # The config file of Play. Contains things like keys, database config, and
   # who shot JFK.
   #

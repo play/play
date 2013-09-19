@@ -44,6 +44,10 @@ module Play
     File.join(TEST_CONFIG_ROOT, 'mpd')
   end
 
+  def self.system_audio
+    false
+  end
+
   class Speaker
     def request(path, method='GET', params={})
       {:now_playing => nil, :volume => 85}

@@ -173,7 +173,7 @@ class Channel < ActiveRecord::Base
                           :mpd_port => mpd_port,
                           :music_path => Play.music_path,
                           :stream_bitrate => Play.config['mpd']['stream_bitrate'],
-                          :system_audio => Play.config['mpd']['system_audio'],
+                          :system_audio => Play.system_audio,
                           :channel_config_directory => config_directory,
                           :global_mpd_path => Play.global_mpd_config_path,
                           )
