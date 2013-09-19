@@ -1,5 +1,5 @@
 <div class="album">
-  <%= link_to channel_album_path(@channel.id, album.artist, album.name), :class => 'album-art' do %>
+  <%= link_to album_path(album.artist, album.name), :class => 'album-art' do %>
     <img src="/images/art/<%= album.art %>" width="150" height="150" />
     <div class="name"><%= album.name %></div>
   <% end %>

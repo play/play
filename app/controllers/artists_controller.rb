@@ -1,6 +1,4 @@
 class ArtistsController < ApplicationController
-  before_filter :find_channel
-
   def show
     @artist = Artist.new(:name => params[:artist_name])
     @albums = @artist.albums

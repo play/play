@@ -2,17 +2,11 @@ Play::Application.routes.draw do
 
   get "account" => 'account#show'
   get "account/token" => 'account#token'
-  #get "channels/:channel_id" => 'channels#show', :as => 'channel'# todo friendly_id
-
-  get "channels/:channel_id" => "channels#show"
-  resources :channels do
-    get "search" => 'songs#search'
-    get "artists/:artist_name/songs/:title" => 'songs#show', :as => 'song'
-    get "artists/:artist_name/albums/:name" => 'albums#show', :as => 'album'
-    get "artists/:artist_name/songs" => 'artists#songs', :as => 'artist_songs'
-    get "artists/:artist_name" => 'artists#show', :as => 'artist'
-  end
-
+  get "search" => 'songs#search'
+  get "artists/:artist_name/songs/:title" => 'songs#show', :as => 'song'
+  get "artists/:artist_name/albums/:name" => 'albums#show', :as => 'album'
+  get "artists/:artist_name/songs" => 'artists#songs', :as => 'artist_songs'
+  get "artists/:artist_name" => 'artists#show', :as => 'artist'
   get "images/art/:id.png" => 'images#art'
 
   get 'artists/:artist_name/albums/:name/download' => 'albums#download', :as => 'album_download'

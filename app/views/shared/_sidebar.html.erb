@@ -5,15 +5,15 @@
 %>
 <div id="sidebar">
   <div class="now-playing">
-    <%= link_to channel_album_path(@channel.id, song.artist, song.album), :class => 'album-art' do %>
+    <%= link_to album_path(song.artist, song.album), :class => 'album-art' do %>
       <img src="/images/art/<%= song.art_file %>" />
     <% end %>
 
     <div class="now-playing-meta">
       <h2 class="title" title="<%= song.title %>"><%= song.title %></h2>
       <p class="album-info">
-        <%= link_to song.artist_name, channel_artist_path(@channel.id, song.artist), :class => 'artist' %> -
-        <%= link_to song.album_name, channel_album_path(@channel.id, song.artist, song.album) %>
+        <%= link_to song.artist_name, artist_path(song.artist), :class => 'artist' %> -
+        <%= link_to song.album_name, album_path(song.artist, song.album) %>
       </p>
     </div>
     <hr>
