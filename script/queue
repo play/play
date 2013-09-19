@@ -19,7 +19,7 @@ loop do
       end
 
       channel.add(song, nil)
-      Play.library.clearerror
+      channel.mpd.clearerror
     end
   end
   sleep 1
