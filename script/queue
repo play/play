@@ -9,7 +9,15 @@ require './config/environment'
 loop do
   Channel.all.each do |channel|
     if channel.queue.size < 2
-      song = Song.new(:path => Play.library.files[:file].sample)
+
+      if channel.song_plays.count > 50
+        # this channel has some history, queue from the past
+        song = channel.song_plays.sample.song
+      else
+        # this is new, queue from the library
+        song = Song.new(:path => Play.library.files[:file].sample)
+      end
+
       channel.add(song, nil)
       Play.library.clearerror
     end
