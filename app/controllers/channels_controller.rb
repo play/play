@@ -1,8 +1,8 @@
 class ChannelsController < ApplicationController
   before_filter :find_channel
 
-  def index
-    # @songs = Play.default_channel.queue
+  def show
+    @songs = @channel.queue
   end
 
   def add
