@@ -10,7 +10,7 @@ loop do
   Channel.all.each do |channel|
     if channel.queue.size < 2
 
-      if channel.song_plays.count > 50
+      if channel.song_plays.manually_queued.count > 50
         # this channel has some history, queue from the past
         song = channel.song_plays.sample.song
       else
