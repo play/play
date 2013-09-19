@@ -22,7 +22,7 @@ class Channel < ActiveRecord::Base
     write_config
     `mpd '#{config_path}' > /dev/null 2>&1`
 
-    connect
+    connection = connect
 
     if !Rails.env.test? && mpd
 
@@ -37,6 +37,7 @@ class Channel < ActiveRecord::Base
       mpd.play
     end
 
+    connection
   end
 
   # Stops the mpd server for this channel.
