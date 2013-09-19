@@ -26,7 +26,7 @@ class Album
   def songs
     @songs ||= begin
       results = ActiveSupport::Notifications.instrument("find.mpd", :options => [:artist, artist.name, :album, name]) do
-        results = Play.mpd.send_command(:find, :artist, artist.name, :album, name)
+        results = Play.library.send_command(:find, :artist, artist.name, :album, name)
       end
 
       results.map do |result|
