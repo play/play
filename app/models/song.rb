@@ -85,14 +85,6 @@ class Song
     end
   end
 
-  # What's currently playing?
-  #
-  # Returns a Song.
-  def self.now_playing
-    path = Play.mpd.current_song.try(:file)
-    new(:path => path) if path
-  end
-
   # The name of the artist of this song.
   #
   # Returns a String
