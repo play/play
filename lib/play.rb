@@ -5,10 +5,11 @@ require "play/speaker"
 
 module Play
 
-  # Our connection to MPD.
+  # Convenience method giving access to the "library" to make the API feel
+  # a little better.
   #
-  # Returns an instance of MPD.
-  def self.mpd
+  # Returns MPD client.
+  def self.library
     @mpd ||= default_channel.mpd
   end
 

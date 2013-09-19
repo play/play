@@ -70,7 +70,7 @@ class Song
     index        = (current_page.to_i * per_page) - per_page
 
     results = ActiveSupport::Notifications.instrument("search.mpd") do
-      Play.mpd.search(conditions.first, conditions.second, :case_sensitive => false)
+      Play.library.search(conditions.first, conditions.second, :case_sensitive => false)
     end
 
     total_results = results.count

@@ -18,7 +18,7 @@ class Artist
   # Returns an Array of Strings.
   def self.all
     artists = ActiveSupport::Notifications.instrument("list.mpd", :options => [:list, :artist]) do
-      Play.mpd.list(:artist)
+      Play.library.list(:artist)
     end
 
     artists.sort.map do |name|
@@ -31,7 +31,7 @@ class Artist
   # Returns an Array of Songs.
   def songs
     records = ActiveSupport::Notifications.instrument("search.mpd", :options => [:artist, :name]) do
-      records = Play.mpd.songs_by_artist(name)
+      records = Play.library.songs_by_artist(name)
     end
 
     records.map do |record|
@@ -43,7 +43,7 @@ class Artist
   #
   # Returns an Array of Albums.
   def albums
-    Play.mpd.albums(name).map do |album_name|
+    Play.library.albums(name).map do |album_name|
       Album.new(:artist => self, :name => album_name) if !album_name.blank?
     end.compact
   end
