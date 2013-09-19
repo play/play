@@ -1,6 +1,74 @@
 require 'test_helper'
 
 class ChannelsTest < ActiveSupport::TestCase
+  context "Managing" do
+    setup do
+      @channel = Channel.make!
+      @user = User.make!
+    end
+
+    test "GET Channels" do
+      authorized_get "/api/channels", @user
+      parsed_response = parse_response(last_response)
+
+      assert last_response.ok?
+      assert_json last_response
+      assert_equal Hash, parsed_response.class
+
+      keys = parsed_response.keys
+
+      assert_equal 1, keys.size
+      assert keys.include? 'channels'
+
+      assert_channel_representation parsed_response['channels'].first
+    end
+
+    test "GET Channel" do
+      authorized_get "/api/channels/#{@channel.id}", @user
+      parsed_response = parse_response(last_response)
+
+      assert last_response.ok?
+      assert_json last_response
+      assert_equal Hash, parsed_response.class
+
+      assert_channel_representation parsed_response
+    end
+
+    test "POST Channels" do
+      authorized_post "/api/channels", @user, {:channel => {:name => 'test channel'}}
+      parsed_response = parse_response(last_response)
+
+      assert last_response.ok?
+      assert_json last_response
+      assert_equal Hash, parsed_response.class
+
+      assert_channel_representation parsed_response
+    end
+
+    test "PUT Channel" do
+      authorized_put "/api/channels/#{@channel.id}", @user, {:channel => {:name => 'new name'}}
+      parsed_response = parse_response(last_response)
+
+      assert last_response.ok?
+      assert_json last_response
+      assert_equal Hash, parsed_response.class
+
+      assert_channel_representation parsed_response
+    end
+
+    test "DELETE Channel" do
+      authorized_delete "/api/channels/#{@channel.id}", @user
+      parsed_response = parse_response(last_response)
+
+      assert last_response.ok?
+      assert_json last_response
+      assert_equal Hash, parsed_response.class
+
+      assert_channel_representation parsed_response
+    end
+
+  end
+  
   context "Controls" do
     setup do
       @channel = Channel.make!

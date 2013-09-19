@@ -1,6 +1,29 @@
 class Api::ChannelsController < Api::BaseController
-
   before_filter :find_channel
+
+  def index
+    channels = Channel.all
+    deliver_json(200, channels_response(channels, current_user))
+  end
+
+  def show
+    deliver_json(200, channel_response(@channel, current_user))
+  end
+
+  def create
+    @channel = Channel.create(params[:channel])
+    deliver_json(200, channel_response(@channel, current_user))
+  end
+
+  def update
+    @channel.update_attributes(params[:channel])
+    deliver_json(200, channel_response(@channel, current_user))
+  end
+
+  def destroy
+    @channel.destroy
+    deliver_json(200, channel_response(@channel, current_user))
+  end
 
   def now_playing
     song = @channel.now_playing
@@ -85,7 +108,8 @@ class Api::ChannelsController < Api::BaseController
   private
 
   def find_channel
-    @channel = Channel.find(params[:channel_id]) if params[:channel_id]
+    channel_id = params[:id] || params[:channel_id]
+    @channel = Channel.find(channel_id) if channel_id
   end
 
 end
