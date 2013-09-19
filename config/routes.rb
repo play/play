@@ -61,6 +61,7 @@ Play::Application.routes.draw do
 
     # channels
     resources :channels do
+      get  "/stream" => 'channels#stream', :as => 'stream'
       get  "/now_playing" => 'channels#now_playing', :as => 'now_playing'
       post "/now_playing" => 'channels#like_now_playing', :as => 'like_now_playing'
       post "/play" => 'channels#play', :as => 'play'

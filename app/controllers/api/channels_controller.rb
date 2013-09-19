@@ -25,6 +25,10 @@ class Api::ChannelsController < Api::BaseController
     deliver_json(200, channel_response(@channel, current_user))
   end
 
+  def stream
+    redirect_to "#{request.scheme}://#{request.host}:#{@channel.httpd_port}"
+  end
+
   def now_playing
     song = @channel.now_playing
     deliver_json(200, {:now_playing => song_response(song, current_user)})

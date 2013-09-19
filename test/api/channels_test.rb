@@ -68,7 +68,15 @@ class ChannelsTest < ActiveSupport::TestCase
     end
 
   end
-  
+
+  test "stream path" do
+    channel = Channel.make!
+    user = User.make!
+
+    authorized_get "/api/channels/#{channel.id}/stream", user
+    assert_equal 302, last_response.status
+  end
+
   context "Controls" do
     setup do
       @channel = Channel.make!
