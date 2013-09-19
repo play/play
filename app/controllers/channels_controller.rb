@@ -1,5 +1,5 @@
 class ChannelsController < ApplicationController
-  before_filter :find_channel
+  before_filter :set_channel
 
   def show
     @songs = @channel.queue
@@ -27,7 +27,9 @@ class ChannelsController < ApplicationController
 
   private
 
-  def find_channel
-    @channel = Channel.find(params[:id]) if params[:id]
+  def set_channel
+    @channel = Channel.find(params[:id])
+    session[:channel_id] = @channel.id
+    @channel
   end
 end
