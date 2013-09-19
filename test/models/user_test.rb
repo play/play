@@ -13,11 +13,6 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 0, @user.plays.count
   end
 
-  test "plays a song" do
-    @user.play!(Song.make)
-    assert !@user.plays.empty?
-  end
-
   test "liked songs" do
     @user.like('Justice/Cross/Stress.mp3')
 

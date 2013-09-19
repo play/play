@@ -2,6 +2,8 @@ class Channel < ActiveRecord::Base
   attr_accessible :mpd_port, :httpd_port, :color, :name
 
   has_many :users
+  has_many :song_plays, -> {order(:created_at => :asc) }
+
 
   validates_uniqueness_of :name, :on => :create, :message => "must be unique"
   validates_uniqueness_of :httpd_port, :on => :create, :message => "must be unique"
@@ -22,7 +24,7 @@ class Channel < ActiveRecord::Base
     write_config
     `mpd '#{config_path}' > /dev/null 2>&1`
 
-    connect
+    connection = connect
 
     if !Rails.env.test? && mpd
 
@@ -37,6 +39,7 @@ class Channel < ActiveRecord::Base
       mpd.play
     end
 
+    connection
   end
 
   # Stops the mpd server for this channel.
@@ -82,14 +85,11 @@ class Channel < ActiveRecord::Base
   # user - The User that requested this song (can be nil if auto-played).
   #
   # Returns the Queue.
-  def add(song,user)
+  def add(song,user=nil)
     mpd.add(song.path)
 
-    if user
-      user.play!(song)
-    else
-      SongPlay.create(:song_path => song.path, :user => nil)
-    end
+    SongPlay.create(:song_path => song.path, :user => user, :channel => self)
+
     queue
   end
 
