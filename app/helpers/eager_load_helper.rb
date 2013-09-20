@@ -4,6 +4,6 @@ module EagerLoadHelper
   end
 
   def current_playlist
-    @current_playlist ||= Play.default_channel.queue
+    @current_playlist ||= current_channel.queue
   end
 end
