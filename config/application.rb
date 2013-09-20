@@ -64,9 +64,10 @@ module Play
     end
 
     config.after_initialize do
-      if defined?(Channel) && !Channel.first
-        Channel.create(:name => 'Play')
-      end
+      # this still crashes without the migration - TODO fix
+      # if defined?(Channel) && !Channel.first
+      #   Channel.create(:name => 'Play')
+      # end
 
     end
 
