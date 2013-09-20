@@ -17,7 +17,7 @@
       </p>
     </div>
     <hr>
-    <ul class="now-playing-actions" data-path="<%= song.path %>">
+    <ul class="now-playing-actions" data-path="<%= song.path %>" data-channel="<%= current_channel.id %>">
       <li><%= render :partial => 'shared/like', :locals => { :song => song, :full => true } %></li>
       <li>
         <%= link_to song_download_path(song) do %>
