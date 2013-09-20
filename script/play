@@ -62,6 +62,20 @@ debug_log() {
 
 debug_log "RAILS_ENV is $RAILS_ENV"
 
+# bootstrap channel if necessary
+
+if bundle exec rake db:channels_exist
+then
+  debug_log 'channel already exists, great.'
+else
+  if bundle exec rake db:create_initial_channel
+  then
+    debug_log 'created initial channel'
+  else
+    debug_log 'could not create channel'
+  fi
+fi
+
 # Handle play commands.
 case "$1" in
   help|--help|-h)
@@ -72,7 +86,7 @@ case "$1" in
     debug_log "Executing /script/env"
     ./script/env
 
-    rake channels:start
+    bundle exec rake channels:start
 
     nohup ./script/queue > log/play-starting.log &
     debug_log "Done executing /script/queue"
@@ -89,7 +103,7 @@ case "$1" in
     exit 0
     ;;
   stop)
-    rake channels:stop
+    bundle exec rake channels:stop
     ./script/web stop
     pkill -f "script/queue"
     ;;
