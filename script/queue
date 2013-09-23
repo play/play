@@ -42,5 +42,5 @@ loop do
       channel.mpd.clearerror
     end
   end
-  sleep 1
+  sleep 10
 end
