@@ -1,3 +1,5 @@
+require 'play/connection_pool'
+
 class Channel < ActiveRecord::Base
   attr_accessible :mpd_port, :httpd_port, :color, :name
 
@@ -61,12 +63,7 @@ class Channel < ActiveRecord::Base
   #
   # Returns an MPD client object.
   def connect
-    return @mpd_connection if @mpd_connection && @mpd_connection.connected?
-
-    @mpd_connection = MPD.new('localhost', mpd_port)
-    @mpd_connection.connect #callback thread enabled
-
-    @mpd_connection
+    @mpd_connection = ConnectionPool.instance.connection_for(self)
   rescue Errno::ECONNRESET
     start
   rescue Errno::ECONNREFUSED
