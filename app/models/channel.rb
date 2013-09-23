@@ -24,7 +24,7 @@ class Channel < ActiveRecord::Base
     write_config
     `mpd '#{config_path}' > /dev/null 2>&1`
 
-    connection = connect
+    mpd_connection = connect
 
     if !Rails.env.test? && mpd
 
@@ -39,7 +39,7 @@ class Channel < ActiveRecord::Base
       mpd.play
     end
 
-    connection
+    mpd_connection
   end
 
   # Stops the mpd server for this channel.
@@ -61,11 +61,12 @@ class Channel < ActiveRecord::Base
   #
   # Returns an MPD client object.
   def connect
-    return @connection if @connection && @connection.connected?
+    return @mpd_connection if @mpd_connection && @mpd_connection.connected?
 
-    @connection = MPD.new('localhost', mpd_port)
-    @connection.connect
-    @connection
+    @mpd_connection = MPD.new('localhost', mpd_port)
+    @mpd_connection.connect #callback thread enabled
+
+    @mpd_connection
   rescue Errno::ECONNRESET
     start
   rescue Errno::ECONNREFUSED
