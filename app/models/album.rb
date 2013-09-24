@@ -30,7 +30,7 @@ class Album
       end
 
       results.map do |result|
-        Song.new(:path => result[:file])
+        Song.new(MPD::Song.new(result)) # fairly ugly
       end
     end
   end

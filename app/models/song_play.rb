@@ -11,6 +11,6 @@ class SongPlay < ActiveRecord::Base
   #
   # Returns a Song.
   def song
-    Song.new(:path => song_path)
+    Song.from_path(song_path)
   end
 end

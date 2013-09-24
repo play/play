@@ -113,7 +113,7 @@ class Channel < ActiveRecord::Base
   # Returns the current Song.
   def now_playing
     if record = mpd.queue.first
-      Song.new(:path => record.file)
+      Song.new(record)
     end
   end
 
@@ -133,7 +133,7 @@ class Channel < ActiveRecord::Base
     end
 
     results.map do |result|
-      Song.new(:path => result.file)
+      Song.new(result)
     end
   end
 

@@ -26,30 +26,24 @@ class Song
   #
   # path - The String path to the Song on disk.
   #
-  # Returns nothing.
-  def initialize(options={})
-    self.path = options[:path] if options[:path]
+  def self.from_path(path)
+    song = Play.library.songs(path).first
+    new(song)
   end
 
-  # Sets the path for this Song. Once the path is set, go in and read the file
-  # from disk and intialize those values in-memory.
+  # Create a new Song.
   #
-  # path - The String path on disk of the music file.
+  # mpd_song - The MPD::Song object representing the song.
   #
-  # Returns the path.
-  def path=(path)
-    @path = path.chomp
-
-    TagLib::FileRef.open(full_path) do |file|
-      if tag = file.tag
-        @artist  = Artist.new(:name => tag.artist)
-        @album   = Album.new(:artist => @artist, :name => tag.album)
-        @title   = tag.title
-        @seconds = file.audio_properties.length
-      end
+  # Returns nothing.
+  def initialize(mpd_song = nil)
+    if mpd_song
+      @path    = mpd_song.file
+      @artist  = Artist.new(:name => mpd_song.artist)
+      @album   = Album.new(:artist => @artist, :name => mpd_song.album)
+      @title   = mpd_song.title
+      @seconds = mpd_song.time
     end
-
-    @path
   end
 
   # Searches for matching Songs.
@@ -79,7 +73,7 @@ class Song
     WillPaginate::Collection.create(current_page, per_page, total_results) do |pager|
       return pager.replace([]) if !results
 
-      results = results.map { |result| Song.new(:path => result.file) }.
+      results = results.map { |result| Song.new(result) }.
         reject { |song| song.title.blank? }
       pager.replace(results)
     end

@@ -35,7 +35,7 @@ loop do
       else
         # this is new, queue from the library
         puts "Auto-queuing a song from the library to the channel: #{channel.name}"
-        song = Song.new(:path => Play.library.files[:file].sample)
+        song = Song.from_path(Play.library.files[:file].sample)
       end
 
       channel.add(song, nil)

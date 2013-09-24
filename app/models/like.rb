@@ -4,6 +4,6 @@ class Like < ActiveRecord::Base
   attr_accessible :song_path, :user
 
   def song
-    Song.new(:path => song_path)
+    Song.from_path(song_path)
   end
 end
