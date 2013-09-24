@@ -83,6 +83,7 @@ Play::Application.routes.draw do
     post "/speakers/:speaker_name/mute" => 'speakers#mute', :as => 'mute_speaker'
     post "/speakers/:speaker_name/unmute" => 'speakers#unmute', :as => 'unmute_speaker'
     post "/speakers/:speaker_name/reset" => 'speakers#reset', :as => 'reset_speaker'
+    post "/speakers/:speaker_name/tune" => 'speakers#tune', :as => 'tune_speaker'
 
     # system
     get "/stream" => 'system#stream', :as => 'stream'
