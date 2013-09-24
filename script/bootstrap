@@ -34,6 +34,22 @@ info 'configure play'
 if test -f "config/play.yml"
 then
   success 'play config loaded'
+  # Migrates existing v3 deploys to channel support. Should be modified to
+  # handle v3 config files as well.
+  ruby -r yaml -e "
+    hash = YAML.load_file('config/play.yml')
+    example = YAML.load_file('config/play.yml.example')
+    music_path = File.open('config/mpd.conf').first.strip.split('\"')[-1] # ghetto
+    unless hash['mpd']
+      puts 'Writing MPD config into play.yml'
+      hash['mpd'] = {
+        'system_audio' => example['mpd']['system_audio'],
+        'music_path' => music_path,
+        'stream_bitrate' => example['mpd']['stream_bitrate']
+      }
+      File.open('config/play.yml', 'w') {|f| f.write(hash.to_yaml) }
+    end
+  "
 else
   user "Are you going to use Play within a GitHub organization? (y,n) › "
   read -n 1 use_gh_org
