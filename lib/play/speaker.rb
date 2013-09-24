@@ -29,6 +29,15 @@ module Play
       status['volume']
     end
 
+    # Tunes the speaker to a specific URL
+    #
+    # stream_url: the url for the shoutcast stream that this speaker will play.
+    #
+    # Returns nothing.
+    def tune(stream_url)
+      request('/tune', 'POST', {'stream_url' => stream_url})
+    end
+
     # Sets the volume of the speaker
     #
     # level: integer between 1 and 100
