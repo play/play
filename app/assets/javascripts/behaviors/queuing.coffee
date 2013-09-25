@@ -26,8 +26,8 @@ $ ->
         element.addClass('icon-plus-sign-alt add')
 
   $('.album .add').live 'click', (event) ->
-    channel_id = element.parents('.song, .track').data('channel')
     element = $(@)
+    channel_id = element.parents('.song, .track').data('channel')
     icon = element.children('.icon')
     message = element.children('.message')
     artist = element.parents('.album').data('artist')
