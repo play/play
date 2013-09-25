@@ -27,7 +27,7 @@ $ ->
 
   $('.album .add').live 'click', (event) ->
     element = $(@)
-    channel_id = element.parents('.song, .track').data('channel')
+    channel_id = element.data('channel')
     icon = element.children('.icon')
     message = element.children('.message')
     artist = element.parents('.album').data('artist')

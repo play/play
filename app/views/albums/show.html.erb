@@ -8,7 +8,7 @@
       <img src="/images/art/<%= @album.art %>" class="album-art">
       <ul>
         <li>
-          <%= link_to '#', :class => 'add' do %>
+          <%= link_to '#', :class => 'add', :'data-channel' => current_channel.id do %>
             <span class="icon icon-plus-sign-alt"></span>
             <span class="message">Add to Queue</span>
           <% end %>
