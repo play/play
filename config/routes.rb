@@ -3,10 +3,10 @@ Play::Application.routes.draw do
   get "account" => 'account#show'
   get "account/token" => 'account#token'
   get "search" => 'songs#search'
-  get "artists/:artist_name/songs/:title" => 'songs#show', :as => 'song'
-  get "artists/:artist_name/albums/:name" => 'albums#show', :as => 'album'
+  get "artists/:artist_name/songs/:title" => 'songs#show', :as => 'song', :constraints => { :title => /[^\/]*/ }
+  get "artists/:artist_name/albums/:name" => 'albums#show', :as => 'album', :constraints => { :name => /[^\/]*/ }
   get "artists/:artist_name/songs" => 'artists#songs', :as => 'artist_songs'
-  get "artists/:artist_name" => 'artists#show', :as => 'artist'
+  get "artists/:artist_name" => 'artists#show', :as => 'artist', :constraints => { :artist_name => /[^\/]*/ }
   get "images/art/:id.png" => 'images#art'
 
   get 'artists/:artist_name/albums/:name/download' => 'albums#download', :as => 'album_download'
@@ -42,15 +42,15 @@ Play::Application.routes.draw do
 
     # artists
     get "/artists" => 'artists#index', :as => 'artists'
-    get "/artists/:artist_name" => 'artists#show', :as => 'artist'
+    get "/artists/:artist_name" => 'artists#show', :as => 'artist', :constraints => { :artist_name => /[^\/]*/ }
 
     # albums
     get "/artists/:artist_name/albums" => 'albums#index', :as => 'artist_albums'
-    get "/artists/:artist_name/albums/:album_name" => 'albums#show', :as => 'artist_album'
+    get "/artists/:artist_name/albums/:album_name" => 'albums#show', :as => 'artist_album', :constraints => { :album_name => /[^\/]*/ }
     get "/artists/:artist_name/albums/:album_name/download" => 'albums#download', :as => 'download_artist_album'
 
     # songs
-    get "/artists/:artist_name/songs/:song_name" => 'songs#show', :as => 'song'
+    get "/artists/:artist_name/songs/:song_name" => 'songs#show', :as => 'song', :constraints => { :song_name => /[^\/]*/ }
     get "/artists/:artist_name/songs/:song_name/download" => 'songs#download', :as => 'download_song'
     put "/artists/:artist_name/songs/:song_name/like" => 'songs#like', :as => 'like_song'
     put "/artists/:artist_name/songs/:song_name/unlike" => 'songs#unlike', :as => 'unlike_song'
