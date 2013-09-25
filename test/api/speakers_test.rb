@@ -81,6 +81,17 @@ class SpeakersTest < ActiveSupport::TestCase
       assert_speaker_representation parsed_response
     end
 
+    test "POST /speakers/:speaker_name/tune" do
+      authorized_post '/api/speakers/floor-2-speaker/tune', @authorized_user, {:stream_url => 'http://play.com:8001'}
+      parsed_response = parse_response(last_response)
+
+      assert last_response.ok?
+      assert_json last_response
+      assert_equal Hash, parsed_response.class
+
+      assert_speaker_representation parsed_response
+    end
+
 
   end
 end
