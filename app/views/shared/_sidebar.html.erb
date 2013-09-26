@@ -1,6 +1,6 @@
 <%
   return if !Play.default_channel
-  song = Play.default_channel.queue.first
+  song = current_channel.queue.first
   return if !song || !flash[:error].blank?
 %>
 <div id="sidebar">
