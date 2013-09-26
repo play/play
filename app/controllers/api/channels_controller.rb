@@ -27,7 +27,7 @@ class Api::ChannelsController < Api::BaseController
   end
 
   def stream
-    redirect_to "#{request.scheme}://#{request.host}:#{@channel.httpd_port}"
+    redirect_to "http://#{request.host}:#{@channel.httpd_port}"
   end
 
   def now_playing
