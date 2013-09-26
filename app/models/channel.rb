@@ -12,6 +12,8 @@ class Channel < ActiveRecord::Base
   validates_uniqueness_of :mpd_port, :on => :create, :message => "must be unique"
 
   before_save :set_ports
+  before_save :set_sorts
+  # before_save :shart_jorts
   after_save :restart
   before_destroy :stop
 
@@ -48,7 +50,7 @@ class Channel < ActiveRecord::Base
   #
   # Returns nothing.
   def stop
-    mpd.kill
+    `mpd '#{config_path}' --kill > /dev/null 2>&1`
   end
 
   # Restarts the mpd server for this channel.
@@ -155,6 +157,14 @@ class Channel < ActiveRecord::Base
         httpd_port += 1
       end
       self.httpd_port = httpd_port
+    end
+  end
+
+  # Assigns a sort value that will put it at de bottom ov de list
+  def set_sorts
+    unless self.sort
+      max = Channel.maximum(:sort)
+      self.sort = max ? max + 1 : 0
     end
   end
 
