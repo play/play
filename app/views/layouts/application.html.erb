@@ -56,9 +56,11 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
-  <%= @nothing_queued ? render(:partial => 'shared/nothing_queued') : ''%>
-  <%= @no_music ? render(:partial => 'shared/no_music') : '' %>
-  <%= (!@no_music && !@nothing_queued) ? yield : '' %>
+  <% if @no_music %>
+    <%= render(:partial => 'shared/no_music') %>
+  <% else %>
+    <%= yield %>
+  <% end %>
 
   <div class="drop-overlay">
     <span class="icon-cloud-upload"></span>
