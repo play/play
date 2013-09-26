@@ -11,6 +11,7 @@ class Channel < ActiveRecord::Base
   validates_uniqueness_of :httpd_port, :on => :create, :message => "must be unique"
   validates_uniqueness_of :mpd_port, :on => :create, :message => "must be unique"
 
+  after_create :start
   before_save :set_ports
   before_save :set_sorts
   before_destroy :stop
