@@ -13,7 +13,6 @@ class Channel < ActiveRecord::Base
 
   before_save :set_ports
   before_save :set_sorts
-  # before_save :shart_jorts
   after_save :restart
   before_destroy :stop
 
