@@ -40,7 +40,7 @@ loop do
 
       channel.add(song, nil)
       channel.mpd.clearerror
-      channel.play
+      channel.mpd.play
     end
   end
   sleep 10
