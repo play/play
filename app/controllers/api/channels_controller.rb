@@ -27,6 +27,7 @@ class Api::ChannelsController < Api::BaseController
   end
 
   def stream
+    @channel.mpd.play
     redirect_to "http://#{request.host}:#{@channel.httpd_port}"
   end
 
