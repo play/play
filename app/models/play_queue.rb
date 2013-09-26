@@ -37,7 +37,7 @@ class PlayQueue
   #
   # Returns the current Song.
   def self.now_playing
-    if record = Play.mpd.queue.first
+    if record = Play.mpd.current_song
       Song.new(:path => record.file)
     end
   end
