@@ -1,4 +1,5 @@
 class Api::ChannelsController < Api::BaseController
+  skip_before_filter :authentication_required, :only => [:stream]
   before_filter :find_channel
 
   def index
