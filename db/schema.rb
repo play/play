@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130919140811) do
+ActiveRecord::Schema.define(version: 20130926030629) do
 
   create_table "channels", force: true do |t|
     t.string   "name"
@@ -20,20 +20,21 @@ ActiveRecord::Schema.define(version: 20130919140811) do
     t.integer  "httpd_port"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sort"
   end
 
   create_table "likes", force: true do |t|
     t.integer  "user_id"
     t.string   "song_path"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "song_plays", force: true do |t|
     t.integer  "user_id"
     t.string   "song_path"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "channel_id"
   end
 

@@ -14,7 +14,12 @@ class ApplicationController < ActionController::Base
   end
 
   def channel
-    @channel ||= session[:channel_id] ? Channel.find(session[:channel_id]) : Play.default_channel
+    begin
+      @channel ||= session[:channel_id] ? Channel.find(session[:channel_id]) : Play.default_channel
+    rescue ActiveRecord::RecordNotFound
+      session[:channel_id] = nil
+      @channel = Play.default_channel
+    end
   end
 
 protected

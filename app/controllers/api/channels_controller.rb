@@ -1,8 +1,9 @@
 class Api::ChannelsController < Api::BaseController
+  skip_before_filter :authentication_required, :only => [:stream]
   before_filter :find_channel
 
   def index
-    channels = Channel.all
+    channels = Channel.order(:sort)
     deliver_json(200, channels_response(channels, current_user))
   end
 
@@ -26,7 +27,7 @@ class Api::ChannelsController < Api::BaseController
   end
 
   def stream
-    redirect_to "#{request.scheme}://#{request.host}:#{@channel.httpd_port}"
+    redirect_to "http://#{request.host}:#{@channel.httpd_port}"
   end
 
   def now_playing
