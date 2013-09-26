@@ -26,9 +26,6 @@ loop do
   # Loop through all the currently tracked channels to see if we need to bump
   # the queue.
   tracked_channels.each do |channel|
-    # first and formost lets make sure it's playing
-    channel.play
-
     if channel.queue.size < 2
 
       if channel.song_plays.manually_queued.count > 50
@@ -43,6 +40,7 @@ loop do
 
       channel.add(song, nil)
       channel.mpd.clearerror
+      channel.play
     end
   end
   sleep 10
