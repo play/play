@@ -1,3 +1,10 @@
-<div id="queue">
-  <%= render :partial => 'shared/song', :collection => @songs %>
-</div>
+<% if !@songs.empty? %>
+  <div id="queue">
+    <%= render :partial => 'shared/song', :collection => @songs %>
+  </div>
+<% else %>
+  <div class="error">
+    <h1>Nothing's queued up.</h1>
+    <p>Always keep the music playing with <code>script/queue</code>.</p>
+  </div>
+<% end %>

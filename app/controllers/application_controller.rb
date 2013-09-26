@@ -41,8 +41,6 @@ protected
     return if Rails.env.test?
     if !channel.mpd
       @no_music = true
-    elsif channel.queue.empty?
-      @nothing_queued = true
     end
   end
 
