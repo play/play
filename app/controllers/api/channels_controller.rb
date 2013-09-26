@@ -3,7 +3,7 @@ class Api::ChannelsController < Api::BaseController
   before_filter :find_channel
 
   def index
-    channels = Channel.all
+    channels = Channel.order(:sort)
     deliver_json(200, channels_response(channels, current_user))
   end
 
