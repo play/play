@@ -8,11 +8,13 @@
       <%= link_to channel.name, channel_path(channel) %>
     </h2>
     <div class="meta">
+    <% if channel.now_playing %>
       <%= channel.now_playing.artist_name %>
-      <% if channel.now_playing.album_name.present? %>
+      <% if channel.now_playing.title.present? %>
         <span class="betweener">-</span>
-        <%= channel.now_playing.album_name %>
+        <%= channel.now_playing.title %>
       <% end %>
+    <% end%>
     </div>
   </div>
 </div>
