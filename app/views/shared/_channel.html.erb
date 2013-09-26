@@ -1,6 +1,6 @@
 <div class="channel">
   <%= link_to channel_path(channel), :class => 'channel-image' do %>
-    <img src="/images/art/<%= channel.now_playing.art_file %>" width="100" height="100" />
+    <img src="<%= channel.now_playing ? "/images/art/#{channel.now_playing.art_file}" : "/images/art-placeholder.png" %>" width="100" height="100" />
   <% end %>
 
   <div class="details">
