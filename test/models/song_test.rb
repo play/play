@@ -27,7 +27,7 @@ class SongTest < ActiveSupport::TestCase
   end
 
   test "knows equivalence" do
-    assert_equal Song.new(:path => 'Justice/Cross/Stress.mp3'), @song
+    assert_equal Song.from_path('Justice/Cross/Stress.mp3'), @song
   end
 
   test "finds a song by any" do

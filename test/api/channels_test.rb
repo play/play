@@ -166,7 +166,7 @@ class ChannelsTest < ActiveSupport::TestCase
     end
 
     test "POST /remove" do
-      @channel.add(Song.new(:path => %{Jeff Buckley/Grace/Lover, You Should've Come Over.mp3}),@user)
+      @channel.add(Song.from_path(%{Jeff Buckley/Grace/Lover, You Should've Come Over.mp3}),@user)
 
       authorized_post "/api/channels/#{@channel.id}/remove", @authorized_user, {:artist_name => @song.artist.to_param, :song_name => @song.to_param}
       parsed_response = parse_response(last_response)

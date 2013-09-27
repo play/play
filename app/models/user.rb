@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   # Returns an Array of Songs.
   def plays
     song_plays.map do |play|
-      Song.new(:path => play.song_path)
+      Song.from_path(play.song_path)
     end
   end
 
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   # Returns an Array of Songs.
   def liked_songs(page=1, per_page=20)
     likes.paginate(:page => page, :per_page => per_page).order('created_at desc').map do |like|
-      Song.new(:path => like.song_path)
+      Song.from_path(like.song_path)
     end
   end
 

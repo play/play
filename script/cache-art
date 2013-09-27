@@ -17,7 +17,7 @@ FileUtils.mkdir_p 'public/images/art'
 
 count = 0
 Array(paths).each do |path|
-  result = Song.new(:path => path).cache_album_art
+  result = Song.from_path(path).cache_album_art
   count += 1 if result
 end
 

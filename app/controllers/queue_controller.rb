@@ -6,7 +6,7 @@ class QueueController < ApplicationController
   def create
     case params[:type]
     when /song/
-      song = Song.new(:path => params[:id])
+      song = Song.from_path(params[:id])
       Play.default_channel.add(song,current_user)
     when /album/
       artist = Artist.new(:name => params[:artist])
@@ -18,7 +18,7 @@ class QueueController < ApplicationController
   end
 
   def destroy
-    song = Song.new(:path => params[:id])
+    song = Song.from_path(params[:id])
     Play.default_channel.remove(song,current_user)
     render :text => 'deleted!'
   end

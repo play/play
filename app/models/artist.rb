@@ -35,7 +35,7 @@ class Artist
     end
 
     records.map do |record|
-      Song.new(:path => record.file)
+      Song.new(record)
     end.reject{ |song| song.title.blank? }
   end
 

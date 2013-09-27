@@ -12,7 +12,7 @@ class SongsController < ApplicationController
     # taglib needs a file extension (lol)
     new_tmp = File.join(File.dirname(tmpfile), File.basename(name))
     File.rename(tmpfile.path, new_tmp)
-    song    = Song.new(:path => new_tmp)
+    song    = Song.from_path(new_tmp)
 
     # Import into our collection
     path = File.join(Play.music_path, song.artist_name, song.album_name)
@@ -35,7 +35,7 @@ class SongsController < ApplicationController
   end
 
   def download
-    song = Song.new(:path => params[:path])
+    song = Song.from_path(params[:path])
     send_file(File.join(Play.music_path,song.path), :disposition => 'attachment')
   end
 end

@@ -8,7 +8,7 @@ class ChannelsController < ApplicationController
   def add
     case params[:type]
     when /song/
-      song = Song.new(:path => params[:song_id])
+      song = Song.from_path(params[:song_id])
       @channel.add(song,current_user)
     when /album/
       artist = Artist.new(:name => params[:artist])
@@ -20,7 +20,7 @@ class ChannelsController < ApplicationController
   end
 
   def remove
-    song = Song.new(:path => params[:song_id])
+    song = Song.from_path(params[:song_id])
     @channel.remove(song,current_user)
     render :text => 'deleted!'
   end
