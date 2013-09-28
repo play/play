@@ -62,6 +62,9 @@ Play::Application.routes.draw do
     put "/artists/:artist_name/songs/:song_name/like" => 'songs#like', :as => 'like_song'
     put "/artists/:artist_name/songs/:song_name/unlike" => 'songs#unlike', :as => 'unlike_song'
 
+    # commands, like from hubot
+    resource :commands, :only => [:index, :create]
+
     # channels
     resources :channels do
       get  "/stream" => 'channels#stream', :as => 'stream'
