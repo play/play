@@ -9,6 +9,7 @@ class Api::CommandsController < Api::BaseController
 
 
     #TODO make sure to ^ and $ all these
+    #TODO support optional 'play' prefix where it'd make sense
     case command
     when /^sup\??$/i
       song = channel.now_playing
