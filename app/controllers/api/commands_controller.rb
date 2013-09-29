@@ -4,9 +4,9 @@ class Api::CommandsController < Api::BaseController
     channel = Channel.find_by_name(params[:channel])
 
     command = (params[:command] || "")
-                .strip            # no leading/trailing spaces
-                .gsub(/\s+/, " ") # make sure all spaces, no newlines or tabs, and no doubles
-
+                .strip                    # no leading/trailing spaces
+                .gsub(/\s+/, " ")         # make sure all spaces, no newlines or tabs, and no doubles
+                .gsub(/^(\/|hubot )/, '') # strip leading / or hubt
 
     #TODO make sure to ^ and $ all these
     #TODO support optional 'play' prefix where it'd make sense
@@ -77,30 +77,37 @@ class Api::CommandsController < Api::BaseController
           output = %{Can't find artist #{artist_name}, let alone song "#{song_name}"}
       end
     when /I want this song/i
-      #  authedRequest message, '/now_playing', 'get', {}, (err, res, body) ->
-      #    json = JSON.parse(body)['now_playing']
-      #    url  = "#{URL}/songs/download/#{escape json.path}"
-      #    message.send("Pretty rad, innit? Grab it for yourself: #{url}")
-      output = "Still need to implement wanting this song (#{command.inspect}), lol"
+      song = channel.now_playing
+
+      if song
+        output = "Pretty rad, innit? Grab it for yourself: #{song_url(:artist_name => song.artist_name, :title => song.title)}"
+      else
+        output = "Nothing is playing on #{channel.name}, lol"
+      end
     when /I want this album/i
-      #  authedRequest message, '/now_playing', 'get', {}, (err, res, body) ->
-      #    json = JSON.parse(body)['now_playing']
-      #    url  = "#{URL}/artists/#{escape json.artist_slug}/albums/#{escape json.album_slug}/download"
-      #    message.send("dope beats available here: #{url}")
-      output = "Still need to implement wanting this album (#{command.inspect}), lol"
+      song = channel.now_playing
+
+      if song
+        output = "dope beats available here: #{album_url(:artist_name => song.artist_name, :name => song.album_name)}"
+      else
+        output = "Nothing is playing on #{channel.name}, lol"
+      end
     when /^(something i('d)? like)|(the good shit)$/i
-      #  authedRequest message, '/queue/stars', 'post', {}, (err, res, body) ->
-      #    json = JSON.parse(body)
-      #    str = json.songs.map (song) ->
-      #      "\"#{song.title}\" by #{song.artist_name}"
-      #    str.join(', ')
-      #    message.send("yo here's some songs: #{str}")
-      output = "Still need to implement #{command.inspect}, lol"
-    when /I (like|star|love|dig) this( song)?/i 
-      #  authedRequest message, '/now_playing', 'post', {}, (err, res, body) ->
-      #    json = JSON.parse(body)['now_playing']
-      #    message.send("You like #{json.artist_name}'s \"#{json.title}\", too? Awesome.")
-      output = "Still need to implement liking this song (#{command.inspect}), lol"
+      songs = user.likes.limit(3).order('rand()').collect(&:song)
+      songs.each do |song|
+        channel.add(song,current_user)
+      end
+
+      output = "Queued up:\n" + songs.map {|song| %{"#{song.title}" by #{song.artist_name}} }.join("\n")
+    when /^(?:play )?I (like|star|love|dig) this( song)?$/i 
+      song = channel.now_playing
+
+      if song
+        user.like(song.path)
+        output = %{You like #{song.artist_name}'s "#{song.title}", too? Awesome.}
+      else
+        output = %{You like the sound of silence, too? Awesome. Just kidding, why don't you play some music or something?}
+      end
     when /volume on (.*)/i
       #  authedRequest message, "/speakers", 'get', {}, (err, res, body) ->
       #    json = JSON.parse(body)['speakers']
@@ -116,13 +123,10 @@ class Api::CommandsController < Api::BaseController
       #    else
       #      message.send("Bumped the volume to #{JSON.parse(body)['volume']}")
       output = "Still need to implement volume adjust (#{command.inspect}), lol"
-    when /where'?s play/i
-      #   authedRequest message, '/stream_url', 'get', {}, (err, res, body) ->
-      #     message.send("play's at #{URL} and you can stream from #{body}")
-
-      output = "Still need to implement where's play (#{command.inspect}), lol"
+    when /^(?:play )?where'?s play$/i
+      output = "#{channel.name} is at #{channel_url(channel)}, and can be streamed from #{api_channel_stream_url(channel)}"
     else
-      output = "lol wut? #{command.inspect}"
+      output = "lol wut? #{command.inspect} doesn't even seem like a thing Play can do"
     end
 
     render :text => output
