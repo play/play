@@ -11,10 +11,20 @@ class Api::CommandsController < Api::BaseController
     #TODO make sure to ^ and $ all these
     #TODO support optional 'play' prefix where it'd make sense
     case command
-    when /^sup\??$/i
+    when /^play$/
+      channel.mpd.play
+      output = "You got it, playing"
+    when /^(?:play )?pause/i
+      channel.mpd.pause = true
+      output = "You got it, pausing"
+    when /^(?:play )?(sup|what'?s playing)\??$/i
       song = channel.now_playing
-      output = %{Now playing on #{channel.name}: "#{song.title}" by #{song.artist_name}, from "#{song.album_name}"}
-    when /^next$/i
+      if song
+        output = %{Now playing on #{channel.name}: "#{song.title}" by #{song.artist_name}, from "#{song.album_name}"}
+      else
+        output = "The queue is empty :( Try adding some songs, eh?"
+      end
+    when /^(?:play )?next$/i
       next_song = channel.queue[1]
 
       channel.mpd.next
@@ -28,60 +38,56 @@ class Api::CommandsController < Api::BaseController
       else
         output = "The queue is empty :( Try adding some songs, eh?"
       end
-    when /(.*) by (.*)/i
-      #  if message.match[1].search(/artist/) != -1 ||
-      #     message.match[1].search(/album/) != -1
-      #    return
+    when /^(?:play )?album (.*) by (.*)$/i
+      album_name = $1
+      artist_name = $2
 
-      #  params = { type: 'song', song_name: message.match[1], artist_name: message.match[2] }
-      #  authedRequest message, '/queue/add', 'post', params, (err, res, body) ->
-      #    if res.statusCode == 404
-      #      return message.send("lol no idea what you're talking about")
+      artist_name = channel.mpd.search(:artist, artist_name, :case_sensitive => false).first.try(:artist)
+      artist = Artist.new(:name => artist_name)
 
-      #    json = JSON.parse(body)
-      #    song = json.songs[0]
+      album = artist.albums.select { |album| album.name.downcase == album_name.downcase }.first
+      songs = album.songs
 
-      #    message.send("Queued up \"#{song.title}\" by #{song.artist_name}")
-      
-      output = "Still need to implement #{command.inspect}, lol"
-    when /album (.*) by (.*)/i
-      #  params = { type: 'album', album_name: message.match[1], artist_name: message.match[2] }
-      #  authedRequest message, '/queue/add', 'post', params, (err, res, body) ->
-      #    if res.statusCode == 404
-      #      return message.send("lol no idea what you're talking about")
+      songs.each{|song| channel.add(song, user)}
 
-      #    json = JSON.parse(body)
-      #    str  = json.songs.map (song) ->
-      #      "\"#{song.title}\" by #{song.artist_name}"
-      #    str.join(', ')
+      output = "Queued up:\n" + songs.map {|song| %{"#{song.title}" by #{song.artist_name}} }.join("\n")
+    when /^(?:play )?artist (.*)$/i
+      artist_name = $1
 
-      #    message.send("Queued up #{str}")
-      output = "Still need to implement #{command.inspect}, lol"
-    when /artist (.*)/i
-      #  params = { type: 'artist', artist_name: message.match[1] }
-      #  authedRequest message, '/queue/add', 'post', params, (err, res, body) ->
-      #    if res.statusCode == 404
-      #      return message.send("lol no idea what you're talking about")
+      artist = Artist.new(:name => artist_name)
+      songs = artist.songs.sample(3)
+      songs.each{|song| channel.add(song, user)}
 
-      #    json = JSON.parse(body)
-      #    str  = json.songs.map (song) ->
-      #      "\"#{song.title}\" by #{song.artist_name}"
-      #    str.join(', ')
+      output = "Queued up:\n" + songs.map {|song| %{"#{song.title}" by #{song.artist_name}} }.join("\n")
+    when /(?:play )?(.*) by (.*)/i
+      song_name = $1
+      artist_name = $2
 
-      #    message.send("Queued up #{str}")
-      output = "Still need to implement #{command.inspect}, lol"
+      artist = Artist.new(:name => artist_name)
+
+      if artist
+        song = artist.songs.find{|song| song.title.downcase == song_name.downcase}
+        if song
+          channel.add song, user
+          output = %{Queued up "#{song.title}" by #{song.artist_name}}
+        else
+          output = %{Can't find "#{song_name}" by #{artist_name}}
+        end
+      else
+          output = %{Can't find artist #{artist_name}, let alone song "#{song_name}"}
+      end
     when /I want this song/i
       #  authedRequest message, '/now_playing', 'get', {}, (err, res, body) ->
       #    json = JSON.parse(body)['now_playing']
       #    url  = "#{URL}/songs/download/#{escape json.path}"
       #    message.send("Pretty rad, innit? Grab it for yourself: #{url}")
-      output = "Still need to implement #{command.inspect}, lol"
+      output = "Still need to implement wanting this song (#{command.inspect}), lol"
     when /I want this album/i
       #  authedRequest message, '/now_playing', 'get', {}, (err, res, body) ->
       #    json = JSON.parse(body)['now_playing']
       #    url  = "#{URL}/artists/#{escape json.artist_slug}/albums/#{escape json.album_slug}/download"
       #    message.send("dope beats available here: #{url}")
-      output = "Still need to implement #{command.inspect}, lol"
+      output = "Still need to implement wanting this album (#{command.inspect}), lol"
     when /^(something i('d)? like)|(the good shit)$/i
       #  authedRequest message, '/queue/stars', 'post', {}, (err, res, body) ->
       #    json = JSON.parse(body)
@@ -94,14 +100,14 @@ class Api::CommandsController < Api::BaseController
       #  authedRequest message, '/now_playing', 'post', {}, (err, res, body) ->
       #    json = JSON.parse(body)['now_playing']
       #    message.send("You like #{json.artist_name}'s \"#{json.title}\", too? Awesome.")
-      output = "Still need to implement #{command.inspect}, lol"
+      output = "Still need to implement liking this song (#{command.inspect}), lol"
     when /volume on (.*)/i
       #  authedRequest message, "/speakers", 'get', {}, (err, res, body) ->
       #    json = JSON.parse(body)['speakers']
       #    speakers = json.filter (x) -> x['name'] == "play-#{speaker}"
       #    volume = speakers[0]['volume']
       #    message.send("Yo :#{message.message.user.name}:, the volume is #{volume} :mega:")
-      output = "Still need to implement #{command.inspect}, lol"
+      output = "Still need to implement volume check (#{command.inspect}), lol"
     when /volume (.*) (.*)/i 
       #  params = { speaker_name: speaker, level: volume }
       #  authedRequest message, "/speakers/#{speaker}/volume", 'post', params, (err, res, body) ->
@@ -109,12 +115,12 @@ class Api::CommandsController < Api::BaseController
       #      message.send(msg)
       #    else
       #      message.send("Bumped the volume to #{JSON.parse(body)['volume']}")
-      output = "Still need to implement #{command.inspect}, lol"
+      output = "Still need to implement volume adjust (#{command.inspect}), lol"
     when /where'?s play/i
       #   authedRequest message, '/stream_url', 'get', {}, (err, res, body) ->
       #     message.send("play's at #{URL} and you can stream from #{body}")
 
-      output = "Still need to implement #{command.inspect}, lol"
+      output = "Still need to implement where's play (#{command.inspect}), lol"
     else
       output = "lol wut? #{command.inspect}"
     end
