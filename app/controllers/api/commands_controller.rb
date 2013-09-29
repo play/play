@@ -8,8 +8,6 @@ class Api::CommandsController < Api::BaseController
                 .gsub(/\s+/, " ")         # make sure all spaces, no newlines or tabs, and no doubles
                 .gsub(/^(\/|hubot )/, '') # strip leading / or hubt
 
-    #TODO make sure to ^ and $ all these
-    #TODO support optional 'play' prefix where it'd make sense
     case command
     when /^play$/
       channel.mpd.play
@@ -30,7 +28,7 @@ class Api::CommandsController < Api::BaseController
       channel.mpd.next
 
       output = %{On to next one on #{channel.name}: "#{next_song.title}" by #{next_song.artist_name}, from "#{next_song.album_name}"}
-    when /^(what's next\??|next\?)$/i
+    when /^(?:play )?(what's next\??|next\?)$/i
       next_song = channel.queue[1]
 
       if next_song
@@ -59,7 +57,7 @@ class Api::CommandsController < Api::BaseController
       songs.each{|song| channel.add(song, user)}
 
       output = "Queued up:\n" + songs.map {|song| %{"#{song.title}" by #{song.artist_name}} }.join("\n")
-    when /(?:play )?(.*) by (.*)/i
+    when /^(?:play )?(.*) by (.*)$/i
       song_name = $1
       artist_name = $2
 
@@ -76,7 +74,7 @@ class Api::CommandsController < Api::BaseController
       else
           output = %{Can't find artist #{artist_name}, let alone song "#{song_name}"}
       end
-    when /I want this song/i
+    when /^(?:play )?I want this song$/i
       song = channel.now_playing
 
       if song
@@ -84,7 +82,7 @@ class Api::CommandsController < Api::BaseController
       else
         output = "Nothing is playing on #{channel.name}, lol"
       end
-    when /I want this album/i
+    when /^(?:play )?I want this album$/i
       song = channel.now_playing
 
       if song
@@ -92,7 +90,7 @@ class Api::CommandsController < Api::BaseController
       else
         output = "Nothing is playing on #{channel.name}, lol"
       end
-    when /^(something i('d)? like)|(the good shit)$/i
+    when /^(?:play )?(something i('d)? like)|(the good shit)$/i
       songs = user.likes.limit(3).order('rand()').collect(&:song)
       songs.each do |song|
         channel.add(song,current_user)
@@ -108,14 +106,14 @@ class Api::CommandsController < Api::BaseController
       else
         output = %{You like the sound of silence, too? Awesome. Just kidding, why don't you play some music or something?}
       end
-    when /volume on (.*)/i
+    when /^(?:play )?volume on (.*)$/i
       #  authedRequest message, "/speakers", 'get', {}, (err, res, body) ->
       #    json = JSON.parse(body)['speakers']
       #    speakers = json.filter (x) -> x['name'] == "play-#{speaker}"
       #    volume = speakers[0]['volume']
       #    message.send("Yo :#{message.message.user.name}:, the volume is #{volume} :mega:")
       output = "Still need to implement volume check (#{command.inspect}), lol"
-    when /volume (.*) (.*)/i 
+    when /^(?:play )?volume (.*) (.*)$/i 
       #  params = { speaker_name: speaker, level: volume }
       #  authedRequest message, "/speakers/#{speaker}/volume", 'post', params, (err, res, body) ->
       #    if msg=JSON.parse(body)['message']
