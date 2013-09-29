@@ -16,11 +16,8 @@ class Api::CommandsController < Api::BaseController
       channel.mpd.pause = true
       output = "You got it, pausing"
     when /^(?:play )?(sup|what'?s playing)\??$/i
-      song = channel.now_playing
-      if song
-        output = %{Now playing on #{channel.name}: "#{song.title}" by #{song.artist_name}, from "#{song.album_name}"}
-      else
-        output = "The queue is empty :( Try adding some songs, eh?"
+      output = try_now_playing channel do |song|
+        %{Now playing on #{channel.name}: "#{song.title}" by #{song.artist_name}, from "#{song.album_name}"}
       end
     when /^(?:play )?next$/i
       next_song = channel.queue[1]
@@ -44,67 +41,51 @@ class Api::CommandsController < Api::BaseController
       artist = Artist.new(:name => artist_name)
 
       album = artist.albums.select { |album| album.name.downcase == album_name.downcase }.first
-      songs = album.songs
 
-      songs.each{|song| channel.add(song, user)}
-
-      output = "Queued up:\n" + songs.map {|song| %{"#{song.title}" by #{song.artist_name}} }.join("\n")
+      output = queue_songs(channel, user, album.songs)
     when /^(?:play )?artist (.*)$/i
       artist_name = $1
-
       artist = Artist.new(:name => artist_name)
-      songs = artist.songs.sample(3)
-      songs.each{|song| channel.add(song, user)}
 
-      output = "Queued up:\n" + songs.map {|song| %{"#{song.title}" by #{song.artist_name}} }.join("\n")
+      songs = artist.songs.sample(3)             
+
+      output = if songs.any?
+                 queue_songs(channel, user, songs)
+               else
+                 "Didn't find any songs by #{artist_name} ¯\_(ツ)_/¯"
+               end
     when /^(?:play )?(.*) by (.*)$/i
       song_name = $1
       artist_name = $2
 
       artist = Artist.new(:name => artist_name)
+      song = artist.songs.find{|song| song.title.downcase == song_name.downcase}
 
-      if artist
-        song = artist.songs.find{|song| song.title.downcase == song_name.downcase}
-        if song
-          channel.add song, user
-          output = %{Queued up "#{song.title}" by #{song.artist_name}}
-        else
-          output = %{Can't find "#{song_name}" by #{artist_name}}
-        end
-      else
-          output = %{Can't find artist #{artist_name}, let alone song "#{song_name}"}
-      end
+      output = if song
+                 queue_song(channel, user, song)
+               else
+                 %{Can't find "#{song_name}" by #{artist_name}}
+               end
     when /^(?:play )?I want this song$/i
-      song = channel.now_playing
-
-      if song
-        output = "Pretty rad, innit? Grab it for yourself: #{song_url(:artist_name => song.artist_name, :title => song.title)}"
-      else
-        output = "Nothing is playing on #{channel.name}, lol"
+      output = try_now_playing channel do |song|
+        "Pretty rad, innit? Grab it for yourself: #{song_url(:artist_name => song.artist_name, :title => song.title)}"
       end
     when /^(?:play )?I want this album$/i
-      song = channel.now_playing
-
-      if song
-        output = "dope beats available here: #{album_url(:artist_name => song.artist_name, :name => song.album_name)}"
-      else
-        output = "Nothing is playing on #{channel.name}, lol"
+      output = try_now_playing channel do |song|
+        if song.album_name
+          "dope beats available here: #{album_url(:artist_name => song.artist_name, :name => song.album_name)}"
+        else
+          %{"#{song.title}" by #{song.artist_name} isn't actually part of an album. Maybe you want just this song instead?}
+        end
       end
     when /^(?:play )?(something i('d)? like)|(the good shit)$/i
       songs = user.likes.limit(3).order('rand()').collect(&:song)
-      songs.each do |song|
-        channel.add(song,current_user)
-      end
 
-      output = "Queued up:\n" + songs.map {|song| %{"#{song.title}" by #{song.artist_name}} }.join("\n")
+      output = queue_songs(channel, user, songs)
     when /^(?:play )?I (like|star|love|dig) this( song)?$/i 
-      song = channel.now_playing
-
-      if song
+      output = try_now_playing channel do |song|
         user.like(song.path)
         output = %{You like #{song.artist_name}'s "#{song.title}", too? Awesome.}
-      else
-        output = %{You like the sound of silence, too? Awesome. Just kidding, why don't you play some music or something?}
       end
     when /^(?:play )?volume on (.*)$/i
       #  authedRequest message, "/speakers", 'get', {}, (err, res, body) ->
@@ -128,5 +109,30 @@ class Api::CommandsController < Api::BaseController
     end
 
     render :text => output
+  end
+
+  protected
+
+  def queue_songs(channel, user, songs)
+    songs.each{|song| channel.add(song, user)}
+
+    "Queued up:\n" + songs.map {|song| %{"#{song.title}" by #{song.artist_name}} }.join("\n")
+  end
+
+  def queue_song(channel, user, song)
+    channel.add song, user
+    output = %{Queued up "#{song.title}" by #{song.artist_name}}
+  end
+
+  def try_now_playing(channel, queue_empty_message = nil )
+    queue_empty_message ||= "The #{channel.name} queue is empty :( Try adding some songs, eh?"
+    song = channel.now_playing
+
+    if song
+      yield song
+    else
+      queue_empty_message
+    end
+    
   end
 end
