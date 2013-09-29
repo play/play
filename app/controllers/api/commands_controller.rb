@@ -20,19 +20,14 @@ class Api::CommandsController < Api::BaseController
         %{Now playing on #{channel.name}: "#{song.title}" by #{song.artist_name}, from "#{song.album_name}"}
       end
     when /^(?:play )?next$/i
-      next_song = channel.queue[1]
-
-      channel.mpd.next
-
-      output = %{On to next one on #{channel.name}: "#{next_song.title}" by #{next_song.artist_name}, from "#{next_song.album_name}"}
-    when /^(?:play )?(what's next\??|next\?)$/i
-      next_song = channel.queue[1]
-
-      if next_song
-        output = %{Up next on #{channel.name}: "#{next_song.title}" by #{next_song.artist_name}, from "#{next_song.album_name}"}
-      else
-        output = "The queue is empty :( Try adding some songs, eh?"
+      output = try_next_song channel do |next_song|
+        %{On to next one on #{channel.name}: "#{next_song.title}" by #{next_song.artist_name}, from "#{next_song.album_name}"}
       end
+    when /^(?:play )?(what's next\??|next\?)$/i
+      output = try_next_song channel do |next_song|
+        %{Up next on #{channel.name}: "#{next_song.title}" by #{next_song.artist_name}, from "#{next_song.album_name}"}
+      end
+
     when /^(?:play )?album (.*) by (.*)$/i
       album_name = $1
       artist_name = $2
@@ -132,6 +127,17 @@ class Api::CommandsController < Api::BaseController
       yield song
     else
       queue_empty_message
+    end
+    
+  end
+
+  def try_next_song channel
+    next_song = channel.queue[1]
+
+    if next_song
+      yield next_song
+    else
+      "The #{channel.name} queue is empty :( Try adding some songs, eh?"
     end
     
   end
