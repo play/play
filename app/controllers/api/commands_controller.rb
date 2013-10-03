@@ -54,7 +54,7 @@ class Api::CommandsController < Api::BaseController
       # /play album yellow & green by Baroness - does work
       # /play artist baroness - does work
       # /play artist Baroness - does work
-      
+
       artist = Artist.new(:name => artist_name)
       album = artist.albums.select { |album| album.name.downcase == album_name.downcase }.first
 
@@ -67,7 +67,7 @@ class Api::CommandsController < Api::BaseController
       artist_name = $1
       artist = Artist.new(:name => artist_name)
 
-      songs = artist.songs.sample(3)             
+      songs = artist.songs.sample(3)
 
       if songs.any?
         queue_songs(channel, user, songs)
@@ -102,7 +102,7 @@ class Api::CommandsController < Api::BaseController
       songs = user.likes.limit(3).order('rand()').collect(&:song)
 
       queue_songs(channel, user, songs)
-    when /^(?:play )?I (like|star|love|dig) this( song)?$/i 
+    when /^(?:play )?I (like|star|love|dig) this( song)?$/i
       try_now_playing channel do |song|
         user.like(song.path)
         output = %{You like #{song.artist_name}'s "#{song.title}", too? Awesome.}
@@ -114,7 +114,7 @@ class Api::CommandsController < Api::BaseController
       #    volume = speakers[0]['volume']
       #    message.send("Yo :#{message.message.user.name}:, the volume is #{volume} :mega:")
       "Still need to implement volume check (#{command.inspect}), lol"
-    when /^(?:play )?volume (.*) (.*)$/i 
+    when /^(?:play )?volume (.*) (.*)$/i
       #  params = { speaker_name: speaker, level: volume }
       #  authedRequest message, "/speakers/#{speaker}/volume", 'post', params, (err, res, body) ->
       #    if msg=JSON.parse(body)['message']
@@ -160,6 +160,6 @@ class Api::CommandsController < Api::BaseController
     else
       "The #{channel.name} queue is empty :( Try adding some songs, eh?"
     end
-    
+
   end
 end
