@@ -3,7 +3,7 @@ class Api::CommandsController < Api::BaseController
     user = User.find_by_login(params[:login]) if params[:login].present?
     channel = Channel.find_by_name(params[:channel])
 
-    if (params[:channel] && !channel)
+    if (!params[:channel].blank? && !channel)
       render :text => "Ooops, I don't know that channel. You're currently tuned to #{params[:channel]}. Maybe it's wrong?"
     else
       command = normalize_command(params[:command])
