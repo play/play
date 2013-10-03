@@ -126,6 +126,15 @@ class Api::CommandsController < Api::BaseController
       "#{channel.name} is at #{channel_url(channel)}, and can be streamed from #{api_channel_stream_url(channel)}"
     when /^(?:play )?list channels$/i
       "These are the channels I know: #{Channel.all.map(&:name).join(', ')}"
+    when /^(?:play )?create channel (.*)$/i
+      name = $1
+      begin
+        channel = Channel.create!(:name => name)
+        "Ok, I created your channel! You can see it here: #{channel_url(channel)}. Or stream it from one of the great Play apps."
+      rescue ActiveRecord::RecordInvalid
+        channel = Channel.find_by_name(name)
+        "Ooops! That channel already exist. You can see it here: #{channel_url(channel)}. Or stream it from one of the great Play apps."
+      end
     else
       "lol wut? #{command.inspect} doesn't even seem like a thing Play can do"
     end
