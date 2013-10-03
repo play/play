@@ -137,6 +137,11 @@ class Api::CommandsController < Api::BaseController
       end
     when /^(?:play )?list speakers$/i
       "These are the speakers I know: #{Play.speakers.map(&:name).join(', ')}"
+    when /^(?:play )?reset (.*)$/i
+      try_speaker $1 do |speaker|
+        speaker.reset
+        "Ok, I reset the speaker for you."
+      end
     else
       "lol wut? #{command.inspect} doesn't even seem like a thing Play can do"
     end
