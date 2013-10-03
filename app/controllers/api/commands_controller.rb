@@ -165,7 +165,7 @@ class Api::CommandsController < Api::BaseController
 
   end
 
-  def try_next_song channel
+  def try_next_song(channel)
     next_song = channel.queue[1]
 
     if next_song
