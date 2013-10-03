@@ -137,6 +137,16 @@ class Api::CommandsController < Api::BaseController
       end
     when /^(?:p(?:lay)? )?list speakers$/i
       "These are the speakers I know: #{Play.speakers.map(&:name).join(', ')}"
+    when /^(?:p(?:lay)? )?tune speaker (.*) to (.*)$/i
+      try_speaker $1 do |speaker|
+        channel = Channel.find_by_name($2)
+        if channel
+          speaker.tune(api_channel_stream_url(channel))
+          "Ok, I tuned that speaker to #{channel.name}"
+        else
+          "Hmm, I don't know that channel."
+        end
+      end
     when /^(?:p(?:lay)? )?reset (.*)$/i
       try_speaker $1 do |speaker|
         speaker.reset
