@@ -135,9 +135,9 @@ class Api::CommandsController < Api::BaseController
         channel = Channel.find_by_name(name)
         "Ooops! That channel already exist. You can see it here: #{channel_url(channel)}. Or stream it from one of the great Play apps."
       end
-    when /^(?:play )?list speakers$/i
+    when /^(?:p(?:lay)? )?list speakers$/i
       "These are the speakers I know: #{Play.speakers.map(&:name).join(', ')}"
-    when /^(?:play )?reset (.*)$/i
+    when /^(?:p(?:lay)? )?reset (.*)$/i
       try_speaker $1 do |speaker|
         speaker.reset
         "Ok, I reset the speaker for you."
