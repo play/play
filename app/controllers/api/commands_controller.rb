@@ -124,6 +124,8 @@ class Api::CommandsController < Api::BaseController
       "Still need to implement volume adjust (#{command.inspect}), lol"
     when /^(?:play )?where'?s play$/i
       "#{channel.name} is at #{channel_url(channel)}, and can be streamed from #{api_channel_stream_url(channel)}"
+    when /^(?:play )?list channels$/i
+      "These are the channels I know: #{Channel.all.map(&:name).join(', ')}"
     else
       "lol wut? #{command.inspect} doesn't even seem like a thing Play can do"
     end
