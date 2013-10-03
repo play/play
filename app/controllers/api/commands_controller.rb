@@ -175,4 +175,16 @@ class Api::CommandsController < Api::BaseController
     end
 
   end
+
+  def try_speaker speaker_name
+    speaker = Play.speakers.detect{|s| s.name == speaker_name}
+
+    if speaker
+      yield speaker
+    else
+      "Ooops, I don't know that speaker. These are the speakers I know: #{Play.speakers.map(&:name).join(', ')}"
+    end
+
+  end
+
 end
