@@ -97,4 +97,20 @@ module Play
   #   mpd.search(type, query, options)
   # end
 
+
+  # Returns the cached request host.
+  #
+  # Returns String.
+  def self.request_host
+    @request_host
+  end
+
+  # Sets the host that the request is happening on.
+  #
+  # Returns String.
+  def self.request_host=(host)
+    @request_host = host
+  end
+
+
 end

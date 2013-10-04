@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :auth_required, :music_required
+  before_filter :set_request_host
 
   helper_method :current_user
 
@@ -23,6 +24,10 @@ class ApplicationController < ActionController::Base
   end
 
 protected
+
+  def set_request_host
+    Play.request_host = request.host
+  end
 
   # We require login to use Play. deal_with_it.gif.
   #

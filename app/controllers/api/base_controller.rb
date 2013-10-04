@@ -6,6 +6,7 @@ class Api::BaseController < ActionController::Base
   include Play::Api::ApiResponse
 
   before_filter :authentication_required
+  before_filter :set_request_host
 
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
@@ -29,6 +30,10 @@ class Api::BaseController < ActionController::Base
   end
 
   private
+
+  def set_request_host
+    Play.request_host = request.host
+  end
 
   # Private: Require that the request has a valid authentication token.
   def authentication_required
