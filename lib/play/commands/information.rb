@@ -32,14 +32,14 @@ module Play
           end
         when /I want this song|gimme dat/i
           if song = channel.now_playing
-            %{Pretty rad, innit? Grab it for yourself: #{song_download_url(song.path)}}
+            %{Pretty rad, innit? Grab it for yourself: #{Rails.application.routes.url_helpers.song_download_url(song.path, :host => Play.request_host)}}
           else
             %{lol, there's nothing playing}
           end
         when /I want this album/i
           if song = channel.now_playing
             if song.album_name
-              "dope beats available here: #{album_download_url(:artist_name => song.artist_name, :name => song.album_name)}"
+              "dope beats available here: #{Rails.application.routes.url_helpers.album_download_url(:artist_name => song.artist_name, :name => song.album_name, :host => Play.request_host)}"
             else
               %{"#{song.title}" by #{song.artist_name} isn't actually part of an album. Maybe you want just this song instead?}
             end

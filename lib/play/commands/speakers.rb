@@ -37,7 +37,7 @@ module Play
           Play::Commands.find_speaker(speaker_name) do |speaker|
             channel = Channel.find_by_name($2)
             if channel
-              speaker.tune(api_channel_stream_url(channel))
+              speaker.tune(Rails.application.routes.url_helpers.api_channel_stream_url(channel, :host => Play.request_host))
               "Ok, I tuned that speaker to #{channel.name}"
             else
               "Hmm, I don't know that channel."
