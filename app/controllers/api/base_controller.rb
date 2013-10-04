@@ -32,7 +32,8 @@ class Api::BaseController < ActionController::Base
   private
 
   def set_request_host
-    Play.request_host = request.host
+    host = request.port == 80 ? request.host : "#{request.host}:#{request.port}"
+    Play.request_host = host
   end
 
   # Private: Require that the request has a valid authentication token.

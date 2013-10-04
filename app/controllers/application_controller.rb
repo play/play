@@ -26,7 +26,8 @@ class ApplicationController < ActionController::Base
 protected
 
   def set_request_host
-    Play.request_host = request.host
+    host = request.port == 80 ? request.host : "#{request.host}:#{request.port}"
+    Play.request_host = host
   end
 
   # We require login to use Play. deal_with_it.gif.
