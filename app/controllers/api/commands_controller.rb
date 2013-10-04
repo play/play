@@ -1,11 +1,19 @@
 class Api::CommandsController < Api::BaseController
   def create
-    user = User.find_by_login(params[:login]) if params[:login].present?
-    channel = Channel.find_by_name(params[:channel])
 
-    if (!params[:channel].blank? && !channel)
+    # attempt to fetch a channel if the param is included
+    if params[:channel]
+      # if the param is blank, default to the first channel
+      # otherwise attempt to find the specified channel
+      channel = params[:channel].blank? ? Channel.first : Channel.find_by_name(params[:channel])
+    end
+
+    # check to see if a channel should be used
+    # if none was found, error out
+    if (params[:channel] && !channel)
       render :text => "Ooops, I don't know that channel. You're currently tuned to #{params[:channel]}. Maybe it's wrong?"
     else
+      # otherwise process the command on the channel
       command = normalize_command(params[:command])
       output = Play::Commands.process_command(command, channel, current_user)
       render :text => output
