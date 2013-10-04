@@ -8,6 +8,8 @@ module Play
       result = Queueing.process_command(command, channel, user) unless result
       result = Speakers.process_command(command, channel, user) unless result
 
+      result = Help.process_command(command, channel, user) unless result
+
       result || "lol wut? #{command.inspect} doesn't even seem like a thing Play can do"
     end
 
