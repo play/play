@@ -2,6 +2,14 @@ module Play
   module Commands
     class Controls
 
+      def self.help
+        items = []
+        items << "### Controls ###"
+        items << "play - Start playing."
+        items << "next - Plays the next song."
+        items << "pause - Pause."
+      end
+
       def self.process_command(command, channel, user)
         ## Control
         case command

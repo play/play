@@ -2,6 +2,15 @@ module Play
   module Commands
     class Information
 
+      def self.help
+        items = []
+        items << "### Info ###"
+        items << "what's playing? - Shows the currently playing song."
+        items << "what's next? - Shows the next song in the queue."
+        items << "I want this song - Shows a download link for the current song."
+        items << "I want this album - Shows a download link for the current album."
+      end
+
       def self.process_command(command, channel, user)
         case command
         when /^sup|what'?s playing/i

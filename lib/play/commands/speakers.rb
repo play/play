@@ -2,6 +2,16 @@ module Play
   module Commands
     class Speakers
 
+      def self.help
+        items = []
+        items << "### Speakers ###"
+        items << "list speakers - Shows a list of Play Speakers Play can currently see."
+        items << "status for speaker <speaker> - Shows what the speaker is playing and it's volume."
+        items << "set volume for speaker <speaker> to <level> - Sets the volume of the speaker. (0-100)."
+        items << "tune speaker <speaker> to <channel> - Tunes the speaker to a specific channel."
+        items << "reset speaker <speaker> - Resets the speaker. This will force it to restart playing."
+      end
+
       def self.process_command(command, channel, user)
         case command
         when /list speakers/i

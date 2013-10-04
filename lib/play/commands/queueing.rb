@@ -2,6 +2,17 @@ module Play
   module Commands
     class Queueing
 
+      def self.help
+        items = []
+        items << "### Queueing ###"
+        items << "play artist <artist> - Queue up three songs from a given artist."
+        items << "play album <album> by <artist> - Queue up an entire album."
+        items << "play song <song> by <artist> - Queue up a particular song."
+        items << "play something I like - Queue up some of your starred songs."
+        items << "play something <user> likes - Queue up some starred songs from someone else."
+        items << "I like this song - Tell Play you like this song."
+      end
+
       def self.process_command(command, channel, user)
         case command
         when /play artist (.*)/i

@@ -2,6 +2,13 @@ module Play
   module Commands
     class Channels
 
+      def self.help
+        items = []
+        items << "### Channels ###"
+        items << "list channels - List all of the available channels."
+        items << "create channel <channel-name> - Create a Play channel."
+      end
+
       def self.process_command(command, channel, user)
         case command
         when /list channels/i
