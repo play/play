@@ -19,6 +19,7 @@ class QueueController < ApplicationController
 
   def destroy
     song = Song.new(:path => params[:id])
+    Play.default_channel.next if song == Play.default_channel.now_playing
     Play.default_channel.remove(song,current_user)
     render :text => 'deleted!'
   end
