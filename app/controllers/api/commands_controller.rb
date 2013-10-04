@@ -1,6 +1,6 @@
 class Api::CommandsController < Api::BaseController
-  def create
 
+  def command
     # attempt to fetch a channel if the param is included
     if params[:channel]
       # if the param is blank, default to the first channel
