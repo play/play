@@ -1,6 +1,7 @@
 require 'play/connection_pool'
 
 class Channel < ActiveRecord::Base
+  MIN_QUEUE_SIZE = 3
   attr_accessible :mpd_port, :httpd_port, :color, :name
 
   has_many :users
@@ -58,6 +59,18 @@ class Channel < ActiveRecord::Base
   def restart
     stop
     start
+  end
+
+  # Plays the next song in the channel's queue.
+  #
+  # This first ensures we have the appropriate number of songs in the queue
+  # before and after the skip to the next song.
+  #
+  # Returns nothing.
+  def next
+    future_queue_size = self.queue.size - 1
+    autoqueue(MIN_QUEUE_SIZE - future_queue_size)
+    mpd.next
   end
 
   # Creates and returns an MPD client to the MPD instance for this Channel.

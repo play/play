@@ -54,7 +54,7 @@ class Api::ChannelsController < Api::BaseController
   end
 
   def next
-    @channel.mpd.next
+    @channel.next
     deliver_json(200, {:message => 'ok'})
   end
 
