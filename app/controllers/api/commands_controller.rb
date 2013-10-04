@@ -11,7 +11,7 @@ class Api::CommandsController < Api::BaseController
     # check to see if a channel should be used
     # if none was found, error out
     if (params[:channel] && !channel)
-      render :text => "Ooops, I don't know that channel. You're currently tuned to #{params[:channel]}. Maybe it's wrong?"
+      render :text => "Ooops, I don't know that channel. Is #{params[:channel]} even a channel?"
     else
       # otherwise process the command on the channel
       command = normalize_command(params[:command])
