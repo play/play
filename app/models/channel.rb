@@ -131,6 +131,15 @@ class Channel < ActiveRecord::Base
     end
   end
 
+  # Get the next playing song.
+  #
+  # Returns the next Song.
+  def up_next
+    if record = mpd.queue[1]
+      Song.new(:path => record.file)
+    end
+  end
+
   # Clears the Channel's queue.
   #
   # Returns nothing.
