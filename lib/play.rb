@@ -2,6 +2,12 @@ require "play/api/error_delivery"
 require "play/api/json_delivery"
 require "play/api/api_response"
 require "play/speaker"
+require "play/commands"
+require "play/commands/channels"
+require "play/commands/controls"
+require "play/commands/information"
+require "play/commands/queueing"
+require "play/commands/speakers"
 
 module Play
 
