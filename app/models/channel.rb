@@ -138,6 +138,37 @@ class Channel < ActiveRecord::Base
     end
   end
 
+  # Autoqueues N number of songs based on the rules.
+  #
+  # This method adds N number of songs to the queue. The SongPlay created is not
+  # attributed to a user so that it appears as an automated queue.
+  #
+  # If the channels has < 50 manual queues, the music library will used as the
+  # pool from which songs are chosen from at random. If the channel has > 50
+  # manual queues, the list of manual queues will be used as pool. This way the
+  # channel will gain a sort of motiff.
+  #
+  # number_of_songs: number of songs you want queued.
+  #
+  # Returns nothing.
+  def autoqueue(number_of_songs)
+    number_of_songs.times do
+      if song_plays.manually_queued.count > 50
+        # this channel has some history, queue from the past
+        puts "Auto-queuing a previously queued song to this channel: #{name}"
+        song = song_plays.manually_queued.sample.song
+      else
+        # this is new, queue from the library
+        puts "Auto-queuing a song from the library to the channel: #{name}"
+        song = Song.new(:path => Play.library.files[:file].sample)
+      end
+
+      add(song, nil)
+      mpd.clearerror
+      mpd.play
+    end
+  end
+
   # Sets the ports that the MPD for this channel will run on.
   #
   # Returns nothing.
