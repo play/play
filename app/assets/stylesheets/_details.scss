@@ -1,0 +1,328 @@
+@import "compass/css3";
+@import "variables";
+
+#queue {
+  margin-top: 56px;
+  margin-left: 300px;
+  background: #f9f9f9;
+
+	.content {
+		margin: 10px 20px;
+	}
+
+  .heading {
+  	display: inline-block;
+  	width: 100%;
+    max-width: 860px;
+    padding: 20px 0;
+    margin: 10px 20px;
+    box-sizing: border-box;
+    @include box-shadow(0 1px 0px #e1e1e1);
+
+		.thumb {
+			width: 40px;
+			height: 40px;
+			float: left;
+			vertical-align: middle;
+			margin-right: 10px;
+			border-radius: 2px;
+		}
+
+    .title {
+      font-size: 24px;
+      line-height: 40px;
+      color: #000;
+    }
+
+		.duration {
+			font-size: 20px;
+			line-height: 40px;
+			font-weight: 100;
+			margin-left: 6px;
+			color: #999;
+		}
+
+		.octicon {
+			font-size: 20px;
+      line-height: 40px;
+		}
+
+    .plays {
+      float: right;
+      font-weight: 100;
+      color: #999;
+      font-size: 24px;
+    }
+	}
+
+	h2 {
+	  font-size: 16px;
+	  font-weight: 700;
+	  line-height: 24px;
+	}
+
+  .fans {
+
+    img {
+      width: 50px;
+      border-radius: 3px;
+    }
+  }
+
+  .play-stats {
+    padding: 20px 0;
+    margin: 10px 20px;
+    font-size: 20px;
+    font-weight: 100;
+    color: #999;
+  }
+
+	.tabs {
+		margin: 10px 0 -12px 0;
+
+	  a {
+	    margin-right: 10px;
+	    padding: 5px;
+	  }
+
+	  a:first-child {
+	    margin-left: -5px;
+	  }
+
+	  a.active {
+	    border-bottom: 2px solid $pink;
+	  }
+	}
+
+	.album-list {
+	  margin-top: 20px;
+
+		.album-art img {
+      overflow: hidden;
+      border-radius: 2px;
+      display: block;
+      position: relative;
+      border: 1px solid #ccc;
+      @include box-shadow(0 1px 2px rgba(#000, .2));
+      margin-bottom: 10px;
+      width: 200px;
+      height: 200px;
+
+      &:before {
+        display: block;
+        content:'';
+        position: absolute;
+        @include box-shadow(inset 0px 0px 0px 2px rgba(red,0.95));
+      }
+		}
+
+	  .album a {
+	    display: inline;
+	    padding: 0px 0px 20px 20px;
+	    float: left;
+	  }
+
+	  .name {
+	    padding: 5px 0;
+	    width: 150px;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	  }
+	}
+
+	.tracklist {
+	  padding-right: 20px;
+	  margin: 15px 20px;
+	  list-style-type: decimal;
+	  width: 90%;
+	  max-width: 860px;
+	  color: #666;
+	  font-size: 13px;
+
+	  a {
+	  	color: #666;
+
+		  &:hover {
+		  	color: $pink;
+		  }
+		}
+
+	  th {
+	    padding: 10px 0;
+	    color: #333;
+	    font-weight: bold;
+	    border-bottom: 0;
+	  }
+
+	  td {
+	    padding: 10px;
+	    border-bottom: 1px solid #e1e1e1;
+
+	    &.number {
+	      text-align: right;
+	      width: 20px;
+	    }
+
+	    &.title { width: 250px; }
+	    &.album { padding-left: 0; }
+	    &.duration { width: 50px; }
+
+	    &.like, &.queue, &.download {
+	      color: #ccc;
+	      font-size: 16px;
+	      width: 20px;
+	      padding: 5px 10px;
+	      cursor: pointer;
+	      transition: color .4s ease;
+
+
+	      a { color: #ccc; }
+	      a:hover, span:hover { color: $pink; }
+	    }
+	  }
+	}
+
+	.error {
+	  margin-top: 200px;
+	  padding: 50px;
+	  text-align: center;
+	  font-weight: 100;
+
+	  h1 {
+	    font-size: 42px;
+	  }
+
+	  p {
+	    margin-top: 15px;
+	    font-size: 20px;
+	  }
+
+	  code {
+	    background-color: #ccc;
+	    padding: 0 5px;
+	    border-radius: 5px;
+
+	    &:hover {
+	      background-color: #eee;
+	    }
+		}
+	}
+
+  .sidebar {
+    width: 150px;
+    display: inline-block;
+    float: left;
+    margin-right: 20px;
+
+    ul {
+      width: 100%;
+
+      li {
+        color: #999;
+        width: 100%;
+        background-color: #f6f6f6;
+        @include background-image(linear-gradient(top, rgb(246, 246, 246), rgb(232, 232, 232)));
+        @include filter-gradient(rgb(246, 246, 246), rgb(232, 232, 232), vertical);
+        @include box-shadow(inset 0 1px 0 #fff, 0 1px 1px rgba(#000, .08), inset 0 0 2px rgba(#fff,.9));
+        border: 1px solid #bfbfbf;
+        display: inline-block;
+        padding: 10px;
+        @include border-radius(2px);
+        font-size: 12px;
+        margin: 3px 0;
+
+        &:hover a, &:hover span {
+        	color: $pink;
+        }
+
+        a {
+          color: #777;
+          text-shadow: 1px 1px 0 #fff;
+        }
+
+        span {
+          float: left;
+          margin-right: 5px;
+          font-size: 12px;
+          text-align: left;
+          color: #999;
+        }
+
+        .icon {
+          width: 14px;
+        }
+      }
+    }
+
+    img {
+      width: 150px;
+      height: 150px;
+      border: 1px solid #e1e1e1;
+      margin-right: 20px;
+    }
+  }
+
+  .listing {
+    margin-left: 170px;
+    max-width: 600px;
+    margin-top: 20px;
+
+    li {
+      color: #595959;
+      list-style: decimal inside none;
+      padding-left: 5px;
+      font-size: 13px;
+      line-height: 40px;
+      font-weight: normal;
+      @include box-shadow(0 1px 0 #e1e1e1);
+
+      &:hover {
+      	color: $pink !important;
+      }
+
+			.octicon {
+				padding: 0 4px;
+			}
+
+      .track-title {
+        color: #595959;
+        text-overflow: ellipsis;
+        display: inline-block;
+        width: 72%;
+        white-space: nowrap;
+				margin-left: 10px;
+
+        &:hover {
+          color: $pink;
+        }
+      }
+
+      .controls {
+        display: inline-block;
+        float: right;
+        font-size: 16px;
+        color: #888;
+
+        a {
+        	color: #888;
+        	transition: color .4s ease;
+        }
+
+        a:hover { color: $pink; }
+
+        .icon-plus-sign-alt, .icon-remove-sign{
+          cursor: pointer;
+        }
+
+        .icon-star-empty:hover, .icon-remove-sign:hover, .icon-plus-sign-alt:hover {
+          color: $pink;
+        }
+      }
+
+      .duration {
+        margin-right: 20px;
+      }
+    }
+  }
+}

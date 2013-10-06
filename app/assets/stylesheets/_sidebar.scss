@@ -1,0 +1,143 @@
+@import "compass/css3";
+@import "variables";
+
+#sidebar {
+  width: 300px;
+  height: 100%;
+  background: #212121;
+  position: fixed;
+  left: 0;
+  top: 65px;
+  bottom: 0;
+  padding: 25px;
+  display: inline-block;
+  z-index: 1;
+  @include box-shadow( 1px 0 2px rgba(0,0,0, .3), inset -1px 0 0 rgba(#fff, .2));
+
+  .now-playing {
+    text-shadow: 0 1px 1px rgba(#000, .8);
+
+    .album-art {
+      overflow: hidden;
+      border-radius: 2px;
+      display: block;
+      position: relative;
+      border: 1px solid rgba(0,0,0, 0.7);
+      @include box-shadow(0 1px 3px rgba(#000, .4));
+
+      &:before {
+        display:block;
+        content:'';
+        position:absolute;
+        width:100%;
+        height:100%;
+        @include box-shadow(inset 0px 0px 0px 1px rgba(255,255,255,0.15));
+      }
+
+      img {
+        width: 250px;
+        height: 250px;
+        display: block;
+      }
+    }
+
+    .album-info {
+      font-weight: 300;
+      font-size: 14px;
+      color: #666;
+      line-height: 20px;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid #111;
+      border-bottom: 1px solid #363636;
+      margin: 15px 0;
+    }
+
+    .now-playing-meta {
+      padding: 0 8px;
+
+      h2 {
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 24px;
+        color: #fff;
+        margin: 15px 0 5px;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  // NOW PLAYING
+
+  .now-playing-actions {
+    background-color: #1a1a1a;
+    border: 1px solid #000;
+    box-shadow: 0 1px 0 #383838;
+    border-radius: 3px;
+
+    li {
+      border-top: 1px solid #282828;
+      border-bottom: 1px solid #000;
+
+      &:first-child { border-top: 0; }
+      &:last-child { border-bottom: 0; }
+
+      color: #999;
+      font-size: 13px;
+      padding: 8px;
+      display: block;
+      @include transition(all .2s ease);
+
+      a { color: #999; }
+      span { margin-right: 3px; }
+
+      &:hover {
+        text-decoration: none;
+        background-color: #222;
+        cursor: pointer;
+      }
+
+      &:hover span { color: $pink; }
+    }
+  }
+
+  // TUNE FANS
+
+  .tune-fans {
+    margin-top: 40px;
+
+    h3 {
+      color: white;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .fans {
+      padding: 10px;
+      background-color: #1a1a1a;
+      border: 1px solid #000;
+      box-shadow: 0 1px 0 #383838;
+      border-radius: 3px;
+      width: 100%;
+      color: #666;
+      font-size: 12px;
+
+      ul {
+        li {
+          display: inline;
+
+          img {
+            margin: 1px;
+            width: 25px;
+            @include border-radius(1px);
+          }
+        }
+      }
+    }
+  }
+}

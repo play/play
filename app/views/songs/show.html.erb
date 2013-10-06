@@ -3,20 +3,22 @@
     <span class="plays track" data-path="<%= @song.path %>">
       <%= render :partial => 'shared/like', :locals => { :song => @song } %>
     </span>
-    <span class="title"><%= @song.title %></span>
+    <span class="title"><%= @song.title %></span> <span class="duration">  (<%= @song.duration %>)</span>
+
   </div>
+  <div class="content">
+    <h2>Fans</h2>
+    <div class="fans">
+      <% @song.likes.each do |like| %>
+        <a href="/<%= like.user.login %>">
+          <img src="//www.gravatar.com/avatar/<%= like.user.gravatar_id %>?s=100" alt="<%= like.user.login %>" />
+        </a>
+      <% end %>
 
-  <h2>Fans</h2>
-  <div class="fans">
-    <% @song.likes.each do |like| %>
-      <a href="/<%= like.user.login %>">
-        <img src="//www.gravatar.com/avatar/<%= like.user.gravatar_id %>?s=100" alt="<%= like.user.login %>" />
-      </a>
-    <% end %>
-
-    <% if @song.likes.empty? %>
-      <p>No one likes this song. It's probably a country music song or something.</p>
-    <% end %>
+      <% if @song.likes.empty? %>
+        <p>No one likes this song. It's probably a country music song or something.</p>
+      <% end %>
+    </div>
   </div>
 
   <div class="play-stats">

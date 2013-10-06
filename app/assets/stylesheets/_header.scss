@@ -1,5 +1,5 @@
 @import "compass/css3";
-@import "vars";
+@import "variables";
 
 #header {
   position: fixed;
@@ -65,6 +65,7 @@
     .filter {
       display: none;
       font-size: 0;
+      transition: all .4s ease;
 
       span {
         font-size: 12px;

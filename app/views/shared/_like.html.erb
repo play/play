@@ -1,7 +1,7 @@
 <% full = false unless full %>
 
 <% if current_user_likes.map(&:song_path).include?(song.path) %>
-  <span class="icon-star unlike"></span> <%= 'Unstar Song' if full %>
+  <span class="icon-star unlike octicon"></span> <%= 'Unstar Song' if full %>
 <% else %>
-  <span class="icon-star-empty like"></span> <%= 'Star Song' if full %>
+  <span class="icon-star-empty like octicon"></span> <%= 'Star Song' if full %>
 <% end %>
