@@ -222,7 +222,8 @@ a {
 
 .artist-albums {
   margin-top: 75px;
-  width: 660px;
+  width: 100%;
+  max-width: 770px;
 
   .others {
     font-size: 14px;
