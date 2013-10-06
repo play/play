@@ -1,11 +1,8 @@
-@import "compass";
-@import "compass/css3/font-face";
-@import "compass/reset";
 @import "compass/css3";
-@import "compass/css3/box-sizing";
-@import "compass/css3/transition";
+@import "compass/reset";
 @import "vars";
-@import "media";
+@import "header";
+
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300');
 
 
@@ -34,142 +31,6 @@ a {
   &:hover {
     color: lighten($pink, 20%);
   }
-}
-
-#header {
-  background-color: #181818;
-  padding: 10px;
-  display: inline-block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  @include box-shadow(0 1px 2px rgba(0,0,0,.3));
-
-  h1 {
-    display: inline-block;
-    float: left;
-    margin-left: 10px;
-    height: 50px;
-    width: 140px;
-    text-indent: -9999px;
-    background: url("/images/play-logo.png") no-repeat center center;
-    background-size: 140px 50px;
-  }
-
-  .stream-controls {
-    padding: 10px;
-    color: $pink;
-    font-weight: 100;
-    cursor: pointer;
-
-    &:hover {
-      color: lighten($pink, 20%)
-    }
-
-    .icon-headphones {
-      font-size: 20px;
-      vertical-align: middle;
-      margin-right: 5px;
-    }
-  }
-
-  #login {
-    margin-right: 10px;
-    font-weight: 100;
-    padding: 10px 15px;
-    @include transition(all .2s ease);
-
-    img {
-      width: 20px;
-      vertical-align: top;
-      margin-top: 5px;
-      margin-right: 5px;
-      border-radius: 3px;
-    }
-  }
-
-  .search {
-    border-radius: 3px;
-    display: inline-block;
-    position: relative;
-
-    .advanced-search {
-      display: inline-block;
-      background-color: #444;
-      border-radius: 30px 0 0 30px;
-      padding: 5px 5px 5px 8px;
-      border: 1px solid #000;
-      border-right: 0;
-      font-size: 16px;
-      color: #e8e8e8;
-
-      &:hover {
-        color: $pink;
-      }
-    }
-
-    .filter {
-      display: none;
-      font-size: 0;
-
-      span {
-        font-size: 12px;
-        color: #fff;
-        padding: 6px 10px 4px 10px;
-        background-color: #666;
-        cursor: pointer;
-
-        &.active {
-          background-color: #333;
-          color: $pink;
-        }
-
-        &:hover {
-          background-color: #333;
-        }
-      }
-    }
-
-    .icon-search {
-      color: #e8e8e8;
-      position: absolute;
-      top: 5px;
-      right: 12px;
-      font-size: 16px;
-    }
-
-    input[type="search"] {
-      -webkit-appearance: textfield;
-      -webkit-box-sizing:content-box;
-      display: inline-block;
-      font-size: 14px;
-      background-color: #303030;
-      border-radius: 0 30px 30px 0;
-      padding: 5px 32px 5px 8px;
-      border: 1px solid #000;
-      margin: 0;
-      color: #eee;
-      outline: none;
-
-      &:focus {
-        border: 1px solid $pink;
-      }
-    }
-
-    input[type="search"]::-webkit-search-decoration,
-    input[type="search"]::-webkit-search-cancel-button,
-    input[type="search"]::-webkit-search-results-button,
-    input[type="search"]::-webkit-search-results-decoration {
-      display: none;
-    }
-  }
-}
-
-section[role="nav"] {
-  float: right;
-  margin-top: 10px;
 }
 
 #sidebar {
