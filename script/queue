@@ -26,21 +26,8 @@ loop do
   # Loop through all the currently tracked channels to see if we need to bump
   # the queue.
   tracked_channels.each do |channel|
-    if channel.queue.size < 2
-
-      if channel.song_plays.manually_queued.count > 50
-        # this channel has some history, queue from the past
-        puts "Auto-queuing a previously queued song to this channel: #{channel.name}"
-        song = channel.song_plays.manually_queued.sample.song
-      else
-        # this is new, queue from the library
-        puts "Auto-queuing a song from the library to the channel: #{channel.name}"
-        song = Song.new(:path => Play.library.files[:file].sample)
-      end
-
-      channel.add(song, nil)
-      channel.mpd.clearerror
-      channel.mpd.play
+    if channel.queue.size < Channel::MIN_QUEUE_SIZE
+      channel.autoqueue(Channel::MIN_QUEUE_SIZE - channel.queue.size)
     end
   end
   sleep 10

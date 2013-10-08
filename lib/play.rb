@@ -2,6 +2,13 @@ require "play/api/error_delivery"
 require "play/api/json_delivery"
 require "play/api/api_response"
 require "play/speaker"
+require "play/commands"
+require "play/commands/channels"
+require "play/commands/controls"
+require "play/commands/help"
+require "play/commands/information"
+require "play/commands/queueing"
+require "play/commands/speakers"
 
 module Play
 
@@ -89,5 +96,21 @@ module Play
   # def self.search(type, query, options={})
   #   mpd.search(type, query, options)
   # end
+
+
+  # Returns the cached request host.
+  #
+  # Returns String.
+  def self.request_host
+    @request_host
+  end
+
+  # Sets the host that the request is happening on.
+  #
+  # Returns String.
+  def self.request_host=(host)
+    @request_host = host
+  end
+
 
 end

@@ -21,6 +21,7 @@ class ChannelsController < ApplicationController
 
   def remove
     song = Song.new(:path => params[:song_id])
+    @channel.next if song == @channel.now_playing
     @channel.remove(song,current_user)
     render :text => 'deleted!'
   end

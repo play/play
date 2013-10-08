@@ -54,7 +54,7 @@ class Api::ChannelsController < Api::BaseController
   end
 
   def next
-    @channel.mpd.next
+    @channel.next
     deliver_json(200, {:message => 'ok'})
   end
 
@@ -90,6 +90,7 @@ class Api::ChannelsController < Api::BaseController
   def remove
     artist = Artist.new(:name => params[:artist_name])
     song = artist.songs.find{|song| song.title == params[:song_name]}
+    @channel.next if song == @channel.now_playing
     @channel.remove(song,current_user)
 
     deliver_json(200, songs_response(@channel.queue, current_user))
