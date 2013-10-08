@@ -10,7 +10,7 @@ module Play
 
       result = Help.process_command(command, channel, user) unless result
 
-      result || "lol wut? #{command.inspect} doesn't even seem like a thing Play can do"
+      result || "#{command.inspect} doesn't even seem like a thing Play can do. Try /p help to brush up on the commands."
     end
 
     def self.queue_songs(channel, user, songs)
