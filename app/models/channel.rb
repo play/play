@@ -39,7 +39,7 @@ class Channel < ActiveRecord::Base
 
           exec "mpd '#{config_path}'"
         end
-        File.open("tmp/pids/mpd-#{self.id}.pid", "w") { |fp| fp.write mpd_pid }
+        File.open(pid_path, "w") { |fp| fp.write mpd_pid }
       end
       Process.waitpid(exec_pid)
       exit($?.exitstatus)
@@ -254,6 +254,13 @@ class Channel < ActiveRecord::Base
   # Returns String.
   def config_path
     File.join(config_directory, 'mpd.conf')
+  end
+
+  # Returns the path to the pid file for this channel's MPD.
+  #
+  # Returns String.
+  def pid_path
+    File.join(config_directory, 'mpd.pid')
   end
 
   # Writes out the mpd.conf config file for this channel's MPD.
