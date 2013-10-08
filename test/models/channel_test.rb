@@ -29,6 +29,10 @@ class ChannelTest < ActiveSupport::TestCase
       assert_equal  "#{Rails.root}/test/tmp/play-test/channels/channel-20/mpd.conf", @channel.config_path
     end
 
+    test 'has the right mpd config path' do
+      assert_equal  "#{Rails.root}/test/tmp/play-test/channels/channel-20/mpd.pid", @channel.pid_path
+    end
+
     test 'writes out the mpd config' do
       @channel.write_config
       assert File.exists?(@channel.config_path)

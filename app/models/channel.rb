@@ -26,24 +26,43 @@ class Channel < ActiveRecord::Base
   # Returns an MPD client.
   def start
     write_config
-    `mpd '#{config_path}' > /dev/null 2>&1`
+    # command = "mpd '#{config_path}' "
 
-    mpd_connection = connect
+    channel = 1
 
-    if !Rails.env.test? && mpd
+    pid = fork do
+      exec_pid = fork do
+        mpd_pid = fork do
+          STDIN.reopen("/dev/null")
+          STDOUT.reopen("/dev/null")
+          STDERR.reopen("/dev/null")
 
-      # Set up mpd to natively consume songs
-      mpd.repeat  = true
-      mpd.consume = true
-
-      # Scan for new songs just in case
-      mpd.update
-
-      # Play the tunes
-      mpd.play
+          exec "mpd '#{config_path}'"
+        end
+        File.open(pid_path, "w") { |fp| fp.write mpd_pid }
+      end
+      Process.waitpid(exec_pid)
+      exit($?.exitstatus)
     end
 
-    mpd_connection
+
+
+    # mpd_connection = connect
+    #
+    # if !Rails.env.test? && mpd
+    #
+    #   # Set up mpd to natively consume songs
+    #   mpd.repeat  = true
+    #   mpd.consume = true
+    #
+    #   # Scan for new songs just in case
+    #   mpd.update
+    #
+    #   # Play the tunes
+    #   mpd.play
+    # end
+    #
+    # mpd_connection
   end
 
   # Stops the mpd server for this channel.
@@ -235,6 +254,13 @@ class Channel < ActiveRecord::Base
   # Returns String.
   def config_path
     File.join(config_directory, 'mpd.conf')
+  end
+
+  # Returns the path to the pid file for this channel's MPD.
+  #
+  # Returns String.
+  def pid_path
+    File.join(config_directory, 'mpd.pid')
   end
 
   # Writes out the mpd.conf config file for this channel's MPD.
