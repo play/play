@@ -20,7 +20,7 @@
 
   <section role="nav">
     <span class="channel-name">
-      <h2><%= link_to(current_channel.name, channel_path(current_channel)) %> <a href="<%= api_channel_stream_url(current_channel) %>"><span class="stream-link icon-headphones"></span></a></h2>
+      <h2><span style="color: #999999">Current Channel:</span> <%= link_to(current_channel.name, channel_path(current_channel)) %> <a href="<%= api_channel_stream_url(current_channel) %>"><span class="stream-link icon-headphones"></span></a></h2>
     </span>
     <% if current_user %>
       <span class="stream-controls" style="display: none">
