@@ -26,9 +26,6 @@ class Channel < ActiveRecord::Base
   # Returns an MPD client.
   def start
     write_config
-    # command = "mpd '#{config_path}' "
-
-    channel = 1
 
     pid = fork do
       exec_pid = fork do
@@ -45,24 +42,22 @@ class Channel < ActiveRecord::Base
       exit($?.exitstatus)
     end
 
+    mpd_connection = connect
 
+    if !Rails.env.test? && mpd
 
-    # mpd_connection = connect
-    #
-    # if !Rails.env.test? && mpd
-    #
-    #   # Set up mpd to natively consume songs
-    #   mpd.repeat  = true
-    #   mpd.consume = true
-    #
-    #   # Scan for new songs just in case
-    #   mpd.update
-    #
-    #   # Play the tunes
-    #   mpd.play
-    # end
-    #
-    # mpd_connection
+      # Set up mpd to natively consume songs
+      mpd.repeat  = true
+      mpd.consume = true
+
+      # Scan for new songs just in case
+      mpd.update
+
+      # Play the tunes
+      mpd.play
+    end
+
+    mpd_connection
   end
 
   # Stops the mpd server for this channel.
