@@ -1,6 +1,7 @@
 require 'play/connection_pool'
 
 class Channel < ActiveRecord::Base
+  MIN_QUEUE_SIZE = 3
   attr_accessible :mpd_port, :httpd_port, :color, :name
 
   has_many :users
@@ -25,24 +26,43 @@ class Channel < ActiveRecord::Base
   # Returns an MPD client.
   def start
     write_config
-    `mpd '#{config_path}' > /dev/null 2>&1`
+    # command = "mpd '#{config_path}' "
 
-    mpd_connection = connect
+    channel = 1
 
-    if !Rails.env.test? && mpd
+    pid = fork do
+      exec_pid = fork do
+        mpd_pid = fork do
+          STDIN.reopen("/dev/null")
+          STDOUT.reopen("/dev/null")
+          STDERR.reopen("/dev/null")
 
-      # Set up mpd to natively consume songs
-      mpd.repeat  = true
-      mpd.consume = true
-
-      # Scan for new songs just in case
-      mpd.update
-
-      # Play the tunes
-      mpd.play
+          exec "mpd '#{config_path}'"
+        end
+        File.open(pid_path, "w") { |fp| fp.write mpd_pid }
+      end
+      Process.waitpid(exec_pid)
+      exit($?.exitstatus)
     end
 
-    mpd_connection
+
+
+    # mpd_connection = connect
+    #
+    # if !Rails.env.test? && mpd
+    #
+    #   # Set up mpd to natively consume songs
+    #   mpd.repeat  = true
+    #   mpd.consume = true
+    #
+    #   # Scan for new songs just in case
+    #   mpd.update
+    #
+    #   # Play the tunes
+    #   mpd.play
+    # end
+    #
+    # mpd_connection
   end
 
   # Stops the mpd server for this channel.
@@ -58,6 +78,18 @@ class Channel < ActiveRecord::Base
   def restart
     stop
     start
+  end
+
+  # Plays the next song in the channel's queue.
+  #
+  # This first ensures we have the appropriate number of songs in the queue
+  # before and after the skip to the next song.
+  #
+  # Returns nothing.
+  def next
+    future_queue_size = self.queue.size - 1
+    autoqueue(MIN_QUEUE_SIZE - future_queue_size)
+    mpd.next
   end
 
   # Creates and returns an MPD client to the MPD instance for this Channel.
@@ -118,6 +150,15 @@ class Channel < ActiveRecord::Base
     end
   end
 
+  # Get the next playing song.
+  #
+  # Returns the next Song.
+  def up_next
+    if record = mpd.queue[1]
+      Song.new(:path => record.file)
+    end
+  end
+
   # Clears the Channel's queue.
   #
   # Returns nothing.
@@ -135,6 +176,37 @@ class Channel < ActiveRecord::Base
 
     results.map do |result|
       Song.new(:path => result.file)
+    end
+  end
+
+  # Autoqueues N number of songs based on the rules.
+  #
+  # This method adds N number of songs to the queue. The SongPlay created is not
+  # attributed to a user so that it appears as an automated queue.
+  #
+  # If the channels has < 50 manual queues, the music library will used as the
+  # pool from which songs are chosen from at random. If the channel has > 50
+  # manual queues, the list of manual queues will be used as pool. This way the
+  # channel will gain a sort of motiff.
+  #
+  # number_of_songs: number of songs you want queued.
+  #
+  # Returns nothing.
+  def autoqueue(number_of_songs)
+    number_of_songs.times do
+      if song_plays.manually_queued.count > 50
+        # this channel has some history, queue from the past
+        puts "Auto-queuing a previously queued song to this channel: #{name}"
+        song = song_plays.manually_queued.sample.song
+      else
+        # this is new, queue from the library
+        puts "Auto-queuing a song from the library to the channel: #{name}"
+        song = Song.new(:path => Play.library.files[:file].sample)
+      end
+
+      add(song, nil)
+      mpd.clearerror
+      mpd.play
     end
   end
 
@@ -182,6 +254,13 @@ class Channel < ActiveRecord::Base
   # Returns String.
   def config_path
     File.join(config_directory, 'mpd.conf')
+  end
+
+  # Returns the path to the pid file for this channel's MPD.
+  #
+  # Returns String.
+  def pid_path
+    File.join(config_directory, 'mpd.pid')
   end
 
   # Writes out the mpd.conf config file for this channel's MPD.
