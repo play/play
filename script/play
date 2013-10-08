@@ -103,7 +103,6 @@ case "$1" in
     exit 0
     ;;
   stop)
-    bundle exec rake channels:stop
     ./script/web stop
     pkill -f "script/queue"
     ;;
