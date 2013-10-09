@@ -75,7 +75,7 @@ module Play
           "Sorry, I couldn't find anything like that."
         when /(play (songs|something) I like)|(play the good shit)/i
           if user
-            songs = user.likes.limit(3).order('rand()').collect(&:song)
+            songs = user.likes.random(3).collect(&:song)
             if songs.present?
               Play::Commands.queue_songs(channel, user, songs)
             else
@@ -88,7 +88,7 @@ module Play
           user_name = $2
           other_user = User.where(:login => user_name).first
           if other_user
-            songs = other_user.likes.limit(3).order('rand()').collect(&:song)
+            songs = other_user.likes.random(3).collect(&:song)
             if songs.present?
               Play::Commands.queue_songs(channel, user, songs)
             else

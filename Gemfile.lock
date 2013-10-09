@@ -123,6 +123,10 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.11.0)
     rake (10.1.0)
+    randumb (0.4.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      rake
     ruby-mpd (0.3.0)
     sass (3.2.9)
     sass-rails (4.0.0)
@@ -177,6 +181,7 @@ DEPENDENCIES
   rack-test
   rails (= 4.0.0)
   rake (~> 10.1.0)
+  randumb (~> 0.4.0)
   ruby-mpd (~> 0.3.0)
   sass-rails (~> 4.0.0)
   sqlite3

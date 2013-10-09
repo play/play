@@ -103,7 +103,7 @@ class Api::ChannelsController < Api::BaseController
   end
 
   def stars
-    songs = current_user.likes.limit(3).order('rand()').collect(&:song)
+    songs = current_user.likes.random(3).collect(&:song)
     songs.each do |song|
       @channel.add(song,current_user)
     end
