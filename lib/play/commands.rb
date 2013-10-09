@@ -2,15 +2,19 @@ module Play
   module Commands
 
     def self.process_command(command, channel, user)
-      result = Channels.process_command(command, channel, user)
-      result = Controls.process_command(command, channel, user) unless result
-      result = Information.process_command(command, channel, user) unless result
-      result = Queueing.process_command(command, channel, user) unless result
-      result = Speakers.process_command(command, channel, user) unless result
+      begin
+        result = Channels.process_command(command, channel, user)
+        result = Controls.process_command(command, channel, user) unless result
+        result = Information.process_command(command, channel, user) unless result
+        result = Queueing.process_command(command, channel, user) unless result
+        result = Speakers.process_command(command, channel, user) unless result
 
-      result = Help.process_command(command, channel, user) unless result
+        result = Help.process_command(command, channel, user) unless result
 
-      result || "#{command.inspect} doesn't even seem like a thing Play can do. Try /p help to brush up on the commands."
+        result || "#{command.inspect} doesn't even seem like a thing Play can do. Try /p help to brush up on the commands."
+      rescue Exception
+        "Heyoooo, something went wrong. Sorry, I couldn't process that."
+      end
     end
 
     def self.queue_songs(channel, user, songs)
