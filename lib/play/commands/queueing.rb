@@ -89,7 +89,11 @@ module Play
           other_user = User.where(:login => user_name).first
           if other_user
             songs = other_user.likes.limit(3).order('rand()').collect(&:song)
-            Play::Commands.queue_songs(channel, user, songs)
+            if songs.present?
+              Play::Commands.queue_songs(channel, user, songs)
+            else
+              "Oops, I don't know their taste. Wait for them to like some songs on Play and I'll remember for next time."
+            end
           else
             "Who dat?"
           end
