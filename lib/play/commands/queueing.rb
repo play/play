@@ -86,7 +86,7 @@ module Play
           end
         when /play (songs|something) (.*) likes/i
           user_name = $2
-          other_user = User.where(:login => user_name).first
+          other_user = User.where("lower(login) = ?", user_name).first
           if other_user
             songs = other_user.likes.random(3).collect(&:song)
             if songs.present?

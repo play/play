@@ -56,7 +56,7 @@ class Api::BaseController < ActionController::Base
     login = request.headers["X_PLAY_LOGIN"] || params[:login] || ""
 
     if token == Play.config['auth_token']
-      user = User.where(:login => login).first
+      user = User.where("lower(login) = ?", login).first
     else
       user = User.find_by_token(token)
     end
