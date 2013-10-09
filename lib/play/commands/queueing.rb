@@ -74,8 +74,16 @@ module Play
 
           "Sorry, I couldn't find anything like that."
         when /(play (songs|something) I like)|(play the good shit)/i
-          songs = user.likes.limit(3).order('rand()').collect(&:song)
-          Play::Commands.queue_songs(channel, user, songs)
+          if user
+            songs = user.likes.limit(3).order('rand()').collect(&:song)
+            if songs.present?
+              Play::Commands.queue_songs(channel, user, songs)
+            else
+              "Oops, I don't know your taste. Like some songs on Play and I'll remember for next time."
+            end
+          else
+            "I don't know who you are. Have you been to #{root_url(:host => Play.request_host)} yet?"
+          end
         when /play (songs|something) (.*) likes/i
           user_name = $2
           other_user = User.where(:login => user_name).first
