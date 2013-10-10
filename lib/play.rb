@@ -93,7 +93,11 @@ module Play
   # Returns nothing.
   def self.update_library
     Channel.all.each do |channel|
+    begin
       channel.mpd.update
+    rescue Exception => e
+      Rails.logger.info e.inspect
+    end
     end
   end
 
