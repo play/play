@@ -22,8 +22,8 @@ module Play
       songs.each{|song| channel.add(song, user)}
       "Queued up:\n" + songs.map {|song| %{"#{song.title}" by #{song.artist_name}} }.join("\n")
     rescue MPD::NotFound => e
-        Rails.logger.info e.inspect
-        "Doh, I can't find one of those songs. Sorry."
+      Rails.logger.info e.inspect
+      "Doh, I can't find one of those songs. Sorry."
     end
 
     def self.queue_song(channel, user, song)
