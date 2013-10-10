@@ -93,7 +93,7 @@ module Play
   # Returns nothing.
   def self.update_library
     Channel.all.each do |channel|
-      channel.update
+      channel.mpd.update
     end
   end
 
