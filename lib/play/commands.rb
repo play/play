@@ -13,7 +13,7 @@ module Play
 
         result || "#{command.inspect} doesn't even seem like a thing Play can do. Try /p help to brush up on the commands."
       rescue Exception => e
-        Rails.logger.info e.message
+        Rails.logger.info e.inspect
         "Heyoooo, something went wrong. Sorry, I couldn't process that."
       end
     end
