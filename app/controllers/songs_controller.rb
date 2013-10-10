@@ -20,7 +20,7 @@ class SongsController < ApplicationController
     FileUtils.mv song.path, File.join(path, File.basename(song.path))
 
     # Update the index
-    Play.library.update
+    Play.update_library
 
     render :text => 'Uploaded!'
   end

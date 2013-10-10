@@ -88,6 +88,15 @@ module Play
     end
   end
 
+  # Updates the library on all the Channels.
+  #
+  # Returns nothing.
+  def self.update_library
+    Channel.all.each do |channel|
+      channel.update
+    end
+  end
+
   #
   def self.queued?(song)
     Channel.all.collect(&:queue).flatten.include?(song)
