@@ -17,7 +17,7 @@ class SongsController < ApplicationController
     # Import into our collection
     path = File.join(Play.music_path, song.artist_name, song.album_name)
     FileUtils.mkdir_p(path)
-    File.rename song.path, File.join(path, File.basename(song.path))
+    FileUtils.mv song.path, File.join(path, File.basename(song.path))
 
     # Update the index
     Play.library.update
