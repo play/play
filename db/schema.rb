@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130519155842) do
+ActiveRecord::Schema.define(version: 20130926030629) do
+
+  create_table "channels", force: true do |t|
+    t.string   "name"
+    t.string   "color"
+    t.integer  "mpd_port"
+    t.integer  "httpd_port"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sort"
+  end
 
   create_table "likes", force: true do |t|
     t.integer  "user_id"
@@ -25,12 +35,14 @@ ActiveRecord::Schema.define(version: 20130519155842) do
     t.string   "song_path"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "channel_id"
   end
 
   create_table "users", force: true do |t|
-    t.string "login"
-    t.string "email"
-    t.string "token"
+    t.string  "login"
+    t.string  "email"
+    t.string  "token"
+    t.integer "channel_id"
   end
 
 end

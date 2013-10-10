@@ -2,6 +2,21 @@ module Play
   module Api
     module ApiResponse
 
+      def channel_response(channel, user)
+        channel_hash = channel.to_hash
+        song = channel.now_playing
+        if song
+          song.liked = user.likes?(song)
+          channel_hash[:now_playing] = song.to_hash
+        end
+
+        channel_hash
+      end
+
+      def channels_response(channels, user)
+        {:channels => channels.collect{|c| channel_response(c, user)}}
+      end
+
       def song_response(song, user)
         return nil unless song
 

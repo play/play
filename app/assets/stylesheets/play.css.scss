@@ -58,6 +58,17 @@ a {
     background-size: 140px 50px;
   }
 
+  .channel-name {
+    padding: 10px;
+    margin-right: 10px;
+    color: white;
+    display: inline-block;
+  }
+
+  .stream-link {
+    margin-left: 12px;
+  }
+
   .stream-controls {
     padding: 10px;
     color: $pink;
@@ -311,6 +322,116 @@ section[role="nav"] {
 
     &:hover span { color: $pink; }
   }
+}
+
+#channels {
+  margin-top: 56px;
+  margin-left: auto;
+  margin-right: auto;
+
+  h1 {
+    font-size: 36px;
+    display: block;
+    line-height: 36px;
+    font-weight: 400;
+    color: #000;
+    margin: 80px 20px 20px 20px;
+  }
+
+  h4 {
+    margin: 30px 20px 0 20px;
+    font-size: 20px;
+    font-weight: 100;
+  }
+
+  .heading {
+    padding: 20px;
+    @include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
+    color: #959595;
+
+    .title {
+        font-size: 24px;
+        display: block;
+        line-height: 24px;
+        font-weight: 400;
+        color: #000;
+    }
+  }
+
+  .channel:first-of-type {
+    @include box-shadow(inset 0 1px 0 #e1e1e1, inset 0 2px 0 #fdf3fd, 0 1px 0px #e1e1e1, 0 2px 0px #fff);
+  }
+
+  .channel {
+    position: relative;
+    padding: 20px;
+    display: block;
+    width: 100%;
+    clear: both;
+    vertical-align: middle;
+    @include box-shadow(0 1px 0px #e1e1e1, 0 2px 0px #fff);
+    @include transition(background-color 0.5s ease);
+
+    &:hover {
+      background-color: #f7edf8;
+      @include box-shadow(inset 0 1px 0 #e1e1e1, inset 0 2px 0 #fdf3fd, 0 1px 0px #e1e1e1, 0 2px 0px #fff);
+
+      .controls {
+        display: inline-block;
+        float: right;
+      }
+    }
+
+    .channel-image {
+      overflow: hidden;
+      border-radius: 1px;
+      position: relative;
+      border: 1px solid #e1e1e1;
+      margin-right: 20px;
+
+      &:before {
+          display:block;
+          content:'';
+          position:absolute;
+          width:100%;
+          height:100%;
+          -moz-box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.15);
+          -webkit-box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.15);
+          box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.15);
+      }
+
+      img {
+            display: block;
+            width: 80px;
+            height: 80px;
+          }
+    }
+
+    > a {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .title {
+        font-size: 24px;
+        display: block;
+        line-height: 24px;
+        font-weight: 400;
+        margin: 5px -2px;
+
+      a {
+        color: #333;
+      }
+    }
+
+    .details {
+      display: inline-block;
+      vertical-align: middle;
+      max-width: 500px;
+    }
+
+  }
+
 }
 
 #queue {

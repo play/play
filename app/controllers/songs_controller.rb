@@ -17,16 +17,16 @@ class SongsController < ApplicationController
     # Import into our collection
     path = File.join(Play.music_path, song.artist_name, song.album_name)
     FileUtils.mkdir_p(path)
-    File.rename song.path, File.join(path, File.basename(song.path))
+    FileUtils.mv song.path, File.join(path, File.basename(song.path))
 
     # Update the index
-    Play.mpd.update
+    Play.update_library
 
     render :text => 'Uploaded!'
   end
 
   def search
-    if record = Play.mpd.send_command(:find, :artist, params[:q]).first
+    if record = Play.library.send_command(:find, :artist, params[:q]).first
       return redirect_to(artist_path(record[:artist]))
     end
 

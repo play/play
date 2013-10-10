@@ -8,7 +8,7 @@
       <img src="/images/art/<%= @album.art %>" class="album-art">
       <ul>
         <li>
-          <%= link_to '#', :class => 'add' do %>
+          <%= link_to '#', :class => 'add', :'data-channel' => current_channel.id do %>
             <span class="icon icon-plus-sign-alt"></span>
             <span class="message">Add to Queue</span>
           <% end %>
@@ -26,7 +26,7 @@
       <span class="artist"><%= link_to @artist.name, artist_path(@artist) %></span>
         <ul class="listing">
           <% @album.songs.each do |song| %>
-            <li class='track' data-path="<%= song.path %>">
+            <li class='track' data-path="<%= song.path %>" data-channel="<%= current_channel.id %>">
               <%= link_to song.title, song_path(song.artist, song), :class => 'track-title' %>
 
               <div class="controls">

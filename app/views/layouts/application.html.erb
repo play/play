@@ -19,6 +19,9 @@
   <a href="/"><h1>Play</h1></a>
 
   <section role="nav">
+    <span class="channel-name">
+      <h2><span style="color: #999999">Current Channel:</span> <%= link_to(current_channel.name, channel_path(current_channel)) %> <a href="<%= api_channel_stream_url(current_channel) %>"><span class="stream-link icon-headphones"></span></a></h2>
+    </span>
     <% if current_user %>
       <span class="stream-controls" style="display: none">
         <span class="icon-headphones"></span>
@@ -53,7 +56,9 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
-  <%= yield %>
+  <%= @nothing_queued ? render(:partial => 'shared/nothing_queued') : ''%>
+  <%= @no_music ? render(:partial => 'shared/no_music') : '' %>
+  <%= (!@no_music && !@nothing_queued) ? yield : '' %>
 
   <div class="drop-overlay">
     <span class="icon-cloud-upload"></span>

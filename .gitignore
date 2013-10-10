@@ -9,4 +9,5 @@ public/assets
 /vendor/gems
 /log/*
 /tmp/*
+/test/tmp
 /db/*.sqlite3

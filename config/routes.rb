@@ -15,6 +15,13 @@ Play::Application.routes.draw do
 
   get ':login/likes' => 'likes#index'
 
+  resources :channels do
+    member do
+      post :add
+      delete :remove
+    end
+  end
+
   resources :likes do
   end
 
@@ -55,10 +62,23 @@ Play::Application.routes.draw do
     put "/artists/:artist_name/songs/:song_name/like" => 'songs#like', :as => 'like_song'
     put "/artists/:artist_name/songs/:song_name/unlike" => 'songs#unlike', :as => 'unlike_song'
 
-    # controls
-    post "/play" => 'controls#play', :as => 'play'
-    post "/pause" => 'controls#pause', :as => 'pause'
-    post "/next" => 'controls#next', :as => 'next'
+    # commands, like from hubot
+    post "/command" => 'commands#command', :as => 'command'
+
+    # channels
+    resources :channels do
+      get  "/stream" => 'channels#stream', :as => 'stream'
+      get  "/now_playing" => 'channels#now_playing', :as => 'now_playing'
+      post "/now_playing" => 'channels#like_now_playing', :as => 'like_now_playing'
+      post "/play" => 'channels#play', :as => 'play'
+      post "/pause" => 'channels#pause', :as => 'pause'
+      post "/next" => 'channels#next', :as => 'next'
+      get  "/queue" => 'channels#list', :as => 'queue'
+      post "/add" => 'channels#add', :as => 'add_queue'
+      post "/remove" => 'channels#remove', :as => 'remove_queue'
+      post "/clear" => 'channels#clear', :as => 'clear_queue'
+      post "/stars" => 'channels#stars'
+    end
 
     # speakers
     get "/speakers" => 'speakers#index', :as => 'speakers'
@@ -66,15 +86,7 @@ Play::Application.routes.draw do
     post "/speakers/:speaker_name/mute" => 'speakers#mute', :as => 'mute_speaker'
     post "/speakers/:speaker_name/unmute" => 'speakers#unmute', :as => 'unmute_speaker'
     post "/speakers/:speaker_name/reset" => 'speakers#reset', :as => 'reset_speaker'
-
-    # queue
-    get  "/now_playing" => 'queue#now_playing', :as => 'now_playing'
-    post "/now_playing" => 'queue#like_now_playing', :as => 'like_now_playing'
-    get  "/queue" => 'queue#list', :as => 'queue'
-    post "/queue/add" => 'queue#add', :as => 'add_queue'
-    post "/queue/remove" => 'queue#remove', :as => 'remove_queue'
-    post "/queue/clear" => 'queue#clear', :as => 'clear_queue'
-    post "/queue/stars" => 'queue#stars'
+    post "/speakers/:speaker_name/tune" => 'speakers#tune', :as => 'tune_speaker'
 
     # system
     get "/stream" => 'system#stream', :as => 'stream'
@@ -133,7 +145,7 @@ Play::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-  root :to => 'queue#index'
+  root :to => 'welcome#index'
 
   get '/:login' => 'users#show'
   get '/:login/history' => 'users#history'

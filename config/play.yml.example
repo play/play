@@ -11,3 +11,7 @@ github:
   org:
   client_id:
   secret:
+mpd:
+  system_audio: false
+  music_path:
+  stream_bitrate: 256

@@ -10,7 +10,8 @@ gem 'omniauth-github'
 gem 'protected_attributes', '~> 1.0.1'
 gem 'rails',            '4.0.0'
 gem 'rake',             '~> 10.1.0'
-gem 'ruby-mpd',         '~> 0.2.4'
+gem "randumb",          '~> 0.4.0'
+gem 'ruby-mpd',         '~> 0.3.0'
 gem 'sqlite3'
 gem 'taglib-ruby',      '~> 0.6.0', :require => 'taglib'
 gem 'turbolinks',       '~> 1.2.0'
@@ -21,7 +22,7 @@ group :assets do
   gem 'sass-rails',     '~> 4.0.0'
   gem 'coffee-rails',   '~> 4.0.0'
   # lol what the fuck is compass doing
-  gem "compass-rails",  :github => "milgner/compass-rails", :branch => "rails4"
+  gem "compass-rails", :github => 'Compass/compass-rails', :ref => "1749c06f"
   gem 'uglifier',       '>= 1.3.0'
 end
 

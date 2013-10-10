@@ -7,7 +7,6 @@ Thread.new do
   browser = DNSSD::Service.new
   services = {}
 
-  puts "Browsing for Play Speaker services"
   # Make it Asynchronous ..
 
   browser.browse '_play-speaker._tcp' do |reply|

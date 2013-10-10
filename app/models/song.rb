@@ -70,7 +70,7 @@ class Song
     index        = (current_page.to_i * per_page) - per_page
 
     results = ActiveSupport::Notifications.instrument("search.mpd") do
-      Play.mpd.search(conditions.first, conditions.second, :case_sensitive => false)
+      Play.library.search(conditions.first, conditions.second, :case_sensitive => false)
     end
 
     total_results = results.count
@@ -83,14 +83,6 @@ class Song
         reject { |song| song.title.blank? }
       pager.replace(results)
     end
-  end
-
-  # What's currently playing?
-  #
-  # Returns a Song.
-  def self.now_playing
-    path = Play.mpd.current_song.try(:file)
-    new(:path => path) if path
   end
 
   # The name of the artist of this song.
@@ -123,7 +115,7 @@ class Song
   #
   # Returns a Boolean.
   def queued?
-    PlayQueue.songs.include?(self)
+    false
   end
 
   # Get the file name for the songs cached album art image.

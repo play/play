@@ -1,0 +1,10 @@
+#!/bin/sh
+
+export RAILS_ENV="test"
+export RAILS_ROOT=$(cd "$(dirname $0)"/.. && pwd)
+
+echo "===> Running tests..."
+killall mpd > /dev/null 2>&1
+ruby -I test \
+  -e '(ARGV.empty? ? Dir["test/**/*_test.rb"] : ARGV).each { |f| load f }' $*
+killall mpd > /dev/null 2>&1

@@ -62,6 +62,15 @@ module Play
     config.generators do |g|
       g.fixture_replacement :machinist
     end
+
+    config.after_initialize do
+      # this still crashes without the migration - TODO fix
+      # if defined?(Channel) && !Channel.first
+      #   Channel.create(:name => 'Play')
+      # end
+
+    end
+
   end
 end
 

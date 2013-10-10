@@ -34,6 +34,22 @@ info 'configure play'
 if test -f "config/play.yml"
 then
   success 'play config loaded'
+  # Migrates existing v3 deploys to channel support. Should be modified to
+  # handle v3 config files as well.
+  ruby -r yaml -e "
+    hash = YAML.load_file('config/play.yml')
+    example = YAML.load_file('config/play.yml.example')
+    music_path = File.open('config/mpd.conf').first.strip.split('\"')[-1] # ghetto
+    unless hash['mpd']
+      puts 'Writing MPD config into play.yml'
+      hash['mpd'] = {
+        'system_audio' => example['mpd']['system_audio'],
+        'music_path' => music_path,
+        'stream_bitrate' => example['mpd']['stream_bitrate']
+      }
+      File.open('config/play.yml', 'w') {|f| f.write(hash.to_yaml) }
+    end
+  "
 else
   user "Are you going to use Play within a GitHub organization? (y,n) › "
   read -n 1 use_gh_org
@@ -77,6 +93,9 @@ else
     auth_token=$(date | md5sum)
   fi
 
+  user "What is the full, absolute path to your music? › "
+  read path
+
   # Write out play.yml
   socket=$BOXEN_MYSQL_SOCKET
   if ruby -r yaml -e "
@@ -88,30 +107,13 @@ else
     hash['github']['org'] = '$gh_org'
     hash['github']['client_id'] = '$client_id'
     hash['github']['secret'] = '$secret'
+    hash['mpd']['music_path'] = '$path'
     File.open('config/play.yml', 'w') {|f| f.write(hash.to_yaml) }
   " >> /tmp/play-bootstrap
   then
     success 'play config loaded'
   else
     fail 'configuring play'
-  fi
-fi
-
-info 'configure mpd'
-if test -f "config/mpd.conf"
-then
-  success 'mpd config loaded'
-else
-  user "What is the full, absolute path to your music? › "
-  read path
-
-  # Write out mpd.conf
-  config_file=$(cat config/mpd.conf.example)
-  if printf "music_directory \"%s\"\n\n%s" "$path" "$config_file" > config/mpd.conf 2> /tmp/play-bootstrap
-  then
-    success 'mpd config loaded'
-  else
-    fail 'configuring mpd'
   fi
 fi
 
@@ -199,6 +201,19 @@ else
   fail 'problem migrating data'
 fi
 
+info 'initial channel creation'
+if bundle exec rake db:channels_exist
+then
+  success 'already exists'
+else
+  if bundle exec rake db:create_initial_channel
+  then
+    success 'created initial channel'
+  else
+    fail 'could not create channel'
+  fi
+fi
+
 info 'asset compliation'
 if bundle exec rake assets:precompile >> /tmp/play-bootstrap 2>&1
 then
@@ -206,10 +221,6 @@ then
 else
   fail 'problem compiling assets'
 fi
-
-info 'starting music server'
-script/music start
-success 'music server up'
 
 info 'caching album art'
 if script/cache-art >> /tmp/play-bootstrap 2>&1

@@ -21,3 +21,11 @@ User.blueprint do
   login { 'holman' }
   email { 'email@example.com' }
 end
+
+Channel.blueprint do
+  id { 20 }
+  name { 'Floor 3' }
+  mpd_port { '6620' }
+  httpd_port { '8020' }
+  color { 'red' }
+end

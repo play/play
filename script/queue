@@ -6,11 +6,29 @@
 
 require './config/environment'
 
+tracked_channels = []
+
 loop do
-  if PlayQueue.songs.size < 2
-    song = Song.new(:path => Play.mpd.files[:file].sample)
-    PlayQueue.add(song, nil)
-    Play.mpd.clearerror
+  all_channels = Channel.all
+
+  # Check to see if any of the channels we're tracking have been removed.
+  # If so, remove them from the ones we're tracking.
+  tracked_channels.each do |channel|
+    tracked_channels.delete(channel) unless all_channels.include?(channel)
   end
-  sleep 1
+
+  # Check to see if any new channels have been added.
+  # If so, add them to the channels that we're tracking.
+  all_channels.each do |channel|
+    tracked_channels << channel unless tracked_channels.include?(channel)
+  end
+
+  # Loop through all the currently tracked channels to see if we need to bump
+  # the queue.
+  tracked_channels.each do |channel|
+    if channel.queue.size < Channel::MIN_QUEUE_SIZE
+      channel.autoqueue(Channel::MIN_QUEUE_SIZE - channel.queue.size)
+    end
+  end
+  sleep 10
 end

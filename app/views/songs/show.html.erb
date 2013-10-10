@@ -1,6 +1,6 @@
 <div id="queue" class="show_song">
   <div class="heading">
-    <span class="plays track" data-path="<%= @song.path %>">
+    <span class="plays track" data-path="<%= @song.path %>" data-channel="<%= current_channel.id %>">
       <%= render :partial => 'shared/like', :locals => { :song => @song } %>
     </span>
     <span class="title"><%= @song.title %></span>

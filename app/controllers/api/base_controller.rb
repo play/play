@@ -6,6 +6,7 @@ class Api::BaseController < ActionController::Base
   include Play::Api::ApiResponse
 
   before_filter :authentication_required
+  before_filter :set_request_host
 
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
@@ -30,6 +31,10 @@ class Api::BaseController < ActionController::Base
 
   private
 
+  def set_request_host
+    Play.request_host = request.host_with_port
+  end
+
   # Private: Require that the request has a valid authentication token.
   def authentication_required
     authenticated? || permission_denied
@@ -40,13 +45,18 @@ class Api::BaseController < ActionController::Base
     head :unauthorized
   end
 
+  # Private: Scopes requests to correct channel
+  def channel
+    @channel ||= params[:channel_id] ? Channel.find(params[:channel_id]) : Channel.first
+  end
+
   # Private: Finds user based on request headers
   def find_user
     token = request.headers['Authorization'] || params[:token] || ""
     login = request.headers["X_PLAY_LOGIN"] || params[:login] || ""
 
     if token == Play.config['auth_token']
-      user = User.where(:login => login).first
+      user = User.where("lower(login) = ?", login).first
     else
       user = User.find_by_token(token)
     end

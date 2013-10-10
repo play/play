@@ -2,11 +2,12 @@ $ ->
   $('.track .add, .song .add').live 'click', (event) ->
     element = $(@)
     path = element.parents('.song, .track').data('path')
+    channel_id = element.parents('.song, .track').data('channel')
 
     $.ajax
       type: 'post',
-      url:  '/queue',
-      data: { type: 'song', id: path },
+      url:  "/channels/#{channel_id}/add",
+      data: { type: 'song', song_id: path },
       success: (data) ->
         element.addClass('icon-remove-sign remove')
         element.removeClass('icon-plus-sign-alt add')
@@ -14,17 +15,19 @@ $ ->
   $('.track .remove, .song .remove').live 'click', (event) ->
     element = $(@)
     path = element.parents('.song, .track').data('path')
+    channel_id = element.parents('.song, .track').data('channel')
 
     $.ajax
       type: 'delete',
-      url:  '/queue',
-      data: { id: path },
+      url:  "/channels/#{channel_id}/remove",
+      data: { song_id: path },
       success: (data) ->
         element.removeClass('icon-remove-sign remove')
         element.addClass('icon-plus-sign-alt add')
 
   $('.album .add').live 'click', (event) ->
     element = $(@)
+    channel_id = element.data('channel')
     icon = element.children('.icon')
     message = element.children('.message')
     artist = element.parents('.album').data('artist')
@@ -36,7 +39,7 @@ $ ->
 
     $.ajax
       type: 'post',
-      url:  '/queue',
+      url:  "/channels/#{channel_id}/add",
       data: { type: 'album', artist: artist, name: name },
       success: (data) ->
         message.text('Good pick!')

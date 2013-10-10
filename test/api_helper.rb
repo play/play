@@ -92,3 +92,13 @@ def assert_speaker_representation(object)
   assert keys.include? 'volume'
   assert keys.include? 'slug'
 end
+
+def assert_channel_representation(object)
+  keys = object.keys
+
+  assert_equal 4, keys.size
+  assert keys.include? 'name'
+  assert keys.include? 'color'
+  assert keys.include? 'now_playing'
+  assert keys.include? 'slug'
+end
