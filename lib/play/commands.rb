@@ -12,7 +12,8 @@ module Play
         result = Help.process_command(command, channel, user) unless result
 
         result || "#{command.inspect} doesn't even seem like a thing Play can do. Try /p help to brush up on the commands."
-      rescue Exception
+      rescue Exception => e
+        Rails.logger.info e.message
         "Heyoooo, something went wrong. Sorry, I couldn't process that."
       end
     end
