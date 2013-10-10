@@ -21,11 +21,17 @@ module Play
     def self.queue_songs(channel, user, songs)
       songs.each{|song| channel.add(song, user)}
       "Queued up:\n" + songs.map {|song| %{"#{song.title}" by #{song.artist_name}} }.join("\n")
+    rescue MPD::NotFound => e
+        Rails.logger.info e.inspect
+        "Doh, I can't find one of those songs. Sorry."
     end
 
     def self.queue_song(channel, user, song)
       channel.add song, user
       output = %{Queued up "#{song.title}" by #{song.artist_name}}
+    rescue MPD::NotFound => e
+      Rails.logger.info e.inspect
+      "Dang, I can't find that. Sorry."
     end
 
     def self.find_speaker(speaker_name)
