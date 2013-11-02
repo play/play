@@ -127,7 +127,7 @@ then
   success 'ruby installed'
 else
   # Install if on rbenv
-  if test $(which rbenv)
+  if test $(which rbenv) && test $(which ruby-build)
   then
     info "installing ruby"
     rbenv install "$RUBY_VERSION" > /tmp/play-bootstrap 2>&1
