@@ -1,10 +1,9 @@
 GIT
-  remote: git://github.com/milgner/compass-rails.git
-  revision: 1749c06f15dc4b058427e7969810457213647fb8
-  branch: rails4
+  remote: git://github.com/Compass/compass-rails.git
+  revision: 30ca43b72a1a986a35055f9999a49b62e2257f5c
   specs:
-    compass-rails (1.0.3)
-      compass (>= 0.12.2, < 0.14)
+    compass-rails (1.1.2)
+      compass (>= 0.12.2)
 
 GEM
   remote: https://rubygems.org/
@@ -37,7 +36,7 @@ GEM
     arel (4.0.0)
     atomic (1.1.9)
     builder (3.1.4)
-    chunky_png (1.2.8)
+    chunky_png (1.2.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
