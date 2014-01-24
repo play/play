@@ -14,7 +14,7 @@ so you can get software compiled on your Mac.
 
 Once that's done, **install Homebrew**:
 
-    ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 With Homebrew installed, install Git:
 
