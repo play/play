@@ -77,6 +77,15 @@ else
     auth_token=$(date | md5sum)
   fi
 
+  user "Are you going to use Play with SoundCloud? (y,n) › "
+  read use_soundcloud
+
+  if [ "$use_soundcloud" == "y" ]
+  then
+    user "What's your SoundCloud client ID? › "
+    read soundcloud_client_id
+  fi
+
   # Write out play.yml
   socket=$BOXEN_MYSQL_SOCKET
   if ruby -r yaml -e "
@@ -85,6 +94,7 @@ else
     hash['db']['password'] = '$db_password'
     hash['db']['socket'] = '$socket' == '' ? '/tmp/mysql.sock' : '$socket'
     hash['auth_token'] = '$auth_token'
+    hash['soundcloud']['client_id'] = '$soundcloud_client_id'
     hash['github']['org'] = '$gh_org'
     hash['github']['client_id'] = '$client_id'
     hash['github']['secret'] = '$secret'

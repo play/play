@@ -7,6 +7,8 @@ db:
   password:
   database: play
   reconnect: true
+soundcloud:
+  client_id:
 github:
   org:
   client_id:
