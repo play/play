@@ -1,5 +1,7 @@
 class Api::QueueController < Api::BaseController
 
+  SOUNDCLOUD_URL = /^https?:\/\/(www\.)?soundcloud\.com\/.+?\/.+/
+
   def now_playing
     song = PlayQueue.now_playing
     deliver_json(200, {:now_playing => song_response(song, current_user)})
@@ -37,16 +39,13 @@ class Api::QueueController < Api::BaseController
       album.songs.each{|song| PlayQueue.add(song, current_user)}
       songs = album.songs
     when /soundcloud/
-      return deliver_json(404, "No proper SoundCloud URL") if params[:url].nil?
+      return deliver_json(404, "No proper SoundCloud URL given") if params[:url].nil? or params[:url] !~ SOUNDCLOUD_URL
       client = SoundCloud.new(:client_id => Play.config['soundcloud']['client_id'])
       track = client.get('/resolve', :url => params[:url])
       return deliver_json(404, "SoundCloud URL is not streamable!") unless track.streamable
-      song = Song.new :path => track["stream_url"]
-      artist = Artist.new :name => track["user"]["username"]
-      song.title = track["title"]
-      song.artist = artist
-      song.seconds = track["duration"]
-      song.album = Album.new :artist => artist, :name => "SoundCloud ID #{track['id']}"
+      # song = Song.new(:path => track["stream_url"], :soundcloud_track => track)
+      Play.mpd.load "soundcloud://track/#{track['id']}"
+      # PlayQueue.add(song,current_user)
       songs = [song]
     end
 
