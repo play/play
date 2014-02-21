@@ -78,12 +78,14 @@ else
   fi
 
   user "Are you going to use Play with SoundCloud? (y,n) › "
-  read use_soundcloud
+  read -n 1 use_soundcloud
 
   if [ "$use_soundcloud" == "y" ]
   then
     user "What's your SoundCloud client ID? › "
     read soundcloud_client_id
+  else
+    soundcloud_client_id=""
   fi
 
   # Write out play.yml
@@ -117,7 +119,20 @@ else
 
   # Write out mpd.conf
   config_file=$(cat config/mpd.conf.example)
-  if printf "music_directory \"%s\"\n\n%s" "$path" "$config_file" > config/mpd.conf 2> /tmp/play-bootstrap
+  if [ "$use_soundcloud" == "y" ]
+  then
+  soundcloud_config="playlist_plugin {
+    name \"soundcloud\"
+    enabled \"true\"
+    apikey \"$soundcloud_client_id\"
+}
+
+"
+  else
+    soundcloud_config=""
+  fi
+
+  if printf "music_directory \"%s\"\n\n%s" "$path" "$soundcloud_config" "$config_file" > config/mpd.conf 2> /tmp/play-bootstrap
   then
     success 'mpd config loaded'
   else
