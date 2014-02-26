@@ -30,12 +30,12 @@
 # Author:
 #   holman
 
-URL   = "#{process.env.HUBOT_PLAY_URL}"
-TOKEN = "#{process.env.HUBOT_PLAY_TOKEN}"
+PLAY_URL   = "#{process.env.HUBOT_PLAY_URL}"
+PLAY_TOKEN = "#{process.env.HUBOT_PLAY_TOKEN}"
 
 authedRequest = (message, path, action, options, callback) ->
-  message.http("#{URL}/api#{path}")
-    .query(login: message.message.user.githubLogin, token: "#{TOKEN}")
+  message.http("#{PLAY_URL}/api#{path}")
+    .query(login: message.message.user.githubLogin, token: "#{PLAY_TOKEN}")
     .header('Content-Length', 0)
     .query(options)[action]() (err, res, body) ->
       callback(err,res,body)
@@ -44,13 +44,13 @@ module.exports = (robot) ->
   # robot.respond /where'?s play/i, (message) ->
   #   message.finish()
   #   authedRequest message, '/stream_url', 'get', {}, (err, res, body) ->
-  #     message.send("play's at #{URL} and you can stream from #{body}")
+  #     message.send("play's at #{PLAY_URL} and you can stream from #{body}")
 
   robot.respond /what'?s playing/i, (message) ->
     authedRequest message, '/now_playing', 'get', {}, (err, res, body) ->
       json = JSON.parse(body)['now_playing']
       str = "\"#{json.title}\" by #{json.artist_name}, from \"#{json.album_name}\"."
-      message.send("#{URL}#{json.album_art_path}")
+      message.send("#{PLAY_URL}#{json.album_art_path}")
       message.send("Now playing " + str)
 
   robot.respond /what'?s next/i, (message) ->
@@ -100,13 +100,13 @@ module.exports = (robot) ->
   robot.respond /I want this song/i, (message) ->
     authedRequest message, '/now_playing', 'get', {}, (err, res, body) ->
       json = JSON.parse(body)['now_playing']
-      url  = "#{URL}/songs/download/#{escape json.path}"
+      url  = "#{PLAY_URL}/songs/download/#{escape json.path}"
       message.send("Pretty rad, innit? Grab it for yourself: #{url}")
 
   robot.respond /I want this album/i, (message) ->
     authedRequest message, '/now_playing', 'get', {}, (err, res, body) ->
       json = JSON.parse(body)['now_playing']
-      url  = "#{URL}/artists/#{escape json.artist_slug}/albums/#{escape json.album_slug}/download"
+      url  = "#{PLAY_URL}/artists/#{escape json.artist_slug}/albums/#{escape json.album_slug}/download"
       message.send("dope beats available here: #{url}")
 
   robot.respond /(play something i('d)? like)|(play the good shit)/i, (message) ->
