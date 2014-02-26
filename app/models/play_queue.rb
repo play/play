@@ -3,10 +3,17 @@ class PlayQueue
   #
   # song - The Song instance to add to the Queue.
   # user - The User that requested this song (can be nil if auto-played).
+  # options - Optional options to pass
   #
   # Returns the Queue.
-  def self.add(song,user)
-    Play.mpd.add(song.path)
+  def self.add(song,user,options={})
+    if song.path.match /soundcloud\.com/
+      # soundcloud is considered a "playlist" by mpd;
+      # also for some reason Play.mpd.load doesn't work. A bug in ruby-mpd? http://git.io/hr4swg
+      `mpc load soundcloud://track/#{options[:track_id]}`
+    else
+      Play.mpd.add(song.path)
+    end
 
     if user
       user.play!(song)
@@ -53,8 +60,13 @@ class PlayQueue
   #
   # Returns an Array of Songs.
   def self.songs
-    results = ActiveSupport::Notifications.instrument("queue.mpd") do
-      Play.mpd.queue
+    # mpd seems to hiccup here when trying to fetch SoundCloud URLs
+    begin
+      results = ActiveSupport::Notifications.instrument("queue.mpd") do
+        Play.mpd.queue
+      end
+    rescue MPD::ConnectionError
+      retry
     end
 
     results.map do |result|
