@@ -92,3 +92,9 @@ def assert_speaker_representation(object)
   assert keys.include? 'volume'
   assert keys.include? 'slug'
 end
+
+def soundcloud_response
+<<-EOS
+{"kind":"track","id":47069209,"created_at":"2012/05/21 09:56:10 +0000","user_id":903649,"duration":242978,"commentable":true,"state":"finished","original_content_size":4858822,"sharing":"public","tag_list":"","permalink":"super-mario-bros-w-baseline","streamable":true,"embeddable_by":"all","downloadable":false,"purchase_url":null,"label_id":null,"purchase_title":null,"genre":"NIGGARACCI N SPANKY DPGC","title":"Super mario bros w baseline SNOOP PROD","description":"HIPPIE ERA ","label_name":"","release":"","track_type":"","key_signature":"","isrc":"","video_url":null,"bpm":null,"release_year":null,"release_month":null,"release_day":null,"original_format":"mp3","license":"all-rights-reserved","uri":"http://api.soundcloud.com/tracks/47069209","user":{"id":903649,"kind":"user","permalink":"snoopdogg","username":"Snoop Dogg","uri":"http://api.soundcloud.com/users/903649","permalink_url":"http://soundcloud.com/snoopdogg","avatar_url":"http://i1.sndcdn.com/avatars-000060899297-4nzb3m-large.jpg?435a760"},"permalink_url":"http://soundcloud.com/snoopdogg/super-mario-bros-w-baseline","artwork_url":null,"waveform_url":"http://w1.sndcdn.com/93pp93owvEnt_m.png","stream_url":"http://api.soundcloud.com/tracks/47069209/stream","playback_count":149692,"download_count":0,"favoritings_count":2361,"comment_count":306,"attachments_uri":"http://api.soundcloud.com/tracks/47069209/attachments"}
+EOS
+end

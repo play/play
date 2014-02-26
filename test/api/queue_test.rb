@@ -9,6 +9,8 @@ class QueueTest < ActiveSupport::TestCase
 
       PlayQueue.add(@song,@user)
       Play.mpd.play
+
+      stub_request(:get, /resolve/).to_return(status: 200, body: soundcloud_response, headers: {})
     end
 
     test "GET /queue" do

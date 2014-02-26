@@ -29,4 +29,5 @@ end
 group :test do
   gem 'machinist'
   gem 'rack-test'
+  gem 'webmock'
 end
