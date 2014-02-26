@@ -33,6 +33,8 @@
 PLAY_URL   = "#{process.env.HUBOT_PLAY_URL}"
 PLAY_TOKEN = "#{process.env.HUBOT_PLAY_TOKEN}"
 
+SOUNDCLOUD_URL = /^https?:\/\/(www\.)?soundcloud\.com\/.+?\/.+/
+
 authedRequest = (message, path, action, options, callback) ->
   message.http("#{PLAY_URL}/api#{path}")
     .query(login: message.message.user.githubLogin, token: "#{PLAY_TOKEN}")
@@ -169,3 +171,16 @@ module.exports = (robot) ->
       str.join(', ')
 
       message.send("Queued up #{str}")
+
+  robot.respond /play soundcloud (.*)/i, (message) ->
+    unless SOUNDCLOUD_URL.test message.match[1]
+      return message.send("#{message.match[1]} doesn't look like a SoundCloud URL..")
+
+    params = { type: 'soundcloud', url: message.match[1] }
+    authedRequest message, '/queue/add', 'post', params, (err, res, body) ->
+      if res.statusCode == 404
+        return message.send(res.body)
+
+      json = JSON.parse(body)
+
+      message.send("Queued up #{message.match[1]}")
