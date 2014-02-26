@@ -84,8 +84,8 @@ class QueueTest < ActiveSupport::TestCase
       assert_song_representation parsed_response['songs'].first
     end
 
-    test "POST /queue/clear" do
-      authorized_post '/api/queue/clear', @authorized_user
+    test "DELETE /queue/clear" do
+      authorized_delete '/api/queue/clear', @authorized_user
       parsed_response = parse_response(last_response)
 
       assert last_response.ok?
