@@ -51,7 +51,7 @@ class Song
       @artist = Artist.new(:name => soundcloud_track["user"]["username"])
       @album = Album.new(:artist => @artist, :name => soundcloud_track["permalink"])
       @title = soundcloud_track["title"]
-      @seconds = soundcloud_track["duration"] / 1000
+      @seconds = soundcloud_track["duration"].to_i / 1000
     else
       TagLib::FileRef.open(full_path) do |file|
         if tag = file.tag
