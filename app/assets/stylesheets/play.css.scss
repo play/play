@@ -73,6 +73,14 @@ a {
       vertical-align: middle;
       margin-right: 5px;
     }
+
+    &.playing:after {
+      content: "playing"
+    }
+
+    &.paused:after {
+      content: "paused"
+    }
   }
 
   #login {
