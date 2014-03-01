@@ -18,7 +18,7 @@ class Artist
   # Returns an Array of Strings.
   def self.all
     artists = ActiveSupport::Notifications.instrument("list.mpd", :options => [:list, :artist]) do
-      Play.mpd.list(:artist)
+      Play.mpd.artists
     end
 
     artists.sort.map do |name|

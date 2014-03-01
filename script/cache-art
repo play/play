@@ -10,7 +10,7 @@
 require './config/environment'
 
 paths  = Play.mpd.files[:file]
-albums = Play.mpd.list(:album)
+albums = Play.mpd.albums
 puts "Caching art for #{albums.count} albums..."
 
 FileUtils.mkdir_p 'public/images/art'

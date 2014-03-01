@@ -35,10 +35,6 @@ class SongTest < ActiveSupport::TestCase
     assert_equal 1, songs.size
   end
 
-  test "now_playing" do
-    assert Song.now_playing.nil?
-  end
-
   test "finds a song by its title" do
     songs = Song.find([:title, 'stress'])
     assert_equal 1, songs.size
