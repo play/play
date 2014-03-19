@@ -22,4 +22,23 @@ class QueueController < ApplicationController
     PlayQueue.remove(song,current_user)
     render :text => 'deleted!'
   end
+
+  def refresh
+    current_id = params[:id]
+
+    unless current_id == PlayQueue.now_playing.path
+      @songs = PlayQueue.songs
+      queue = render_to_string :partial => "shared/song", :collection => PlayQueue.songs
+      sidebar = render_to_string :partial => 'shared/sidebar'
+      puts "kaka", @songs
+      if request.xhr?
+        respond_to do |format|
+          format.js
+        end
+        return
+      end
+    end
+
+    render :text => "not yet"
+  end
 end

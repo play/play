@@ -47,3 +47,15 @@ $ ->
         icon.removeClass('icon-spinner').removeClass('icon-spin').addClass('icon-exclamation-sign')
 
     return false
+
+  # constantly refresh the main view to get the latest queue
+  setInterval( ->
+    current_playing_path = $('.now-playing-actions').data('path')
+
+    $.ajax
+      type: 'get',
+      url:  '/queue/refresh',
+      data: { id: current_playing_path }
+      cache: false
+
+  , 5000)

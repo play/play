@@ -18,7 +18,7 @@ Play::Application.routes.draw do
   resources :likes do
   end
 
-  resources :queue do
+  resources :queue, :except => ['show'] do
   end
 
   scope '/likes' do
@@ -28,6 +28,8 @@ Play::Application.routes.draw do
   scope '/queue' do
     delete ''          => 'queue#destroy'
   end
+
+  get '/queue/refresh' => 'queue#refresh'
 
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure'         => 'sessions#failure'
