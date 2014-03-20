@@ -10,8 +10,7 @@ class PlayQueue
     if song.path.match /soundcloud\.com/
       # soundcloud is considered a "playlist" by mpd;
       # see http://git.io/hr4swg for more info
-      playlist = MPD::Playlist.new(Play.mpd, "soundcloud://track/#{options[:track_id]}")
-      playlist.load
+      MPD::Playlist.new(Play.mpd, "soundcloud://track/#{options[:track_id]}").load
     else
       Play.mpd.add(song.path)
     end
