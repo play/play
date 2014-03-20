@@ -1,6 +1,7 @@
 require "play/api/error_delivery"
 require "play/api/json_delivery"
 require "play/api/api_response"
+require "play/client/soundcloud"
 require "play/speaker"
 
 module Play
