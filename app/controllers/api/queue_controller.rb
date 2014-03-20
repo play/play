@@ -40,7 +40,7 @@ class Api::QueueController < Api::BaseController
       songs = album.songs
     when /soundcloud/
       return deliver_json(404, "No proper SoundCloud URL given") if params[:url].nil? or params[:url] !~ SOUNDCLOUD_URL
-      track = JSON.parse(soundcloud_client.get('/resolve', :url => params[:url]))
+      track = soundcloud_client.get('/resolve', :url => params[:url])
       return deliver_json(404, "SoundCloud URL is not streamable!") unless track["streamable"]
       song = Song.new(:path => params[:url])
       options = { :track_id => track['id'] }
