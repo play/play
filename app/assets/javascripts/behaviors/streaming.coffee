@@ -1,13 +1,14 @@
 $ ->
   protocol = window.location.protocol
-  hostname = window.location.hostname
+  hostname = "0.0.0.0"
   port     = 8000
   audio    = new Audio("#{protocol}//#{hostname}:#{port}")
+  audio.play()
 
   $('.stream-controls').on 'click', (event) ->
-    if audio.paused
-      audio.play()
+    if audio.muted
+      audio.muted = false
       $('.stream-controls').addClass("playing").removeClass("paused")
     else
-      audio.pause()
+      audio.muted = true
       $('.stream-controls').addClass("paused").removeClass("playing")
