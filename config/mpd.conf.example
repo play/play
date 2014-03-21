@@ -13,6 +13,12 @@ audio_output {
   bind_to_address  "0.0.0.0"
 }
 
+audio_output {
+     type            "osx"
+     name            "Play"
+    mixer_type      "software"
+}
+
 bind_to_address  "0.0.0.0"
 
 # Files and directories #######################################################
