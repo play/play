@@ -1,5 +1,5 @@
 $ ->
-  protocol = window.location.protocol
+  protocol = "http:"
   hostname = "0.0.0.0"
   port     = 8000
   audio    = new Audio("#{protocol}//#{hostname}:#{port}")
