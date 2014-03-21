@@ -75,7 +75,7 @@ Play::Application.routes.draw do
     get  "/queue" => 'queue#list', :as => 'queue'
     post "/queue/add" => 'queue#add', :as => 'add_queue'
     post "/queue/remove" => 'queue#remove', :as => 'remove_queue'
-    post "/queue/clear" => 'queue#clear', :as => 'clear_queue'
+    delete "/queue/clear" => 'queue#clear', :as => 'clear_queue'
     post "/queue/stars" => 'queue#stars'
 
     # system

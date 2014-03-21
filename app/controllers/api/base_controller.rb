@@ -4,6 +4,7 @@ class Api::BaseController < ActionController::Base
   include Play::Api::ErrorDelivery
   include Play::Api::JsonDelivery
   include Play::Api::ApiResponse
+  include Play::Client::SoundCloud
 
   before_filter :authentication_required
 

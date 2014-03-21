@@ -3,6 +3,7 @@ require "digest"
 
 class Song
   extend Machinist::Machinable if Rails.env.test?
+  include Play::Client::SoundCloud
 
   # The title of the Song.
   attr_accessor :title
@@ -40,12 +41,25 @@ class Song
   def path=(path)
     @path = path.chomp
 
-    TagLib::FileRef.open(full_path) do |file|
-      if tag = file.tag
-        @artist  = Artist.new(:name => tag.artist)
-        @album   = Album.new(:artist => @artist, :name => tag.album)
-        @title   = tag.title
-        @seconds = file.audio_properties.length
+    if path.match /soundcloud\.com/
+      # after the first add, it seems that MPD sets result.file to the API URL
+      if path.match /api\.soundcloud\.com\/tracks\/(\d+)/
+        soundcloud_track = soundcloud_client.get("/tracks/#{$1}")
+      else
+        soundcloud_track = soundcloud_client.get('/resolve', :url => @path)
+      end
+      @artist = Artist.new(:name => soundcloud_track["user"]["username"])
+      @album = Album.new(:artist => @artist, :name => soundcloud_track["permalink"])
+      @title = soundcloud_track["title"]
+      @seconds = soundcloud_track["duration"].to_i / 1000
+    else
+      TagLib::FileRef.open(full_path) do |file|
+        if tag = file.tag
+          @artist  = Artist.new(:name => tag.artist)
+          @album   = Album.new(:artist => @artist, :name => tag.album)
+          @title   = tag.title
+          @seconds = file.audio_properties.length
+        end
       end
     end
 
