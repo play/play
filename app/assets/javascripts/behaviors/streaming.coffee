@@ -1,6 +1,6 @@
 $ ->
-  protocol = "http:"
-  hostname = "0.0.0.0"
+  protocol = window.location.protocol
+  hostname = window.location.hostname
   port     = 8000
   audio    = new Audio("#{protocol}//#{hostname}:#{port}")
   audio.play()
