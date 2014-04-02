@@ -1,14 +1,16 @@
 $ ->
+  # Fuck these Safari crashes
+  return false
+
   protocol = window.location.protocol
-  hostname = "0.0.0.0"
+  hostname = window.location.hostname
   port     = 8000
   audio    = new Audio("#{protocol}//#{hostname}:#{port}")
-  audio.play()
 
   $('.stream-controls').on 'click', (event) ->
-    if audio.muted
-      audio.muted = false
+    if audio.paused
+      audio.play()
       $('.stream-controls').addClass("playing").removeClass("paused")
     else
-      audio.muted = true
+      audio.pause()
       $('.stream-controls').addClass("paused").removeClass("playing")

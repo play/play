@@ -74,12 +74,12 @@ a {
       margin-right: 5px;
     }
 
-    &.playing {
-      color: $pink;
+    &.playing:after {
+      content: "playing"
     }
 
-    &.paused {
-      color: #666
+    &.paused:after {
+      content: "paused"
     }
   }
 
