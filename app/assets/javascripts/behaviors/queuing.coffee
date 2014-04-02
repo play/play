@@ -51,7 +51,9 @@ $ ->
   # constantly refresh the main view to get the latest queue
   setInterval( ->
     current_playing_path = $('.now-playing-actions').data('path')
-
+    pathArray = window.location.pathname.split( '/' )
+    isHomepage = pathArray.length == 2 && pathArray[0] == "" && pathArray[1] == ""
+    return unless isHomepage
     $.ajax
       type: 'get',
       url:  '/queue/refresh',

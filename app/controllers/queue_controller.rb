@@ -30,7 +30,6 @@ class QueueController < ApplicationController
       @songs = PlayQueue.songs
       queue = render_to_string :partial => "shared/song", :collection => PlayQueue.songs
       sidebar = render_to_string :partial => 'shared/sidebar'
-      puts "kaka", @songs
       if request.xhr?
         respond_to do |format|
           format.js
