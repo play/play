@@ -23,6 +23,8 @@ impact on our culture.
 
 Play is built for the Mac. We use a Mac Mini.
 
+Note that OS X Mavericks and later are not supported.
+
 ### iTunes
 
 Play is **iTunes-based**. That means we can let iTunes do what it's good at and
