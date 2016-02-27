@@ -27,7 +27,7 @@ Play is built for the Mac. We use a Mac Mini.
 
 Play is **iTunes-based**. That means we can let iTunes do what it's good at and
 manage the state of our music. We use **iTunes DJ** to handle the main Play
-queue, specifically because it emulates what Play does: provide a smart playlist
+queue, specifically because it emulates what Play does: provide a smart playlist of
 neverending songs.
 
 ### The Stream and Speakers
