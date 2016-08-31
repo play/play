@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+
+import re
+import time
+import sys
+import os
+import requests
+import tempfile
+import urlparse
+import mimetypes
+import subprocess
+
+itunes_stdout = re.compile("file track id (\d+) of library playlist id (\d+) of source id (\d+)")
+add_to_itunes = os.path.abspath(
+                  os.path.join(
+                    os.path.dirname(__file__), 'add-to-itunes'))
+
+def main(url):
+    url_parts = urlparse.urlparse(url)
+    try:
+        url_parts.hostname
+    except AttributeError:
+        sys.exit("Bad URL")
+    
+    filename = url_parts.path.split('/')[-1]
+    resp = requests.get(url)
+    if resp.status_code not in range(200, 299):
+        sys.exit("Bad response (%s)" % resp.status_code)
+    content_type = resp.headers.get('content-type', 'audio/mpeg') # Propably MP3?
+    if not content_type.startswith("audio/"):
+        sys.exit("Bad content-type")
+    if 'content-disposition' in resp.headers:
+        _parts = resp.headers.get('content-disposition', '').split('filename=')
+        if len(_parts) == 2:
+            filename = ''.join(_parts[1].split("\""))
+    if not "." in filename:
+        filename = filename + mimetypes.guess_extension(content_type)
+    suffix = "." + filename.split(".")[-1]
+    with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as fp:
+        fp.write(resp.content)
+        proc = subprocess.Popen([add_to_itunes, fp.name], 
+            stdout=subprocess.PIPE, 
+            stderr=subprocess.PIPE)
+        out, err = proc.communicate()
+        if out:
+            match = re.match(itunes_stdout, out)
+            if match is not None:
+                song, playlist, source = match.groups()
+                print filename, song
+        elif err:
+            sys.exit("Couldn't add to iTunes ({})".format(err))
+            
+    exit(0)
+        
+
+if __name__ == "__main__":
+    if len(sys.argv) > 0:
+        main(sys.argv[1])
