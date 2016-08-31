@@ -7,3 +7,4 @@ pusher_secret: __PUSHER_SECRET__
 auth_token: __AUTH_TOKEN__
 office_url: http://example.com/office.macs
 stream_url: http://example.com:8000/listen
+auth_method: __AUTH_METHOD__
