@@ -85,6 +85,17 @@ module Play
       Time.iso8601(val)
     end
 
+    # Public: The person who last played the song.
+    #
+    # song - The Song to look up
+    #
+    # Returns a String containing the name of the person, or nil if
+    # the song has never been played.
+    def self.song_last_queued_by(song)
+      return nil unless (t = song_last_played_at(song))
+      $redis.get("#{KEY}:ids:#{song.id + t.to_i.to_s}:user")
+    end
+
     # Public: The last x listens, with latest on top.
     #
     # number - The Integer number of results we should return.

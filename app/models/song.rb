@@ -24,6 +24,9 @@ module Play
 
     # The last time a song was played
     attr_accessor :last_played
+
+    # The last person who queued the song
+    attr_accessor :last_queued_by
     
     # Duration in seconds, including fractions
     attr_accessor :duration
@@ -49,6 +52,7 @@ module Play
         @artist = options[:artist]
         @album  = options[:album]
         @last_played = options[:last_played]
+        @last_queued_by = options[:last_queued_by]
         @duration = options[:duration]
       end
     end
@@ -156,6 +160,10 @@ module Play
       return ret.iso8601
     end
 
+    def last_queued_by
+      return @last_queued_by ||= History.song_last_queued_by(self)
+    end
+
     # The hashed representation of a Song, suitable for API responses.
     #
     # Returns a Hash.
@@ -168,6 +176,7 @@ module Play
         :starred => starred || false,
         :queued  => queued?,
         :last_played => last_played_iso8601,
+        :last_queued_by => last_queued_by,
         :duration => duration
       }
     end

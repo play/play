@@ -27,6 +27,12 @@ context "History" do
     assert_equal 0, History.count_by_song(song)
   end
 
+  test "proper blame is attributed" do
+    History.add(@song, @user)
+    assert_equal @user.login, History.song_last_queued_by(@song)
+    assert_equal @user.login, @song.last_queued_by
+  end
+
   test "returns a given amount" do
     History.add(@song, @user)
     History.add(@song, @user)
