@@ -3,8 +3,14 @@ play = exports ? this
 pusher = new Pusher('<%= Play.config.pusher_key %>')
 channel = pusher.subscribe('now_playing_updates')
 
+# Handle update_now_playing messages from pusher.
+#
+# message - contains the currently playing song and the current queue of songs.
+#
+# Updates now playing and queue if the user is on the queue page.
 channel.bind 'update_now_playing', (message) ->
   play.renderNowPlaying(message.now_playing)
+  return if $('#queue-results').attr('data-page') isnt 'queue'
   list = listFromJson(message)
   songs = Mustache.to_html(templates.list,list,templates)
   $('#songs').html(songs)
