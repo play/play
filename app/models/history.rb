@@ -31,6 +31,7 @@ module Play
   class History
     # The redis key to stash History data.
     KEY = 'play:histories'
+    STAR_WEIGHT = 3  # How much a song's score increases when a user stars it.
 
     # Public: Add a play history for a song.
     #
@@ -59,6 +60,9 @@ module Play
       $redis.rpush "#{KEY}:#{user.login}:song_ids",       song.id
       $redis.rpush "#{KEY}:#{user.login}:ids",            uniq
       $redis.rpush "#{KEY}:#{user.login}:ids:#{uniq}:id", song.id
+      
+      # Maintain a counter for the song in global stats.
+      self.incr_song(song, 1, Time.now)
     end
 
     # Public: The total playcount of the library. Ever.
@@ -102,6 +106,62 @@ module Play
     # Returns an Integer.
     def self.now
       Time.now.to_i
+    end
+
+    # The user changes their rating of the current song.
+    def self.incr_song(song, incr, at)
+      key = at.strftime("%Y%m%d")
+      key = "#{KEY}:#{key}"
+
+      # Maybe use MULTI here?
+      score = ($redis.zscore(key, song.id) || 0).to_i
+      $redis.zadd key, score+incr, song.id
+    end
+
+    # Record the fact the current song was starred by a user in overall stats tracking.
+    def self.star_song(song, at=Time.now)
+      self.incr_song(song, STAR_WEIGHT, at)
+    end
+
+    # Record the fact the current song was unstarred.
+    def self.unstar_song(song, at=Time.now)
+      self.incr_song(song, -1*STAR_WEIGHT, at)
+    end
+
+    # Return the top N starred songs for the time range (with per-day "granularity")
+    def self.popular(from, to, n=15)
+      from_day = from.strftime("%Y%m%d")
+      to_day = to.strftime("%Y%m%d")
+
+      key = "#{KEY}:#{from_day}"
+      if from_day.eql?(to_day)
+        # Consult a single sorted set.
+        ret = $redis.zrevrange(key, 0, n-1, :with_scores => true)
+      else
+        # Aggregate multiple sorted set results with ZUNIONSTORE.
+        keys = []
+        while !from_day.eql?(to_day)
+          keys << key
+          from += 24*60*60
+          from_day = from.strftime("%Y%m%d")
+          key = "#{KEY}:#{from_day}"
+        end
+        keys << key
+
+        tmp_key = "#{KEY}:#{Time.now.to_i}"
+        $redis.zunionstore(tmp_key, keys)
+        ret = $redis.zrevrange(tmp_key, 0, n-1, :with_scores => true)
+        $redis.del(tmp_key)
+      end
+
+      # looks like [id1, score1, id2, score2]
+      pairs = (ret.size/2-1)
+      0.upto(pairs).map do |i|
+        song_id = ret[i*2]
+        score = ret[i*2+1]
+
+        [ Song.find(song_id), score ]
+      end
     end
   end
 end

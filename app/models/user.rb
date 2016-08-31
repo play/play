@@ -134,13 +134,14 @@ module Play
       $redis.smembers("#{KEY}:#{login}:stars").include?(song.id)
     end
 
-    # Public: Stars a song. Likes a song. Saves a song.
+    # Public: Stars a song. Likes a song. Saves a song. Updates global stat counters for the song.
     #
     # song - The Song to star.
     #
     # Returns true when saved.
     def star(song)
       $redis.sadd("#{KEY}:#{login}:stars",song.id)
+      History.star_song(song)
       true
     end
 
@@ -151,6 +152,7 @@ module Play
     # Returns true when saved.
     def unstar(song)
       $redis.srem("#{KEY}:#{login}:stars",song.id)
+      History.unstar_song(song)
       true
     end
 

@@ -33,5 +33,26 @@ module Play
       Yajl.dump hash
     end
 
+    # Public: Takes a collection of Song objects with an associated score and 
+    # renders JSON as above in songs_to_json.
+    #
+    # Returns a JSONified String.
+    def scored_songs_as_json(scored_songs,user)
+      if scored_songs && user
+        songs = scored_songs.map do |song,score|
+          song.starred = user.starred?(song)
+          song.to_hash.merge(:score => score)
+        end
+      else
+        songs = nil
+      end
+
+      hash = {
+        :songs => songs || []
+      }
+
+      Yajl.dump hash
+    end
+
   end
 end

@@ -42,6 +42,15 @@ module Play
       songs_as_json(songs,current_user)
     end
 
+    post "/queue/popular" do
+      days = (params[:days] || 7).to_i
+      scored_songs = History.popular(Time.now - days*24*60*60, Time.now).shuffle[0..4]
+
+      songs = scored_songs.each(&:first)
+
+      scored_songs_as_json(scored_songs,current_user)
+    end
+
     post "/freeform" do
       subject = params[:subject]
 
