@@ -18,6 +18,7 @@ gem 'json'
 if RUBY_PLATFORM.downcase.include?("darwin")
   gem 'rb-appscript'
 end
+gem 'vlcrc'
 
 group :test do
   gem 'rack-test'

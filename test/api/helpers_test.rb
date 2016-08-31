@@ -1,4 +1,5 @@
 require File.expand_path("../../helper", __FILE__)
+require 'json'
 
 context "api/helpers" do
   include Helpers
