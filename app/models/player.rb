@@ -5,7 +5,7 @@ module Play
     #
     # Returns an Appscript instance of the music app.
     def self.app
-      Appscript.app('iTunes')
+      Appscript.app('iTunes', Tunes)
     end
 
     # All songs in the library.
