@@ -202,7 +202,7 @@ to consume the Shoutcast stream.
 
 ## iTunes Match
 
-Like many people have experienced on iOS with apps that use your music library, iTunes Match royally
+Like many people have experienced with iOS apps that use your music library, iTunes Match royally
 screws this up. iTunes does nothing to differentiate songs that are actually available on disk, and those
 that would need to be pulled down first by Match in order to play them.
 
