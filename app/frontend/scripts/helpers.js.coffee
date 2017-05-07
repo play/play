@@ -46,6 +46,9 @@ play.renderQueue = () ->
     success: (response) ->
       song   = listFromJson(response)
       stache = Mustache.to_html(templates.list,song,templates)
+      if song.songs.length is 0 && $('#now-playing').children().length is 0
+        $('#itunes-notice').show()
+        $('#now-playing').hide()
       $('#songs').html(stache)
       play.spin(false)
 
